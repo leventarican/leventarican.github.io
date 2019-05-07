@@ -1,5 +1,5 @@
 .hello world
-My name is Levent Arican. My intereserests are mainly in Software development. Call me Software Developer, Software Engineer, Computer Scientist, Software Craftsman, ...
+My name is Levent Arican. My intereserests are mainly in Software development. Nowadays we read often the terms Software Developer, Software Engineer, Computer Scientist, Software Craftsman. The intersection of these can adapt to me.
 
 Checkout my repository: https://github.com/leventarican
 

@@ -1,27 +1,23 @@
-.hello world
+# hello world
 My name is Levent Arican. My intereserests are mainly in Software development. Nowadays we read often the terms Software Developer, Software Engineer, Computer Scientist, Software Craftsman. The intersection of these shouĺd be adapt me.
 
-Checkout my repository: https://github.com/leventarican
+* Checkout my repository: https://github.com/leventarican
+* This page is reachable under: https://leventarican.github.io/
+* This page is based on Markdown and exported with ghostwriter
 
-.experienced in programming languages, technologies, paradigms
+## experienced in programming languages, technologies, paradigms
 * Java and Java EE
 * Kotlin and Android Development
 * JavaScript (ES6), a bit Node.js
-* C++
-* Python
+* C++03, C(99)
+* Python (pandas, numpy, scikit-learn)
 * Cloud Technologies: OpenShift (Docker), Azure, Google Cloud
 * CI/CD: Jenkins, Maven, Git, ...
 * Clean Code, Clean Architecture
 
-.interest fields
+## interest fields
 * maths
 * computer vision
 * AI
 * computer security
 
-.asciidoc
-* This HTML page is based on asciidoc (https://github.com/leventarican/leventarican.github.io/blob/master/index.adoc)
-* created with AsciidocFX: https://github.com/asciidocfx/AsciidocFX
-* github understands README.adoc
-* open format (it is just a textfile / ascii file)
-* easy export to HTML, PDF, Epub, even Word, ...

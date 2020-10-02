@@ -3,16 +3,14 @@ My name is Levent Arican. My intereserests are mainly in Software development. N
 
 * Checkout my repository: https://github.com/leventarican
 * This page is reachable under: https://leventarican.github.io/
-* This page is based on Markdown and exported with ghostwriter
 
 ## experienced in programming languages, technologies, paradigms
 * Java and Java EE
-* Kotlin and Android Development
+* Flutter, Kotlin and Android Development
 * JavaScript (ES6), a bit Node.js
 * C++03, C(99)
-* Python (pandas, numpy, scikit-learn)
+* Python (pandas, numpy, scikit-learn, OpenCV)
 * Cloud Technologies: OpenShift (Docker), Azure, Google Cloud
-* CI/CD: Jenkins, Maven, Git, ...
 * Clean Code, Clean Architecture
 
 ## interest fields
@@ -20,4 +18,3 @@ My name is Levent Arican. My intereserests are mainly in Software development. N
 * computer vision
 * AI
 * computer security
-

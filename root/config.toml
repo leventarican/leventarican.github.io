@@ -1,0 +1,24 @@
+baseURL = "https://leventarican.github.io/"
+languageCode = "en-us"
+title = "Levent Arican"
+theme = "researcher"
+
+[params]
+  author = "Levent Arican"
+  description = "A simple monospaced resume theme for Hugo."
+  [params.footer]
+    text = "By Levent Arican"
+    url = "https://github.com/leventarican"
+
+[permalinks]
+  "/" = "/:filename"
+
+[menu]
+  [[menu.main]]
+    name = "About"
+    url = "/about"
+    weight = 1
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact"
+    weight = 2

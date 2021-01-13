@@ -12,7 +12,6 @@ My name is Levent Arican. My intereserests are mainly in Software development. N
 * Python (pandas, numpy, scikit-learn, OpenCV)
 * Cloud Technologies: OpenShift (Docker), Azure, Google Cloud
 * Clean Code, Clean Architecture
-* Data Engineering
 
 ## interest fields
 * maths

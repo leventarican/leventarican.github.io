@@ -2,3 +2,5 @@ baseURL = "http://example.org/"
 languageCode = "en-us"
 title = "computer science"
 theme = "researcher"
+
+publishDir = "docs"

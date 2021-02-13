@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://leventarican.github.io/</loc>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/about/</loc>
+        <lastmod>1010-01-01</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/categories/</loc>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/categories/about/</loc>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/page/1/</loc>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/tags/</loc>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/tags/developer/</loc>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/tags/engineer/</loc>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/tags/software/</loc>
+    </url>
+</urlset>

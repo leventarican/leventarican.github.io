@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            
+<h1 class="title">
+    Android: RecyclerView
+</h1>
+<p class="subtitle"><strong>2020-02-26</strong></p>
+<p>In order to use <code>RecyclerView</code> you need to setup following pieces:</p>
+<ul>
+<li>item: our data</li>
+<li>adapter: converts data/item to <code>RecyclerView</code>'s format. Check also code comment.</li>
+<li>viewholders: pool of reuse views</li>
+<li>recyclerview: <code>RecyclerView</code> interacts with <code>ViewHolder</code></li>
+</ul>
+<h3 id="now-we-implement-our-logic">Now we implement our logic</h3>
+<ul>
+<li>create class <code>Datasource</code>: as the name suggests the data provider</li>
+<li>create data class <code>ProgrammingLang</code>: our entity</li>
+</ul>
+<h3 id="transform-model-to-android">Transform model to android</h3>
+<p>Next we need a way to take the data from data source and format it to <code>RecyclerView</code>'s format
+The transformation is done with Adapters.</p>
+<blockquote>
+<p>Adapter is a <strong>design pattern</strong> that adapts the data into something that understands <code>RecyclerView</code> </p>
+</blockquote>
+<h3 id="example-app">Example App</h3>
+<ul>
+<li>check out the example app here: https://github.com/leventarican/android-kotlin-developer-ng/tree/main/examples/AppLe</li>
+</ul>
+
+
+        </div>
+    </section>
+</body>
+
+</html>

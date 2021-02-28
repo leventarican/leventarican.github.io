@@ -18,5 +18,6 @@ Next we need a way to take the data from data source and format it to `RecyclerV
 The transformation is done with Adapters.
 > Adapter is a __design pattern__ that adapts the data into something that understands `RecyclerView` 
 
-### Example App
-* check out the example app here: https://github.com/leventarican/android-kotlin-developer-ng/tree/main/examples/AppLe
+### Examples
+* https://github.com/leventarican/GitBrowser
+* https://github.com/leventarican/android-kotlin-developer-ng/tree/main/examples/AppLe

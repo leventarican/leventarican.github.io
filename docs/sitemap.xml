@@ -4,6 +4,10 @@
         <loc>https://leventarican.github.io/</loc>
     </url>
     <url>
+        <loc>https://leventarican.github.io/android-recyclerview/</loc>
+        <lastmod>2020-02-26</lastmod>
+    </url>
+    <url>
         <loc>https://leventarican.github.io/blog/</loc>
     </url>
     <url>
@@ -19,7 +23,19 @@
         <lastmod>2019-12-06</lastmod>
     </url>
     <url>
-        <loc>https://leventarican.github.io/blog/under-construction/</loc>
-        <lastmod>2021-12-12</lastmod>
+        <loc>https://leventarican.github.io/blog/sse/</loc>
+        <lastmod>2021-03-02</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/cpp-dynamic-memory/</loc>
+        <lastmod>2020-02-09</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/microcontroller-from-scratch/</loc>
+        <lastmod>2019-12-06</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/sse/</loc>
+        <lastmod>2021-03-02</lastmod>
     </url>
 </urlset>

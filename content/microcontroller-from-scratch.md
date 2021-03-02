@@ -3,7 +3,7 @@ title = "Microcontroller: AVR ATtiny85"
 date = 2019-12-06
 +++
 
-## AVR: ATtiny85
+# About
 __tools__
 * dmesg: list kernel ring buffer
 * lsusb: list usb devices
@@ -14,7 +14,7 @@ __tools__
     * binutils-avr: tools like assembler, linker
     * gdb-avr: debugger for 
 
-### example: main.c
+# Example: main.c
 
 * Step 1: we need to bring our program to uC (microcontroller)
 * Step 2: run the uC

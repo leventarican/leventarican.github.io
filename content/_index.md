@@ -1,9 +1,9 @@
-{% extends "base.html" %}
-
-{% block content %}
-<h1 class="title">
-    Levent Arican
-</h1>
++++
+title = "Blog | Post"
+sort_by = "date"
+template = "blog.html"
+page_template = "blog-page.html"
++++
 
 My name is Levent Arican. My interests are mainly in Software development.
 Nowadays we read often the terms Software Developer, Software Engineer, Computer Scientist, Software Craftsman, Data
@@ -30,8 +30,3 @@ Experienced (vary) in programming languages, technologies, paradigms
     <li>Python: pandas, numpy, scikit-learn</li>
     <li>Cloud Technologies: AWS, OpenShift, Azure, Google Cloud</li>
 </ul>
-
-<hr />
-
-<p>Click <a href="/blog/">here</a> to see my <b>posts</b></p>
-{% endblock content %}

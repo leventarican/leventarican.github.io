@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            
+<h1 class="title">
+    C++: Dynamic Memory Allocation
+</h1>
+<p class="subtitle"><strong>2020-02-09</strong></p>
+<ul>
+<li>new and delete operators</li>
+<li>Dynamic Memory Allocation</li>
+<li>segmentation fault demo</li>
+<li>malloc() or calloc(), free()</li>
+<li>Memory Management</li>
+</ul>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">#include &lt;iostream&gt;
+
+using namespace std;
+
+int main() {
+    float* p;
+    p = new float(3.14);
+    cout &lt;&lt; &quot;\nnew example: &quot; &lt;&lt; *p;
+
+    int size = 8;
+    int* a = new int[size];
+    cout &lt;&lt; &quot;\narray: &quot; &lt;&lt; *a;
+    *a = 100;
+    *a++;
+    *a = 200;
+    *a--;
+    cout &lt;&lt; &quot;\narray: &quot; &lt;&lt; *a;
+    cout &lt;&lt; &quot;\narray: &quot; &lt;&lt; a[1] &lt;&lt; endl;
+
+    delete [] a;
+    cout &lt;&lt; &quot;\nprocessing finished: &quot; &lt;&lt; a[0] &lt;&lt; endl;
+
+    cout &lt;&lt; &quot;\nprocessing finished: &quot; &lt;&lt; endl;
+    cout &lt;&lt; &quot;\nsegmentation fault: &quot; &lt;&lt; a[100] &lt;&lt; endl;
+}
+</span></code></pre>
+
+        </div>
+    </section>
+</body>
+
+</html>

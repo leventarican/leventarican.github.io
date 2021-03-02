@@ -21,12 +21,21 @@
 The connection client-server is done <em>once</em>.</p>
 <p>This approach differs from the well-known concept of client-server communication.
 Where client does a request to a server and the server responses to client.
-The difference is that the initiation is done by the client.</p>
+The difference to SSE is that the initiation is done by the client. 
+The client has to request for new data.</p>
 <p><img src="../client-server.png" alt="" /></p>
 <p>Whereas in the SSE concept the server initiates.</p>
+<p>The client on the other side should react to the stream of events.
+It's a kind of <em>broadcast</em> mechanism where clients <em>subscribes</em> to the server events.
+SSE can be clustered together with Kafka, JMS in the umbrella term <em>reactive messaging</em>.</p>
+<p><img src="../sse.png" alt="" /></p>
+<h1 id="implementation">Implementation</h1>
+<p>In order to use SSE in your implementation you need a SSE client API (javascript API, Jersey Client SSE API, Microprofile, ...)</p>
 <h1 id="links">Links</h1>
 <ul>
 <li>https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/sse.html</li>
+<li>https://openliberty.io/guides/reactive-messaging-sse.html</li>
+<li>https://download.eclipse.org/microprofile/microprofile-reactive-messaging-1.0/microprofile-reactive-messaging-spec.html</li>
 <li>drawing made with: https://excalidraw.com/</li>
 </ul>
 

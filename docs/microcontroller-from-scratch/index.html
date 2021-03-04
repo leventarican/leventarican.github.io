@@ -15,7 +15,16 @@
 </h1>
 <p class="subtitle"><strong>2019-12-06</strong></p>
 <h1 id="about">About</h1>
-<p><strong>tools</strong></p>
+<p>This documentation gives a kind of microcontroller programming from scratch.
+I used the ATtiny85 for this example. IMHO its simplest, smallest, ... and a good starting point.
+The aim was: </p>
+<ul>
+<li>Code a programm (preferable in C) and run it on the uC. </li>
+<li>The wiring, powering, is all done manually. </li>
+<li>No ready-to-use embedded single boards, or other comfortable chips, sticks.</li>
+</ul>
+<h1 id="tools">Tools</h1>
+<p>Used tools in this doc.</p>
 <ul>
 <li>dmesg: list kernel ring buffer</li>
 <li>lsusb: list usb devices</li>
@@ -30,6 +39,28 @@
 </li>
 </ul>
 <h1 id="example-main-c">Example: main.c</h1>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">#define F_CPU 8000000UL
+
+#include &lt;avr/io.h&gt;
+// /usr/lib/avr/include/avr/iotn85.h
+#include &lt;util/delay.h&gt;
+
+/*
+led the LED blink each 500ms
+*/
+int main (void) {
+
+   DDRB |= (1 &lt;&lt; PB0);
+
+   while(1) {
+       PORTB ^= (1 &lt;&lt; PB0);
+       _delay_ms(500);
+   }
+
+   return 0;
+}
+</span></code></pre>
 <ul>
 <li>Step 1: we need to bring our program to uC (microcontroller)</li>
 <li>Step 2: run the uC</li>
@@ -46,8 +77,8 @@ avrdude -p attiny85 -c usbasp -U flash:w:main.hex:a
 <p>The connection between the computer and microcontroller is done with a programmer. In my case its a <em>USBasp</em>. For more: https://fischl.de/.</p>
 <p>Usually the <em>USBasp</em> will have a ISP 10 pin cable witch is wired to the relevant pins in ATtiny85.</p>
 <p><em>AVRISP mkII</em> is also a good choice. It's just hard to find a original one and its expensive. You also have to extra power you uC.</p>
-<p><strong>Step 2: running</strong>
-After flashing process the program is loaded into the ATtiny85. Wire a circuit with a led to PIN 5 on ATtiny85 and power it up.</p>
+<p><strong>Step 2: running</strong></p>
+<p>After flashing process the program is loaded into the ATtiny85. Wire a circuit with a led to PIN 5 on ATtiny85 and power it up.</p>
 <p><strong>circuit</strong></p>
 <ul>
 <li>the led will glow every 500ms with flashed main.c example
@@ -56,8 +87,15 @@ After flashing process the program is loaded into the ATtiny85. Wire a circuit w
 <p><strong>cheatsheet</strong></p>
 <ul>
 <li>list supported uController: <code>avrdude -p?</code></li>
-<li>check connection between programmer (e.g. USBasp, AVRISP, ...): <code>avrdude -p attiny85 -c usbasp</code> or <code>avrdude -p t85 -c usbasp</code></li>
+<li>check connection between programmer (e.g. USBasp, AVRISP, ...): </li>
 </ul>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">avrdude -p attiny85 -c usbasp
+</span></code></pre>
+<p>or </p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">avrdude -p t85 -c usbasp
+</span></code></pre>
 <p><strong>electricity</strong></p>
 <ul>
 <li>power-bus in breadboard (+ and - lines)</li>
@@ -67,7 +105,7 @@ After flashing process the program is loaded into the ATtiny85. Wire a circuit w
 </ul>
 <p><strong>Atmel ATTiny85</strong></p>
 <pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">Reset	1	8	VCC (5V)
+<code><span style="color:#c0c5ce;">Reset   1   8   VCC (5V)
 		2	7	SCK
 		3	6	MISO
 GND		4	5	MOSI
@@ -90,6 +128,10 @@ GND		4	5	MOSI
 <li>10 or 6 pins</li>
 <li>In System Programming</li>
 <li>use with: <code>avrdude -p attiny85 -c avrispmkII</code></li>
+</ul>
+<h1 id="repository">Repository</h1>
+<ul>
+<li>https://github.com/leventarican/microcontroller</li>
 </ul>
 
 

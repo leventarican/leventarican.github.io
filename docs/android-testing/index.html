@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            
+<h1 class="title">
+    Android: Testing
+</h1>
+<p class="subtitle"><strong>2020-03-04</strong></p>
+<h1 id="about">About</h1>
+<p>An overview about Testing in Android. The following topics are covered.</p>
+<ul>
+<li>Basic Testing</li>
+<li>Testing Repository, ViewModel, Fragments</li>
+<li>Testing Navigation, Coroutines, Room, Databinding</li>
+</ul>
+<h1 id="introduction">Introduction</h1>
+<p>When you create a new android project you get a default testing setup.
+If you look at your project you will see three so called <em>source sets</em>.
+<code>androidTest</code> and <code>test</code> contains your tests</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">$ tree -d -L 2 app/src/
+
+app/src/
+├── androidTest
+│   └── java
+├── main
+│   ├── java
+│   └── res
+└── test
+    └── java
+</span></code></pre>
+<p>The default dependencies defined in gradle are <code>junit</code> and <code>espresso</code> library</p>
+<blockquote>
+<p>You may noticed that the <em>test</em> folder represents the <em>junit</em> library. Where you test your code, classes in <em>main</em> folder.</p>
+</blockquote>
+<blockquote>
+<p>For the android test dependency <em>espresso</em> library is used.</p>
+</blockquote>
+<p>As a quick refresher. How to run a test in android studio: open your <code>ExampleUnitTest</code> class &gt; mark the method annotated with <code>@Test</code> &gt; right click &gt; Run ...</p>
+<h1 id="android-test">Android Test</h1>
+<p>The android test folder contains test which run on the android system. Not like the junit test which run on the local machine JVM (default java behaviour). The android test are also called <em>instrumented test</em> whereas junit test are called <em>local test</em>.</p>
+<p>To run an android test works same way as junit. After running an android test you should see something like <code>androidx.test.runner.AndroidJUnitRunner</code>. Which is an indication of running an android test. </p>
+<h1 id="tdd">TDD</h1>
+<p>We have seen that android gives us the default (plus android test) environment to code in Test Driven Development methodology.</p>
+<blockquote>
+<p>TDD: write test first, run test first and then implement the feature</p>
+</blockquote>
+<h1 id="examples">Examples</h1>
+<ul>
+<li>https://github.com/udacity/android-testing.git</li>
+</ul>
+
+
+        </div>
+    </section>
+</body>
+
+</html>

@@ -17,7 +17,7 @@
 <h1 id="about">About</h1>
 <p>This document gives an overview about SSE. What is it. When to use. The Terminology.</p>
 <h1 id="introduction">Introduction</h1>
-<p>As the abbr. suggest the contept behind SSE is that the server is sending data <em>asynchronously</em> to client.
+<p>As the abbr. suggests the concept behind SSE is that the server is sending data <em>asynchronously</em> to client.
 The connection client-server is done <em>once</em>.</p>
 <p>This approach differs from the well-known concept of client-server communication.
 Where client does a request to a server and the server responses to client.
@@ -31,6 +31,11 @@ SSE can be clustered together with Kafka, JMS in the umbrella term <em>reactive 
 <p><img src="../sse.png" alt="" /></p>
 <h1 id="implementation">Implementation</h1>
 <p>In order to use SSE in your implementation you need a SSE client API (javascript API, Jersey Client SSE API, Microprofile, ...)</p>
+<h1 id="todo">TODO</h1>
+<ul>
+<li>data source: sender, data sink: receiver</li>
+<li>use SSE for simple messaging, or as data sink of a kafka architecture (kafka -&gt; SSE: see links)</li>
+</ul>
 <h1 id="links">Links</h1>
 <ul>
 <li>https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/sse.html</li>

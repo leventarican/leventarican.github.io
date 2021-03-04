@@ -4,7 +4,15 @@ date = 2019-12-06
 +++
 
 # About
-__tools__
+This documentation gives a kind of microcontroller programming from scratch.
+I used the ATtiny85 for this example. IMHO its simplest, smallest, ... and a good starting point.
+The aim was: 
+* Code a programm (preferable in C) and run it on the uC. 
+* The wiring, powering, is all done manually. 
+* No ready-to-use embedded single boards, or other comfortable chips, sticks.
+
+# Tools
+Used tools in this doc.
 * dmesg: list kernel ring buffer
 * lsusb: list usb devices
 * avrdude: for programmer, transfer code from computer to microcontroller
@@ -15,6 +23,29 @@ __tools__
     * gdb-avr: debugger for 
 
 # Example: main.c
+
+```
+#define F_CPU 8000000UL
+
+#include <avr/io.h>
+// /usr/lib/avr/include/avr/iotn85.h
+#include <util/delay.h>
+
+/*
+led the LED blink each 500ms
+*/
+int main (void) {
+
+   DDRB |= (1 << PB0);
+
+   while(1) {
+       PORTB ^= (1 << PB0);
+       _delay_ms(500);
+   }
+
+   return 0;
+}
+```
 
 * Step 1: we need to bring our program to uC (microcontroller)
 * Step 2: run the uC
@@ -37,6 +68,7 @@ Usually the _USBasp_ will have a ISP 10 pin cable witch is wired to the relevant
 _AVRISP mkII_ is also a good choice. It's just hard to find a original one and its expensive. You also have to extra power you uC.
 
 __Step 2: running__
+
 After flashing process the program is loaded into the ATtiny85. Wire a circuit with a led to PIN 5 on ATtiny85 and power it up.
 
 __circuit__
@@ -45,7 +77,14 @@ __circuit__
 
 __cheatsheet__
 * list supported uController: `avrdude -p?`
-* check connection between programmer (e.g. USBasp, AVRISP, ...): `avrdude -p attiny85 -c usbasp` or `avrdude -p t85 -c usbasp`
+* check connection between programmer (e.g. USBasp, AVRISP, ...): 
+```
+avrdude -p attiny85 -c usbasp
+```
+or 
+```
+avrdude -p t85 -c usbasp
+```
 
 __electricity__
 * power-bus in breadboard (+ and - lines)
@@ -56,7 +95,7 @@ __electricity__
 __Atmel ATTiny85__
 
 ```
-Reset	1	8	VCC (5V)
+Reset   1   8   VCC (5V)
 		2	7	SCK
 		3	6	MISO
 GND		4	5	MOSI
@@ -77,3 +116,6 @@ __ISP AVR__
 * 10 or 6 pins
 * In System Programming
 * use with: `avrdude -p attiny85 -c avrispmkII`
+
+# Repository
+* https://github.com/leventarican/microcontroller

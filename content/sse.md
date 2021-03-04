@@ -7,7 +7,7 @@ date = 2021-03-02
 This document gives an overview about SSE. What is it. When to use. The Terminology.
 
 # Introduction
-As the abbr. suggest the contept behind SSE is that the server is sending data _asynchronously_ to client.
+As the abbr. suggests the concept behind SSE is that the server is sending data _asynchronously_ to client.
 The connection client-server is done _once_.
 
 This approach differs from the well-known concept of client-server communication.
@@ -27,6 +27,10 @@ SSE can be clustered together with Kafka, JMS in the umbrella term _reactive mes
 
 # Implementation
 In order to use SSE in your implementation you need a SSE client API (javascript API, Jersey Client SSE API, Microprofile, ...)
+
+# TODO
+* data source: sender, data sink: receiver
+* use SSE for simple messaging, or as data sink of a kafka architecture (kafka -> SSE: see links)
 
 # Links
 * https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/sse.html

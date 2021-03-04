@@ -6,8 +6,6 @@ date = 2020-02-26
 # About
 A short description of `RecyclerView`.
 
-# Introduction
-
 # Components
 In order to use `RecyclerView` you need to setup following pieces:
 * item: our data

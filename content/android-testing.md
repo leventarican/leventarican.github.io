@@ -1,6 +1,6 @@
 +++
 title = "Android: Testing"
-date = 2020-03-04
+date = 2021-03-04
 +++
 
 # About
@@ -47,8 +47,8 @@ We have seen that android gives us the default (plus android test) environment t
 > The testing code is also a kind of a documentation _what your code does_.
 
 # Good practices
-Use good naming. Example: `subjectUnderTest_actionOrInput_resultState`.
-Structure your test code using Given / When / Then.
+* Use good naming. Example: `subjectUnderTest_actionOrInput_resultState`.
+* Structure your test code using Given / When / Then.
 ```
 @Test
 fun getDeveloper_expert_returnsExpert() {
@@ -60,7 +60,7 @@ fun getDeveloper_expert_returnsExpert() {
     assertEquals(3, result)
 }
 ```
-Use an assertion framework. For example hamcrest framework. For hamcrest you need to add the dependency in your build file.
+* Use an assertion framework. For example hamcrest framework. For hamcrest you need to add the dependency in your build file. Example usage (differs from junit assertion)
 ```
 // `is` so called _matcher_
 assertThat(result, `is`(3))
@@ -78,15 +78,22 @@ Recommendation for coverage is:
 * Unit Tests: 70%
 * Integration Tests: 20%
 * E2E Tests: 10%
+
 But my thoughts are the main __impact__ does the end to end tests.
 
-A big issue is also if you have large function or othere components with lot of dependencies. 
-It's difficult to test. You may can do a end to end test. But creating unit test could be in that case difficult.
+A big issue is also if you have a large function or other components with lot of dependencies. 
+It's difficult to test. In that case you can do an end to end test. But creating unit test could be in that case difficult.
 
 That's why you should __break down__ your application logic into isolated components.
 With a well defined (best practice) application architecture you can divide your code in a defined way.
 
 ![](../android-testing.png)
+
+What to do if you havent a well structured code or legacy code?
+* (only) Refactor code where you have tests
+* write test where its easily possible
+* you can always write end to end tests
+* for new features use an architecture
 
 # Links
 * https://github.com/udacity/android-testing.git

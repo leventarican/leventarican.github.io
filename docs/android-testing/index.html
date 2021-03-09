@@ -23,7 +23,7 @@
 <h1 class="title">
     Android: Testing
 </h1>
-<p class="subtitle"><strong>2020-03-04</strong></p>
+<p class="subtitle"><strong>2021-03-04</strong></p>
 <h1 id="about">About</h1>
 <p>An overview about Testing in Android. The following topics are covered.</p>
 <ul>
@@ -67,8 +67,10 @@ app/src/
 <p>The testing code is also a kind of a documentation <em>what your code does</em>.</p>
 </blockquote>
 <h1 id="good-practices">Good practices</h1>
-<p>Use good naming. Example: <code>subjectUnderTest_actionOrInput_resultState</code>.
-Structure your test code using Given / When / Then.</p>
+<ul>
+<li>Use good naming. Example: <code>subjectUnderTest_actionOrInput_resultState</code>.</li>
+<li>Structure your test code using Given / When / Then.</li>
+</ul>
 <pre style="background-color:#2b303b;">
 <code><span style="color:#c0c5ce;">@Test
 fun getDeveloper_expert_returnsExpert() {
@@ -80,7 +82,9 @@ fun getDeveloper_expert_returnsExpert() {
     assertEquals(3, result)
 }
 </span></code></pre>
-<p>Use an assertion framework. For example hamcrest framework. For hamcrest you need to add the dependency in your build file.</p>
+<ul>
+<li>Use an assertion framework. For example hamcrest framework. For hamcrest you need to add the dependency in your build file. Example usage (differs from junit assertion)</li>
+</ul>
 <pre style="background-color:#2b303b;">
 <code><span style="color:#c0c5ce;">// `is` so called _matcher_
 assertThat(result, `is`(3))
@@ -96,18 +100,62 @@ assertThat(result, `is`(3))
 <ul>
 <li>Unit Tests: 70%</li>
 <li>Integration Tests: 20%</li>
-<li>E2E Tests: 10%
-But my thoughts are the main <strong>impact</strong> does the end to end tests.</li>
+<li>E2E Tests: 10%</li>
 </ul>
-<p>A big issue is also if you have large function or othere components with lot of dependencies. 
-It's difficult to test. You may can do a end to end test. But creating unit test could be in that case difficult.</p>
+<p>But my thoughts are the main <strong>impact</strong> does the end to end tests.</p>
+<p>A big issue is also if you have a large function or other components with lot of dependencies. 
+It's difficult to test. In that case you can do an end to end test. But creating unit test could be in that case difficult.</p>
 <p>That's why you should <strong>break down</strong> your application logic into isolated components.
 With a well defined (best practice) application architecture you can divide your code in a defined way.</p>
 <p><img src="../android-testing.png" alt="" /></p>
+<p>What to do if you havent a well structured code or legacy code?</p>
+<ul>
+<li>(only) Refactor code where you have tests</li>
+<li>write test where its easily possible</li>
+<li>you can always write end to end tests</li>
+<li>for new features use an architecture</li>
+</ul>
+<h1 id="unit-testing">Unit Testing</h1>
+<blockquote>
+<p>Run test in JVM instead of Android ecosystem.</p>
+</blockquote>
+<p>We sad that unit testing (with JUnit) is a local test and faster then an instrumented test. In some cases we need an <strong>application context</strong>. In order to get that component Android provides <strong>AndroidX Test</strong> libraries.</p>
+<ol>
+<li>To use it you need to add the following dependencies:
+<ul>
+<li>AndroidX Test core</li>
+<li>roboelectric: creates a simulated android environment for local tests</li>
+<li>AndroidX Test Kotlin: needed for the AndroidJUnit Runner</li>
+</ul>
+</li>
+</ol>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">testImplementation &quot;androidx.test:core-ktx:$androidXTestCoreVersion&quot;
+
+testImplementation &quot;org.robolectric:robolectric:$robolectricVersion&quot;
+
+testImplementation &quot;androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion&quot;
+</span></code></pre>
+<ol start="2">
+<li>Afterwards in your JUnit test class you also need to annotate you class.
+You can then use e.g. a <code>ViewModel</code> which expects an application context.</li>
+</ol>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">@RunWith(AndroidJUnit4::class)
+class DeveloperTest {
+    @Test
+    fun addNewDeveloper_setsNewDeveloperEvent {
+        val viewModel = DeveloperViewModel(ApplicationProvider.getApplicationContext())
+    }
+}
+</span></code></pre>
+<p>With AndroidX Test libraries we can reuse code in both environments (local and instrumented).</p>
+<p><img src="../androidX-test.png" alt="" /></p>
 <h1 id="links">Links</h1>
 <ul>
 <li>https://github.com/udacity/android-testing.git</li>
 <li>https://developer.android.com/training/testing/fundamentals</li>
+<li>https://developer.android.com/training/testing/set-up-project</li>
 </ul>
 
 

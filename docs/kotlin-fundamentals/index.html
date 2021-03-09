@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            
+<h1 class="title">
+    Rust Fundamentals
+</h1>
+<p class="subtitle"><strong>2021-03-07</strong></p>
+<h1 id="about">About</h1>
+<p>This document gives an overview of Kotlin programming languages characteristic components.</p>
+<h1 id="enum">Enum</h1>
+<p>An Enumartion data type is in Kotlin a class. It defined by <code>enum class</code>. Similar to <code>sealed class</code>.</p>
+<p>Example: we define three constants. Whereas each constant is an object of the defined enum class.</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">enum class Developer {
+    JUNIOR, SENIOR, EXPERT
+}
+</span></code></pre>
+<p>Lets continue the example and give the option to assign an experience value. Each enum (e.g. <code>EXPERT</code>) is an instance of the defined enum class and initialized with the given <code>experience</code> value.</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">enum class Developer(val experience: Int) {
+    JUNIOR(1), SENIOR(10), EXPERT(100)
+}
+</span></code></pre><h1 id="sealed-class">Sealed class</h1>
+<p>As the name <strong>sealed</strong> suggest a <code>sealed class</code> is restricted. Restricted means subclasses are only allowed at compile-time. A sealed class is also <strong>abstract</strong>. </p>
+<p>A Sealed class can more then an enum class.</p>
+<h1 id="links">Links</h1>
+<ul>
+<li>https://kotlinlang.org/docs/sealed-classes.html</li>
+</ul>
+
+
+        </div>
+    </section>
+</body>
+
+</html>

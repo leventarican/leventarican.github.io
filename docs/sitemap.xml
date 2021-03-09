@@ -9,7 +9,11 @@
     </url>
     <url>
         <loc>https://leventarican.github.io/android-testing/</loc>
-        <lastmod>2020-03-04</lastmod>
+        <lastmod>2021-03-04</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/architecture/</loc>
+        <lastmod>2021-03-07</lastmod>
     </url>
     <url>
         <loc>https://leventarican.github.io/cpp-dynamic-memory/</loc>
@@ -20,8 +24,16 @@
         <lastmod>2021-03-02</lastmod>
     </url>
     <url>
+        <loc>https://leventarican.github.io/kotlin-fundamentals/</loc>
+        <lastmod>2021-03-07</lastmod>
+    </url>
+    <url>
         <loc>https://leventarican.github.io/microcontroller-from-scratch/</loc>
         <lastmod>2019-12-06</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/rust-fundamentals/</loc>
+        <lastmod>2021-03-07</lastmod>
     </url>
     <url>
         <loc>https://leventarican.github.io/sse/</loc>

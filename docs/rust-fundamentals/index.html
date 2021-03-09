@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            
+<h1 class="title">
+    Rust Fundamentals
+</h1>
+<p class="subtitle"><strong>2021-03-07</strong></p>
+<h1 id="about">About</h1>
+<p>This document gives an overview about the programming language rust. Especially the wording, the syntax. If you come from a different programming language then you may need a kind of mind mapping.</p>
+<blockquote>
+<p>Learn Rust from my perspective.</p>
+</blockquote>
+<h1 id="trait">Trait</h1>
+<blockquote>
+<p>A <code>trait</code> is a collection of methods defined for an unknown type: <code>Self</code></p>
+</blockquote>
+<p>So in other words then the official description. A <code>trait</code> is a <strong><code>interface</code></strong> in java language.</p>
+<h1 id="struct">Struct</h1>
+<p>We know the data type <code>struct</code> from C language. Rust provides in addition two more struct types: tuples and unit structs.</p>
+<h1 id="method">Method</h1>
+<p>You defined a structure but also want to add methods. Then you can use the <code>impl</code> keyword.</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">struct Developer {
+    exp: u8
+}
+
+impl Developer {
+    fn isExpert(&amp;self) -&gt; bool {
+        self.exp &gt; 100
+    }
+}
+</span></code></pre><h1 id="string">String</h1>
+<p>Text can stored in rust in two ways. </p>
+<p>The first way is to use the 'String' type. Which is a struct data type defined in rust std library: <code>Struct std::string::String</code>. The <code>String</code> is stored as a vector of bytes <code>Vec&lt;u8&gt;</code>.</p>
+<p>And there is also a second string data type: <code>&amp;str</code>. </p>
+<h1 id="slice">Slice</h1>
+<p>A slice is a two word object. The first word is a pointer to the data. The second word is the length of the slice.</p>
+<blockquote>
+<p>pointer size is usize (pointer size). <code>usize</code> is determined by the processor architecture. e.g. on <code>x86-64</code> the usize is <strong>64 bit</strong>.</p>
+</blockquote>
+<p>A quick refresher regarding <em>word</em>:</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">8 bit = 1 byte
+2 byte = 1 word
+1 dword (double word) = 2 word
+</span></code></pre><h1 id="streams">Streams</h1>
+<p>Rust has in-build support for working with streaming or functional programming.</p>
+<p>A basic example. We have a vector of numbers and want to display that data as a reversed string. First we need a iterator [<code>iter()</code>]. Afterwards we can begin our data transformation.</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">let data = vec![0, 1, 1, 1];
+let s: String = data.iter().map(|d| d.to_string()).rev().collect();
+
+// output: 1110
+</span></code></pre>
+<blockquote>
+<p>You may ask what is <code>vec!</code>. It's a macro, an alias to create new <code>Vec</code> and initialize with values.</p>
+</blockquote>
+<h1 id="links">Links</h1>
+<ul>
+<li>https://doc.rust-lang.org/rust-by-example/trait.html</li>
+<li>https://doc.rust-lang.org/rust-by-example/custom_types/structs.html</li>
+<li>https://doc.rust-lang.org/rust-by-example/fn/methods.html</li>
+<li>https://doc.rust-lang.org/rust-by-example/std/str.html</li>
+<li>https://mkaz.blog/working-with-rust/</li>
+</ul>
+
+
+        </div>
+    </section>
+</body>
+
+</html>

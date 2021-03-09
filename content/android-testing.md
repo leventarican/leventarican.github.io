@@ -95,6 +95,41 @@ What to do if you havent a well structured code or legacy code?
 * you can always write end to end tests
 * for new features use an architecture
 
+# Unit Testing
+> Run test in JVM instead of Android ecosystem.
+
+We sad that unit testing (with JUnit) is a local test and faster then an instrumented test. In some cases we need an __application context__. In order to get that component Android provides __AndroidX Test__ libraries.
+
+1. To use it you need to add the following dependencies:
+    * AndroidX Test core
+    * roboelectric: creates a simulated android environment for local tests
+    * AndroidX Test Kotlin: needed for the AndroidJUnit Runner
+
+```
+testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
+
+testImplementation "org.robolectric:robolectric:$robolectricVersion"
+
+testImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion"
+```
+
+2. Afterwards in your JUnit test class you also need to annotate you class.
+You can then use e.g. a `ViewModel` which expects an application context.
+```
+@RunWith(AndroidJUnit4::class)
+class DeveloperTest {
+    @Test
+    fun addNewDeveloper_setsNewDeveloperEvent {
+        val viewModel = DeveloperViewModel(ApplicationProvider.getApplicationContext())
+    }
+}
+```
+
+With AndroidX Test libraries we can reuse code in both environments (local and instrumented).
+
+![](../androidX-test.png)
+
 # Links
 * https://github.com/udacity/android-testing.git
 * https://developer.android.com/training/testing/fundamentals
+* https://developer.android.com/training/testing/set-up-project

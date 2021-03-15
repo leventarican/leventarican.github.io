@@ -1,5 +1,5 @@
 +++
-title = "Rust Fundamentals"
+title = "Kotlin Fundamentals"
 date = 2021-03-07
 +++
 

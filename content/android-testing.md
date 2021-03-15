@@ -125,7 +125,7 @@ class DeveloperTest {
 }
 ```
 
-With AndroidX Test libraries we can reuse code in both environments (local and instrumented).
+With AndroidX Test libraries we can reuse code in both environments (local and instrumented). To conclude AndroidX Test provides a unified API.
 
 ![](../androidX-test.png)
 

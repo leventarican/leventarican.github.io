@@ -23,6 +23,8 @@ But firstly you should focus on problem solving. If you are familliar enough wit
 ### Delegation Pattern
 > Delegation is like inheritance done manually through object composition.
 
+When do we need inheritance or composition? Whenever we have __depdendencies__ we can use OOP techniques to use other components functions. E.g. a class method we don't have.
+
 A class _has_ an object (composition) rather then _is a_ object (inheritance).
 
 Kotlin has a kind of build-in support for _Delegation Pattern_ with the `by`-clause.
@@ -54,6 +56,9 @@ TODO: Domain Driven Development.
 
 ### HDD
 The Hype Driven Development paradigm.
+
+### MVVM
+The Model - View - ViewModel is commonly used in Android environment.
 
 # Links
 * https://bevyengine.org/learn/book/getting-started/ecs/

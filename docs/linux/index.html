@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Kotlin, Rust, Python">
+
+    <style>
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:800px; margin:16px auto;">
+            
+<h1 class="title">
+    Linux
+</h1>
+<p class="subtitle"><strong>2021-03-18</strong></p>
+<h1 id="free-up-space">Free up space</h1>
+<p>Use <strong>autoremove</strong> on ubuntu to remove old packages, kernel, ...</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">sudo apt-get autoremove
+</span></code></pre>
+<p>You can also clean <strong>apt chache</strong></p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">sudo du -sh /var/cache/apt
+sudo apt-get autoclean
+</span></code></pre>
+<p>Clear <strong>systemd journal logs</strong> older then 3 days</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">journalctl --disk-usage
+sudo journalctl --vacuum-time=3d
+</span></code></pre>
+<p>Remove <strong>snap</strong> older versions</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">du -h /var/lib/snapd/snaps
+
+#!/bin/bash
+# Removes old revisions of snaps
+# CLOSE ALL SNAPS BEFORE RUNNING THIS
+set -eu
+snap list --all | awk &#39;/disabled/{print $1, $3}&#39; |
+    while read snapname revision; do
+        snap remove &quot;$snapname&quot; --revision=&quot;$revision&quot;
+    done
+</span></code></pre>
+<p>If you want to use a UI then stacer is a good tool</p>
+<h1 id="snap">Snap</h1>
+<p>The <code>snap-store</code> under linux using ~ 500MB. As an alternative you can use <code>gnome-software</code>.</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">sudo snap remove snap-store &amp;&amp; sudo apt install gnome-software
+</span></code></pre><h1 id="links">Links</h1>
+<ul>
+<li>https://itsfoss.com/free-up-space-ubuntu-linux/</li>
+<li>https://github.com/oguzhaninan/Stacer</li>
+</ul>
+
+
+        </div>
+    </section>
+</body>
+
+</html>

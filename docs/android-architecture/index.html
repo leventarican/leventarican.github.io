@@ -5,6 +5,21 @@
     <meta charset="utf-8">
     <title>Levent Arican</title>
     
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Kotlin, Rust, Python">
+
+    <style>
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+    </style>
+
     <!-- Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
     <script>
@@ -25,24 +40,24 @@
 </h1>
 <p class="subtitle"><strong>2021-03-15</strong></p>
 <h1 id="about">About</h1>
-<p>Give an overview about the Android Architecture components or bluebrints.</p>
+<p>Give an overview about the Android Architecture components or blueprints.</p>
 <h1 id="introduction">Introduction</h1>
 <blockquote>
 <p>There are different ways to develop an app. But the challenge is to develop an app with a good architecture.</p>
 </blockquote>
 <p>By time Android development evolved to make development more comfortable e.g. skip writing boilerplate code.
 Make code structure more <em>robust, testable, maintainable</em>.</p>
-<p>At begin there was mainly an <code>Activity</code> component which represents a screen. Then <code>Fragments</code> where introduced. A type of micro-UI within an <code>Activty</code>.
+<p>At begin there was mainly an <code>Activity</code> component which represents a screen. Then <code>Fragments</code> where introduced. A type of micro-UI within an <code>Activity</code>.
 Latetely an <em>android support library</em> was introduced. With Android 9.0 this support library is called <em>AndroidX</em>.
 <em>AndroidX</em> is part of the <em>Jetpack</em> library suite.</p>
 <p>There are also 3rd party libraries which are commonly used.</p>
-<p>Also important to mention is the usage of kotlin language extensions or features.</p>
+<p>Also important to mention is the usage of kotlin language extensions or features. Namely <em>Android KTX</em>.</p>
 <p>You also should know some different development approaches. E.g. <em>single-activity-architecture</em>.</p>
 <blockquote>
 <p>These additional components help you to improve your code quality but bring a lot of new dependencies. First you need too know and then use it suitable.</p>
 </blockquote>
 <h1 id="components">Components</h1>
-<p>Now lets list the components available. We want to know when to use which components and what the motivation of it.</p>
+<p>Now lets list the available components. We want to know when to use which components and what the motivation of it.</p>
 <ul>
 <li>DataBinding</li>
 <li>ViewBinding</li>
@@ -50,6 +65,7 @@ Latetely an <em>android support library</em> was introduced. With Android 9.0 th
 <li>LiveData</li>
 <li>Room</li>
 </ul>
+<p>You will often read the components with the apprevation MVVM architecture: Model - View - ViewModel</p>
 <p>If we need to store or request/fetch data from a data source we can achieve this in different ways. You should know that read/write operation on <em>cache/memory/in-memory</em> is different to <em>disc</em> or even <em>network</em>. To summarize there are different data persistence layers.</p>
 <table><thead><tr><th>Type</th><th>IO time</th></tr></thead><tbody>
 <tr><td>cache/memory</td><td>fast</td></tr>
@@ -58,16 +74,60 @@ Latetely an <em>android support library</em> was introduced. With Android 9.0 th
 </tbody></table>
 <p>When we develop an app our intention is mainly to receive input then display respective information. It's the usual data process: <code>input -&gt; process -&gt; output</code>. The components listed above are intended to support displaying, storing, ... data. We achieve a decopling of the code components.</p>
 <p>Some words about <em>Jetpack</em>. As already introduced it was formerly <em>Android Support Library</em>: v4 Support Libraries, v7 Support Libraries.
-The <em>AndroidX library</em> contains the existing support library and also includes the latest Jetpack components. </p>
+The <em>AndroidX library</em> contains the existing support library and also includes the latest Jetpack components.</p>
 <h3 id="databinding">DataBinding</h3>
 <p>With data binding we can access the UI element directly over the generate Binding class. Instead of searching the hole UI tree <code>findviewbyId</code> we just access the view defined in the layout file directly.</p>
+<blockquote>
+<p>Data Binding Library supports the developer to bind the UI with the data.</p>
+</blockquote>
+<p>In your UI component you can then set data to UI.</p>
 <pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">binding.textView.text = &#39;kotlin&#39;
+<code><span style="color:#c0c5ce;">binding.textView.text = &#39;data&#39;
+</span></code></pre>
+<p>You can even skip this intermediate step and set value directly in your layout file with <em>expression language</em>.</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">&lt;TextView android:text=&quot;@{viewmodel.data}&quot; /&gt;
 </span></code></pre>
 <blockquote>
 <p>Too get such an <code>binding</code> object there are some prerequirements you need to too. E.g. include the dependency, wrap layout file with <code>&lt;layout/&gt;</code> tag and inflate the layout file.</p>
 </blockquote>
-<h3 id="viewmodel">ViewModel</h3>
+<p>So you wrapped your layout file with <code>&lt;layout&gt;</code> and now want to use your views directly in your UI components. You need the respective binding instance. To get such an instance all you need to do is inflate the layout with your code with the <code>DataBindingUtil</code>. Let see some code artefacts.</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">val binding: FragmentDevBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dev, container, false)
+</span></code></pre>
+<p>Within an <code>Activity</code> the way to get the binding is a bit different.</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">val binding = MainActivityBinding.inflate(getLayoutinflater())
+</span></code></pre>
+<blockquote>
+<p>You may ask where do I get the <code>*Binding</code> class. This class will be automatically generated when you wrap your layout file with <code>&lt;layout&gt;</code> tag. Thats also the reason why need to inflate the layout file with the <code>DataBindinUtil</code>.</p>
+</blockquote>
+<p>We can even rename the generate Binding class name. This is not obligatory just a additional information.</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">&lt;data class=&quot;Binding&quot; /&gt;
+</span></code></pre>
+<p>A note about the <em>lifecycle owner</em>. If you want to use Data Binding with <code>LiveData</code> then you need to set the lifecycle owner to your binding instance. This is needed to define the scope of the <code>LiveData</code> object. Check also the API doc.</p>
+<blockquote>
+<p>Sets the LifecycleOwner that should be used for observing changes of LiveData in this binding</p>
+</blockquote>
+<p>A lifecycle owner is class with an Android lifecycle. Like <code>Activity</code> or <code>Fragment</code>.</p>
+<h3 id="view-binding">View Binding</h3>
+<p>A kind of subset of data binding. In view binding there is no such techniques like <em>binding expression</em>, <em>binding adapters</em> or <em>two-way binding</em>.
+It's a good alternative to eliminate <code>findViewById</code>. There is no <code>&lt;layout&gt;</code> tag required in layout file. </p>
+<p>So, how can I use view binding? In comparison to data binding its enough to set the view binding build features to true. The binding class for a layout file will be automatically generated. </p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">buildFeatures {
+    viewBinding = true
+}
+</span></code></pre>
+<p>You can even ignore generating a binding class .</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">tools:viewBindingIgnore=&quot;true&quot;
+</span></code></pre>
+<p>Now in your UI component you inflate your layout file with the generated binding class to get a binding class instance.</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">binding = ActivityMainBinding.inflate(layoutInflater)
+</span></code></pre><h3 id="viewmodel">ViewModel</h3>
 <p>The view model component was introduced to hold the app data model in a lifecycle aware state. Whenever the <code>Acvitity</code> or <code>Fragment</code> lifecycle changes we need to care about the data state. With <code>ViewModel</code> this manual process is obsolete. The <code>ViewModel</code> manages the data for the UI. Either a single UI component (activity/fragment) or shared UI components.</p>
 <blockquote>
 <p>For a <code>ViewModel</code> integration we need to add dependencies, introduce a <code>ViewModel</code> class and get the <code>ViewModel</code> reference from a view model provider.</p>
@@ -76,9 +136,35 @@ The <em>AndroidX library</em> contains the existing support library and also inc
 <pre style="background-color:#2b303b;">
 <code><span style="color:#c0c5ce;">class DeveloperViewModel : ViewModel {}
 </span></code></pre>
-<p>In your UI component get the instance.</p>
+<p>In your UI component get the ViewModel instance.</p>
 <pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">
+<code><span style="color:#c0c5ce;">val viewModel = ViewModelProvider(this).get(DeveloperViewModel::class.java)
+// use viewModel to observe live data: viewModel.data.observe { ... }
+</span></code></pre>
+<p>Thats all. But there is also a concise way with <em>Android KTX</em>.</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">val viewModel: DeveloperViewModel by activityViewModels()
+</span></code></pre>
+<p>Or in an Activity</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">val viewModel: DeveloperViewModel by viewModels()
+</span></code></pre>
+<p>What if you need dependencies in your ViewModel class? E.g. add a repository to your ViewModel.
+Remember the ViewModel manages your data. And it make sense that a ViewModel has access to a repository layer.</p>
+<blockquote>
+<p>Quick Refresh: A <em>Repository</em> is a data abstraction layer for local, network, in-memory data.</p>
+</blockquote>
+<p>Define the ViewModel as you would usually do in OOP by using a constructor.
+Then you need to define a factory class which extends from <code>ViewModelProvider.Factory</code>.</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">class DeveloperViewModel(private val r: DeveloperRepository) : ViewModel {}
+class DeveloperViewModelFactory(private val r: DeveloperRepository) : ViewModelProvider.Factory {}
+</span></code></pre>
+<p>On instantiating you provide then this factory class to the <code>ViewModelProvider</code>. With <em>Android KTX</em> even more concise.</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">val vm: DeveloperViewModel by viewModels {
+    DeveloperViewModelFactory(repository)
+}
 </span></code></pre><h3 id="livedata">LiveData</h3>
 <p>With <code>LiveData</code> for example we can do <em>reactive programming</em>. The UI react to changes on data.</p>
 <pre style="background-color:#2b303b;">
@@ -97,13 +183,22 @@ The <em>AndroidX library</em> contains the existing support library and also inc
 <li>logging: Timber</li>
 </ul>
 <h1 id="kotlin">Kotlin</h1>
-<p>Where does kotlin helps us the develop better apps. Like <code>Coroutines</code>. </p>
-<p><em>Android KTX</em> is a set of Kotlin extensions which is part of Android Jetpack.</p>
+<blockquote>
+<p><strong>Android KTX</strong> is a set of Kotlin extensions which is part of Android Jetpack.</p>
+</blockquote>
+<p>Android KTX helps us the develop better apps. Better means in this context with the help of Kotlin features we are able to write concise and readable code. That's the motivation behind the KTX extentions.</p>
+<p>Then there is <strong>kotlin-android-extensions</strong> (also known as <em>Kotlin synthetics</em>). A gradle plugin from jetbrains. Which is already deprecated.
+Whenever you see a code snippet with the following import then its <code>kotlin-android-extensions</code>.</p>
+<pre style="background-color:#2b303b;">
+<code><span style="color:#c0c5ce;">import kotlinx.android.synthetic.main.activity_main.*
+</span></code></pre>
+<p>You should migrate to <strong>view binding</strong>.</p>
 <h1 id="links">Links</h1>
 <ul>
 <li>https://developer.android.com/jetpack</li>
 <li>https://developer.android.com/topic/libraries/support-library/index.html</li>
 <li>https://developer.android.com/topic/libraries/architecture</li>
+<li>https://android-developers.googleblog.com/2020/11/the-future-of-kotlin-android-extensions.html</li>
 </ul>
 <h1 id="links-github">Links: Github</h1>
 <ul>

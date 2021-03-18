@@ -80,10 +80,32 @@ We can even rename the generate Binding class name. This is not obligatory just 
 <data class="Binding" />
 ```
 
-A note about the _lifecycle owner_.If you want to use Data Binding with `LiveData` then you need to set the lifecycle owner to your binding instance. This is needed to define the scope of the `LiveData` object. Check also the API doc.
+A note about the _lifecycle owner_. If you want to use Data Binding with `LiveData` then you need to set the lifecycle owner to your binding instance. This is needed to define the scope of the `LiveData` object. Check also the API doc.
 > Sets the LifecycleOwner that should be used for observing changes of LiveData in this binding
 
 A lifecycle owner is class with an Android lifecycle. Like `Activity` or `Fragment`.
+
+### View Binding
+A kind of subset of data binding. In view binding there is no such techniques like _binding expression_, _binding adapters_ or _two-way binding_.
+It's a good alternative to eliminate `findViewById`. There is no `<layout>` tag required in layout file. 
+
+So, how can I use view binding? In comparison to data binding its enough to set the view binding build features to true. The binding class for a layout file will be automatically generated. 
+
+```
+buildFeatures {
+    viewBinding = true
+}
+```
+
+You can even ignore generating a binding class .
+```
+tools:viewBindingIgnore="true"
+```
+
+Now in your UI component you inflate your layout file with the generated binding class to get a binding class instance.
+```
+binding = ActivityMainBinding.inflate(layoutInflater)
+```
 
 ### ViewModel
 The view model component was introduced to hold the app data model in a lifecycle aware state. Whenever the `Acvitity` or `Fragment` lifecycle changes we need to care about the data state. With `ViewModel` this manual process is obsolete. The `ViewModel` manages the data for the UI. Either a single UI component (activity/fragment) or shared UI components.
@@ -145,14 +167,22 @@ data.payload.observe(this, {
 * logging: Timber
 
 # Kotlin
-> _Android KTX_ is a set of Kotlin extensions which is part of Android Jetpack.
+> __Android KTX__ is a set of Kotlin extensions which is part of Android Jetpack.
 
 Android KTX helps us the develop better apps. Better means in this context with the help of Kotlin features we are able to write concise and readable code. That's the motivation behind the KTX extentions.
+
+Then there is __kotlin-android-extensions__ (also known as _Kotlin synthetics_). A gradle plugin from jetbrains. Which is already deprecated.
+Whenever you see a code snippet with the following import then its `kotlin-android-extensions`.
+```
+import kotlinx.android.synthetic.main.activity_main.*
+```
+You should migrate to __view binding__.
 
 # Links
 * https://developer.android.com/jetpack
 * https://developer.android.com/topic/libraries/support-library/index.html
 * https://developer.android.com/topic/libraries/architecture
+* https://android-developers.googleblog.com/2020/11/the-future-of-kotlin-android-extensions.html
 
 # Links: Github
 * https://github.com/android/architecture-components-samples/tree/master/GithubBrowserSample

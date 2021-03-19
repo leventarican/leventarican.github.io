@@ -10,13 +10,13 @@ This document gives an overview of Kotlin programming languages characteristic c
 An Enumartion data type is in Kotlin a class. It defined by `enum class`. Similar to `sealed class`.
 
 Example: we define three constants. Whereas each constant is an object of the defined enum class.
-```
+```kt
 enum class Developer {
     JUNIOR, SENIOR, EXPERT
 }
 ```
 Lets continue the example and give the option to assign an experience value. Each enum (e.g. `EXPERT`) is an instance of the defined enum class and initialized with the given `experience` value.
-```
+```kt
 enum class Developer(val experience: Int) {
     JUNIOR(1), SENIOR(10), EXPERT(100)
 }

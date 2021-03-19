@@ -6,9 +6,19 @@
     <title>Levent Arican</title>
     
     <meta name="author" content="Levent Arican">
-    <meta name="description" content="Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Kotlin, Rust, Python">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
 
     <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
         code {
             font-size: large;
         }
@@ -17,6 +27,9 @@
         }
         table, th, td {
             border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
         }
     </style>
 
@@ -64,26 +77,26 @@ The aim was: </p>
 </li>
 </ul>
 <h1 id="example-main-c">Example: main.c</h1>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">#define F_CPU 8000000UL
+<pre style="background-color:#272822;">
+<code class="language-c" data-lang="c"><span style="color:#f92672;">#define </span><span style="color:#f8f8f2;">F_CPU </span><span style="color:#ae81ff;">8000000</span><span style="font-style:italic;color:#66d9ef;">UL
 
-#include &lt;avr/io.h&gt;
-// /usr/lib/avr/include/avr/iotn85.h
-#include &lt;util/delay.h&gt;
+</span><span style="color:#f92672;">#include </span><span style="color:#e6db74;">&lt;avr/io.h&gt;
+</span><span style="color:#75715e;">// /usr/lib/avr/include/avr/iotn85.h
+</span><span style="color:#f92672;">#include </span><span style="color:#e6db74;">&lt;util/delay.h&gt;
 
-/*
+</span><span style="color:#75715e;">/*
 led the LED blink each 500ms
 */
-int main (void) {
+</span><span style="font-style:italic;color:#66d9ef;">int </span><span style="color:#a6e22e;">main </span><span style="color:#f8f8f2;">(</span><span style="font-style:italic;color:#66d9ef;">void</span><span style="color:#f8f8f2;">) {
 
-   DDRB |= (1 &lt;&lt; PB0);
+   DDRB </span><span style="color:#f92672;">|= </span><span style="color:#f8f8f2;">(</span><span style="color:#ae81ff;">1 </span><span style="color:#f92672;">&lt;&lt;</span><span style="color:#f8f8f2;"> PB0);
 
-   while(1) {
-       PORTB ^= (1 &lt;&lt; PB0);
-       _delay_ms(500);
+   </span><span style="color:#f92672;">while</span><span style="color:#f8f8f2;">(</span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">) {
+       PORTB </span><span style="color:#f92672;">^= </span><span style="color:#f8f8f2;">(</span><span style="color:#ae81ff;">1 </span><span style="color:#f92672;">&lt;&lt;</span><span style="color:#f8f8f2;"> PB0);
+       _delay_ms(</span><span style="color:#ae81ff;">500</span><span style="color:#f8f8f2;">);
    }
 
-   return 0;
+   </span><span style="color:#f92672;">return </span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">;
 }
 </span></code></pre>
 <ul>
@@ -92,12 +105,12 @@ int main (void) {
 </ul>
 <p><strong>Step 1: compile, build and flash</strong></p>
 <p>In order to bring our program to the uC we need a elf format. To be short. These are the steps for it: </p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">avr-gcc -mmcu=attiny85 -Os -c main.c  -o main.o
-avr-gcc main.o -o main.elf
-avr-objcopy -O ihex -j .text -j .data main.elf main.hex
-avr-size --mcu=attiny85 -C main.elf 
-avrdude -p attiny85 -c usbasp -U flash:w:main.hex:a
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">avr-gcc</span><span style="font-style:italic;color:#fd971f;"> -mmcu</span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;">attiny85</span><span style="font-style:italic;color:#fd971f;"> -Os -c</span><span style="color:#f8f8f2;"> main.c</span><span style="font-style:italic;color:#fd971f;">  -o</span><span style="color:#f8f8f2;"> main.o
+avr-gcc main.o</span><span style="font-style:italic;color:#fd971f;"> -o</span><span style="color:#f8f8f2;"> main.elf
+avr-objcopy</span><span style="font-style:italic;color:#fd971f;"> -O</span><span style="color:#f8f8f2;"> ihex</span><span style="font-style:italic;color:#fd971f;"> -j</span><span style="color:#f8f8f2;"> .text</span><span style="font-style:italic;color:#fd971f;"> -j</span><span style="color:#f8f8f2;"> .data main.elf main.hex
+avr-size</span><span style="font-style:italic;color:#fd971f;"> --mcu</span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;">attiny85</span><span style="font-style:italic;color:#fd971f;"> -C</span><span style="color:#f8f8f2;"> main.elf 
+avrdude</span><span style="font-style:italic;color:#fd971f;"> -p</span><span style="color:#f8f8f2;"> attiny85</span><span style="font-style:italic;color:#fd971f;"> -c</span><span style="color:#f8f8f2;"> usbasp</span><span style="font-style:italic;color:#fd971f;"> -U</span><span style="color:#f8f8f2;"> flash:w:main.hex:a
 </span></code></pre>
 <p>The connection between the computer and microcontroller is done with a programmer. In my case its a <em>USBasp</em>. For more: https://fischl.de/.</p>
 <p>Usually the <em>USBasp</em> will have a ISP 10 pin cable witch is wired to the relevant pins in ATtiny85.</p>
@@ -114,12 +127,12 @@ avrdude -p attiny85 -c usbasp -U flash:w:main.hex:a
 <li>list supported uController: <code>avrdude -p?</code></li>
 <li>check connection between programmer (e.g. USBasp, AVRISP, ...): </li>
 </ul>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">avrdude -p attiny85 -c usbasp
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">avrdude</span><span style="font-style:italic;color:#fd971f;"> -p</span><span style="color:#f8f8f2;"> attiny85</span><span style="font-style:italic;color:#fd971f;"> -c</span><span style="color:#f8f8f2;"> usbasp
 </span></code></pre>
 <p>or </p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">avrdude -p t85 -c usbasp
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">avrdude</span><span style="font-style:italic;color:#fd971f;"> -p</span><span style="color:#f8f8f2;"> t85</span><span style="font-style:italic;color:#fd971f;"> -c</span><span style="color:#f8f8f2;"> usbasp
 </span></code></pre>
 <p><strong>electricity</strong></p>
 <ul>
@@ -129,11 +142,11 @@ avrdude -p attiny85 -c usbasp -U flash:w:main.hex:a
 <li>integrated circuit (IC) = chips comes with DIP (dual in-line package) for the middle gab in breadboard</li>
 </ul>
 <p><strong>Atmel ATTiny85</strong></p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">Reset   1   8   VCC (5V)
-		2	7	SCK
-		3	6	MISO
-GND		4	5	MOSI
+<pre style="background-color:#272822;">
+<code class="language-md" data-lang="md"><span style="color:#f8f8f2;">Reset   1   8   VCC (5V)
+        2   7	SCK
+        3   6	MISO
+GND     4   5	MOSI
 </span></code></pre>
 <p><strong>Serial Peripheral Interface</strong></p>
 <ul>
@@ -159,6 +172,9 @@ GND		4	5	MOSI
 <li>https://github.com/leventarican/microcontroller</li>
 </ul>
 
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
 
         </div>
     </section>

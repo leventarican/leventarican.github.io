@@ -13,7 +13,7 @@ An overview about Testing in Android. The following topics are covered.
 When you create a new android project you get a default testing setup.
 If you look at your project you will see three so called __source sets__.
 `androidTest` and `test` contains your tests
-```
+```bash
 $ tree -d -L 2 app/src/
 
 app/src/
@@ -49,7 +49,7 @@ We have seen that android gives us the default (plus android test) environment t
 # Good practices
 * Use good naming. Example: `subjectUnderTest_actionOrInput_resultState`.
 * Structure your test code using Given / When / Then.
-```
+```kt
 @Test
 fun getDeveloper_expert_returnsExpert() {
     // GIVEN
@@ -61,7 +61,7 @@ fun getDeveloper_expert_returnsExpert() {
 }
 ```
 * Use an assertion framework. For example hamcrest framework. For hamcrest you need to add the dependency in your build file. Example usage (differs from junit assertion)
-```
+```kt
 // `is` so called _matcher_
 assertThat(result, `is`(3))
 ```
@@ -105,7 +105,7 @@ We sad that unit testing (with JUnit) is a local test and faster then an instrum
     * roboelectric: creates a simulated android environment for local tests
     * AndroidX Test Kotlin: needed for the AndroidJUnit Runner
 
-```
+```groovy
 testImplementation "androidx.test:core-ktx:$androidXTestCoreVersion"
 
 testImplementation "org.robolectric:robolectric:$robolectricVersion"
@@ -115,7 +115,7 @@ testImplementation "androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVers
 
 2. Afterwards in your JUnit test class you also need to annotate you class.
 You can then use e.g. a `ViewModel` which expects an application context.
-```
+```kt
 @RunWith(AndroidJUnit4::class)
 class DeveloperTest {
     @Test

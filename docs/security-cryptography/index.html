@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:800px; margin:16px auto;">
+            
+<h1 class="title">
+    Security | Cryptography
+</h1>
+<p class="subtitle"><strong>2021-03-19</strong></p>
+<h1 id="security">Security</h1>
+<p>Authentication</p>
+<ul>
+<li>Who are you?</li>
+<li>Methods: Login form, HTTP authentication, X.509 certificates, HTTP digest, ...</li>
+</ul>
+<p>Authorization</p>
+<ul>
+<li>What can i do?</li>
+<li>Methods: Access control for URLs, Secure objects and methods, Access control lists (ACLs)</li>
+<li>Types: Role-, Claims-, Policy-based authorization</li>
+</ul>
+<p>SiteMinder, Single Sign-On</p>
+<ul>
+<li>SSO is a solution that allows a user to authenticate once and gain access to all applications/resources supported by the SSO, without having to sign in separately to each application/resource.</li>
+<li>with a SiteMinder Web Agent a client request is intercepted 
+<ul>
+<li>Web Agent is a filter on the web server</li>
+<li>is the request path (resource) is protected then the request goes to Policy Server</li>
+<li>the Policy Server needs the credentials (username / password) to gave access</li>
+</ul>
+</li>
+<li>why use SSO / SiteMinder?
+<ul>
+<li>it acts as a single point of truth</li>
+<li>otherwise the user has to login each per system (ex. apache web server, IIS windows server, ...)</li>
+</ul>
+</li>
+<li>CA Single Sign-On (formerly CA SiteMinder)</li>
+<li>CA SiteMinder Policy Server</li>
+<li>CA SiteMinder authentication provider</li>
+</ul>
+<p>HTTP authentication schemas</p>
+<ul>
+<li>Basic: uses the easily reversible Base64 encoding instead of hashing</li>
+<li>Digest: applies a hash function to the username and password before sending them over the network</li>
+<li>Bearer / OAuth
+<ul>
+<li>Token based authentication</li>
+<li>is complementary to and distinct from ODIC</li>
+<li>ODIC and OAuth are often used together</li>
+<li>OAuth act as the authorization layer</li>
+</ul>
+</li>
+<li>NTLM NT LAN Manager authentication is a challenge-response scheme. NTLM uses Windows credentials to transform the challenge data.</li>
+</ul>
+<p>API Keys</p>
+<ul>
+<li>access REST api with a key (no user required)</li>
+</ul>
+<p>JWT</p>
+<ul>
+<li>JSON Web Token: is an encrypted JSON (format)</li>
+<li>typicalls used with Bearer auth.</li>
+</ul>
+<p>ODIC</p>
+<ul>
+<li>OpenID Connect</li>
+<li>OIDC providing the user <em>authentication layer</em></li>
+</ul>
+<p>Integrated Windows Authentication (IWA)</p>
+<ul>
+<li>The current Windows user information on the client computer is used by the browser.</li>
+</ul>
+<p>Kerberos</p>
+<ul>
+<li>is a computer-network authentication protocol </li>
+</ul>
+<p>LDAP</p>
+<ul>
+<li>Lightweight Directory Access Protocol is a standard application protocol</li>
+<li>sharing of information on users, systems, networks, services, and applications</li>
+<li>LDAP authentication is the process of validating a username and password with a directory service using the LDAP protocol.</li>
+</ul>
+<p>Links</p>
+<ul>
+<li>https://doubleoctopus.com/security-wiki/</li>
+<li>https://www.roytuts.com/how-siteminder-works/</li>
+<li>https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication</li>
+<li>https://docs.microsoft.com/en-us/dotnet/framework/wcf/feature-details/understanding-http-authentication</li>
+<li>https://docs.microsoft.com/en-us/aspnet/core/security/?view=aspnetcore-3.1</li>
+<li>https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html</li>
+<li>https://jwt.io/introduction/</li>
+</ul>
+<h1 id="cryptography">Cryptography</h1>
+<ul>
+<li>encryption / ciphering / encoding</li>
+<li>we need encryption when ever we send information over unsafe networks.</li>
+<li>main target of cryptography
+<ul>
+<li>Confidentiality: only authorized person can read protected information</li>
+<li>Authentication: you talk to the right person. you can trust.</li>
+<li>Integrity: the message hasnt been changed</li>
+</ul>
+</li>
+<li>encrypt a plaintext with a key and algorithm: <code>plaintext -&gt; chiphertext</code></li>
+</ul>
+<h3 id="hashing">hashing</h3>
+<ul>
+<li>a one-way function / fingerprint</li>
+<li>used e.g. for passwords. the hash of it is stored then stored.</li>
+</ul>
+<p><em>example: python MD5</em></p>
+<pre style="background-color:#272822;">
+<code class="language-py" data-lang="py"><span style="color:#f92672;">&gt;&gt;&gt; </span><span style="color:#f8f8f2;">hashlib.md5(</span><span style="font-style:italic;color:#66d9ef;">b</span><span style="color:#e6db74;">&#39;bob&#39;</span><span style="color:#f8f8f2;">).hexdigest()
+</span><span style="color:#e6db74;">&#39;9f9d51bc70ef21ca5c14f307980a29d8&#39;
+</span><span style="color:#f92672;">&gt;&gt;&gt; </span><span style="color:#f8f8f2;">hashlib.md5(</span><span style="font-style:italic;color:#66d9ef;">b</span><span style="color:#e6db74;">&#39;bob&#39;</span><span style="color:#f8f8f2;">).hexdigest()
+</span><span style="color:#e6db74;">&#39;9f9d51bc70ef21ca5c14f307980a29d8&#39;
+</span></code></pre><h3 id="symmetric-asymmetric-encryption">symmetric / asymmetric encryption</h3>
+<ul>
+<li>symmetric encryption (algorithms): only <em>one key</em> for encryption and decryption
+<ul>
+<li>problem: both user has to know the key</li>
+</ul>
+</li>
+<li>asymmetric encryption / <em>public key cryptography</em> : key pair (private key and public key)
+<ul>
+<li>the information can decrypted with private key</li>
+<li>encryption with public key</li>
+</ul>
+</li>
+</ul>
+<h3 id="certificates-encrypted-connections">certificates: encrypted connections</h3>
+<p>For an secure connection between two nodes (e.g. client / server) we can use TLS (SSL). In order to accomblish this we need a few artifacts.</p>
+<p>First of all we need a <em>SSL certificate</em>.</p>
+<p><strong>Signed certificate</strong>: In order to obtain a <em>signed</em> SSL certificate we can create a private key and a <em>CSR</em> with <em>OpenSSL</em>.</p>
+<p>With the <em>key</em> file we create the CSR. And with the CSR in turn we can request a signed digital certificate from an <em>CA</em>.</p>
+<p>For the key generation you can use a common public-key cryptosystem provided in OpenSSL.</p>
+<p><strong>Self-signed certificate</strong> is the counterpart of the CA signed certificate.</p>
+<p>Here you just create your private key and your certificate. And use it for secure connection.</p>
+<h3 id="terminology">terminology</h3>
+<ul>
+<li>private key file</li>
+<li>CSR: Certificate Signing Request</li>
+<li>CA: certificate authority</li>
+</ul>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

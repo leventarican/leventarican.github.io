@@ -6,9 +6,19 @@
     <title>Levent Arican</title>
     
     <meta name="author" content="Levent Arican">
-    <meta name="description" content="Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Kotlin, Rust, Python">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
 
     <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
         code {
             font-size: large;
         }
@@ -17,6 +27,9 @@
         }
         table, th, td {
             border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
         }
     </style>
 
@@ -50,8 +63,8 @@
 <p>When you create a new android project you get a default testing setup.
 If you look at your project you will see three so called <strong>source sets</strong>.
 <code>androidTest</code> and <code>test</code> contains your tests</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">$ tree -d -L 2 app/src/
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">$ tree</span><span style="font-style:italic;color:#fd971f;"> -d -L</span><span style="color:#f8f8f2;"> 2 app/src/
 
 app/src/
 ├── androidTest
@@ -86,23 +99,23 @@ app/src/
 <li>Use good naming. Example: <code>subjectUnderTest_actionOrInput_resultState</code>.</li>
 <li>Structure your test code using Given / When / Then.</li>
 </ul>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">@Test
-fun getDeveloper_expert_returnsExpert() {
-    // GIVEN
-    val devs = listOf&lt;Developers&gt;(Developer(experience=10), Developer(experience=15), Developer(experience=30))
-    // WHEN
-    val result = getNumberOfSeniorDevelopers(devs)
-    // THEN
-    assertEquals(3, result)
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f8f8f2;">@Test
+</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">getDeveloper_expert_returnsExpert</span><span style="color:#f8f8f2;">() {
+    </span><span style="color:#75715e;">// GIVEN
+    </span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">devs </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> listOf&lt;Developers&gt;(Developer(experience</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">10</span><span style="color:#f8f8f2;">), Developer(experience</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">15</span><span style="color:#f8f8f2;">), Developer(experience</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">30</span><span style="color:#f8f8f2;">))
+    </span><span style="color:#75715e;">// WHEN
+    </span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">result </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> getNumberOfSeniorDevelopers(devs)
+    </span><span style="color:#75715e;">// THEN
+</span><span style="color:#f8f8f2;">    assertEquals(</span><span style="color:#ae81ff;">3</span><span style="color:#f8f8f2;">, result)
 }
 </span></code></pre>
 <ul>
 <li>Use an assertion framework. For example hamcrest framework. For hamcrest you need to add the dependency in your build file. Example usage (differs from junit assertion)</li>
 </ul>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">// `is` so called _matcher_
-assertThat(result, `is`(3))
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#75715e;">// `is` so called _matcher_
+</span><span style="color:#f8f8f2;">assertThat(result, </span><span style="color:#e6db74;">`is`</span><span style="color:#f8f8f2;">(</span><span style="color:#ae81ff;">3</span><span style="color:#f8f8f2;">))
 </span></code></pre><h1 id="test-scope-aka-testing-pyramid">Test scope aka. Testing Pyramid</h1>
 <p>On automated testing generally three test scopes are used:</p>
 <ul>
@@ -144,23 +157,23 @@ With a well defined (best practice) application architecture you can divide your
 </ul>
 </li>
 </ol>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">testImplementation &quot;androidx.test:core-ktx:$androidXTestCoreVersion&quot;
+<pre style="background-color:#272822;">
+<code class="language-groovy" data-lang="groovy"><span style="color:#f8f8f2;">testImplementation </span><span style="color:#e6db74;">&quot;androidx.test:core-ktx:$androidXTestCoreVersion&quot;
 
-testImplementation &quot;org.robolectric:robolectric:$robolectricVersion&quot;
+</span><span style="color:#f8f8f2;">testImplementation </span><span style="color:#e6db74;">&quot;org.robolectric:robolectric:$robolectricVersion&quot;
 
-testImplementation &quot;androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion&quot;
+</span><span style="color:#f8f8f2;">testImplementation </span><span style="color:#e6db74;">&quot;androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion&quot;
 </span></code></pre>
 <ol start="2">
 <li>Afterwards in your JUnit test class you also need to annotate you class.
 You can then use e.g. a <code>ViewModel</code> which expects an application context.</li>
 </ol>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">@RunWith(AndroidJUnit4::class)
-class DeveloperTest {
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f8f8f2;">@RunWith(AndroidJUnit4</span><span style="color:#f92672;">::</span><span style="color:#f8f8f2;">class)
+</span><span style="color:#f92672;">class </span><span style="color:#f8f8f2;">DeveloperTest {
     @Test
-    fun addNewDeveloper_setsNewDeveloperEvent {
-        val viewModel = DeveloperViewModel(ApplicationProvider.getApplicationContext())
+    </span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">addNewDeveloper_setsNewDeveloperEvent</span><span style="color:#f8f8f2;"> {
+        </span><span style="color:#a6e22e;">val viewModel</span><span style="color:#f8f8f2;"> = </span><span style="color:#a6e22e;">DeveloperViewModel</span><span style="color:#f8f8f2;">(</span><span style="font-style:italic;color:#fd971f;">ApplicationProvider</span><span style="color:#f92672;">.</span><span style="font-style:italic;color:#fd971f;">getApplicationContext</span><span style="color:#f8f8f2;">())
     }
 }
 </span></code></pre>
@@ -173,6 +186,9 @@ class DeveloperTest {
 <li>https://developer.android.com/training/testing/set-up-project</li>
 </ul>
 
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
 
         </div>
     </section>

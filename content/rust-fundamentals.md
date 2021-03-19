@@ -19,7 +19,7 @@ We know the data type `struct` from C language. Rust provides in addition two mo
 # Method
 You defined a structure but also want to add methods. Then you can use the `impl` keyword.
 
-```
+```rust
 struct Developer {
     exp: u8
 }
@@ -44,7 +44,7 @@ A slice is a two word object. The first word is a pointer to the data. The secon
 > pointer size is usize (pointer size). `usize` is determined by the processor architecture. e.g. on `x86-64` the usize is __64 bit__.
 
 A quick refresher regarding _word_:
-```
+```txt
 8 bit = 1 byte
 2 byte = 1 word
 1 dword (double word) = 2 word
@@ -55,7 +55,7 @@ Rust has in-build support for working with streaming or functional programming.
 
 A basic example. We have a vector of numbers and want to display that data as a reversed string. First we need a iterator [`iter()`]. Afterwards we can begin our data transformation.
 
-```
+```rust
 let data = vec![0, 1, 1, 1];
 let s: String = data.iter().map(|d| d.to_string()).rev().collect();
 

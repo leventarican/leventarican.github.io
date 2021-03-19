@@ -24,7 +24,7 @@ Used tools in this doc.
 
 # Example: main.c
 
-```
+```c
 #define F_CPU 8000000UL
 
 #include <avr/io.h>
@@ -53,7 +53,7 @@ int main (void) {
 __Step 1: compile, build and flash__
 
 In order to bring our program to the uC we need a elf format. To be short. These are the steps for it: 
-```
+```bash
 avr-gcc -mmcu=attiny85 -Os -c main.c  -o main.o
 avr-gcc main.o -o main.elf
 avr-objcopy -O ihex -j .text -j .data main.elf main.hex
@@ -78,11 +78,11 @@ __circuit__
 __cheatsheet__
 * list supported uController: `avrdude -p?`
 * check connection between programmer (e.g. USBasp, AVRISP, ...): 
-```
+```bash
 avrdude -p attiny85 -c usbasp
 ```
 or 
-```
+```bash
 avrdude -p t85 -c usbasp
 ```
 
@@ -94,11 +94,11 @@ __electricity__
 
 __Atmel ATTiny85__
 
-```
+```md
 Reset   1   8   VCC (5V)
-		2	7	SCK
-		3	6	MISO
-GND		4	5	MOSI
+        2   7	SCK
+        3   6	MISO
+GND     4   5	MOSI
 ```
 
 __Serial Peripheral Interface__

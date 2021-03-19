@@ -9,7 +9,7 @@ date = 2020-02-09
 * malloc() or calloc(), free()
 * Memory Management
 
-```
+```cpp
 #include <iostream>
 
 using namespace std;

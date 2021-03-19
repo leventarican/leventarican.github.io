@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "root.html" %}
 
 {% block content %}
 <h1 class="title">
@@ -6,4 +6,7 @@
 </h1>
 <p class="subtitle"><strong>{{ page.date }}</strong></p>
 {{ page.content | safe }}
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
 {% endblock content %}

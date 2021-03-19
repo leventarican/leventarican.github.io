@@ -5,6 +5,7 @@ date = 2021-03-15
 
 # About
 Give an overview about the Android Architecture components or blueprints.
+You should already know the _basics_ of Android App and System.
 
 # Introduction
 > There are different ways to develop an app. But the challenge is to develop an app with a good architecture.
@@ -47,36 +48,36 @@ When we develop an app our intention is mainly to receive input then display res
 Some words about _Jetpack_. As already introduced it was formerly _Android Support Library_: v4 Support Libraries, v7 Support Libraries.
 The _AndroidX library_ contains the existing support library and also includes the latest Jetpack components.
 
-### DataBinding
+## DataBinding
 With data binding we can access the UI element directly over the generate Binding class. Instead of searching the hole UI tree `findviewbyId` we just access the view defined in the layout file directly.
 
 > Data Binding Library supports the developer to bind the UI with the data.
 
 In your UI component you can then set data to UI.
-```
+```kt
 binding.textView.text = 'data'
 ```
 
 You can even skip this intermediate step and set value directly in your layout file with _expression language_.
-```
+```xml
 <TextView android:text="@{viewmodel.data}" />
 ```
 
 > Too get such an `binding` object there are some prerequirements you need to too. E.g. include the dependency, wrap layout file with `<layout/>` tag and inflate the layout file.
 
 So you wrapped your layout file with `<layout>` and now want to use your views directly in your UI components. You need the respective binding instance. To get such an instance all you need to do is inflate the layout with your code with the `DataBindingUtil`. Let see some code artefacts.
-```
+```kt
 val binding: FragmentDevBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dev, container, false)
 ```
 Within an `Activity` the way to get the binding is a bit different.
-```
+```kt
 val binding = MainActivityBinding.inflate(getLayoutinflater())
 ```
 
 > You may ask where do I get the `*Binding` class. This class will be automatically generated when you wrap your layout file with `<layout>` tag. Thats also the reason why need to inflate the layout file with the `DataBindinUtil`.
 
 We can even rename the generate Binding class name. This is not obligatory just a additional information.
-```
+```xml
 <data class="Binding" />
 ```
 
@@ -85,49 +86,49 @@ A note about the _lifecycle owner_. If you want to use Data Binding with `LiveDa
 
 A lifecycle owner is class with an Android lifecycle. Like `Activity` or `Fragment`.
 
-### View Binding
+## View Binding
 A kind of subset of data binding. In view binding there is no such techniques like _binding expression_, _binding adapters_ or _two-way binding_.
 It's a good alternative to eliminate `findViewById`. There is no `<layout>` tag required in layout file. 
 
 So, how can I use view binding? In comparison to data binding its enough to set the view binding build features to true. The binding class for a layout file will be automatically generated. 
 
-```
+```groovy
 buildFeatures {
     viewBinding = true
 }
 ```
 
 You can even ignore generating a binding class .
-```
+```xml
 tools:viewBindingIgnore="true"
 ```
 
 Now in your UI component you inflate your layout file with the generated binding class to get a binding class instance.
-```
+```kt
 binding = ActivityMainBinding.inflate(layoutInflater)
 ```
 
-### ViewModel
+## ViewModel
 The view model component was introduced to hold the app data model in a lifecycle aware state. Whenever the `Acvitity` or `Fragment` lifecycle changes we need to care about the data state. With `ViewModel` this manual process is obsolete. The `ViewModel` manages the data for the UI. Either a single UI component (activity/fragment) or shared UI components.
 
 > For a `ViewModel` integration we need to add dependencies, introduce a `ViewModel` class and get the `ViewModel` reference from a view model provider.
 
-Now some code.
-```
+Now some code. Let's create a `ViewModel`.
+```kt
 class DeveloperViewModel : ViewModel {}
 ```
 In your UI component get the ViewModel instance.
-```
+```kt
 val viewModel = ViewModelProvider(this).get(DeveloperViewModel::class.java)
 // use viewModel to observe live data: viewModel.data.observe { ... }
 ```
 
 Thats all. But there is also a concise way with _Android KTX_.
-```
+```kt
 val viewModel: DeveloperViewModel by activityViewModels()
 ```
 Or in an Activity
-```
+```kt
 val viewModel: DeveloperViewModel by viewModels()
 ```
 
@@ -138,21 +139,21 @@ Remember the ViewModel manages your data. And it make sense that a ViewModel has
 
 Define the ViewModel as you would usually do in OOP by using a constructor.
 Then you need to define a factory class which extends from `ViewModelProvider.Factory`.
-```
+```kt
 class DeveloperViewModel(private val r: DeveloperRepository) : ViewModel {}
 class DeveloperViewModelFactory(private val r: DeveloperRepository) : ViewModelProvider.Factory {}
 ```
 On instantiating you provide then this factory class to the `ViewModelProvider`. With _Android KTX_ even more concise.
-```
+```kt
 val vm: DeveloperViewModel by viewModels {
     DeveloperViewModelFactory(repository)
 }
 ```
 
-### LiveData
+## LiveData
 With `LiveData` for example we can do _reactive programming_. The UI react to changes on data.
 
-```
+```kt
 data.payload.observe(this, {
     Log.d("#", "event received: $it. react...")
 })
@@ -173,7 +174,7 @@ Android KTX helps us the develop better apps. Better means in this context with 
 
 Then there is __kotlin-android-extensions__ (also known as _Kotlin synthetics_). A gradle plugin from jetbrains. Which is already deprecated.
 Whenever you see a code snippet with the following import then its `kotlin-android-extensions`.
-```
+```kt
 import kotlinx.android.synthetic.main.activity_main.*
 ```
 You should migrate to __view binding__.

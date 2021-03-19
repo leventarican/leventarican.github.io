@@ -6,9 +6,19 @@
     <title>Levent Arican</title>
     
     <meta name="author" content="Levent Arican">
-    <meta name="description" content="Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Kotlin, Rust, Python">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
 
     <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
         code {
             font-size: large;
         }
@@ -17,6 +27,9 @@
         }
         table, th, td {
             border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
         }
     </style>
 
@@ -40,7 +53,8 @@
 </h1>
 <p class="subtitle"><strong>2021-03-15</strong></p>
 <h1 id="about">About</h1>
-<p>Give an overview about the Android Architecture components or blueprints.</p>
+<p>Give an overview about the Android Architecture components or blueprints.
+You should already know the <em>basics</em> of Android App and System.</p>
 <h1 id="introduction">Introduction</h1>
 <blockquote>
 <p>There are different ways to develop an app. But the challenge is to develop an app with a good architecture.</p>
@@ -75,79 +89,79 @@ Latetely an <em>android support library</em> was introduced. With Android 9.0 th
 <p>When we develop an app our intention is mainly to receive input then display respective information. It's the usual data process: <code>input -&gt; process -&gt; output</code>. The components listed above are intended to support displaying, storing, ... data. We achieve a decopling of the code components.</p>
 <p>Some words about <em>Jetpack</em>. As already introduced it was formerly <em>Android Support Library</em>: v4 Support Libraries, v7 Support Libraries.
 The <em>AndroidX library</em> contains the existing support library and also includes the latest Jetpack components.</p>
-<h3 id="databinding">DataBinding</h3>
+<h2 id="databinding">DataBinding</h2>
 <p>With data binding we can access the UI element directly over the generate Binding class. Instead of searching the hole UI tree <code>findviewbyId</code> we just access the view defined in the layout file directly.</p>
 <blockquote>
 <p>Data Binding Library supports the developer to bind the UI with the data.</p>
 </blockquote>
 <p>In your UI component you can then set data to UI.</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">binding.textView.text = &#39;data&#39;
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f8f8f2;">binding</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">textView</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">text </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&#39;data&#39;
 </span></code></pre>
 <p>You can even skip this intermediate step and set value directly in your layout file with <em>expression language</em>.</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">&lt;TextView android:text=&quot;@{viewmodel.data}&quot; /&gt;
+<pre style="background-color:#272822;">
+<code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">TextView </span><span style="color:#a6e22e;">android:text</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@{viewmodel.data}&quot; </span><span style="color:#f8f8f2;">/&gt;
 </span></code></pre>
 <blockquote>
 <p>Too get such an <code>binding</code> object there are some prerequirements you need to too. E.g. include the dependency, wrap layout file with <code>&lt;layout/&gt;</code> tag and inflate the layout file.</p>
 </blockquote>
 <p>So you wrapped your layout file with <code>&lt;layout&gt;</code> and now want to use your views directly in your UI components. You need the respective binding instance. To get such an instance all you need to do is inflate the layout with your code with the <code>DataBindingUtil</code>. Let see some code artefacts.</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">val binding: FragmentDevBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dev, container, false)
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">binding</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> FragmentDevBinding </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> DataBindingUtil</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">inflate(inflater, R</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">layout</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">fragment_dev, container, </span><span style="color:#ae81ff;">false</span><span style="color:#f8f8f2;">)
 </span></code></pre>
 <p>Within an <code>Activity</code> the way to get the binding is a bit different.</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">val binding = MainActivityBinding.inflate(getLayoutinflater())
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">binding </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> MainActivityBinding</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">inflate(getLayoutinflater())
 </span></code></pre>
 <blockquote>
 <p>You may ask where do I get the <code>*Binding</code> class. This class will be automatically generated when you wrap your layout file with <code>&lt;layout&gt;</code> tag. Thats also the reason why need to inflate the layout file with the <code>DataBindinUtil</code>.</p>
 </blockquote>
 <p>We can even rename the generate Binding class name. This is not obligatory just a additional information.</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">&lt;data class=&quot;Binding&quot; /&gt;
+<pre style="background-color:#272822;">
+<code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">data </span><span style="color:#a6e22e;">class</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;Binding&quot; </span><span style="color:#f8f8f2;">/&gt;
 </span></code></pre>
 <p>A note about the <em>lifecycle owner</em>. If you want to use Data Binding with <code>LiveData</code> then you need to set the lifecycle owner to your binding instance. This is needed to define the scope of the <code>LiveData</code> object. Check also the API doc.</p>
 <blockquote>
 <p>Sets the LifecycleOwner that should be used for observing changes of LiveData in this binding</p>
 </blockquote>
 <p>A lifecycle owner is class with an Android lifecycle. Like <code>Activity</code> or <code>Fragment</code>.</p>
-<h3 id="view-binding">View Binding</h3>
+<h2 id="view-binding">View Binding</h2>
 <p>A kind of subset of data binding. In view binding there is no such techniques like <em>binding expression</em>, <em>binding adapters</em> or <em>two-way binding</em>.
 It's a good alternative to eliminate <code>findViewById</code>. There is no <code>&lt;layout&gt;</code> tag required in layout file. </p>
 <p>So, how can I use view binding? In comparison to data binding its enough to set the view binding build features to true. The binding class for a layout file will be automatically generated. </p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">buildFeatures {
-    viewBinding = true
-}
+<pre style="background-color:#272822;">
+<code class="language-groovy" data-lang="groovy"><span style="color:#f8f8f2;">buildFeatures {
+    viewBinding </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">true
+</span><span style="color:#f8f8f2;">}
 </span></code></pre>
 <p>You can even ignore generating a binding class .</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">tools:viewBindingIgnore=&quot;true&quot;
+<pre style="background-color:#272822;">
+<code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">tools:viewBindingIgnore=&quot;true&quot;
 </span></code></pre>
 <p>Now in your UI component you inflate your layout file with the generated binding class to get a binding class instance.</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">binding = ActivityMainBinding.inflate(layoutInflater)
-</span></code></pre><h3 id="viewmodel">ViewModel</h3>
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f8f8f2;">binding </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> ActivityMainBinding</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">inflate(layoutInflater)
+</span></code></pre><h2 id="viewmodel">ViewModel</h2>
 <p>The view model component was introduced to hold the app data model in a lifecycle aware state. Whenever the <code>Acvitity</code> or <code>Fragment</code> lifecycle changes we need to care about the data state. With <code>ViewModel</code> this manual process is obsolete. The <code>ViewModel</code> manages the data for the UI. Either a single UI component (activity/fragment) or shared UI components.</p>
 <blockquote>
 <p>For a <code>ViewModel</code> integration we need to add dependencies, introduce a <code>ViewModel</code> class and get the <code>ViewModel</code> reference from a view model provider.</p>
 </blockquote>
-<p>Now some code.</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">class DeveloperViewModel : ViewModel {}
+<p>Now some code. Let's create a <code>ViewModel</code>.</p>
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f92672;">class </span><span style="color:#f8f8f2;">DeveloperViewModel </span><span style="color:#f92672;">: </span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">ViewModel</span><span style="color:#f8f8f2;"> {}
 </span></code></pre>
 <p>In your UI component get the ViewModel instance.</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">val viewModel = ViewModelProvider(this).get(DeveloperViewModel::class.java)
-// use viewModel to observe live data: viewModel.data.observe { ... }
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">viewModel </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> ViewModelProvider(</span><span style="color:#ae81ff;">this</span><span style="color:#f8f8f2;">)</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">get(DeveloperViewModel</span><span style="color:#f92672;">::</span><span style="color:#f8f8f2;">class</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">java)
+</span><span style="color:#75715e;">// use viewModel to observe live data: viewModel.data.observe { ... }
 </span></code></pre>
 <p>Thats all. But there is also a concise way with <em>Android KTX</em>.</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">val viewModel: DeveloperViewModel by activityViewModels()
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">viewModel</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> DeveloperViewModel </span><span style="color:#f92672;">by</span><span style="color:#f8f8f2;"> activityViewModels()
 </span></code></pre>
 <p>Or in an Activity</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">val viewModel: DeveloperViewModel by viewModels()
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">viewModel</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> DeveloperViewModel </span><span style="color:#f92672;">by</span><span style="color:#f8f8f2;"> viewModels()
 </span></code></pre>
 <p>What if you need dependencies in your ViewModel class? E.g. add a repository to your ViewModel.
 Remember the ViewModel manages your data. And it make sense that a ViewModel has access to a repository layer.</p>
@@ -156,20 +170,20 @@ Remember the ViewModel manages your data. And it make sense that a ViewModel has
 </blockquote>
 <p>Define the ViewModel as you would usually do in OOP by using a constructor.
 Then you need to define a factory class which extends from <code>ViewModelProvider.Factory</code>.</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">class DeveloperViewModel(private val r: DeveloperRepository) : ViewModel {}
-class DeveloperViewModelFactory(private val r: DeveloperRepository) : ViewModelProvider.Factory {}
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f92672;">class </span><span style="color:#f8f8f2;">DeveloperViewModel(</span><span style="color:#f92672;">private val </span><span style="font-style:italic;color:#fd971f;">r</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> DeveloperRepository) </span><span style="color:#f92672;">: </span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">ViewModel</span><span style="color:#f8f8f2;"> {}
+</span><span style="color:#f92672;">class </span><span style="color:#f8f8f2;">DeveloperViewModelFactory(</span><span style="color:#f92672;">private val </span><span style="font-style:italic;color:#fd971f;">r</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> DeveloperRepository) </span><span style="color:#f92672;">: </span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">ViewModelProvider</span><span style="color:#f8f8f2;">.</span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">Factory</span><span style="color:#f8f8f2;"> {}
 </span></code></pre>
 <p>On instantiating you provide then this factory class to the <code>ViewModelProvider</code>. With <em>Android KTX</em> even more concise.</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">val vm: DeveloperViewModel by viewModels {
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">vm</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> DeveloperViewModel </span><span style="color:#f92672;">by</span><span style="color:#f8f8f2;"> viewModels {
     DeveloperViewModelFactory(repository)
 }
-</span></code></pre><h3 id="livedata">LiveData</h3>
+</span></code></pre><h2 id="livedata">LiveData</h2>
 <p>With <code>LiveData</code> for example we can do <em>reactive programming</em>. The UI react to changes on data.</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">data.payload.observe(this, {
-    Log.d(&quot;#&quot;, &quot;event received: $it. react...&quot;)
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f92672;">data.</span><span style="color:#f8f8f2;">payload</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">observe(</span><span style="color:#ae81ff;">this</span><span style="color:#f8f8f2;">, {
+    Log</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">d(</span><span style="color:#e6db74;">&quot;#&quot;</span><span style="color:#f8f8f2;">, </span><span style="color:#e6db74;">&quot;event received: </span><span style="font-style:italic;color:#fd971f;">$it</span><span style="color:#e6db74;">. react...&quot;</span><span style="color:#f8f8f2;">)
 })
 </span></code></pre>
 <blockquote>
@@ -189,8 +203,8 @@ class DeveloperViewModelFactory(private val r: DeveloperRepository) : ViewModelP
 <p>Android KTX helps us the develop better apps. Better means in this context with the help of Kotlin features we are able to write concise and readable code. That's the motivation behind the KTX extentions.</p>
 <p>Then there is <strong>kotlin-android-extensions</strong> (also known as <em>Kotlin synthetics</em>). A gradle plugin from jetbrains. Which is already deprecated.
 Whenever you see a code snippet with the following import then its <code>kotlin-android-extensions</code>.</p>
-<pre style="background-color:#2b303b;">
-<code><span style="color:#c0c5ce;">import kotlinx.android.synthetic.main.activity_main.*
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f92672;">import</span><span style="color:#f8f8f2;"> kotlinx.android.synthetic.main.activity_main.*
 </span></code></pre>
 <p>You should migrate to <strong>view binding</strong>.</p>
 <h1 id="links">Links</h1>
@@ -207,6 +221,9 @@ Whenever you see a code snippet with the following import then its <code>kotlin-
 <li>https://github.com/android/architecture-samples/wiki/To-do-app-specification</li>
 </ul>
 
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
 
         </div>
     </section>

@@ -25,3 +25,5 @@ git clone https://github.com/lopes/zola.386
 
 ## Links
 * https://www.getzola.org/documentation/getting-started/overview/
+* https://www.getzola.org/documentation/getting-started/configuration/
+* https://www.getzola.org/documentation/content/syntax-highlighting/

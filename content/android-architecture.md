@@ -86,6 +86,10 @@ A note about the _lifecycle owner_. If you want to use Data Binding with `LiveDa
 
 A lifecycle owner is class with an Android lifecycle. Like `Activity` or `Fragment`.
 
+### Binding adapter
+The data binding library also provides a more sophisticated technique called binding adapter.
+This option give you a way to implement your own logic for setting attribute values.
+
 ## View Binding
 A kind of subset of data binding. In view binding there is no such techniques like _binding expression_, _binding adapters_ or _two-way binding_.
 It's a good alternative to eliminate `findViewById`. There is no `<layout>` tag required in layout file. 

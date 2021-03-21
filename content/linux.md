@@ -60,6 +60,25 @@ Find files named `*.md` in or below the directory `development/` with max depth 
 find development/ -maxdepth 2 -name *README.md -type f -print
 ```
 
+# System specification
+The command `lshw` should be installed by default.
+With `lshw` you can list cpu, memory or all system information in console, as json or html.
+
+List memory only.
+```bash
+sudo lshw -C memory
+  *-memory                  
+       description: System Memory
+       physical id: 1
+       slot: System board or motherboard
+       size: 16GiB
+```
+
+List all with format html.
+```bash
+sudo lshw -html > specs.html
+```
+
 # Free up space
 Use __autoremove__ on ubuntu to remove old packages, kernel, ...
 ```bash

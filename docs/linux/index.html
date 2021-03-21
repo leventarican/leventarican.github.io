@@ -93,6 +93,21 @@ rm jdk  // remove symbolic link
 <p>Find files named <code>*.md</code> in or below the directory <code>development/</code> with max depth 2</p>
 <pre style="background-color:#272822;">
 <code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">find development/</span><span style="font-style:italic;color:#fd971f;"> -maxdepth</span><span style="color:#f8f8f2;"> 2</span><span style="font-style:italic;color:#fd971f;"> -name </span><span style="color:#f92672;">*</span><span style="color:#f8f8f2;">README.md</span><span style="font-style:italic;color:#fd971f;"> -type</span><span style="color:#f8f8f2;"> f</span><span style="font-style:italic;color:#fd971f;"> -print
+</span></code></pre><h1 id="system-specification">System specification</h1>
+<p>The command <code>lshw</code> should be installed by default.
+With <code>lshw</code> you can list cpu, memory or all system information in console, as json or html.</p>
+<p>List memory only.</p>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">sudo lshw</span><span style="font-style:italic;color:#fd971f;"> -C</span><span style="color:#f8f8f2;"> memory
+  *-memory                  
+       description: System Memory
+       physical id: 1
+       slot: System board or motherboard
+       size: 16GiB
+</span></code></pre>
+<p>List all with format html.</p>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">sudo lshw</span><span style="font-style:italic;color:#fd971f;"> -html </span><span style="color:#f92672;">&gt;</span><span style="color:#f8f8f2;"> specs.html
 </span></code></pre><h1 id="free-up-space">Free up space</h1>
 <p>Use <strong>autoremove</strong> on ubuntu to remove old packages, kernel, ...</p>
 <pre style="background-color:#272822;">

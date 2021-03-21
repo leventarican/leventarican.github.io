@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:800px; margin:16px auto;">
+            
+<h1 class="title">
+    AWS: Computer Vision
+</h1>
+<p class="subtitle"><strong>2020-05-13</strong></p>
+<blockquote>
+<p>under construction ...</p>
+</blockquote>
+<h1 id="aws-and-computer-vision">AWS and Computer Vision</h1>
+<h2 id="gluoncv">GluonCV</h2>
+<ul>
+<li>GluonCV: a deep learning toolkit for computer vision</li>
+<li>runs on Apache MXNet engine</li>
+<li>created and maintained by AWS</li>
+<li>Java, Maven, Linux, CPU: 
+<ul>
+<li>https://mxnet.apache.org/get_started/java_setup.html</li>
+<li>https://gluon-cv.mxnet.io/install.html</li>
+</ul>
+</li>
+<li>GluonCV was also created to close the a gap between model experimentation and applicable model deployment</li>
+<li>GluonCV <em>implements</em> models for image classifications, ...</li>
+<li>these models are accessible in <strong>model zoo</strong>.</li>
+<li>these models are pre-trained on public available dataset with millions of images.</li>
+<li>what is a model? 
+<ul>
+<li>simply defined: a function with an input and an output</li>
+<li>in CV a model takes an image as input and generate a prediction as output</li>
+<li>the term <em>network</em> and <em>model</em> is interchangeable</li>
+<li>for different task you may need different models. it depends on prediction <em>accuracy</em> and <em>compute resource consumption</em></li>
+</ul>
+</li>
+<li>GluonCV covers following computer vision tasks:
+<ul>
+<li>image classification</li>
+<li>object detection models (ex. YOLO: Real-Time Object Detection)</li>
+<li>semantic / instance segmentation</li>
+<li>pose estimation</li>
+</ul>
+</li>
+</ul>
+<h2 id="apache-mxnet">Apache MXNet</h2>
+<ul>
+<li>Apache MXNet: is a deep learning framework</li>
+<li>with MXNet you can build and train neuronal network models </li>
+<li>it support different languages: Java, Python, R, C++, ...</li>
+<li>MXNet has a lot of pre-trained models in model-zoo</li>
+<li>MXNet supports ONNX: https://onnx.ai/supported-tools.html</li>
+</ul>
+<h2 id="aws-ml-stack">AWS: ML Stack</h2>
+<ul>
+<li>AI Services: contains high level API's for vision, speech, language, ...
+<ul>
+<li><em>Amazon Rekognition</em></li>
+</ul>
+</li>
+<li>ML Services
+<ul>
+<li><em>Amazon SageMaker</em></li>
+</ul>
+</li>
+<li>ML Frameworks &amp; Infrastructure: 
+<ul>
+<li>DL Frameworks TensorFlow, MXNet, Pytorch, ...</li>
+<li>Infrastructure: EC2, Deep Learning Containers, IoT Greengrass
+<ul>
+<li><em>AWS Deep Learning AMI</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="amazon-rekognition">Amazon Rekognition</h3>
+<ul>
+<li>for image and video analysis: object, scene and activity detection</li>
+<li>provides simple API for usage</li>
+</ul>
+<h3 id="amazon-sagemaker">Amazon SageMaker</h3>
+<ul>
+<li>SageMaker service is compososed of many services: label, build &amp; train, tune, compile, deploy</li>
+<li>amazon sagemaker has a service for labeling for supervised learning. ex. when classification a dog image. on train a human has to label it: 
+<ul>
+<li>a flag: yes it is a dog</li>
+<li>pixel coordinates of the dog in the image</li>
+</ul>
+</li>
+<li>a jupyter notebook with preinstalled (CONDA environments) <em>apache mxnet, tensorflow, pytorch, chainer</em> and non-deeplearning frameworks <em>scikit-learn and Spark ML</em>.</li>
+<li>in the jupyter notebook you can write your own ML models, train it, ...</li>
+<li>or you can use build-in algorithms: <em>K-Means, K-Nearest Neighbors (k-NN), BlazingText</em>, ...</li>
+<li>further algorithm by 3rd pary is listed in AWS Marketplace</li>
+<li>you can train a model <strong>locally</strong> on amazon sagemaker notebook or use <strong>model training jobs</strong> (needed infrastructure / instances is created instantly)</li>
+<li>model is stored is S3</li>
+<li>model optimization jobs: compiles the trained model into exe</li>
+<li>deployment
+<ul>
+<li><strong>amazon sagemaker endpoint</strong>: http request</li>
+<li><strong>AWS IoT Greengrass</strong>: for deployment on edge devices; see also Amazon SageMaker Neo</li>
+</ul>
+</li>
+<li>the workflow is controlable by AWS CLI </li>
+<li>or SDK's in python <code>import sagemaker</code></li>
+</ul>
+<h3 id="aws-deep-learning-ami">AWS Deep Learning AMI</h3>
+<ul>
+<li>Deep Learning Amazon Machine Images: DLAMI</li>
+<li>AMI is a template to create a virtual machine (instance) in EC2 (Amazon Elastic Compute Cloud)</li>
+<li>an AMI includes the OS and any additional software / dependency</li>
+<li>its like purchasing an computer. it has an OS and additional programs</li>
+<li>the DLAMI provides different OS (Ubuntu, Amazon Linux, Windows), preinstalled DL frameworks (mxnet, tensorflow, ...) and Nvidia CUDA drivers</li>
+<li>if you create an DLAMI instance with EC2 then you can access it with SSH (private/public key). you access the instance with the public DNS: <code>ssh -i &quot;private-key.pem&quot; ubuntu@ec2-...-compute-amazonaws.com</code>. do not forget to shutdown the instance (for cost reasons). and also delete the instance because you'll get charged for the storage.</li>
+</ul>
+<h3 id="aws-deep-learning-containers">AWS Deep Learning Containers</h3>
+<ul>
+<li>these containers provide just another way to set up a <em>deep learning environment</em> on AWS with optimized, prepackaged, container images</li>
+<li>amazon provides a docker container repository: Amazon Elastic Container Registry (ECR)</li>
+<li>Amazon Elastic Container Service: Amazon ECS. ECS do the container orchestration.</li>
+<li>So what are Deep Learning Containers? <em>These are Docker container images pre-installed with deep learning frameworks</em> </li>
+<li>you can deploy container on:
+<ul>
+<li>ECS</li>
+<li>Amazon Elastic Kubernetes Services: Amazon EKS</li>
+<li>EC2 with DLAMI: connect to instance (with SSH) then docker run</li>
+<li>on your own machine: Docker and Amazon CLI has to be installed</li>
+</ul>
+</li>
+</ul>
+<h2 id="module-3-gluoncv-start">Module 3: GluonCV Start</h2>
+<ul>
+<li>understand how to use pre-trained models for computer vision tasks</li>
+<li>as previously defined you can use GluonCV on local machine (by setup environment) or use pre-installed environment in a Amazon Sagemaker instance, Amazon Elastic Compute Cloud (EC2), Amazon Deep Learning AMI (DLAMI)</li>
+</ul>
+<h3 id="setup-virtual-environment">Setup Virtual Environment</h3>
+<p>Example for ubuntu. in order to work on a clean independent environment we'll use a virtual environment. then we install mxnet and gluoncv</p>
+<ol>
+<li>create virtual environment: only once</li>
+</ol>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">python3</span><span style="font-style:italic;color:#fd971f;"> -m</span><span style="color:#f8f8f2;"> venv gluoncv
+</span></code></pre>
+<ol start="2">
+<li>activate virtual environment</li>
+</ol>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#66d9ef;">cd</span><span style="color:#f8f8f2;"> gluoncv
+</span><span style="color:#66d9ef;">source</span><span style="color:#f8f8f2;"> bin/activate
+</span></code></pre>
+<ol start="3">
+<li>deactivate virtual environment</li>
+</ol>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">deactivate
+</span></code></pre><h3 id="install-mxnet-and-gluoncv">Install MXNet and GluonCV</h3>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">pip install mxnet
+pip install gluoncv
+
+</span><span style="color:#75715e;"># for CPU optimized
+# pip install mxnet-mkl
+
+# for GPU optimized
+# pip install mxnet-cu101
+</span></code></pre><h3 id="image-classification-with-a-pre-trained-model">Image Classification with a pre-trained model</h3>
+<ul>
+<li>objective is to classify the image from a list of predetermined classes</li>
+<li>when making a prediction the model will assign a probability to each of these classes</li>
+<li>ex. we have a mountain image and our classes are: mountain, beach, forest
+<ul>
+<li>the model will now give probabilities to each class: mountain 80%, beach 0%, forst 20%</li>
+</ul>
+</li>
+<li>GluonCV Models are pre-trained on public available dataset</li>
+</ul>
+<h4 id="datasets">Datasets</h4>
+<ul>
+<li>Datasets for Image Classification</li>
+<li><strong>CIFAR-10</strong> (Canadian Institute for Advanced Research) used over 10 years for computer research. it includes 10 basic classes: cars, cats, dogs, ... and 60000 images. its a small dataset with low resolution images (32x32).</li>
+<li><strong>ImageNet</strong> is another images classification dataset. released by prinston university in 2009. with 14 mio images and 22.000 classes. refered as <em>ImageNet22k</em>. models are pre-trained on a sub-set of it (<em>Imagenet1k</em>: 1.000.000 images and 1000 classes).</li>
+</ul>
+<h4 id="models">Models</h4>
+<ul>
+<li>Neuronal Network Models for image classification</li>
+<li>there are a lot of different models architectures (classification model architectures)
+<ul>
+<li><strong>ResNet</strong> is popular</li>
+<li>ResNet has different variants: ResNet18, ResNet50</li>
+<li><strong>MobileNet</strong> is good for mobile phones</li>
+<li>or: VGG, SqueezeNet, DenseNet, AlexNet, DarkNet, Inception, ...</li>
+</ul>
+</li>
+<li>how to decide which model to take? accurary, memory consumption, ...</li>
+<li>as already wrote, GluonCV implement these model based on the research paper. The GluonCV models are compared to other implementations optimized. The GluonCV version to ResNet-152 is called ResNet-152D.</li>
+</ul>
+<h4 id="code-examples">Code Examples</h4>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">image-classification.py
+</span></code></pre><h3 id="object-detection-with-a-pre-trained-model">Object Detection with a pre-trained model</h3>
+<ul>
+<li>understand the content of an image</li>
+<li>ex. medical image analysis, self driving cars, ...</li>
+<li>locate object in an image with a box (called bounding box) </li>
+<li>additionally the located object is classified from a list of predetermined classes</li>
+<li>the model will also give a probability for each class</li>
+</ul>
+<h4 id="datasets-1">Datasets</h4>
+<ul>
+<li><strong>Pascal VOC</strong> (Visual Object Class)
+<ul>
+<li>2007 version: 10000 images and 24500 object classes</li>
+<li>2012 version: 11500 images and 27500 object classes</li>
+</ul>
+</li>
+<li><strong>COCO</strong> (Common Object in Context)
+<ul>
+<li>2017</li>
+<li>123000 images</li>
+<li>886000 objects</li>
+<li>80 object classes: Pascal VOC classes are included. Additionally following categories are more covered: sports, food, household objects (table, tv, computer, ...)</li>
+</ul>
+</li>
+</ul>
+<h4 id="models-1">Models</h4>
+<ul>
+<li>Object detection model architectures: 
+<ul>
+<li><strong>Faster-RNN</strong>: with ResNet
+<ul>
+<li>Faster-RNN is an extension of ResNet with additional components</li>
+<li>the network output need coordinates for bounding box, ...</li>
+<li>ResNet is called the base network or backbone</li>
+</ul>
+</li>
+<li><strong>SSD</strong>: with VGG or ResNet or MobilNet</li>
+<li><strong>YOLO</strong>: with Darknet or MobileNet</li>
+</ul>
+</li>
+</ul>
+<h4 id="code-examples-1">Code Examples</h4>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">object-detection.py
+</span></code></pre><h3 id="image-segmentation-with-a-pre-trained-model">Image Segmentation with a pre-trained model</h3>
+<ul>
+<li>see code documentation: <code>image-segmentation.py</code></li>
+</ul>
+<h3 id="neural-network-essentials">Neural Network Essentials</h3>
+<ul>
+<li>the pre-trained models are based of components called Neural Networks especially <strong>Convolutional Neural Networks</strong></li>
+</ul>
+<h4 id="fully-connected-network">Fully Connected Network</h4>
+<ul>
+<li>a fundamental network is called the <strong>fully connected network</strong></li>
+<li>is called fully connected because all inputs are connected to outputs</li>
+<li>its a general purpose network that makes no assumption about the input data</li>
+<li>the network begins from 0. it has no special information from the image and has to <em>re-learn</em> the relationship between  the pixels</li>
+</ul>
+<p><img src="./gluoncv/fully-connected-network.png" alt="source: aws training" /></p>
+<ul>
+<li>example of a fully connected network with 4 inputs with 3 fully connected layers</li>
+<li>the 4 inputs can correspond to 4 pixels (if we have a 2x2 image)</li>
+<li>we have 3 outputs (with predictions) because of 3 classes</li>
+<li>an image is composed of pixels. and each pixel of an RGB image will have three values that encode the intensity of red, green and blue colors.</li>
+<li>more simplified example. we have a gray scale image
+<ul>
+<li>each pixel represent the intensity: 0 is black and 1 is white</li>
+<li>now all pixels are flattened for the first layer: pixel to input</li>
+</ul>
+</li>
+<li>all connections are weighted
+<ul>
+<li>with this weights the activation function is activated and produces the output</li>
+<li>with a activation function like <strong>Sigmoid function</strong> the network has the ability to <em>learn</em></li>
+<li>therefore the train objective is to find the best weights</li>
+</ul>
+</li>
+<li>these connection weights are called also <strong>network parameters</strong>
+<ul>
+<li>real world models have billions of network parameteres or even more</li>
+</ul>
+</li>
+<li>pre-trained models have already good network parameter that have been learned already
+<ul>
+<li>we download a file with these values and create a model based on it</li>
+</ul>
+</li>
+</ul>
+<h4 id="convolutional-networks">Convolutional networks</h4>
+<ul>
+<li>used in computer vision tasks</li>
+<li><em>Convolutional neural networks learn local patterns from small neighborhoods of pixels, unlike fully connected networks that learned patterns across all pixels of the image.</em></li>
+<li>two most important operations: the convolution operation and the max-pooling operation</li>
+<li>a component of the convolution operation is the <strong>kernel or filter</strong></li>
+<li>the input goes through this kernel and generate an output to learn pattern or extract features </li>
+<li>you can achive by this operation: edge feature extraction, or blur image, sharpen</li>
+<li>with deep learning we learn the parameter for the best suited kernel values</li>
+<li>max pooling reduces the dimension by getting the max value of a defined kernel ex. 2x2 (4 input values) the output will be 1 value</li>
+</ul>
+<p><strong>what is a feature?</strong></p>
+<ul>
+<li>the number of features is equal to number of nodes in the input layer</li>
+<li>if we want to classify man or woman then the attributes (height, hair length, ...) of them are the features</li>
+<li>if we want to classify images (cat / dog) then our features = inputs. the next layer can then do <strong>features extraction</strong> like cat ears vs dog ears, ...</li>
+</ul>
+<h2 id="module-4-gluon-fundamentals">Module 4: Gluon Fundamentals</h2>
+<ul>
+<li>Understand the mathematics behind NDArray</li>
+<li>Understand when to use different Gluon blocks including convolution, dense layers, and pooling</li>
+<li>Compose Gluon blocks into complete models</li>
+<li>Understand the difference between metrics and loss </li>
+</ul>
+<h3 id="n-dimensional-arrays">N-dimensional arrays</h3>
+<ul>
+<li>ndarrays also called <strong>tensors</strong></li>
+<li>vectors and matrices of N-dimensions</li>
+<li>used in deep learning to represent input, output, ...</li>
+</ul>
+<p><img src="./gluoncv/ndarray.png" alt="source: aws training" /></p>
+<h3 id="ndarray">NDArray</h3>
+<ul>
+<li>NDArray: MXNet's primary tool for storing and transforming numerical data</li>
+<li>examples: <code>ndarray.py, ndarray-operations.py</code></li>
+</ul>
+<h3 id="gluon-blocks">Gluon Blocks</h3>
+<ul>
+<li>how to create a neuronal network using the gluon API of mxnet
+<ul>
+<li>examples: <code>gluon-blocks.py, gluon-blocks-init.py</code></li>
+</ul>
+</li>
+<li>create a sequential block to compose a sequence of layers to create a neural network
+<ul>
+<li>examples: <code>gluon-blocks-sequential.py, gluon-blocks-custom.py</code></li>
+</ul>
+</li>
+<li>visualize gluon models (blocks) to understand it better</li>
+</ul>
+<h2 id="sources-links">Sources, Links</h2>
+<ul>
+<li>cloudera: AWS Computer Vision: Getting Started with GluonCV</li>
+<li>a good intro into 2D Convolutions with mxnet: https://medium.com/apache-mxnet/convolutions-explained-with-ms-excel-465d6649831c</li>
+<li>good slides about GluonCV: https://github.com/dmlc/web-data/blob/master/gluoncv/slides/Classification.pdf</li>
+</ul>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

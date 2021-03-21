@@ -57,13 +57,30 @@
 <blockquote>
 <p>Learn Rust from my perspective.</p>
 </blockquote>
+<h1 id="cargo">Cargo</h1>
+<p><em>cargo</em> is the build system and package manager. Dependencies will be automatically downloaded.</p>
+<p>A cargo project is defined by a <code>cargo.toml</code> file.</p>
+<p>The command for building a cargo project</p>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">cargo build
+</span></code></pre>
+<p>To run a cargo project</p>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">cargo run
+</span></code></pre><h1 id="crates">Crates</h1>
+<p><em>crates</em> are <em>libraries</em></p>
+<h1 id="modules">Modules</h1>
+<p><em>modules</em> are used for code organizing</p>
+<h1 id="attributes">Attributes</h1>
+<p><em>attributes</em> are <em>annotations</em></p>
 <h1 id="trait">Trait</h1>
 <blockquote>
 <p>A <code>trait</code> is a collection of methods defined for an unknown type: <code>Self</code></p>
 </blockquote>
 <p>So in other words then the official description. A <code>trait</code> is a <strong><code>interface</code></strong> in java language.</p>
 <h1 id="struct">Struct</h1>
-<p>We know the data type <code>struct</code> from C language. Rust provides in addition two more struct types: tuples and unit structs.</p>
+<p>We know the data type <code>struct</code> from C language. Rust provides in addition two more struct types: tuples and unit structs.
+There is no class type in Rust. In Go language we also don't have class types.</p>
 <h1 id="method">Method</h1>
 <p>You defined a structure but also want to add methods. Then you can use the <code>impl</code> keyword.</p>
 <pre style="background-color:#272822;">
@@ -91,7 +108,7 @@
 2 byte = 1 word
 1 dword (double word) = 2 word
 </span></code></pre><h1 id="streams">Streams</h1>
-<p>Rust has in-build support for working with streaming or functional programming.</p>
+<p>Rust has in-build support for working with streaming or functional programming or collection tranformation operations.</p>
 <p>A basic example. We have a vector of numbers and want to display that data as a reversed string. First we need a iterator [<code>iter()</code>]. Afterwards we can begin our data transformation.</p>
 <pre style="background-color:#272822;">
 <code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#66d9ef;">let</span><span style="color:#f8f8f2;"> data </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">vec![</span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">];

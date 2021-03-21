@@ -61,7 +61,15 @@ An <code>Activity</code> in Android context is a window like in a desktop app. A
 <p>There are different menu types: options menu (aka. <em>overflow</em> menu), contextual menu and popup menu.</p>
 <h1 id="navigation">Navigation</h1>
 <p>With navigation the movement (back and forth) from screen to screen is meant. Android provides two system provides UI components to navigate back on press. One option is the <strong>back</strong> button in the <strong>system navigation bar</strong>. Second option is <strong>up</strong> button in the <strong>app bar</strong>.</p>
-<h1 id="layout">Layout</h1>
+<p>With Navigation UI you can tie navigation destinations with menu items. If you have an options menu and want to navigate to a specific screen then use the same id as the destination id. The <code>navigation-ui-ktx</code> component follows here the <strong>convention-over-code</strong> principle.</p>
+<p>In this menu definition we have an logout item. On click the screen should switch to login fragment.</p>
+<pre style="background-color:#272822;">
+<code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">item </span><span style="color:#a6e22e;">android:id</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@+id/loginFragment&quot; </span><span style="color:#a6e22e;">android:title</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;Logout&quot; </span><span style="color:#f8f8f2;">/&gt;
+</span></code></pre>
+<p>In our <em>navigation graph</em> file we defined the fragment with the same id <code>loginFragment</code>.</p>
+<pre style="background-color:#272822;">
+<code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">fragment </span><span style="color:#a6e22e;">android:id</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@+id/loginFragment&quot; </span><span style="color:#f8f8f2;">/&gt;
+</span></code></pre><h1 id="layout">Layout</h1>
 <p>Layout's in Android are a huge topic. By time the available layout's evolved. You should basically know to use which layout when. </p>
 <ul>
 <li>Whats the difference <code>ConstraintLayout</code> to <code>CoordinatorLayout</code>. </li>
@@ -73,6 +81,8 @@ An <code>Activity</code> in Android context is a window like in a desktop app. A
 <li>https://developer.android.com/training/appbar</li>
 <li>https://developer.android.com/guide/topics/ui/menus#options-menu</li>
 <li>https://developer.android.com/guide/navigation/navigation-principles</li>
+<li>https://developer.android.com/guide/navigation/navigation-ui#Tie-navdrawer</li>
+<li>https://developer.android.com/guide/navigation/navigation-ui#add_a_navigation_drawer</li>
 </ul>
 
 <footer>

@@ -8,6 +8,30 @@ This document gives an overview about the programming language rust. Especially 
 
 > Learn Rust from my perspective.
 
+# Cargo
+_cargo_ is the build system and package manager. Dependencies will be automatically downloaded.
+
+A cargo project is defined by a `cargo.toml` file.
+
+The command for building a cargo project
+```bash
+cargo build
+```
+
+To run a cargo project
+```bash
+cargo run
+```
+
+# Crates
+_crates_ are _libraries_
+
+# Modules
+_modules_ are used for code organizing
+
+# Attributes
+_attributes_ are _annotations_
+
 # Trait
 > A `trait` is a collection of methods defined for an unknown type: `Self`
 
@@ -15,6 +39,7 @@ So in other words then the official description. A `trait` is a __`interface`__ 
 
 # Struct
 We know the data type `struct` from C language. Rust provides in addition two more struct types: tuples and unit structs.
+There is no class type in Rust. In Go language we also don't have class types.
 
 # Method
 You defined a structure but also want to add methods. Then you can use the `impl` keyword.
@@ -51,7 +76,7 @@ A quick refresher regarding _word_:
 ```
 
 # Streams
-Rust has in-build support for working with streaming or functional programming.
+Rust has in-build support for working with streaming or functional programming or collection tranformation operations.
 
 A basic example. We have a vector of numbers and want to display that data as a reversed string. First we need a iterator [`iter()`]. Afterwards we can begin our data transformation.
 

@@ -27,6 +27,40 @@ As the name __sealed__ suggest a `sealed class` is restricted. Restricted means 
 
 A Sealed class can more then an enum class.
 
+# by lazy
+`by lazy` follows the delegation pattern. In the following example a get operation will be delegated to the String and only computed on _first_ access.
+```kt
+val code: String by lazy {
+	"kotlin"
+}
+```
+
+When should we use `by lazy` property initialization?
+A good case is if you have a heavy class which initialization is time-consuming. Wouldn't is be better if we create it when it's needed? Another benefit is you will always use the same instance once an instance is created.
+```kt
+class Developer {
+	private val coffee: CoffeeGrinder by lazy {
+		CofeeGrinder()
+	}
+}
+```
+
+# lateinit
+With `lateinit` you also achieve a later initialization like `by lazy`. In in this case you define where it's initialized. 
+`lateinit` is good if you want to prevent nullable variable.
+```kt
+val data: String? = null
+```
+
+Better use `lateinit`.
+```kt
+lateinit var data: String 
+```
+
+> If you have a nullable variable and want to ensure an alternative or default value you can use the `?:` aka Elvis operator.
+```kt
+val process = data?.payload ?: "default-payload" 
+```
 
 # Links
 * https://kotlinlang.org/docs/sealed-classes.html

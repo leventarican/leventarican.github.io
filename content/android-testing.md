@@ -129,7 +129,12 @@ With AndroidX Test libraries we can reuse code in both environments (local and i
 
 ![](../androidX-test.png)
 
+# Test Doubles
+Like _stunt doubles_ we can create _test doubles_ to replace a production object for testing purposes.
+There are various kind of doubles: Dummy, Fake, Mock, Stub, Spy
+
 # Links
 * https://github.com/udacity/android-testing.git
 * https://developer.android.com/training/testing/fundamentals
 * https://developer.android.com/training/testing/set-up-project
+* https://martinfowler.com/bliki/TestDouble.html

@@ -70,7 +70,37 @@
 </span></code></pre><h1 id="sealed-class">Sealed class</h1>
 <p>As the name <strong>sealed</strong> suggest a <code>sealed class</code> is restricted. Restricted means subclasses are only allowed at compile-time. A sealed class is also <strong>abstract</strong>. </p>
 <p>A Sealed class can more then an enum class.</p>
-<h1 id="links">Links</h1>
+<h1 id="by-lazy">by lazy</h1>
+<p><code>by lazy</code> follows the delegation pattern. In the following example a get operation will be delegated to the String and only computed on <em>first</em> access.</p>
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">code</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">String </span><span style="color:#f92672;">by</span><span style="color:#f8f8f2;"> lazy {
+	</span><span style="color:#e6db74;">&quot;kotlin&quot;
+</span><span style="color:#f8f8f2;">}
+</span></code></pre>
+<p>When should we use <code>by lazy</code> property initialization?
+A good case is if you have a heavy class which initialization is time-consuming. Wouldn't is be better if we create it when it's needed? Another benefit is you will always use the same instance once an instance is created.</p>
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f92672;">class </span><span style="color:#f8f8f2;">Developer {
+	</span><span style="color:#f92672;">private val </span><span style="color:#f8f8f2;">coffee</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> CoffeeGrinder </span><span style="color:#f92672;">by</span><span style="color:#f8f8f2;"> lazy {
+		CofeeGrinder()
+	}
+}
+</span></code></pre><h1 id="lateinit">lateinit</h1>
+<p>With <code>lateinit</code> you also achieve a later initialization like <code>by lazy</code>. In in this case you define where it's initialized. 
+<code>lateinit</code> is good if you want to prevent nullable variable.</p>
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">data</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">String</span><span style="color:#f8f8f2;">? </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">null
+</span></code></pre>
+<p>Better use <code>lateinit</code>.</p>
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f8f8f2;">lateinit </span><span style="color:#f92672;">var </span><span style="color:#f8f8f2;">data</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">String 
+</span></code></pre>
+<blockquote>
+<p>If you have a nullable variable and want to ensure an alternative or default value you can use the <code>?:</code> aka Elvis operator.</p>
+</blockquote>
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">process </span><span style="color:#f92672;">= data?.</span><span style="color:#f8f8f2;">payload </span><span style="color:#f92672;">?: </span><span style="color:#e6db74;">&quot;default-payload&quot; 
+</span></code></pre><h1 id="links">Links</h1>
 <ul>
 <li>https://kotlinlang.org/docs/sealed-classes.html</li>
 </ul>

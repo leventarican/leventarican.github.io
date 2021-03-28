@@ -1,6 +1,6 @@
 +++
 title = "Security | Cryptography"
-date = 2021-03-19
+date = 2020-03-19
 +++
 
 # Security

@@ -7,7 +7,9 @@ date = 2021-03-28
 This document aims to give a short introduction to Room persistence library.
 
 # Introduction
-Room helps us to create and use a local database.
+Room helps us to create and use a local database. Room is Android's own implementation of ORM (object relational mapping).
+There are also another ORM projects before Room exists.
+
 A Room database is defined by the following components:
 * SQLite
 * DAO: data access object

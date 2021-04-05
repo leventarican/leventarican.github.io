@@ -28,11 +28,54 @@ In our _navigation graph_ file we defined the fragment with the same id `loginFr
 <fragment android:id="@+id/loginFragment" />
 ```
 
+## Safe Args
+When navigating you may also want to pass data between the screens. Safe Args plugin generate also classes which can be used for navigation. E.g. you have defined screens (fragments) and connect the screen with actions. To apply the direction you can use the generated class.
+
+```kotlin
+val data = "data#payload"
+val action = Screen0FragmentDirections.actionScreen0FragmentToScreen1Fragment(data)
+findNavController().navigate(action)
+```
+
+To receive the data we use the arguments (variable) which is already given (generated) in our fragment.
+```kotlin
+val bundle = arguments
+bundle?.let {
+    val args = Screen1FragmentArgs.fromBundle(it)
+}
+```
+
+In the code example above we use the defined action to change the screens (from screen0 to screen1). We also pass data (type string). Now before you can use this piece of code you need some pre-steps. Let's have look to the navigation file where we defined an `action` and an `argument`.
+
+```xml
+<!-- FOR THE SAKE OF SIMPLITY BOILERPLATE CODE IS NOT GIVEN -->
+<fragment>
+    <action
+        android:id="@+id/action_screen0Fragment_to_screen1Fragment"
+        app:destination="@id/screen1Fragment" />
+</fragment>
+<fragment>
+    <argument
+        android:name="data"
+        app:argType="string"
+        android:defaultValue="default-data" />
+</fragment>
+```
+
+Safe args is optional so if you want to use it you also need to add the dependencies in your gradle file.
+```groovy
+// plugin apply in module gradle
+id 'androidx.navigation.safeargs.kotlin'
+
+// dependency in top-level gradle file
+classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.4"
+```
+
 # Layout
 Layout's in Android are a huge topic. By time the available layout's evolved. You should basically know to use which layout when. 
 * Whats the difference `ConstraintLayout` to `CoordinatorLayout`. 
 * `RecyclerView` is a good choice for large list items. 
-* You should also know that are `<include>` and `<merge>` layout tags
+* You should also heard about `<include>` and `<merge>` layout tags for performance improving and reusing of layouts.
 
 # Links
 * https://developer.android.com/training/appbar
@@ -40,3 +83,4 @@ Layout's in Android are a huge topic. By time the available layout's evolved. Yo
 * https://developer.android.com/guide/navigation/navigation-principles
 * https://developer.android.com/guide/navigation/navigation-ui#Tie-navdrawer
 * https://developer.android.com/guide/navigation/navigation-ui#add_a_navigation_drawer
+* https://developer.android.com/training/improving-layouts/reusing-layouts

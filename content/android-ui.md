@@ -75,7 +75,7 @@ classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.4"
 Layout's in Android are a huge topic. By time the available layout's evolved. You should basically know to use which layout when. 
 * Whats the difference `ConstraintLayout` to `CoordinatorLayout`. 
 * `RecyclerView` is a good choice for large list items. 
-* You should also heard about `<include>` and `<merge>` layout tags for performance improving and reusing of layouts.
+* You should also heard about `<include>` and `<merge>` layout tags for performance improving and __reusing__ of layouts.
 
 # Links
 * https://developer.android.com/training/appbar

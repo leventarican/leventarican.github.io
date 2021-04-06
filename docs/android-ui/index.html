@@ -69,12 +69,48 @@ An <code>Activity</code> in Android context is a window like in a desktop app. A
 <p>In our <em>navigation graph</em> file we defined the fragment with the same id <code>loginFragment</code>.</p>
 <pre style="background-color:#272822;">
 <code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">fragment </span><span style="color:#a6e22e;">android:id</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@+id/loginFragment&quot; </span><span style="color:#f8f8f2;">/&gt;
+</span></code></pre><h2 id="safe-args">Safe Args</h2>
+<p>When navigating you may also want to pass data between the screens. Safe Args plugin generate also classes which can be used for navigation. E.g. you have defined screens (fragments) and connect the screen with actions. To apply the direction you can use the generated class.</p>
+<pre style="background-color:#272822;">
+<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">data </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;data#payload&quot;
+</span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">action </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> Screen0FragmentDirections</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">actionScreen0FragmentToScreen1Fragment(</span><span style="color:#f92672;">data</span><span style="color:#f8f8f2;">)
+findNavController()</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">navigate(action)
+</span></code></pre>
+<p>To receive the data we use the arguments (variable) which is already given (generated) in our fragment.</p>
+<pre style="background-color:#272822;">
+<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">bundle </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> arguments
+bundle</span><span style="color:#f92672;">?.</span><span style="color:#f8f8f2;">let {
+    </span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">args </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> Screen1FragmentArgs</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">fromBundle(it)
+}
+</span></code></pre>
+<p>In the code example above we use the defined action to change the screens (from screen0 to screen1). We also pass data (type string). Now before you can use this piece of code you need some pre-steps. Let's have look to the navigation file where we defined an <code>action</code> and an <code>argument</code>.</p>
+<pre style="background-color:#272822;">
+<code class="language-xml" data-lang="xml"><span style="color:#75715e;">&lt;!-- FOR THE SAKE OF SIMPLITY BOILERPLATE CODE IS NOT GIVEN --&gt;
+</span><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">fragment</span><span style="color:#f8f8f2;">&gt;
+    &lt;</span><span style="color:#f92672;">action
+        </span><span style="color:#a6e22e;">android:id</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@+id/action_screen0Fragment_to_screen1Fragment&quot;
+        </span><span style="color:#a6e22e;">app:destination</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@id/screen1Fragment&quot; </span><span style="color:#f8f8f2;">/&gt;
+&lt;/</span><span style="color:#f92672;">fragment</span><span style="color:#f8f8f2;">&gt;
+&lt;</span><span style="color:#f92672;">fragment</span><span style="color:#f8f8f2;">&gt;
+    &lt;</span><span style="color:#f92672;">argument
+        </span><span style="color:#a6e22e;">android:name</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;data&quot;
+        </span><span style="color:#a6e22e;">app:argType</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;string&quot;
+        </span><span style="color:#a6e22e;">android:defaultValue</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;default-data&quot; </span><span style="color:#f8f8f2;">/&gt;
+&lt;/</span><span style="color:#f92672;">fragment</span><span style="color:#f8f8f2;">&gt;
+</span></code></pre>
+<p>Safe args is optional so if you want to use it you also need to add the dependencies in your gradle file.</p>
+<pre style="background-color:#272822;">
+<code class="language-groovy" data-lang="groovy"><span style="color:#75715e;">// plugin apply in module gradle
+</span><span style="color:#f8f8f2;">id </span><span style="color:#e6db74;">&#39;androidx.navigation.safeargs.kotlin&#39;
+
+</span><span style="color:#75715e;">// dependency in top-level gradle file
+</span><span style="color:#f8f8f2;">classpath </span><span style="color:#e6db74;">&quot;androidx.navigation:navigation-safe-args-gradle-plugin:2.3.4&quot;
 </span></code></pre><h1 id="layout">Layout</h1>
 <p>Layout's in Android are a huge topic. By time the available layout's evolved. You should basically know to use which layout when. </p>
 <ul>
 <li>Whats the difference <code>ConstraintLayout</code> to <code>CoordinatorLayout</code>. </li>
 <li><code>RecyclerView</code> is a good choice for large list items. </li>
-<li>You should also know that are <code>&lt;include&gt;</code> and <code>&lt;merge&gt;</code> layout tags</li>
+<li>You should also heard about <code>&lt;include&gt;</code> and <code>&lt;merge&gt;</code> layout tags for performance improving and reusing of layouts.</li>
 </ul>
 <h1 id="links">Links</h1>
 <ul>
@@ -83,6 +119,7 @@ An <code>Activity</code> in Android context is a window like in a desktop app. A
 <li>https://developer.android.com/guide/navigation/navigation-principles</li>
 <li>https://developer.android.com/guide/navigation/navigation-ui#Tie-navdrawer</li>
 <li>https://developer.android.com/guide/navigation/navigation-ui#add_a_navigation_drawer</li>
+<li>https://developer.android.com/training/improving-layouts/reusing-layouts</li>
 </ul>
 
 <footer>

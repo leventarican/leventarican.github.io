@@ -55,7 +55,8 @@
 <h1 id="about">About</h1>
 <p>This document aims to give a short introduction to Room persistence library.</p>
 <h1 id="introduction">Introduction</h1>
-<p>Room helps us to create and use a local database. Room is Android's own implementation of ORM (object relational mapping).
+<p>You want to store data on your local machine. And want to provide offline app user experience. Room library could be a choice for that.
+Room helps us to create and use a local database. Room is Android's own implementation of ORM (object relational mapping).
 There are also another ORM projects before Room exists.</p>
 <p>A Room database is defined by the following components:</p>
 <ul>
@@ -63,10 +64,13 @@ There are also another ORM projects before Room exists.</p>
 <li>DAO: data access object</li>
 <li>entity class: a data class with annotation (<em>metainformation</em> for Room library)</li>
 </ul>
-<p>An <em>entity</em> represents a table in database. The interaction (insert, delete, update, queries) to database are represented by interfaces.
+<p>An <em>entity</em> represents a table in database. The interaction (query) to database are represented by interfaces.
 An interface define how to interact with a database. In Room the interface is the DAO.</p>
 <blockquote>
 <p>DAO is a <strong>design pattern</strong>. The motivation is to abstract the database layer to switch the database technology behind the DAO. With a DAO class we map kotlin function to sql queries. Think of a DAO as defining a <em>custom interface</em> for accessing your db.</p>
+</blockquote>
+<blockquote>
+<p>query: a request for data from a database (select) or a request to perform an action on the data (insert, delete)</p>
 </blockquote>
 <p>Now lets see annotation examples. Here we have a pure data class.</p>
 <pre style="background-color:#272822;">
@@ -94,16 +98,24 @@ An interface define how to interact with a database. In Room the interface is th
 <pre style="background-color:#272822;">
 <code class="language-kotlin" data-lang="kotlin"><span style="color:#f8f8f2;">@Dao
 </span><span style="color:#f92672;">interface </span><span style="color:#f8f8f2;">DeveloperDAO {
-
     @Insert
     </span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">insert</span><span style="color:#f8f8f2;">(</span><span style="color:#f92672;">data:</span><span style="color:#f8f8f2;"> Developer)
 }
 </span></code></pre>
-<p>Ok now described our tables and our interaction. Finally the creation of an database works </p>
+<p>Ok now described our tables and our interaction. Finally we define a database <em>abstract</em> class which extends <code>RoomDatabase</code>. It's abstact because Room will do the implementation for us. </p>
 <pre style="background-color:#272822;">
 <code class="language-kotlin" data-lang="kotlin"><span style="color:#f8f8f2;">@Database(entities </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> arrayOf(Developer</span><span style="color:#f92672;">::</span><span style="color:#f8f8f2;">class), version </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">)
 </span><span style="color:#f92672;">abstract class </span><span style="color:#f8f8f2;">AppDatabase </span><span style="color:#f92672;">: </span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">RoomDatabase</span><span style="color:#f8f8f2;">() {
     </span><span style="color:#f92672;">abstract fun </span><span style="color:#a6e22e;">developerDao</span><span style="color:#f8f8f2;">()</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> DeveloperDao
+}
+</span></code></pre>
+<p>A nice feature of Room is the support of <code>LiveData</code>. 
+Example when you define your DAO interface and you query data you can specify the result as <code>LiveData</code>. Which mean you call the function <strong>once</strong> and then can use the LiveData to <strong>observe</strong> from it.</p>
+<pre style="background-color:#272822;">
+<code class="language-kotlin" data-lang="kotlin"><span style="color:#f8f8f2;">@Dao
+</span><span style="color:#f92672;">interface </span><span style="color:#f8f8f2;">DeveloperDAO {
+    @Query
+    </span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">getAll</span><span style="color:#f8f8f2;">()</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> LiveData&lt;</span><span style="font-style:italic;color:#66d9ef;">List</span><span style="color:#f8f8f2;">&lt;Developer&gt;&gt;
 }
 </span></code></pre><h1 id="links">Links</h1>
 <ul>

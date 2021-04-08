@@ -56,7 +56,7 @@ interface DeveloperDAO {
 }
 ```
 
-Ok now described our tables and our interaction. Finally the creation of an database works 
+Ok now described our tables and our interaction. Finally we define a database _abstract_ class which extends `RoomDatabase`. It's abstact because Room will do the implementation for us. 
 ```kotlin
 @Database(entities = arrayOf(Developer::class), version = 1)
 abstract class AppDatabase : RoomDatabase() {
@@ -65,7 +65,7 @@ abstract class AppDatabase : RoomDatabase() {
 ```
 
 A nice feature of Room is the support of `LiveData`. 
-Example when you define your DAO interface and you query data you can specify the result as `LiveData`. Which mean you call the function once and then can use the LiveData to observe from it.
+Example when you define your DAO interface and you query data you can specify the result as `LiveData`. Which mean you call the function __once__ and then can use the LiveData to __observe__ from it.
 
 ```kotlin
 @Dao

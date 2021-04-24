@@ -62,5 +62,46 @@ lateinit var data: String
 val process = data?.payload ?: "default-payload" 
 ```
 
+# Collections
+
+## Pair
+```kt
+println("# collections: pair")
+
+val j = Pair("java", 11)
+log("first: ${j.first}; second: ${j.second}")
+
+// with _syntactic sugar_
+val k = "kotlin" to 1.4
+log("first: ${k.first}; second: ${k.second}")
+```
+
+## Triple
+```kt
+val green = Triple(0, 255, 0)
+log("rgb: ${green.first}, ${green.second}, ${green.third}")
+```
+
+## Array
+```kt
+val i = intArrayOf(0, 10, 200)
+val n = arrayOfNulls<Int>(3)
+```
+
+## List
+```kt
+val n = listOf(0, 1, 2, 3, 3);
+```
+
+## Map
+```kt
+val stack = mutableMapOf<Int, String>(10 to "python", 11 to "rust")
+```
+
+## Set
+```kt
+val binary = setOf(0, 1, 1, 1)
+```
+
 # Links
 * https://kotlinlang.org/docs/sealed-classes.html

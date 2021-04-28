@@ -76,7 +76,7 @@ zip</span><span style="font-style:italic;color:#fd971f;"> -r -0 -s</span><span s
 <pre style="background-color:#272822;">
 <code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">df</span><span style="font-style:italic;color:#fd971f;"> -h</span><span style="color:#f8f8f2;"> .
 du</span><span style="font-style:italic;color:#fd971f;"> -h --max-depth</span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;">1 /home/
-</span></code></pre><h1 id="network-openwrt">Network / openwrt</h1>
+</span></code></pre><h1 id="network">Network</h1>
 <pre style="background-color:#272822;">
 <code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">arp	// list MAC adress to IP adress
 cat /var/dhcp.leases	// show IP adress, hostname, MAC adress
@@ -144,7 +144,17 @@ sudo apt-get autoclean
 <p>The <code>snap-store</code> under linux using ~ 500MB. As an alternative you can use <code>gnome-software</code>.</p>
 <pre style="background-color:#272822;">
 <code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">sudo snap remove snap-store </span><span style="color:#f92672;">&amp;&amp; </span><span style="color:#f8f8f2;">sudo apt install gnome-software
-</span></code></pre><h1 id="links">Links</h1>
+</span></code></pre><h1 id="battery">Battery</h1>
+<p>Calculate the battery capacity with energy_full values: <code>56760000 / 57020000 * 100 = 99.5%</code></p>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">cat /sys/class/power_supply/BAT0/energy_full
+56760000
+
+cat /sys/class/power_supply/BAT0/energy_full_design 
+57020000
+</span></code></pre>
+<p>Tools like <code>tlp</code> or <code>tlp-stat --battery</code> could also be useful for battery management or stats.</p>
+<h1 id="links">Links</h1>
 <ul>
 <li>https://itsfoss.com/free-up-space-ubuntu-linux/</li>
 <li>https://github.com/oguzhaninan/Stacer</li>

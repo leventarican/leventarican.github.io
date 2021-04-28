@@ -37,7 +37,7 @@ du -h --max-depth=1 /home/
 ```
 
 
-# Network / openwrt
+# Network
 ```bash
 arp	// list MAC adress to IP adress
 cat /var/dhcp.leases	// show IP adress, hostname, MAC adress
@@ -119,6 +119,18 @@ The `snap-store` under linux using ~ 500MB. As an alternative you can use `gnome
 ```bash
 sudo snap remove snap-store && sudo apt install gnome-software
 ```
+
+# Battery
+Calculate the battery capacity with energy_full values: `56760000 / 57020000 * 100 = 99.5%`
+```bash
+cat /sys/class/power_supply/BAT0/energy_full
+56760000
+
+cat /sys/class/power_supply/BAT0/energy_full_design 
+57020000
+```
+
+Tools like `tlp` or `tlp-stat --battery` could also be useful for battery management or stats.
 
 # Links
 * https://itsfoss.com/free-up-space-ubuntu-linux/

@@ -75,6 +75,29 @@ interface DeveloperDAO {
 }
 ```
 
+## Main / UI Thread
+Long running operation like database operations should run on a separate thread (_non-blocking_). That's why it is a good idea to run these operations with kotlin __coroutines__.
+
+> __Recap__: the main thread (also called UI thread) is a single thread that handles all updates on UI. The main thread has to update the screen every _16ms_ or more or 60 fps to ensure everythings is smooth. Many tasks takes longer then 16ms such as fetch data from internet, reading a large file, database operations, etc.
+
+Whenever using coroutines with Room you need to ensure that functions in the call-hierarchy are marked with `suspend` otherwise Room won't recognize it and it will still try to run it on main thread. 
+You may then receive an error like this. Because Room will not allow access database without thread's by default.
+```
+Cannot access database on the main thread since it may potentially lock the UI for a long period of time.
+```
+
+Example:
+```kotlin
+fun init() {
+	scope.launch { data = database.all() }
+}
+
+interface AppDatabaseDao {
+	@Query("select * from data_table order by dataId desc")
+	suspend fun all(): Data?
+}
+```
+
 # Links
 * https://developer.android.com/training/data-storage/room
 * https://developer.android.com/jetpack/androidx/releases/room

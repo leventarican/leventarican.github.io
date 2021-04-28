@@ -117,6 +117,26 @@ Example when you define your DAO interface and you query data you can specify th
     @Query
     </span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">getAll</span><span style="color:#f8f8f2;">()</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> LiveData&lt;</span><span style="font-style:italic;color:#66d9ef;">List</span><span style="color:#f8f8f2;">&lt;Developer&gt;&gt;
 }
+</span></code></pre><h2 id="main-ui-thread">Main / UI Thread</h2>
+<p>Long running operation like database operations should run on a separate thread (<em>non-blocking</em>). That's why it is a good idea to run these operations with kotlin <strong>coroutines</strong>.</p>
+<blockquote>
+<p><strong>Recap</strong>: the main thread (also called UI thread) is a single thread that handles all updates on UI. The main thread has to update the screen every <em>16ms</em> or more or 60 fps to ensure everythings is smooth. Many tasks takes longer then 16ms such as fetch data from internet, reading a large file, database operations, etc.</p>
+</blockquote>
+<p>Whenever using coroutines with Room you need to ensure that functions in the call-hierarchy are marked with <code>suspend</code> otherwise Room won't recognize it and it will still try to run it on main thread. 
+You may then receive an error like this. Because Room will not allow access database without thread's by default.</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">Cannot access database on the main thread since it may potentially lock the UI for a long period of time.
+</span></code></pre>
+<p>Example:</p>
+<pre style="background-color:#272822;">
+<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">init</span><span style="color:#f8f8f2;">() {
+	scope</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">launch { </span><span style="color:#f92672;">data =</span><span style="color:#f8f8f2;"> database</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">all() }
+}
+
+</span><span style="color:#f92672;">interface </span><span style="color:#f8f8f2;">AppDatabaseDao {
+	@Query(</span><span style="color:#e6db74;">&quot;select * from data_table order by dataId desc&quot;</span><span style="color:#f8f8f2;">)
+	</span><span style="color:#f92672;">suspend fun </span><span style="color:#a6e22e;">all</span><span style="color:#f8f8f2;">()</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> Data?
+}
 </span></code></pre><h1 id="links">Links</h1>
 <ul>
 <li>https://developer.android.com/training/data-storage/room</li>

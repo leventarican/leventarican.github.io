@@ -4,7 +4,7 @@ date = 2021-03-28
 +++
 
 # About
-This document aims to give a short introduction to Room persistence library.
+This document aims to give a short introduction to __Room__ persistence library.
 
 # Introduction
 You want to store data on your local machine. And want to provide offline app user experience. Room library could be a choice for that.

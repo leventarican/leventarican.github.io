@@ -31,7 +31,6 @@ Now lets list the available components. We want to know when to use which compon
 * ViewBinding
 * ViewModel
 * LiveData
-* Room
 
 You will often read the components with the apprevation MVVM architecture: Model - View - ViewModel
 
@@ -49,16 +48,18 @@ Some words about _Jetpack_. As already introduced it was formerly _Android Suppo
 The _AndroidX library_ contains the existing support library and also includes the latest Jetpack components.
 
 ## DataBinding
-With data binding we can access the UI element directly over the generate Binding class. Instead of searching the hole UI tree `findviewbyId` we just access the view defined in the layout file directly.
+With data binding we can access views (UI elements) directly over the generated Binding class. Instead of searching the hole UI tree `findviewbyId` we just access the view defined in the layout file directly.
 
 > Data Binding Library supports the developer to bind the UI with the data.
 
 In your UI component you can then set data to UI.
 ```kt
 binding.textView.text = 'data'
+// OR
+binding.textView.text = viewmodel.data
 ```
 
-You can even skip this intermediate step and set value directly in your layout file with _expression language_.
+You can even skip this intermediate step (boilerplate code) and set value directly in your layout file with _expression language_.
 ```xml
 <TextView android:text="@{viewmodel.data}" />
 ```
@@ -91,7 +92,7 @@ The data binding library also provides a more sophisticated technique called bin
 This option give you a way to implement your own logic for setting attribute values.
 
 ## View Binding
-A kind of subset of data binding. In view binding there is no such techniques like _binding expression_, _binding adapters_ or _two-way binding_.
+ViewBinding is another way to _access views_. A kind of subset of data binding. In view binding there is no such techniques like _binding expression_, _binding adapters_ or _two-way binding_.
 It's a good alternative to eliminate `findViewById`. There is no `<layout>` tag required in layout file. 
 
 So, how can I use view binding? In comparison to data binding its enough to set the view binding build features to true. The binding class for a layout file will be automatically generated. 

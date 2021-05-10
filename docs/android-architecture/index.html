@@ -77,7 +77,6 @@ Latetely an <em>android support library</em> was introduced. With Android 9.0 th
 <li>ViewBinding</li>
 <li>ViewModel</li>
 <li>LiveData</li>
-<li>Room</li>
 </ul>
 <p>You will often read the components with the apprevation MVVM architecture: Model - View - ViewModel</p>
 <p>If we need to store or request/fetch data from a data source we can achieve this in different ways. You should know that read/write operation on <em>cache/memory/in-memory</em> is different to <em>disc</em> or even <em>network</em>. To summarize there are different data persistence layers.</p>
@@ -90,15 +89,17 @@ Latetely an <em>android support library</em> was introduced. With Android 9.0 th
 <p>Some words about <em>Jetpack</em>. As already introduced it was formerly <em>Android Support Library</em>: v4 Support Libraries, v7 Support Libraries.
 The <em>AndroidX library</em> contains the existing support library and also includes the latest Jetpack components.</p>
 <h2 id="databinding">DataBinding</h2>
-<p>With data binding we can access the UI element directly over the generate Binding class. Instead of searching the hole UI tree <code>findviewbyId</code> we just access the view defined in the layout file directly.</p>
+<p>With data binding we can access views (UI elements) directly over the generated Binding class. Instead of searching the hole UI tree <code>findviewbyId</code> we just access the view defined in the layout file directly.</p>
 <blockquote>
 <p>Data Binding Library supports the developer to bind the UI with the data.</p>
 </blockquote>
 <p>In your UI component you can then set data to UI.</p>
 <pre style="background-color:#272822;">
 <code class="language-kt" data-lang="kt"><span style="color:#f8f8f2;">binding</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">textView</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">text </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&#39;data&#39;
+</span><span style="color:#75715e;">// OR
+</span><span style="color:#f8f8f2;">binding</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">textView</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">text </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> viewmodel</span><span style="color:#f92672;">.data
 </span></code></pre>
-<p>You can even skip this intermediate step and set value directly in your layout file with <em>expression language</em>.</p>
+<p>You can even skip this intermediate step (boilerplate code) and set value directly in your layout file with <em>expression language</em>.</p>
 <pre style="background-color:#272822;">
 <code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">TextView </span><span style="color:#a6e22e;">android:text</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@{viewmodel.data}&quot; </span><span style="color:#f8f8f2;">/&gt;
 </span></code></pre>
@@ -129,7 +130,7 @@ The <em>AndroidX library</em> contains the existing support library and also inc
 <p>The data binding library also provides a more sophisticated technique called binding adapter.
 This option give you a way to implement your own logic for setting attribute values.</p>
 <h2 id="view-binding">View Binding</h2>
-<p>A kind of subset of data binding. In view binding there is no such techniques like <em>binding expression</em>, <em>binding adapters</em> or <em>two-way binding</em>.
+<p>ViewBinding is another way to <em>access views</em>. A kind of subset of data binding. In view binding there is no such techniques like <em>binding expression</em>, <em>binding adapters</em> or <em>two-way binding</em>.
 It's a good alternative to eliminate <code>findViewById</code>. There is no <code>&lt;layout&gt;</code> tag required in layout file. </p>
 <p>So, how can I use view binding? In comparison to data binding its enough to set the view binding build features to true. The binding class for a layout file will be automatically generated. </p>
 <pre style="background-color:#272822;">

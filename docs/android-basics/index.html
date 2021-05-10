@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:800px; margin:16px auto;">
+            
+<h1 class="title">
+    Android: Basics
+</h1>
+<p class="subtitle"><strong>2021-05-08</strong></p>
+<h1 id="about">About</h1>
+<p>Give an overview about Android basics.</p>
+<h1 id="introduction">Introduction</h1>
+<h2 id="activity">Activity</h2>
+<p>The very basic Android component is the <code>Activity</code>. An <code>Activity</code> is a window as you know it from the desktop world. Where the user can interact with the application.</p>
+<p>An <code>Activity</code> is mostly used as fullscreen window. You can use an <code>Activity</code> also as floating or embedded window.</p>
+<p>You place your UI with the method <code>setContentView(View)</code>. For example if you defined your UI in your layout file and you want to use it in your activity.</p>
+<pre style="background-color:#272822;">
+<code class="language-kotlin" data-lang="kotlin"><span style="color:#f8f8f2;">@Override
+</span><span style="color:#f92672;">public</span><span style="color:#f8f8f2;"> void onCreate(Bundle savedInstanceState) {
+	setContentView(R</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">layout</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">your_layout);
+}
+</span></code></pre>
+<p>With <code>setContentView(View)</code> we are <em>inflating</em> the view to the activity.</p>
+<p>What does inflating means?
+In short: it's the process of adding a view to activity on runtime.
+The layout xml is get parsed, then the view hierarchy is build, and finally added to the parent view to <em>render</em> your view's (UI).</p>
+<h3 id="lifecycle">Lifecycle</h3>
+<p>An activity has a <strong>lifecycle</strong> where it has different <strong>stages</strong>. These stages are covered through six callbacks: <code>onCreate(), onStart(), ...</code>. The android system invokes the callbacks as an activity enters a new <strong>state</strong>.</p>
+<p>On some circumstates the system can destroy an activity instance. And the state of the application is may lost. For that cases you can save the instance state with <code>onSaveInstanceState()</code> and <code>Bundle</code>.</p>
+<pre style="background-color:#272822;">
+<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">override fun </span><span style="color:#a6e22e;">onSaveInstanceState</span><span style="color:#f8f8f2;">(</span><span style="font-style:italic;color:#fd971f;">outState</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> Bundle?) {
+	outState</span><span style="color:#f92672;">?.</span><span style="color:#f8f8f2;">run {
+		putInt(</span><span style="color:#ae81ff;">DATA</span><span style="color:#f8f8f2;">, currentData)
+	}
+
+	</span><span style="color:#ae81ff;">super</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">onSaveInstanceState(outState)
+}
+</span></code></pre>
+<p>To restore the activity UI state you can then use the saved instance state.</p>
+<pre style="background-color:#272822;">
+<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">override fun </span><span style="color:#a6e22e;">onCreate</span><span style="color:#f8f8f2;">(</span><span style="font-style:italic;color:#fd971f;">savedInstanceState</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> Bundle?) {
+	</span><span style="color:#ae81ff;">super</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">onCreate(savedInstanceState)onSaveInstanceState(outState)
+
+	</span><span style="color:#75715e;">// skip boilerplate code
+</span><span style="color:#f8f8f2;">	currentData </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> getInt(</span><span style="color:#ae81ff;">DATA</span><span style="color:#f8f8f2;">)
+}
+</span></code></pre><h2 id="view">View</h2>
+<p>A view is a atomic element (building block) in Android. A view can be a button, text, ... or a layout. There are many layout options in Android: Relative, Linear, Constraint, ...</p>
+<p>We can create view either by XML definition or programmatically.</p>
+<pre style="background-color:#272822;">
+<code class="language-kotlin" data-lang="kotlin"><span style="color:#f8f8f2;">@Override
+</span><span style="color:#f92672;">public</span><span style="color:#f8f8f2;"> void onCreate(Bundle savedInstanceState) {
+	</span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">b </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> Button()
+	</span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">t </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> TextView()
+	</span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">l </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> RelativeLayout()
+	l</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">add(b)
+	setContentView(l)
+}
+</span></code></pre>
+<p>Here we created a ViewGroup (contains multiple views).</p>
+<h1 id="links">Links</h1>
+<ul>
+<li>https://developer.android.com/reference/android/app/Activity</li>
+<li>https://developer.android.com/reference/android/view/View</li>
+<li>https://developer.android.com/guide/components/activities/activity-lifecycle</li>
+</ul>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

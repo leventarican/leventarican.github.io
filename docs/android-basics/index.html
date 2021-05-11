@@ -90,7 +90,24 @@ The layout xml is get parsed, then the view hierarchy is build, and finally adde
 </span><span style="color:#f8f8f2;">	currentData </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> getInt(</span><span style="color:#ae81ff;">DATA</span><span style="color:#f8f8f2;">)
 }
 </span></code></pre><h2 id="view">View</h2>
-<p>A view is a atomic element (building block) in Android. A view can be a button, text, ... or a layout. There are many layout options in Android: Relative, Linear, Constraint, ...</p>
+<p>A View is a atomic element (building block) in Android. A view can be a button, text, ... or a layout. There are many layout options in Android: Relative, Linear, Constraint, ...</p>
+<blockquote>
+<p>View is the base class for widgets, which are used to create interactive UI components (buttons, text fields, etc.)</p>
+</blockquote>
+<p>Now you read <strong>View, Widget, Layout</strong>. Let's see the class hierachy. You can see that View is in package <code>android.view</code> and a button in package <code>android.widget</code>.</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">kotlin.Any
+	android.view.View
+		android.widget.TextView
+			android.widget.Button
+</span></code></pre>
+<p>Similarly for a layout. A <strong>ViewGroup</strong> is an invisible container that holds other Views or ViewGroups.</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">kotlin.Any
+	android.view.View
+		android.view.ViewGroup
+			android.widget.LinearLayout
+</span></code></pre>
 <p>We can create view either by XML definition or programmatically.</p>
 <pre style="background-color:#272822;">
 <code class="language-kotlin" data-lang="kotlin"><span style="color:#f8f8f2;">@Override

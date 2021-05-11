@@ -52,7 +52,10 @@ With data binding we can access views (UI elements) directly over the generated 
 
 > Data Binding Library supports the developer to bind the UI with the data.
 
-In your UI component you can then set data to UI.
+In other words. On one hand you have your UI (View, layout file) on the other hand you have your model (the data).
+With the __MVVM__ (Model-View-ViewModel) pattern a third component the ViewModel is supported. The __View__ communicates with the __Model__ over the __ViewModel__.
+
+Now let's see data binding in action. In your UI component you can then set data to UI.
 ```kt
 binding.textView.text = 'data'
 // OR
@@ -64,25 +67,34 @@ You can even skip this intermediate step (boilerplate code) and set value direct
 <TextView android:text="@{viewmodel.data}" />
 ```
 
-> Too get such an `binding` object there are some prerequirements you need to too. E.g. include the dependency, wrap layout file with `<layout/>` tag and inflate the layout file.
+To get such an `binding` object there are some prerequirements you need to do. E.g. include the dependency, wrap layout file with `<layout/>` tag and inflate the layout file.
 
-So you wrapped your layout file with `<layout>` and now want to use your views directly in your UI components. You need the respective binding instance. To get such an instance all you need to do is inflate the layout with your code with the `DataBindingUtil`. Let see some code artefacts.
+So you wrapped your layout file with `<layout>` and now want to use your views directly in your UI components. You need the respective binding instance. To get such an instance all you need to do is inflate the layout.
+There are two ways to inflate the layout: with `DataBindingUtil`
 ```kt
 val binding: FragmentDevBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dev, container, false)
 ```
-Within an `Activity` the way to get the binding is a bit different.
+The `DataBindingUtil` is describes as:
+> Utility class to create ViewDataBinding from layouts. 
+
+Or with the (generated) binding class.
 ```kt
 val binding = MainActivityBinding.inflate(getLayoutinflater())
 ```
 
-> You may ask where do I get the `*Binding` class. This class will be automatically generated when you wrap your layout file with `<layout>` tag. Thats also the reason why need to inflate the layout file with the `DataBindinUtil`.
+You may ask where do I get the `*Binding` class. This class will be automatically generated when you wrap your layout file with `<layout>` tag.
 
-We can even rename the generate Binding class name. This is not obligatory just a additional information.
+The base class for a data binding class is `ViewDataBinding`. Remember the `DataBindingUtil` can also return a data binding class.
+
+Android documentation recommendation for `DataBindingUtil` usage:
+> Use this version only if layoutId is unknown in advance. Otherwise, use the generated Binding's inflate method to ensure type-safe inflation.
+
+We can even rename the generate Binding class name. This is not obligatory.
 ```xml
 <data class="Binding" />
 ```
 
-A note about the _lifecycle owner_. If you want to use Data Binding with `LiveData` then you need to set the lifecycle owner to your binding instance. This is needed to define the scope of the `LiveData` object. Check also the API doc.
+A note about the __lifecycle owner__. If you want to use Data Binding with `LiveData` then you need to set the lifecycle owner to your binding instance. This is needed to define the scope of the `LiveData` object. Check also the API doc.
 > Sets the LifecycleOwner that should be used for observing changes of LiveData in this binding
 
 A lifecycle owner is class with an Android lifecycle. Like `Activity` or `Fragment`.
@@ -189,6 +201,7 @@ You should migrate to __view binding__.
 * https://developer.android.com/topic/libraries/support-library/index.html
 * https://developer.android.com/topic/libraries/architecture
 * https://android-developers.googleblog.com/2020/11/the-future-of-kotlin-android-extensions.html
+* https://developer.android.com/reference/android/databinding/DataBindingUtil.html#inflate
 
 # Links: Github
 * https://github.com/android/architecture-components-samples/tree/master/GithubBrowserSample

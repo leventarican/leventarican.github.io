@@ -56,7 +56,25 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 
 ## View
-A view is a atomic element (building block) in Android. A view can be a button, text, ... or a layout. There are many layout options in Android: Relative, Linear, Constraint, ...
+A View is a atomic element (building block) in Android. A view can be a button, text, ... or a layout. There are many layout options in Android: Relative, Linear, Constraint, ...
+
+> View is the base class for widgets, which are used to create interactive UI components (buttons, text fields, etc.)
+
+Now you read __View, Widget, Layout__. Let's see the class hierachy. You can see that View is in package `android.view` and a button in package `android.widget`.
+```
+kotlin.Any
+	android.view.View
+		android.widget.TextView
+			android.widget.Button
+``` 
+
+Similarly for a layout. A __ViewGroup__ is an invisible container that holds other Views or ViewGroups.
+```
+kotlin.Any
+	android.view.View
+		android.view.ViewGroup
+			android.widget.LinearLayout
+```
 
 We can create view either by XML definition or programmatically.
 

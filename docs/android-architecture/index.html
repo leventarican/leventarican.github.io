@@ -93,7 +93,9 @@ The <em>AndroidX library</em> contains the existing support library and also inc
 <blockquote>
 <p>Data Binding Library supports the developer to bind the UI with the data.</p>
 </blockquote>
-<p>In your UI component you can then set data to UI.</p>
+<p>In other words. On one hand you have your UI (View, layout file) on the other hand you have your model (the data).
+With the <strong>MVVM</strong> (Model-View-ViewModel) pattern a third component the ViewModel is supported. The <strong>View</strong> communicates with the <strong>Model</strong> over the <strong>ViewModel</strong>.</p>
+<p>Now let's see data binding in action. In your UI component you can then set data to UI.</p>
 <pre style="background-color:#272822;">
 <code class="language-kt" data-lang="kt"><span style="color:#f8f8f2;">binding</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">textView</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">text </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&#39;data&#39;
 </span><span style="color:#75715e;">// OR
@@ -103,25 +105,31 @@ The <em>AndroidX library</em> contains the existing support library and also inc
 <pre style="background-color:#272822;">
 <code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">TextView </span><span style="color:#a6e22e;">android:text</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@{viewmodel.data}&quot; </span><span style="color:#f8f8f2;">/&gt;
 </span></code></pre>
-<blockquote>
-<p>Too get such an <code>binding</code> object there are some prerequirements you need to too. E.g. include the dependency, wrap layout file with <code>&lt;layout/&gt;</code> tag and inflate the layout file.</p>
-</blockquote>
-<p>So you wrapped your layout file with <code>&lt;layout&gt;</code> and now want to use your views directly in your UI components. You need the respective binding instance. To get such an instance all you need to do is inflate the layout with your code with the <code>DataBindingUtil</code>. Let see some code artefacts.</p>
+<p>To get such an <code>binding</code> object there are some prerequirements you need to do. E.g. include the dependency, wrap layout file with <code>&lt;layout/&gt;</code> tag and inflate the layout file.</p>
+<p>So you wrapped your layout file with <code>&lt;layout&gt;</code> and now want to use your views directly in your UI components. You need the respective binding instance. To get such an instance all you need to do is inflate the layout.
+There are two ways to inflate the layout: with <code>DataBindingUtil</code></p>
 <pre style="background-color:#272822;">
 <code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">binding</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> FragmentDevBinding </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> DataBindingUtil</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">inflate(inflater, R</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">layout</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">fragment_dev, container, </span><span style="color:#ae81ff;">false</span><span style="color:#f8f8f2;">)
 </span></code></pre>
-<p>Within an <code>Activity</code> the way to get the binding is a bit different.</p>
+<p>The <code>DataBindingUtil</code> is describes as:</p>
+<blockquote>
+<p>Utility class to create ViewDataBinding from layouts. </p>
+</blockquote>
+<p>Or with the (generated) binding class.</p>
 <pre style="background-color:#272822;">
 <code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">binding </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> MainActivityBinding</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">inflate(getLayoutinflater())
 </span></code></pre>
+<p>You may ask where do I get the <code>*Binding</code> class. This class will be automatically generated when you wrap your layout file with <code>&lt;layout&gt;</code> tag.</p>
+<p>The base class for a data binding class is <code>ViewDataBinding</code>. Remember the <code>DataBindingUtil</code> can also return a data binding class.</p>
+<p>Android documentation recommendation for <code>DataBindingUtil</code> usage:</p>
 <blockquote>
-<p>You may ask where do I get the <code>*Binding</code> class. This class will be automatically generated when you wrap your layout file with <code>&lt;layout&gt;</code> tag. Thats also the reason why need to inflate the layout file with the <code>DataBindinUtil</code>.</p>
+<p>Use this version only if layoutId is unknown in advance. Otherwise, use the generated Binding's inflate method to ensure type-safe inflation.</p>
 </blockquote>
-<p>We can even rename the generate Binding class name. This is not obligatory just a additional information.</p>
+<p>We can even rename the generate Binding class name. This is not obligatory.</p>
 <pre style="background-color:#272822;">
 <code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">data </span><span style="color:#a6e22e;">class</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;Binding&quot; </span><span style="color:#f8f8f2;">/&gt;
 </span></code></pre>
-<p>A note about the <em>lifecycle owner</em>. If you want to use Data Binding with <code>LiveData</code> then you need to set the lifecycle owner to your binding instance. This is needed to define the scope of the <code>LiveData</code> object. Check also the API doc.</p>
+<p>A note about the <strong>lifecycle owner</strong>. If you want to use Data Binding with <code>LiveData</code> then you need to set the lifecycle owner to your binding instance. This is needed to define the scope of the <code>LiveData</code> object. Check also the API doc.</p>
 <blockquote>
 <p>Sets the LifecycleOwner that should be used for observing changes of LiveData in this binding</p>
 </blockquote>
@@ -217,6 +225,7 @@ Whenever you see a code snippet with the following import then its <code>kotlin-
 <li>https://developer.android.com/topic/libraries/support-library/index.html</li>
 <li>https://developer.android.com/topic/libraries/architecture</li>
 <li>https://android-developers.googleblog.com/2020/11/the-future-of-kotlin-android-extensions.html</li>
+<li>https://developer.android.com/reference/android/databinding/DataBindingUtil.html#inflate</li>
 </ul>
 <h1 id="links-github">Links: Github</h1>
 <ul>

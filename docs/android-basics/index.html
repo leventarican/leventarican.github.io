@@ -108,7 +108,7 @@ The layout xml is get parsed, then the view hierarchy is build, and finally adde
 		android.view.ViewGroup
 			android.widget.LinearLayout
 </span></code></pre>
-<p>We can create view either by XML definition or programmatically.</p>
+<p>We can create view objects either by XML definition or programmatically.</p>
 <pre style="background-color:#272822;">
 <code class="language-kotlin" data-lang="kotlin"><span style="color:#f8f8f2;">@Override
 </span><span style="color:#f92672;">public</span><span style="color:#f8f8f2;"> void onCreate(Bundle savedInstanceState) {
@@ -118,8 +118,9 @@ The layout xml is get parsed, then the view hierarchy is build, and finally adde
 	l</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">add(b)
 	setContentView(l)
 }
-</span></code></pre>
-<p>Here we created a ViewGroup (contains multiple views).</p>
+</span></code></pre><h2 id="layout">Layout</h2>
+<p>We know layout's from java swing, javafx, etc. It is the process of laying out the ui components. You may remember the layout managers from swing: <code>GridLayout</code>, <code>BorderLayout</code>, etc.</p>
+<p>In Android we have the option to define the layout in a layout .xml file as a resource. By handling the layout as a resource we separate it from code. So the maintenance of UI and application logic is more independent. </p>
 <h1 id="links">Links</h1>
 <ul>
 <li>https://developer.android.com/reference/android/app/Activity</li>

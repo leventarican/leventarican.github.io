@@ -76,7 +76,7 @@ kotlin.Any
 			android.widget.LinearLayout
 ```
 
-We can create view either by XML definition or programmatically.
+We can create view objects either by XML definition or programmatically.
 
 ```kotlin
 @Override
@@ -89,7 +89,10 @@ public void onCreate(Bundle savedInstanceState) {
 }
 ```
 
-Here we created a ViewGroup (contains multiple views).
+## Layout
+We know layout's from java swing, javafx, etc. It is the process of laying out the ui components. You may remember the layout managers from swing: `GridLayout`, `BorderLayout`, etc.
+
+In Android we have the option to define the layout in a layout .xml file as a resource. By handling the layout as a resource we separate it from code. So the maintenance of UI and application logic is more independent. 
 
 # Links
 * https://developer.android.com/reference/android/app/Activity

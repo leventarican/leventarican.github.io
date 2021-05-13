@@ -7,8 +7,8 @@ date = 2021-03-18
 Give an overview about Android UI components. Know the naming of the components.
 
 # App bar
-The __app bar__ also known as the `ActionBar`. Later the `Toolbar` was introduced. The `ActionBar` as usually used in combination `Activity` whereas the `Toolbar` is more flexible.
-An `Activity` in Android context is a window like in a desktop app. And a desktop app has usually a toolbar.
+The __app bar__ also known as the `ActionBar`. Later the __toolbar__ was introduced. The `ActionBar` as usually used in combination `Activity` whereas the `Toolbar` is more flexible.
+An `Activity` in Android context is like a window in a desktop app. And a desktop app has usually a toolbar.
 
 # Menu
 There are different menu types: options menu (aka. _overflow_ menu), contextual menu and popup menu.

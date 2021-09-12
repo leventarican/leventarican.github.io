@@ -65,12 +65,48 @@
 	setContentView(R</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">layout</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">your_layout);
 }
 </span></code></pre>
-<p>With <code>setContentView(View)</code> we are <em>inflating</em> the view to the activity.</p>
-<p>What does inflating means?
-In short: it's the process of adding a view to activity on runtime.
+<p>With <code>setContentView(View)</code> we are inflating the view to the activity. </p>
+<blockquote>
+<p>The process of connecting a Layout and Activity is called <strong>inflation</strong>.</p>
+</blockquote>
+<p>What does inflating in detail means?
+It's the process of adding a view to activity on runtime.
 The layout xml is get parsed, then the view hierarchy is build, and finally added to the parent view to <em>render</em> your view's (UI).</p>
 <h3 id="lifecycle">Lifecycle</h3>
-<p>An activity has a <strong>lifecycle</strong> where it has different <strong>stages</strong>. These stages are covered through six callbacks: <code>onCreate(), onStart(), ...</code>. The android system invokes the callbacks as an activity enters a new <strong>state</strong>.</p>
+<p>An activity has a <strong>lifecycle</strong> where it has different <strong>stages</strong>. These stages are covered through six callbacks: <code>onCreate(), onStart()</code> etc. The android system invokes the <strong>callbacks</strong> as an activity enters a new <strong>state</strong>. With these callback methods you can react to each stage <strong>event</strong>.</p>
+<p>Since 2017 Android provide a second way for reacting to state changes the <strong>lifecycle library</strong>. It introduced the <code>Lifecycle</code>, <code>LifecycleOwner</code> (Activity, Fragment) and <code>LifecycleObserver</code> classes.</p>
+<p>So you may ask why was this library introduced? 
+A good example is the following case in the callback method. You forgot to stop the engine in the <code>onstop()</code> method.</p>
+<pre style="background-color:#272822;">
+<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">onStart</span><span style="color:#f8f8f2;">() {
+	engine</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">start()
+}
+</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">onStop</span><span style="color:#f8f8f2;">() {
+	</span><span style="color:#75715e;">// engine.stop()
+</span><span style="color:#f8f8f2;">}
+</span></code></pre>
+<p>With the lifecycle library you have a way to move the logic to the <code>class Engine</code> itself. So on each respective event occurence (state change) the method's will be called.</p>
+<pre style="background-color:#272822;">
+<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">class </span><span style="color:#f8f8f2;">Engine(</span><span style="font-style:italic;color:#fd971f;">lifecycle</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> Lifecycle) </span><span style="color:#f92672;">: </span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">LifecycleObserver</span><span style="color:#f8f8f2;"> {
+	init {
+		lifecycle</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">addObserver(</span><span style="color:#ae81ff;">this</span><span style="color:#f8f8f2;">)
+	}
+	@OnLifecycleEvent(Lifecycle</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">Event</span><span style="color:#f92672;">.</span><span style="color:#ae81ff;">ON_START</span><span style="color:#f8f8f2;">)
+	</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">startEngine</span><span style="color:#f8f8f2;">() {</span><span style="color:#f92672;">...</span><span style="color:#f8f8f2;">}
+
+	@OnLifecycleEvent(Lifecycle</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">Event</span><span style="color:#f92672;">.</span><span style="color:#ae81ff;">ON_STOP</span><span style="color:#f8f8f2;">)
+	</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">stopEngine</span><span style="color:#f8f8f2;">() {</span><span style="color:#f92672;">...</span><span style="color:#f8f8f2;">}
+}
+</span></code></pre>
+<p>With the <em>introduced</em> <code>Lifecycle</code> class you can query the state</p>
+<pre style="background-color:#272822;">
+<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">class </span><span style="color:#f8f8f2;">MainActivity </span><span style="color:#f92672;">: </span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">AppCompatActivity</span><span style="color:#f8f8f2;">() {
+	</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">processData</span><span style="color:#f8f8f2;">() {
+		</span><span style="color:#f92672;">if</span><span style="color:#f8f8f2;"> (</span><span style="color:#ae81ff;">this</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">lifecycle</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">currentState</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">isAtLeast(Lifecycle</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">State</span><span style="color:#f92672;">.</span><span style="color:#ae81ff;">STARTED</span><span style="color:#f8f8f2;">)) {
+		}
+	}
+}
+</span></code></pre><h3 id="state">State</h3>
 <p>On some circumstates the system can destroy an activity instance. And the state of the application is may lost. For that cases you can save the instance state with <code>onSaveInstanceState()</code> and <code>Bundle</code>.</p>
 <pre style="background-color:#272822;">
 <code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">override fun </span><span style="color:#a6e22e;">onSaveInstanceState</span><span style="color:#f8f8f2;">(</span><span style="font-style:italic;color:#fd971f;">outState</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> Bundle?) {

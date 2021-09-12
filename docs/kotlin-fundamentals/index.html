@@ -54,6 +54,13 @@
 <p class="subtitle"><strong>2021-03-07</strong></p>
 <h1 id="about">About</h1>
 <p>This document gives an overview of Kotlin programming languages characteristic components.</p>
+<p>Kotlin is a <strong>statically</strong> typed programming language like Java, C++, etc. Means that type of a variable is known at <strong>compile time</strong>. Whereas <strong>dynamically</strong> typed programming languages like Python, JavaScript variable types are known at <strong>runtime</strong>.</p>
+<p>When you write Kotlin code <code>.kt</code> the <strong>Kotlin compiler</strong> creates a <code>.class</code> file. The compiler and the final application need the <strong>Kotlin runtime library</strong>.</p>
+<h1 id="why-use-kotlin">Why use Kotlin?</h1>
+<p>Java development speed increased in latest years.</p>
+<p>But currently there are still 3rd party libraries like lombok that developers prefer to get rid of boilerplate code. This brings new dependency and issues for later maintanence difficulities. Kotlin can also interact with Lombok generated code since 1.5.20.</p>
+<p>Instead of using 3rd party libraries a developer may switch to kotlin. The interoperability with java code works well. In some edge-case it may have difficulities. But instead of introduce a new 3rd party the developer should use either java features only or introduce kotlin to an existing project.</p>
+<p>A good example in the described example are <code>data class</code> in kotlin. In Java there will come a new feature <code>record</code>  (see link [1]). With Lombok you can achieve same result as a data class.</p>
 <h1 id="enum">Enum</h1>
 <p>An Enumartion data type is in Kotlin a class. It defined by <code>enum class</code>. Similar to <code>sealed class</code>.</p>
 <p>Example: we define three constants. Whereas each constant is an object of the defined enum class.</p>
@@ -130,7 +137,8 @@ log(</span><span style="color:#e6db74;">&quot;rgb: </span><span style="font-styl
 <code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">binary </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> setOf(</span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">)
 </span></code></pre><h1 id="links">Links</h1>
 <ul>
-<li>https://kotlinlang.org/docs/sealed-classes.html</li>
+<li>[0] https://kotlinlang.org/docs/sealed-classes.html</li>
+<li>[1] https://openjdk.java.net/jeps/359</li>
 </ul>
 
 <footer>

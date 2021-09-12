@@ -52,6 +52,11 @@ TODO
 
 ### DDD
 The Data Driven Development paradigm.
+* http://www.catb.org/~esr/writings/taoup/html/ch09s01.html
+
+Data Oriented Programming
+* https://blog.klipse.tech/java/2021/03/05/data-oriented-programming-in-java.html
+
 TODO: Domain Driven Development.
 
 ### HDD

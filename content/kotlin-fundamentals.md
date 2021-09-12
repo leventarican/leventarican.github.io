@@ -6,6 +6,19 @@ date = 2021-03-07
 # About
 This document gives an overview of Kotlin programming languages characteristic components.
 
+Kotlin is a __statically__ typed programming language like Java, C++, etc. Means that type of a variable is known at __compile time__. Whereas __dynamically__ typed programming languages like Python, JavaScript variable types are known at __runtime__.
+
+When you write Kotlin code `.kt` the __Kotlin compiler__ creates a `.class` file. The compiler and the final application need the __Kotlin runtime library__.
+
+# Why use Kotlin? 
+Java development speed increased in latest years.
+
+But currently there are still 3rd party libraries like lombok that developers prefer to get rid of boilerplate code. This brings new dependency and issues for later maintanence difficulities. Kotlin can also interact with Lombok generated code since 1.5.20.
+
+Instead of using 3rd party libraries a developer may switch to kotlin. The interoperability with java code works well. In some edge-case it may have difficulities. But instead of introduce a new 3rd party the developer should use either java features only or introduce kotlin to an existing project.
+
+A good example in the described example are `data class` in kotlin. In Java there will come a new feature `record`  (see link [1]). With Lombok you can achieve same result as a data class.
+
 # Enum
 An Enumartion data type is in Kotlin a class. It defined by `enum class`. Similar to `sealed class`.
 
@@ -104,4 +117,5 @@ val binary = setOf(0, 1, 1, 1)
 ```
 
 # Links
-* https://kotlinlang.org/docs/sealed-classes.html
+* [0] https://kotlinlang.org/docs/sealed-classes.html
+* [1] https://openjdk.java.net/jeps/359

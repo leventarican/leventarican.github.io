@@ -61,7 +61,7 @@ You should already know the <em>basics</em> of Android App and System.</p>
 </blockquote>
 <p>By time Android development evolved to make development more comfortable e.g. skip writing boilerplate code.
 Make code structure more <em>robust, testable, maintainable</em>.</p>
-<p>At begin there was mainly an <code>Activity</code> component which represents a screen. Then <code>Fragments</code> where introduced. A type of micro-UI within an <code>Activity</code>.
+<p>At begin there was mainly an <code>Activity</code> component which represents a screen. Then <code>Fragments</code> where introduced with Android 3.0 (API Level 11). A type of micro-UI within an <code>Activity</code>.
 Latetely an <em>android support library</em> was introduced. With Android 9.0 this support library is called <em>AndroidX</em>.
 <em>AndroidX</em> is part of the <em>Jetpack</em> library suite.</p>
 <p>There are also 3rd party libraries which are commonly used.</p>
@@ -70,6 +70,35 @@ Latetely an <em>android support library</em> was introduced. With Android 9.0 th
 <blockquote>
 <p>These additional components help you to improve your code quality but bring a lot of new dependencies. First you need too know and then use it suitable.</p>
 </blockquote>
+<h1 id="fragments">Fragments</h1>
+<p>How is the relationship of Actvity and Fragment?
+An Activity operates as a frame that contains the UI fragments and can provide UI elements that surround the fragment.
+<img src="../fragments.png" alt="" /> </p>
+<p>Like Activity you need to create a Fragment with extending a base class.
+Notice that a fragment has different states compared to an Activity. In a fragment we define the UI (inflate layout to fragment). But in comparison to an Activity wou need to return the inflated layout.</p>
+<pre style="background-color:#272822;">
+<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">class </span><span style="color:#f8f8f2;">DataFragment </span><span style="color:#f92672;">: </span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">Fragment</span><span style="color:#f8f8f2;">() {
+    </span><span style="color:#f92672;">override fun </span><span style="color:#a6e22e;">onCreateView</span><span style="color:#f8f8f2;">() {
+        </span><span style="color:#f92672;">return</span><span style="color:#f8f8f2;"> inflater</span><span style="color:#f92672;">...</span><span style="color:#f8f8f2;"> (R</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">layout</span><span style="color:#f92672;">...</span><span style="color:#f8f8f2;">)
+    }
+}
+</span></code></pre>
+<p>It's similar with Activitys when you tell Android which to layout to use. Android will places the layout to activity's layout hierarchy.</p>
+<pre style="background-color:#272822;">
+<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">override fun </span><span style="color:#a6e22e;">onCreate</span><span style="color:#f8f8f2;">() {
+    setContentView(R</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">layout</span><span style="color:#f92672;">...</span><span style="color:#f8f8f2;">)
+}
+</span></code></pre>
+<p>A Fragment are somehow lightwight Activity. Main purpose is to manage the UI within an Activity. The OS can create an Activity not a Fragment. An Activity extends also the <code>Context class</code> like <code>Service</code> or <code>Application</code>. With the Context you can access app data like resources (images, string, ...) or internal database.</p>
+<h1 id="intents">Intents</h1>
+<p>As mentioned we can navigate from Activity to Activity. You can also open a system camera activity from you app activity. The jump to another Activity is achieved with <strong>Intents</strong> and <strong>Intent Filters</strong>.</p>
+<p>Intents and Intent Filters bring the <em>click it</em> (as Hyperlink in HTTP protocol) paradigm to mobile app. Thus it's a <em>powerful</em> mechanism which brings the web <em>mindset</em> to mobile apps.
+As Hyperlink the target address is described with URI (<em>Uniform Resource Identifier</em>).</p>
+<pre style="background-color:#272822;">
+<code><span style="color:#f8f8f2;">content://contacts/people
+geo:37.786971,-122.399677;crs=Moon-2011;u=35
+</span></code></pre>
+<p><em>An intent indicates the <strong>intention</strong> of your app.</em></p>
 <h1 id="components">Components</h1>
 <p>Now lets list the available components. We want to know when to use which components and what the motivation of it.</p>
 <ul>

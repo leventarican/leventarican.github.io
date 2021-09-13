@@ -13,7 +13,7 @@ You should already know the _basics_ of Android App and System.
 By time Android development evolved to make development more comfortable e.g. skip writing boilerplate code.
 Make code structure more _robust, testable, maintainable_.
 
-At begin there was mainly an `Activity` component which represents a screen. Then `Fragments` where introduced. A type of micro-UI within an `Activity`.
+At begin there was mainly an `Activity` component which represents a screen. Then `Fragments` where introduced with Android 3.0 (API Level 11). A type of micro-UI within an `Activity`.
 Latetely an _android support library_ was introduced. With Android 9.0 this support library is called _AndroidX_.
 _AndroidX_ is part of the _Jetpack_ library suite.
 
@@ -24,6 +24,39 @@ Also important to mention is the usage of kotlin language extensions or features
 You also should know some different development approaches. E.g. _single-activity-architecture_.
 
 > These additional components help you to improve your code quality but bring a lot of new dependencies. First you need too know and then use it suitable.
+
+# Fragments
+How is the relationship of Actvity and Fragment?
+An Activity operates as a frame that contains the UI fragments and can provide UI elements that surround the fragment.
+![](../fragments.png) 
+
+Like Activity you need to create a Fragment with extending a base class.
+Notice that a fragment has different states compared to an Activity. In a fragment we define the UI (inflate layout to fragment). But in comparison to an Activity wou need to return the inflated layout.
+```kotlin
+class DataFragment : Fragment() {
+    override fun onCreateView() {
+        return inflater... (R.layout...)
+    }
+}
+```
+It's similar with Activitys when you tell Android which to layout to use. Android will places the layout to activity's layout hierarchy.
+```kotlin
+override fun onCreate() {
+    setContentView(R.layout...)
+}
+```
+A Fragment are somehow lightwight Activity. Main purpose is to manage the UI within an Activity. The OS can create an Activity not a Fragment. An Activity extends also the `Context class` like `Service` or `Application`. With the Context you can access app data like resources (images, string, ...) or internal database.
+
+# Intents
+As mentioned we can navigate from Activity to Activity. You can also open a system camera activity from you app activity. The jump to another Activity is achieved with __Intents__ and __Intent Filters__.
+
+Intents and Intent Filters bring the _click it_ (as Hyperlink in HTTP protocol) paradigm to mobile app. Thus it's a _powerful_ mechanism which brings the web _mindset_ to mobile apps.
+As Hyperlink the target address is described with URI (_Uniform Resource Identifier_).
+```
+content://contacts/people
+geo:37.786971,-122.399677;crs=Moon-2011;u=35
+```
+_An intent indicates the __intention__ of your app._
 
 # Components
 Now lets list the available components. We want to know when to use which components and what the motivation of it.

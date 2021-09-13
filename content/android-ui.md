@@ -14,7 +14,23 @@ An `Activity` in Android context is like a window in a desktop app. And a deskto
 There are different menu types: options menu (aka. _overflow_ menu), contextual menu and popup menu.
 
 # Navigation
-With navigation the movement (back and forth) from screen to screen is meant. Android provides two system provides UI components to navigate back on press. One option is the __back__ button in the __system navigation bar__. Second option is __up__ button in the __app bar__.
+With navigation the movement (back and forth) from screen to screen is meant. 
+You can navigate between different Activies and between Fragments in an Activity.
+
+Historically you navigate between the screens with intents and fragment transactions.
+
+Whenever you navigate to a screen the previous screen is arranges in a stack which is called the __back stack__. It follows the stack principle _LIFO (last in, first out)_. You can go back but not forth when you hit the back button.
+![](../backstack.png)
+
+Difference between Activity back stack and Fragment back stack: when you navigate back in an Activity stack you can go back until leaving the App. Navigating within Fragments are similar but the stack boundaries are the Activity which hosts the Fragments (Fragment Manager, Transaction).
+
+__Navigation Component__ is another way to navigate between the screens.
+The Navigation component is a collection of libraries, plug-in and tooling.
+It handles the back stack, fragment transactions, argument passing (safe args), deep linking, navigation-based animations. All the navigation information is centralized and visualised in the __Navigation graph__.
+
+Android provides two system UI components to navigate back on press. One option is the __back__ button in the __system navigation bar__. Second option is __up__ button in the __app bar__.
+
+![](../android-bar.png)
 
 With Navigation UI you can tie navigation destinations with menu items. If you have an options menu and want to navigate to a specific screen then use the same id as the destination id. The `navigation-ui-ktx` component follows here the __convention-over-code__ principle.
 
@@ -84,3 +100,4 @@ Layout's in Android are a huge topic. By time the available layout's evolved. Yo
 * https://developer.android.com/guide/navigation/navigation-ui#Tie-navdrawer
 * https://developer.android.com/guide/navigation/navigation-ui#add_a_navigation_drawer
 * https://developer.android.com/training/improving-layouts/reusing-layouts
+* https://developer.android.com/guide/navigation/navigation-getting-started

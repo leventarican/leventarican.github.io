@@ -55,23 +55,30 @@
 <h1 id="about">About</h1>
 <p>Give an overview about Android UI components. Know the naming of the components.</p>
 <h1 id="app-bar">App bar</h1>
-<p>The <strong>app bar</strong> also known as the <code>ActionBar</code>. Later the <strong>toolbar</strong> was introduced. The <code>ActionBar</code> as usually used in combination <code>Activity</code> whereas the <code>Toolbar</code> is more flexible.
-An <code>Activity</code> in Android context is like a window in a desktop app. And a desktop app has usually a toolbar.</p>
+<p>The <strong>app bar</strong> also known as the <strong>action bar</strong>. Later the <strong>toolbar</strong> was introduced. The <code>ActionBar</code> as usually used in combination <code>Activity</code> whereas the <code>Toolbar</code> is more flexible. You can place a toolbar at an arbitrary location in view hierarchy whereas an app bar is controled by the framework.</p>
+<blockquote>
+<p>Analogy: an Activity in Android context is like a window in a desktop app. And a desktop app has usually a toolbar.</p>
+</blockquote>
 <h1 id="menu">Menu</h1>
 <p>There are different menu types: options menu (aka. <em>overflow</em> menu), contextual menu and popup menu.</p>
 <h1 id="navigation">Navigation</h1>
 <p>With navigation the movement (back and forth) from screen to screen is meant. 
 You can navigate between different Activies and between Fragments in an Activity.</p>
-<p>Historically you navigate between the screens with intents and fragment transactions.</p>
+<p>Historically (or with basic Android building blocks) you implement navigate between the screens with intents and fragment transactions.</p>
 <p>Whenever you navigate to a screen the previous screen is arranges in a stack which is called the <strong>back stack</strong>. It follows the stack principle <em>LIFO (last in, first out)</em>. You can go back but not forth when you hit the back button.
 <img src="../backstack.png" alt="" /></p>
 <p>Difference between Activity back stack and Fragment back stack: when you navigate back in an Activity stack you can go back until leaving the App. Navigating within Fragments are similar but the stack boundaries are the Activity which hosts the Fragments (Fragment Manager, Transaction).</p>
+<h2 id="navigation-component">Navigation Component</h2>
 <p><strong>Navigation Component</strong> is another way to navigate between the screens.
 The Navigation component is a collection of libraries, plug-in and tooling.
-It handles the back stack, fragment transactions, argument passing (safe args), deep linking, navigation-based animations. All the navigation information is centralized and visualised in the <strong>Navigation graph</strong>.</p>
+It handles the back stack, fragment transactions, argument passing (safe args), deep linking, navigation-based animations. </p>
+<p>All the navigation information is centralized and visualised in the <strong>Navigation graph</strong>. Aside nav graph you should understand the role of <strong>NavHost</strong> and <strong>NavController</strong>. The host component acts as the name suggests as a host of the current (or destination screen). The controller component on the other side <em>orchestrates</em> the swapping of the screen within the host component (NavHost).</p>
+<p>To be more concrete. An activity has the ability to display. Thas why it's obvious to define a <em>NavHost</em> in an activity.</p>
+<p><img src="../nav-component.png" alt="" /></p>
 <p>Android provides two system UI components to navigate back on press. One option is the <strong>back</strong> button in the <strong>system navigation bar</strong>. Second option is <strong>up</strong> button in the <strong>app bar</strong>.</p>
 <p><img src="../android-bar.png" alt="" /></p>
-<p>With Navigation UI you can tie navigation destinations with menu items. If you have an options menu and want to navigate to a specific screen then use the same id as the destination id. The <code>navigation-ui-ktx</code> component follows here the <strong>convention-over-code</strong> principle.</p>
+<h3 id="navigation-ui">Navigation UI</h3>
+<p>With <strong>Navigation UI</strong> you can tie navigation destinations with menu items. If you have an options menu and want to navigate to a specific screen then use the same id as the destination id. The <code>navigation-ui-ktx</code> component follows here the <strong>convention-over-code</strong> principle.</p>
 <p>In this menu definition we have an logout item. On click the screen should switch to login fragment.</p>
 <pre style="background-color:#272822;">
 <code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">item </span><span style="color:#a6e22e;">android:id</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@+id/loginFragment&quot; </span><span style="color:#a6e22e;">android:title</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;Logout&quot; </span><span style="color:#f8f8f2;">/&gt;
@@ -79,7 +86,10 @@ It handles the back stack, fragment transactions, argument passing (safe args), 
 <p>In our <em>navigation graph</em> file we defined the fragment with the same id <code>loginFragment</code>.</p>
 <pre style="background-color:#272822;">
 <code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">fragment </span><span style="color:#a6e22e;">android:id</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@+id/loginFragment&quot; </span><span style="color:#f8f8f2;">/&gt;
-</span></code></pre><h2 id="safe-args">Safe Args</h2>
+</span></code></pre>
+<p>At this point (Navigation UI component) it make sense also to mention the <strong>Drawer</strong> component. The navigation drawer shows the <em>navigation menu</em>. You can open it by selecting drawer icon or swipe from left edge.</p>
+<p><img src="../navigation-drawer.png" alt="" /></p>
+<h3 id="safe-args">Safe Args</h3>
 <p>When navigating you may also want to pass data between the screens. Safe Args plugin generate also classes which can be used for navigation. E.g. you have defined screens (fragments) and connect the screen with actions. To apply the direction you can use the generated class.</p>
 <pre style="background-color:#272822;">
 <code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">data </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;data#payload&quot;

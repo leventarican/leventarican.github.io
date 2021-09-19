@@ -101,24 +101,22 @@ As Hyperlink the target address is described with URI (<em>Uniform Resource Iden
 geo:37.786971,-122.399677;crs=Moon-2011;u=35
 </span></code></pre>
 <p><em>An intent indicates the <strong>intention</strong> of your app.</em></p>
-<h1 id="components">Components</h1>
-<p>Now lets list the available components. We want to know when to use which components and what the motivation of it.</p>
+<h1 id="app-architecure">App architecure</h1>
+<p>If you want to build a robust, maintainable app you should construct your app with a clean architecture. Android best practices follows here the <strong>separation of concerns</strong> principle. E.g. activity and fragment are UI-based classes and should only contain the UI related code. It should act as a <strong>glue</strong> class between the Android OS and the app. Activity and Fragment classes should <strong>lean</strong> as possible.</p>
+<p>Android introduced for that reason some components support the separation of responsibilities (separate UI from business logic). You will often read the components with the apprevation <strong>MVVM</strong> architecture: Model - View - ViewModel. We want to know when to use which components and what the motivation of it.</p>
 <ul>
 <li>DataBinding</li>
 <li>ViewBinding</li>
 <li>ViewModel</li>
 <li>LiveData</li>
 </ul>
-<p>You will often read the components with the apprevation MVVM architecture: Model - View - ViewModel</p>
 <p>If we need to store or request/fetch data from a data source we can achieve this in different ways. You should know that read/write operation on <em>cache/memory/in-memory</em> is different to <em>disc</em> or even <em>network</em>. To summarize there are different data persistence layers.</p>
 <table><thead><tr><th>Type</th><th>IO time</th></tr></thead><tbody>
 <tr><td>cache/memory</td><td>fast</td></tr>
 <tr><td>disc</td><td>slow</td></tr>
 <tr><td>network</td><td>very slow</td></tr>
 </tbody></table>
-<p>When we develop an app our intention is mainly to receive input then display respective information. It's the usual data process: <code>input -&gt; process -&gt; output</code>. The components listed above are intended to support displaying, storing, ... data. We achieve a decopling of the code components.</p>
-<p>Some words about <em>Jetpack</em>. As already introduced it was formerly <em>Android Support Library</em>: v4 Support Libraries, v7 Support Libraries.
-The <em>AndroidX library</em> contains the existing support library and also includes the latest Jetpack components.</p>
+<p>When we develop an app our intention is mainly to receive input then display respective information. It's the usual data process: <code>input -&gt; process -&gt; output</code>. The components listed above are intended to support displaying, storing, ... data. We achieve a <strong>decopling of the code components</strong>.</p>
 <h2 id="databinding">DataBinding</h2>
 <p>With data binding we can access views (UI elements) directly over the generated Binding class. Instead of searching the hole UI tree <code>findviewbyId</code> we just access the view defined in the layout file directly.</p>
 <blockquote>
@@ -126,6 +124,7 @@ The <em>AndroidX library</em> contains the existing support library and also inc
 </blockquote>
 <p>In other words. On one hand you have your UI (View, layout file) on the other hand you have your model (the data).
 With the <strong>MVVM</strong> (Model-View-ViewModel) pattern a third component the ViewModel is supported. The <strong>View</strong> communicates with the <strong>Model</strong> over the <strong>ViewModel</strong>.</p>
+<p><img src="../mvvm.png" alt="" /> </p>
 <p>Now let's see data binding in action. In your UI component you can then set data to UI.</p>
 <pre style="background-color:#272822;">
 <code class="language-kt" data-lang="kt"><span style="color:#f8f8f2;">binding</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">textView</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">text </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&#39;data&#39;
@@ -185,7 +184,7 @@ It's a good alternative to eliminate <code>findViewById</code>. There is no <cod
 <pre style="background-color:#272822;">
 <code class="language-kt" data-lang="kt"><span style="color:#f8f8f2;">binding </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> ActivityMainBinding</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">inflate(layoutInflater)
 </span></code></pre><h2 id="viewmodel">ViewModel</h2>
-<p>The view model component was introduced to hold the app data model in a lifecycle aware state. Whenever the <code>Acvitity</code> or <code>Fragment</code> lifecycle changes we need to care about the data state. With <code>ViewModel</code> this manual process is obsolete. The <code>ViewModel</code> manages the data for the UI. Either a single UI component (activity/fragment) or shared UI components.</p>
+<p>The view model component was introduced to hold the app data model in a <strong>lifecycle aware</strong> state. Whenever the <code>Acvitity</code> or <code>Fragment</code> lifecycle changes we need to care about the data state. With <code>ViewModel</code> this manual process is obsolete. The <code>ViewModel</code> manages the data for the UI. Either a single UI component (activity/fragment) or shared UI components.</p>
 <blockquote>
 <p>For a <code>ViewModel</code> integration we need to add dependencies, introduce a <code>ViewModel</code> class and get the <code>ViewModel</code> reference from a view model provider.</p>
 </blockquote>
@@ -223,7 +222,7 @@ Then you need to define a factory class which extends from <code>ViewModelProvid
     DeveloperViewModelFactory(repository)
 }
 </span></code></pre><h2 id="livedata">LiveData</h2>
-<p>With <code>LiveData</code> for example we can do <em>reactive programming</em>. The UI react to changes on data.</p>
+<p>With <code>LiveData</code> for example we can do <strong>reactive programming</strong>. The UI react to changes (<em>callbacks</em>) on data.</p>
 <pre style="background-color:#272822;">
 <code class="language-kt" data-lang="kt"><span style="color:#f92672;">data.</span><span style="color:#f8f8f2;">payload</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">observe(</span><span style="color:#ae81ff;">this</span><span style="color:#f8f8f2;">, {
     Log</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">d(</span><span style="color:#e6db74;">&quot;#&quot;</span><span style="color:#f8f8f2;">, </span><span style="color:#e6db74;">&quot;event received: </span><span style="font-style:italic;color:#fd971f;">$it</span><span style="color:#e6db74;">. react...&quot;</span><span style="color:#f8f8f2;">)
@@ -250,6 +249,9 @@ Whenever you see a code snippet with the following import then its <code>kotlin-
 <code class="language-kt" data-lang="kt"><span style="color:#f92672;">import</span><span style="color:#f8f8f2;"> kotlinx.android.synthetic.main.activity_main.*
 </span></code></pre>
 <p>You should migrate to <strong>view binding</strong>.</p>
+<h1 id="jetpack">Jetpack</h1>
+<p>Some words about Jetpack. As already introduced it was formerly Android Support Library: v4 Support Libraries, v7 Support Libraries.
+The AndroidX library contains the existing support library and also includes the latest Jetpack components.</p>
 <h1 id="links">Links</h1>
 <ul>
 <li>https://developer.android.com/jetpack</li>

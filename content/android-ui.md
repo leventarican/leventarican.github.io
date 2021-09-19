@@ -30,7 +30,7 @@ __Navigation Component__ is another way to navigate between the screens.
 The Navigation component is a collection of libraries, plug-in and tooling.
 It handles the back stack, fragment transactions, argument passing (safe args), deep linking, navigation-based animations. 
 
-All the navigation information is centralized and visualised in the __Navigation graph__. Aside nav graph you should understand the role of __NavHost__ and __NavController__. The host component acts as the name suggests as a host of the current (or destination screen). The controller component on the other side _orchestrates_ the swapping of the screen within the host component (NavHost).
+All the navigation information is centralized and visualised in the __Navigation graph__. Aside nav graph you should understand the role of __NavHost__ and __NavController__. The host component acts as the name suggests as a host of the current (destination screen). The controller component on the other side _orchestrates_ the swapping of the screen within the host component (NavHost).
 
 To be more concrete. An activity has the ability to display. Thas why it's obvious to define a _NavHost_ in an activity.
 
@@ -105,6 +105,7 @@ Layout's in Android are a huge topic. By time the available layout's evolved. Yo
 * Whats the difference `ConstraintLayout` to `CoordinatorLayout`. 
 * `RecyclerView` is a good choice for large list items. 
 * You should also heard about `<include>` and `<merge>` layout tags for performance improving and __reusing__ of layouts.
+* Or if you want to use a navigation drawer in your app you can use the predefined `DrawerLayout`.
 
 # Links
 * https://developer.android.com/training/appbar

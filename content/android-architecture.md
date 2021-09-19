@@ -61,14 +61,14 @@ geo:37.786971,-122.399677;crs=Moon-2011;u=35
 ```
 _An intent indicates the __intention__ of your app._
 
-# Components
-Now lets list the available components. We want to know when to use which components and what the motivation of it.
+# App architecure
+If you want to build a robust, maintainable app you should construct your app with a clean architecture. Android best practices follows here the __separation of concerns__ principle. E.g. activity and fragment are UI-based classes and should only contain the UI related code. It should act as a __glue__ class between the Android OS and the app. Activity and Fragment classes should __lean__ as possible.
+
+Android introduced for that reason some components support the separation of responsibilities (separate UI from business logic). You will often read the components with the apprevation __MVVM__ architecture: Model - View - ViewModel. We want to know when to use which components and what the motivation of it.
 * DataBinding
 * ViewBinding
 * ViewModel
 * LiveData
-
-You will often read the components with the apprevation MVVM architecture: Model - View - ViewModel
 
 If we need to store or request/fetch data from a data source we can achieve this in different ways. You should know that read/write operation on _cache/memory/in-memory_ is different to _disc_ or even _network_. To summarize there are different data persistence layers.
 
@@ -78,10 +78,7 @@ If we need to store or request/fetch data from a data source we can achieve this
 | disc         | slow      |
 | network      | very slow |
 
-When we develop an app our intention is mainly to receive input then display respective information. It's the usual data process: `input -> process -> output`. The components listed above are intended to support displaying, storing, ... data. We achieve a decopling of the code components.
-
-Some words about _Jetpack_. As already introduced it was formerly _Android Support Library_: v4 Support Libraries, v7 Support Libraries.
-The _AndroidX library_ contains the existing support library and also includes the latest Jetpack components.
+When we develop an app our intention is mainly to receive input then display respective information. It's the usual data process: `input -> process -> output`. The components listed above are intended to support displaying, storing, ... data. We achieve a __decopling of the code components__.
 
 ## DataBinding
 With data binding we can access views (UI elements) directly over the generated Binding class. Instead of searching the hole UI tree `findviewbyId` we just access the view defined in the layout file directly.
@@ -90,6 +87,8 @@ With data binding we can access views (UI elements) directly over the generated 
 
 In other words. On one hand you have your UI (View, layout file) on the other hand you have your model (the data).
 With the __MVVM__ (Model-View-ViewModel) pattern a third component the ViewModel is supported. The __View__ communicates with the __Model__ over the __ViewModel__.
+
+![](../mvvm.png) 
 
 Now let's see data binding in action. In your UI component you can then set data to UI.
 ```kt
@@ -162,7 +161,7 @@ binding = ActivityMainBinding.inflate(layoutInflater)
 ```
 
 ## ViewModel
-The view model component was introduced to hold the app data model in a lifecycle aware state. Whenever the `Acvitity` or `Fragment` lifecycle changes we need to care about the data state. With `ViewModel` this manual process is obsolete. The `ViewModel` manages the data for the UI. Either a single UI component (activity/fragment) or shared UI components.
+The view model component was introduced to hold the app data model in a __lifecycle aware__ state. Whenever the `Acvitity` or `Fragment` lifecycle changes we need to care about the data state. With `ViewModel` this manual process is obsolete. The `ViewModel` manages the data for the UI. Either a single UI component (activity/fragment) or shared UI components.
 
 > For a `ViewModel` integration we need to add dependencies, introduce a `ViewModel` class and get the `ViewModel` reference from a view model provider.
 
@@ -204,7 +203,7 @@ val vm: DeveloperViewModel by viewModels {
 ```
 
 ## LiveData
-With `LiveData` for example we can do _reactive programming_. The UI react to changes on data.
+With `LiveData` for example we can do __reactive programming__. The UI react to changes (_callbacks_) on data.
 
 ```kt
 data.payload.observe(this, {
@@ -231,6 +230,10 @@ Whenever you see a code snippet with the following import then its `kotlin-andro
 import kotlinx.android.synthetic.main.activity_main.*
 ```
 You should migrate to __view binding__.
+
+# Jetpack
+Some words about Jetpack. As already introduced it was formerly Android Support Library: v4 Support Libraries, v7 Support Libraries.
+The AndroidX library contains the existing support library and also includes the latest Jetpack components.
 
 # Links
 * https://developer.android.com/jetpack

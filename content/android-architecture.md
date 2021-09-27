@@ -50,6 +50,8 @@ A Fragment are somehow lightwight Activity. Main purpose is to manage the UI wit
 # Context
 An Activity extends also the `Context class` like `Service` or `Application`. With the Context you can access app data like resources (images, string, ...) or internal database.
 
+> With `Context` class you can talk and use system features.
+
 # Intents
 As mentioned we can navigate from Activity to Activity. You can also open a system camera activity from you app activity. The jump to another Activity is achieved with __Intents__ and __Intent Filters__.
 

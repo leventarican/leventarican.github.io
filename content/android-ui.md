@@ -7,9 +7,39 @@ date = 2021-03-18
 Give an overview about Android UI components. Know the naming of the components.
 
 # App bar
-The __app bar__ also known as the __action bar__. Later the __toolbar__ was introduced. The `ActionBar` as usually used in combination `Activity` whereas the `Toolbar` is more flexible. You can place a toolbar at an arbitrary location in view hierarchy whereas an app bar is controled by the framework.
+The __app bar__ also known as the __action bar__. Later the __toolbar__ was introduced.
 
 > Analogy: an Activity in Android context is like a window in a desktop app. And a desktop app has usually a toolbar.
+
+Android documentation suggest to use `Toolbar` to implement app bar's (Link: #1)
+
+Unfortunately there are manual steps to use `Toolbar`. You need to prevent the usage of native `ActionBar` class.
+1. First you have to use the `NoActionBar` theme in the `AndroidManifest.xml`.
+```xml
+<application android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+```
+2. Apply a toolbar in the layout file.
+```xml
+<com.google.android.material.appbar.AppBarLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/Widget.Design.AppBarLayout">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary" />
+</com.google.android.material.appbar.AppBarLayout>
+```
+3. In your activity you the the `Toolbar` as app bar.
+```kt
+// this example works with plugin kotlin-android-extensions
+// using import kotlinx.android.synthetic.main.activity_main.*
+setSupportActionBar(toolbar)
+
+// alternatively you can do it this way.
+setSupportActionBar(findViewById(R.id.toolbar))
+```
 
 # Menu
 There are different menu types: options menu (aka. _overflow_ menu), contextual menu and popup menu.
@@ -108,10 +138,11 @@ Layout's in Android are a huge topic. By time the available layout's evolved. Yo
 * Or if you want to use a navigation drawer in your app you can use the predefined `DrawerLayout`.
 
 # Links
-* https://developer.android.com/training/appbar
-* https://developer.android.com/guide/topics/ui/menus#options-menu
-* https://developer.android.com/guide/navigation/navigation-principles
-* https://developer.android.com/guide/navigation/navigation-ui#Tie-navdrawer
-* https://developer.android.com/guide/navigation/navigation-ui#add_a_navigation_drawer
-* https://developer.android.com/training/improving-layouts/reusing-layouts
-* https://developer.android.com/guide/navigation/navigation-getting-started
+1. https://developer.android.com/training/appbar/setting-up
+2. https://developer.android.com/training/appbar
+3. https://developer.android.com/guide/topics/ui/menus#options-menu
+4. https://developer.android.com/guide/navigation/navigation-principles
+5. https://developer.android.com/guide/navigation/navigation-ui#Tie-navdrawer
+6. https://developer.android.com/guide/navigation/navigation-ui#add_a_navigation_drawer
+7. https://developer.android.com/training/improving-layouts/reusing-layouts
+8. https://developer.android.com/guide/navigation/navigation-getting-started

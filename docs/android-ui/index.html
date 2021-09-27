@@ -55,11 +55,44 @@
 <h1 id="about">About</h1>
 <p>Give an overview about Android UI components. Know the naming of the components.</p>
 <h1 id="app-bar">App bar</h1>
-<p>The <strong>app bar</strong> also known as the <strong>action bar</strong>. Later the <strong>toolbar</strong> was introduced. The <code>ActionBar</code> as usually used in combination <code>Activity</code> whereas the <code>Toolbar</code> is more flexible. You can place a toolbar at an arbitrary location in view hierarchy whereas an app bar is controled by the framework.</p>
+<p>The <strong>app bar</strong> also known as the <strong>action bar</strong>. Later the <strong>toolbar</strong> was introduced.</p>
 <blockquote>
 <p>Analogy: an Activity in Android context is like a window in a desktop app. And a desktop app has usually a toolbar.</p>
 </blockquote>
-<h1 id="menu">Menu</h1>
+<p>Android documentation suggest to use <code>Toolbar</code> to implement app bar's (Link: #1)</p>
+<p>Unfortunately there are manual steps to use <code>Toolbar</code>. You need to prevent the usage of native <code>ActionBar</code> class.</p>
+<ol>
+<li>First you have to use the <code>NoActionBar</code> theme in the <code>AndroidManifest.xml</code>.</li>
+</ol>
+<pre style="background-color:#272822;">
+<code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">application </span><span style="color:#a6e22e;">android:theme</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@style/Theme.AppCompat.Light.NoActionBar&quot;</span><span style="color:#f8f8f2;">/&gt;
+</span></code></pre>
+<ol start="2">
+<li>Apply a toolbar in the layout file.</li>
+</ol>
+<pre style="background-color:#272822;">
+<code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">com.google.android.material.appbar.AppBarLayout
+    </span><span style="color:#a6e22e;">android:layout_width</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;match_parent&quot;
+    </span><span style="color:#a6e22e;">android:layout_height</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;wrap_content&quot;
+    </span><span style="color:#a6e22e;">android:theme</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@style/Widget.Design.AppBarLayout&quot;</span><span style="color:#f8f8f2;">&gt;
+    &lt;</span><span style="color:#f92672;">androidx.appcompat.widget.Toolbar
+        </span><span style="color:#a6e22e;">android:id</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@+id/toolbar&quot;
+        </span><span style="color:#a6e22e;">android:layout_width</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;match_parent&quot;
+        </span><span style="color:#a6e22e;">android:layout_height</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;?attr/actionBarSize&quot;
+        </span><span style="color:#a6e22e;">android:background</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;?attr/colorPrimary&quot; </span><span style="color:#f8f8f2;">/&gt;
+&lt;/</span><span style="color:#f92672;">com.google.android.material.appbar.AppBarLayout</span><span style="color:#f8f8f2;">&gt;
+</span></code></pre>
+<ol start="3">
+<li>In your activity you the the <code>Toolbar</code> as app bar.</li>
+</ol>
+<pre style="background-color:#272822;">
+<code class="language-kt" data-lang="kt"><span style="color:#75715e;">// this example works with plugin kotlin-android-extensions
+// using import kotlinx.android.synthetic.main.activity_main.*
+</span><span style="color:#f8f8f2;">setSupportActionBar(toolbar)
+
+</span><span style="color:#75715e;">// alternatively you can do it this way.
+</span><span style="color:#f8f8f2;">setSupportActionBar(findViewById(R</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">id</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">toolbar))
+</span></code></pre><h1 id="menu">Menu</h1>
 <p>There are different menu types: options menu (aka. <em>overflow</em> menu), contextual menu and popup menu.</p>
 <h1 id="navigation">Navigation</h1>
 <p>With navigation the movement (back and forth) from screen to screen is meant. 
@@ -134,7 +167,8 @@ bundle</span><span style="color:#f92672;">?.</span><span style="color:#f8f8f2;">
 <li>Or if you want to use a navigation drawer in your app you can use the predefined <code>DrawerLayout</code>.</li>
 </ul>
 <h1 id="links">Links</h1>
-<ul>
+<ol>
+<li>https://developer.android.com/training/appbar/setting-up</li>
 <li>https://developer.android.com/training/appbar</li>
 <li>https://developer.android.com/guide/topics/ui/menus#options-menu</li>
 <li>https://developer.android.com/guide/navigation/navigation-principles</li>
@@ -142,7 +176,7 @@ bundle</span><span style="color:#f92672;">?.</span><span style="color:#f8f8f2;">
 <li>https://developer.android.com/guide/navigation/navigation-ui#add_a_navigation_drawer</li>
 <li>https://developer.android.com/training/improving-layouts/reusing-layouts</li>
 <li>https://developer.android.com/guide/navigation/navigation-getting-started</li>
-</ul>
+</ol>
 
 <footer>
 	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>

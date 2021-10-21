@@ -55,6 +55,10 @@
 <h1 id="curl">Curl</h1>
 <pre style="background-color:#272822;">
 <code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">sudo curl</span><span style="font-style:italic;color:#fd971f;"> -L</span><span style="color:#f8f8f2;"> https://down.load/file</span><span style="font-style:italic;color:#fd971f;"> -o</span><span style="color:#f8f8f2;"> here
+</span></code></pre><h1 id="memory-usage">Memory usage</h1>
+<p>NOTE, that <em>cache</em> does not take memory from apps. </p>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">free</span><span style="font-style:italic;color:#fd971f;"> -wh
 </span></code></pre><h1 id="compressed-files">Compressed Files</h1>
 <p>Unpack compressed tar gz files</p>
 <pre style="background-color:#272822;">
@@ -150,7 +154,7 @@ sudo apt-get autoclean
 <code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">cat /sys/class/power_supply/BAT0/energy_full
 56760000
 
-cat /sys/class/power_supply/BAT0/energy_full_design 
+cat /sys/class/power_supply/BAT0/energy_full_design
 57020000
 </span></code></pre>
 <p>Tools like <code>tlp</code> or <code>tlp-stat --battery</code> could also be useful for battery management or stats.</p>

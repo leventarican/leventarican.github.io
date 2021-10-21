@@ -8,6 +8,12 @@ date = 2021-03-18
 sudo curl -L https://down.load/file -o here
 ```
 
+# Memory usage
+NOTE, that _cache_ does not take memory from apps. 
+```bash
+free -wh
+```
+
 # Compressed Files
 Unpack compressed tar gz files
 ```bash
@@ -126,7 +132,7 @@ Calculate the battery capacity with energy_full values: `56760000 / 57020000 * 1
 cat /sys/class/power_supply/BAT0/energy_full
 56760000
 
-cat /sys/class/power_supply/BAT0/energy_full_design 
+cat /sys/class/power_supply/BAT0/energy_full_design
 57020000
 ```
 

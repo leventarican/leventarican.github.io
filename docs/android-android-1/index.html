@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:800px; margin:16px auto;">
+            
+<h1 class="title">
+    Android: Development with Android 1
+</h1>
+<p class="subtitle"><strong>2021-12-26</strong></p>
+<h1 id="about">About</h1>
+<p>It's 2021 and Android 12 is out. But we document here how to develop an app for <strong>Android 1 - API Level 2</strong> (the release before Cupcake - API Level 3).</p>
+<h1 id="motivation">Motivation</h1>
+<p>You may ask now why should I invest time to run Android 1 as almost (from 2008) 13 years past. If you today start with android development then you may overwhelmed by the ecosystem.</p>
+<p>By going back to history and rebuilding / developing apps for Android 1 you may get a better understanding of the ecosystem.</p>
+<p>E.g. at the beginning there was a console tool like <code>android</code> or <code>activitycreator</code> (according to documentation it was a python script).</p>
+<h1 id="introduction">Introduction</h1>
+<p>All here described steps can be applied for ubuntu (linux) with architecture x86 64bit.
+We want to keep it easy and clean we don't use any IDE.
+Everything is done with console tools.</p>
+<h1 id="setup-your-environment">Setup your environment</h1>
+<p>First of all we need to setup our environment. Instead of gradle the initial build mechanism for android was <code>ant</code>. For sure there was no Java 17 that's why we use Java 1.6 to be compatible. The most interesting part here is to get the android sdk 1.1 r1.</p>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#75715e;"># get java 1.6
+# ensure to set JAVA_HOME and PATH directing to java jdk 1.6 bin
+</span><span style="color:#f8f8f2;">curl https://cdn.azul.com/zulu/bin/zulu6.10.0.3-ca-jdk6.0.73-linux_x64.zip</span><span style="font-style:italic;color:#fd971f;"> --output</span><span style="color:#f8f8f2;"> jdk1.6.zip
+
+</span><span style="color:#75715e;"># get apache ant (minimum Java 5 runtime)
+</span><span style="color:#f8f8f2;">curl https://dlcdn.apache.org//ant/binaries/apache-ant-1.9.16-bin.zip</span><span style="font-style:italic;color:#fd971f;"> --output</span><span style="color:#f8f8f2;"> apache-ant.zip
+
+</span><span style="color:#75715e;"># get android sdk release 1.1 r1
+</span><span style="color:#f8f8f2;">curl https://dl.google.com/android/archives/android-sdk-linux_x86-1.1_r1.zip</span><span style="font-style:italic;color:#fd971f;"> -o</span><span style="color:#f8f8f2;"> android1.1.zip
+</span></code></pre><h2 id="setup-jdk">Setup JDK</h2>
+<p>You downloaded the jdk 1.6. Now the system should know it as the default java version.</p>
+<p>Create a bash script called <code>j6.sh</code>.</p>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#75715e;">#!/bin/bash
+
+</span><span style="color:#f92672;">export </span><span style="color:#f8f8f2;">JAVA_HOME</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">$HOME/development/zulu1.6.0_73-6.10.0.3-x86lx64
+</span><span style="color:#f8f8f2;">unlink $HOME/development/jdk
+ln</span><span style="font-style:italic;color:#fd971f;"> -s </span><span style="color:#f8f8f2;">$JAVA_HOME $HOME/development/jdk
+java</span><span style="font-style:italic;color:#fd971f;"> -version
+</span></code></pre>
+<p>Afterwards the script is referenced in alias. Aliases can be defined in <code>~/.bash_aliases</code>.</p>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#66d9ef;">alias </span><span style="color:#a6e22e;">j6</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;source $HOME/development/j6.sh&quot;
+</span><span style="color:#66d9ef;">alias </span><span style="color:#a6e22e;">j8</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;source $HOME/development/j8.sh&quot;
+</span><span style="color:#66d9ef;">alias </span><span style="color:#a6e22e;">j11</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;source $HOME/development/j11.sh&quot;
+</span></code></pre>
+<p>Finally add the jdk path to your environment PATH variable. I use the <code>~/.profile</code> for that purpose.</p>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">PATH</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;$HOME/development/jdk/bin:$PATH&quot;
+</span></code></pre>
+<p>If you did that for other Java version, then you can switch between the available java version in a comfortable way.</p>
+<h1 id="hello-world">Hello World</h1>
+<p>You should now prepared to create an android application, build it, start the emulator, install the apk to the emulator.</p>
+<p>Full list of commands using <code>activitycreator</code>, <code>emulator</code> and <code>adb</code>.</p>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#75715e;"># create an application
+</span><span style="color:#f8f8f2;">./android-sdk-linux_x86-1.1_r1/tools/activitycreator</span><span style="font-style:italic;color:#fd971f;"> --out</span><span style="color:#f8f8f2;"> HelloAndroid com.android.hello.HelloAndroid
+
+</span><span style="color:#75715e;"># start emulator
+</span><span style="color:#f8f8f2;">./android-sdk-linux_x86-1.1_r1/tools/emulator
+
+HelloAndroid$ tree
+</span><span style="color:#66d9ef;">.
+</span><span style="color:#f8f8f2;">├── AndroidManifest.xml
+├── bin
+├── build.xml
+├── default.properties
+├── libs
+├── res
+│   ├── layout
+│   │   └── main.xml
+│   └── values
+│       └── strings.xml
+└── src
+    └── com
+        └── android
+            └── hello
+                ├── HelloAndroid.java
+                └── R.java
+
+9 directories, 7 files
+
+</span><span style="color:#75715e;"># build (this creates the apk)
+</span><span style="color:#f8f8f2;">ant debug
+
+Buildfile: HelloAndroid/build.xml
+...
+
+</span><span style="color:#75715e;"># install apk
+</span><span style="color:#f8f8f2;">android-sdk-linux_x86-1.1_r1/tools$ adb install HelloAndroid/bin/HelloAndroid-debug.apk
+
+Performing Push Install
+HelloAndroid/bin/...ebug.apk: 1 file pushed, 0 skipped. 23.7 MB/s (4784 bytes in 0.000s)
+	pkg: /data/local/tmp/HelloAndroid-debug.apk
+Success
+</span></code></pre>
+<p>Create an app with <code>android</code> command line tool (available in Android 1.5).</p>
+<pre style="background-color:#272822;">
+<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">android-sdk-linux_x86-1.5_r3/tools/android update project</span><span style="font-style:italic;color:#fd971f;"> --path</span><span style="color:#f8f8f2;"> HelloActivity/</span><span style="font-style:italic;color:#fd971f;"> --target</span><span style="color:#f8f8f2;"> 1
+</span></code></pre>
+<p><img src="../android1-emulator.png" alt="" /></p>
+<h1 id="links">Links</h1>
+<ul>
+<li>API Level 3: https://developer.android.com/sdk/older_releases.html#release-1.5-r3</li>
+<li>API Level 2: https://developer.android.com/sdk/older_releases.html#release-1.1-r1</li>
+<li>https://apilevels.com/</li>
+</ul>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

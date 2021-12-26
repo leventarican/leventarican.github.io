@@ -28,7 +28,7 @@ You also should know some different development approaches. E.g. _single-activit
 # Fragments
 How is the relationship of Actvity and Fragment?
 An Activity operates as a frame that contains the UI fragments and can provide UI elements that surround the fragment.
-![](../fragments.png) 
+![](../fragments.png)
 
 Like Activity you need to create a Fragment with extending a base class.
 Notice that a fragment has different states compared to an Activity. In a fragment we define the UI (inflate layout to fragment). But in comparison to an Activity wou need to return the inflated layout.
@@ -45,7 +45,7 @@ override fun onCreate() {
     setContentView(R.layout...)
 }
 ```
-A Fragment are somehow lightwight Activity. Main purpose is to manage the UI within an Activity. The OS can create an Activity not a Fragment. 
+A Fragment are somehow lightwight Activity. Main purpose is to manage the UI within an Activity. The OS can create an Activity not a Fragment.
 
 # Context
 An Activity extends also the `Context class` like `Service` or `Application`. With the Context you can access app data like resources (images, string, ...) or internal database.
@@ -90,7 +90,7 @@ With data binding we can access views (UI elements) directly over the generated 
 In other words. On one hand you have your UI (View, layout file) on the other hand you have your model (the data).
 With the __MVVM__ (Model-View-ViewModel) pattern a third component the ViewModel is supported. The __View__ communicates with the __Model__ over the __ViewModel__.
 
-![](../mvvm.png) 
+![](../mvvm.png)
 
 Now let's see data binding in action. In your UI component you can then set data to UI.
 ```kt
@@ -112,7 +112,7 @@ There are two ways to inflate the layout: with `DataBindingUtil`
 val binding: FragmentDevBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_dev, container, false)
 ```
 The `DataBindingUtil` is describes as:
-> Utility class to create ViewDataBinding from layouts. 
+> Utility class to create ViewDataBinding from layouts.
 
 Or with the (generated) binding class.
 ```kt
@@ -142,9 +142,9 @@ This option give you a way to implement your own logic for setting attribute val
 
 ## View Binding
 ViewBinding is another way to _access views_. A kind of subset of data binding. In view binding there is no such techniques like _binding expression_, _binding adapters_ or _two-way binding_.
-It's a good alternative to eliminate `findViewById`. There is no `<layout>` tag required in layout file. 
+It's a good alternative to eliminate `findViewById`. There is no `<layout>` tag required in layout file.
 
-So, how can I use view binding? In comparison to data binding its enough to set the view binding build features to true. The binding class for a layout file will be automatically generated. 
+So, how can I use view binding? In comparison to data binding its enough to set the view binding build features to true. The binding class for a layout file will be automatically generated.
 
 ```groovy
 buildFeatures {

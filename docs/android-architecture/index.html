@@ -73,7 +73,7 @@ Latetely an <em>android support library</em> was introduced. With Android 9.0 th
 <h1 id="fragments">Fragments</h1>
 <p>How is the relationship of Actvity and Fragment?
 An Activity operates as a frame that contains the UI fragments and can provide UI elements that surround the fragment.
-<img src="../fragments.png" alt="" /> </p>
+<img src="../fragments.png" alt="" /></p>
 <p>Like Activity you need to create a Fragment with extending a base class.
 Notice that a fragment has different states compared to an Activity. In a fragment we define the UI (inflate layout to fragment). But in comparison to an Activity wou need to return the inflated layout.</p>
 <pre style="background-color:#272822;">
@@ -89,7 +89,7 @@ Notice that a fragment has different states compared to an Activity. In a fragme
     setContentView(R</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">layout</span><span style="color:#f92672;">...</span><span style="color:#f8f8f2;">)
 }
 </span></code></pre>
-<p>A Fragment are somehow lightwight Activity. Main purpose is to manage the UI within an Activity. The OS can create an Activity not a Fragment. </p>
+<p>A Fragment are somehow lightwight Activity. Main purpose is to manage the UI within an Activity. The OS can create an Activity not a Fragment.</p>
 <h1 id="context">Context</h1>
 <p>An Activity extends also the <code>Context class</code> like <code>Service</code> or <code>Application</code>. With the Context you can access app data like resources (images, string, ...) or internal database.</p>
 <blockquote>
@@ -127,7 +127,7 @@ geo:37.786971,-122.399677;crs=Moon-2011;u=35
 </blockquote>
 <p>In other words. On one hand you have your UI (View, layout file) on the other hand you have your model (the data).
 With the <strong>MVVM</strong> (Model-View-ViewModel) pattern a third component the ViewModel is supported. The <strong>View</strong> communicates with the <strong>Model</strong> over the <strong>ViewModel</strong>.</p>
-<p><img src="../mvvm.png" alt="" /> </p>
+<p><img src="../mvvm.png" alt="" /></p>
 <p>Now let's see data binding in action. In your UI component you can then set data to UI.</p>
 <pre style="background-color:#272822;">
 <code class="language-kt" data-lang="kt"><span style="color:#f8f8f2;">binding</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">textView</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">text </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&#39;data&#39;
@@ -146,7 +146,7 @@ There are two ways to inflate the layout: with <code>DataBindingUtil</code></p>
 </span></code></pre>
 <p>The <code>DataBindingUtil</code> is describes as:</p>
 <blockquote>
-<p>Utility class to create ViewDataBinding from layouts. </p>
+<p>Utility class to create ViewDataBinding from layouts.</p>
 </blockquote>
 <p>Or with the (generated) binding class.</p>
 <pre style="background-color:#272822;">
@@ -172,8 +172,8 @@ There are two ways to inflate the layout: with <code>DataBindingUtil</code></p>
 This option give you a way to implement your own logic for setting attribute values.</p>
 <h2 id="view-binding">View Binding</h2>
 <p>ViewBinding is another way to <em>access views</em>. A kind of subset of data binding. In view binding there is no such techniques like <em>binding expression</em>, <em>binding adapters</em> or <em>two-way binding</em>.
-It's a good alternative to eliminate <code>findViewById</code>. There is no <code>&lt;layout&gt;</code> tag required in layout file. </p>
-<p>So, how can I use view binding? In comparison to data binding its enough to set the view binding build features to true. The binding class for a layout file will be automatically generated. </p>
+It's a good alternative to eliminate <code>findViewById</code>. There is no <code>&lt;layout&gt;</code> tag required in layout file.</p>
+<p>So, how can I use view binding? In comparison to data binding its enough to set the view binding build features to true. The binding class for a layout file will be automatically generated.</p>
 <pre style="background-color:#272822;">
 <code class="language-groovy" data-lang="groovy"><span style="color:#f8f8f2;">buildFeatures {
     viewBinding </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">true

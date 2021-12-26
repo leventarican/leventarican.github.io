@@ -67,9 +67,6 @@ Full list of commands using `activitycreator`, `emulator` and `adb`.
 # create an application
 ./android-sdk-linux_x86-1.1_r1/tools/activitycreator --out HelloAndroid com.android.hello.HelloAndroid
 
-# start emulator
-./android-sdk-linux_x86-1.1_r1/tools/emulator
-
 HelloAndroid$ tree
 .
 ├── AndroidManifest.xml
@@ -90,6 +87,9 @@ HelloAndroid$ tree
                 └── R.java
 
 9 directories, 7 files
+
+# start emulator
+./android-sdk-linux_x86-1.1_r1/tools/emulator
 
 # build (this creates the apk)
 ant debug
@@ -114,6 +114,7 @@ android-sdk-linux_x86-1.5_r3/tools/android update project --path HelloActivity/ 
 ![](../android1-emulator.png)
 
 # Links
+* https://github.com/leventarican/android-command-line
 * API Level 3: https://developer.android.com/sdk/older_releases.html#release-1.5-r3
 * API Level 2: https://developer.android.com/sdk/older_releases.html#release-1.1-r1
 * https://apilevels.com/

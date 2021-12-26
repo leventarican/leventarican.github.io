@@ -103,9 +103,6 @@ java</span><span style="font-style:italic;color:#fd971f;"> -version
 <code class="language-bash" data-lang="bash"><span style="color:#75715e;"># create an application
 </span><span style="color:#f8f8f2;">./android-sdk-linux_x86-1.1_r1/tools/activitycreator</span><span style="font-style:italic;color:#fd971f;"> --out</span><span style="color:#f8f8f2;"> HelloAndroid com.android.hello.HelloAndroid
 
-</span><span style="color:#75715e;"># start emulator
-</span><span style="color:#f8f8f2;">./android-sdk-linux_x86-1.1_r1/tools/emulator
-
 HelloAndroid$ tree
 </span><span style="color:#66d9ef;">.
 </span><span style="color:#f8f8f2;">├── AndroidManifest.xml
@@ -126,6 +123,9 @@ HelloAndroid$ tree
                 └── R.java
 
 9 directories, 7 files
+
+</span><span style="color:#75715e;"># start emulator
+</span><span style="color:#f8f8f2;">./android-sdk-linux_x86-1.1_r1/tools/emulator
 
 </span><span style="color:#75715e;"># build (this creates the apk)
 </span><span style="color:#f8f8f2;">ant debug
@@ -148,6 +148,7 @@ Success
 <p><img src="../android1-emulator.png" alt="" /></p>
 <h1 id="links">Links</h1>
 <ul>
+<li>https://github.com/leventarican/android-command-line</li>
 <li>API Level 3: https://developer.android.com/sdk/older_releases.html#release-1.5-r3</li>
 <li>API Level 2: https://developer.android.com/sdk/older_releases.html#release-1.1-r1</li>
 <li>https://apilevels.com/</li>

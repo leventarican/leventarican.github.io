@@ -98,11 +98,15 @@ Buildfile: HelloAndroid/build.xml
 ...
 
 # install apk
-android-sdk-linux_x86-1.1_r1/tools$ adb install HelloAndroid/bin/HelloAndroid-debug.apk
+android-sdk-linux_x86-1.1_r1/tools$ adb install HelloAndroid-debug.apk
 
 Performing Push Install
 HelloAndroid/bin/...ebug.apk: 1 file pushed, 0 skipped. 23.7 MB/s (4784 bytes in 0.000s)
 	pkg: /data/local/tmp/HelloAndroid-debug.apk
+Success
+
+# uninstall apk (with package name)
+android-sdk-linux_x86-1.1_r1/tools$ adb uninstall com.android.hello
 Success
 ```
 
@@ -118,3 +122,4 @@ android-sdk-linux_x86-1.5_r3/tools/android update project --path HelloActivity/ 
 * API Level 3: https://developer.android.com/sdk/older_releases.html#release-1.5-r3
 * API Level 2: https://developer.android.com/sdk/older_releases.html#release-1.1-r1
 * https://apilevels.com/
+* https://source.android.com/setup/start/build-numbers

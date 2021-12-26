@@ -134,11 +134,15 @@ Buildfile: HelloAndroid/build.xml
 ...
 
 </span><span style="color:#75715e;"># install apk
-</span><span style="color:#f8f8f2;">android-sdk-linux_x86-1.1_r1/tools$ adb install HelloAndroid/bin/HelloAndroid-debug.apk
+</span><span style="color:#f8f8f2;">android-sdk-linux_x86-1.1_r1/tools$ adb install HelloAndroid-debug.apk
 
 Performing Push Install
 HelloAndroid/bin/...ebug.apk: 1 file pushed, 0 skipped. 23.7 MB/s (4784 bytes in 0.000s)
 	pkg: /data/local/tmp/HelloAndroid-debug.apk
+Success
+
+</span><span style="color:#75715e;"># uninstall apk (with package name)
+</span><span style="color:#f8f8f2;">android-sdk-linux_x86-1.1_r1/tools$ adb uninstall com.android.hello
 Success
 </span></code></pre>
 <p>Create an app with <code>android</code> command line tool (available in Android 1.5).</p>
@@ -152,6 +156,7 @@ Success
 <li>API Level 3: https://developer.android.com/sdk/older_releases.html#release-1.5-r3</li>
 <li>API Level 2: https://developer.android.com/sdk/older_releases.html#release-1.1-r1</li>
 <li>https://apilevels.com/</li>
+<li>https://source.android.com/setup/start/build-numbers</li>
 </ul>
 
 <footer>

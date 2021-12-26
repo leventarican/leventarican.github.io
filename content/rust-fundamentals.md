@@ -3,7 +3,7 @@ title = "Rust Fundamentals"
 date = 2021-03-07
 +++
 
-# About 
+# About
 This document gives an overview about the programming language rust. Especially the wording, the syntax. If you come from a different programming language then you may need a kind of mind mapping.
 
 > Learn Rust from my perspective.
@@ -56,12 +56,12 @@ impl Developer {
 }
 ```
 
-# String 
-Text can stored in rust in two ways. 
+# String
+Text can stored in rust in two ways.
 
 The first way is to use the 'String' type. Which is a struct data type defined in rust std library: `Struct std::string::String`. The `String` is stored as a vector of bytes `Vec<u8>`.
 
-And there is also a second string data type: `&str`. 
+And there is also a second string data type: `&str`.
 
 # Slice
 A slice is a two word object. The first word is a pointer to the data. The second word is the length of the slice.
@@ -95,3 +95,4 @@ let s: String = data.iter().map(|d| d.to_string()).rev().collect();
 * https://doc.rust-lang.org/rust-by-example/fn/methods.html
 * https://doc.rust-lang.org/rust-by-example/std/str.html
 * https://mkaz.blog/working-with-rust/
+* Android and Rust AOSP: https://source.android.com/setup/build/rust/building-rust-modules/overview

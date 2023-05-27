@@ -64,35 +64,33 @@
 <ol>
 <li>First you have to use the <code>NoActionBar</code> theme in the <code>AndroidManifest.xml</code>.</li>
 </ol>
-<pre style="background-color:#272822;">
-<code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">application </span><span style="color:#a6e22e;">android:theme</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@style/Theme.AppCompat.Light.NoActionBar&quot;</span><span style="color:#f8f8f2;">/&gt;
+<pre data-lang="xml" style="background-color:#272822;color:#f8f8f2;" class="language-xml "><code class="language-xml" data-lang="xml"><span>&lt;</span><span style="color:#f92672;">application </span><span style="color:#a6e22e;">android:theme</span><span>=</span><span style="color:#e6db74;">&quot;@style/Theme.AppCompat.Light.NoActionBar&quot;</span><span>/&gt;
 </span></code></pre>
 <ol start="2">
 <li>Apply a toolbar in the layout file.</li>
 </ol>
-<pre style="background-color:#272822;">
-<code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">com.google.android.material.appbar.AppBarLayout
-    </span><span style="color:#a6e22e;">android:layout_width</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;match_parent&quot;
-    </span><span style="color:#a6e22e;">android:layout_height</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;wrap_content&quot;
-    </span><span style="color:#a6e22e;">android:theme</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@style/Widget.Design.AppBarLayout&quot;</span><span style="color:#f8f8f2;">&gt;
-    &lt;</span><span style="color:#f92672;">androidx.appcompat.widget.Toolbar
-        </span><span style="color:#a6e22e;">android:id</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@+id/toolbar&quot;
-        </span><span style="color:#a6e22e;">android:layout_width</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;match_parent&quot;
-        </span><span style="color:#a6e22e;">android:layout_height</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;?attr/actionBarSize&quot;
-        </span><span style="color:#a6e22e;">android:background</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;?attr/colorPrimary&quot; </span><span style="color:#f8f8f2;">/&gt;
-&lt;/</span><span style="color:#f92672;">com.google.android.material.appbar.AppBarLayout</span><span style="color:#f8f8f2;">&gt;
+<pre data-lang="xml" style="background-color:#272822;color:#f8f8f2;" class="language-xml "><code class="language-xml" data-lang="xml"><span>&lt;</span><span style="color:#f92672;">com.google.android.material.appbar.AppBarLayout
+</span><span>    </span><span style="color:#a6e22e;">android:layout_width</span><span>=</span><span style="color:#e6db74;">&quot;match_parent&quot;
+</span><span>    </span><span style="color:#a6e22e;">android:layout_height</span><span>=</span><span style="color:#e6db74;">&quot;wrap_content&quot;
+</span><span>    </span><span style="color:#a6e22e;">android:theme</span><span>=</span><span style="color:#e6db74;">&quot;@style/Widget.Design.AppBarLayout&quot;</span><span>&gt;
+</span><span>    &lt;</span><span style="color:#f92672;">androidx.appcompat.widget.Toolbar
+</span><span>        </span><span style="color:#a6e22e;">android:id</span><span>=</span><span style="color:#e6db74;">&quot;@+id/toolbar&quot;
+</span><span>        </span><span style="color:#a6e22e;">android:layout_width</span><span>=</span><span style="color:#e6db74;">&quot;match_parent&quot;
+</span><span>        </span><span style="color:#a6e22e;">android:layout_height</span><span>=</span><span style="color:#e6db74;">&quot;?attr/actionBarSize&quot;
+</span><span>        </span><span style="color:#a6e22e;">android:background</span><span>=</span><span style="color:#e6db74;">&quot;?attr/colorPrimary&quot; </span><span>/&gt;
+</span><span>&lt;/</span><span style="color:#f92672;">com.google.android.material.appbar.AppBarLayout</span><span>&gt;
 </span></code></pre>
 <ol start="3">
 <li>In your activity you the the <code>Toolbar</code> as app bar.</li>
 </ol>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#75715e;">// this example works with plugin kotlin-android-extensions
-// using import kotlinx.android.synthetic.main.activity_main.*
-</span><span style="color:#f8f8f2;">setSupportActionBar(toolbar)
-
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#75715e;">// this example works with plugin kotlin-android-extensions
+</span><span style="color:#75715e;">// using import kotlinx.android.synthetic.main.activity_main.*
+</span><span>setSupportActionBar(toolbar)
+</span><span>
 </span><span style="color:#75715e;">// alternatively you can do it this way.
-</span><span style="color:#f8f8f2;">setSupportActionBar(findViewById(R</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">id</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">toolbar))
-</span></code></pre><h1 id="menu">Menu</h1>
+</span><span>setSupportActionBar(findViewById(R</span><span style="color:#f92672;">.</span><span>id</span><span style="color:#f92672;">.</span><span>toolbar))
+</span></code></pre>
+<h1 id="menu">Menu</h1>
 <p>There are different menu types: options menu (aka. <em>overflow</em> menu), contextual menu and popup menu.</p>
 <h1 id="navigation">Navigation</h1>
 <p>With navigation the movement (back and forth) from screen to screen is meant. 
@@ -113,52 +111,47 @@ It handles the back stack, fragment transactions, argument passing (safe args), 
 <h3 id="navigation-ui">Navigation UI</h3>
 <p>With <strong>Navigation UI</strong> you can tie navigation destinations with menu items. If you have an options menu and want to navigate to a specific screen then use the same id as the destination id. The <code>navigation-ui-ktx</code> component follows here the <strong>convention-over-code</strong> principle.</p>
 <p>In this menu definition we have an logout item. On click the screen should switch to login fragment.</p>
-<pre style="background-color:#272822;">
-<code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">item </span><span style="color:#a6e22e;">android:id</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@+id/loginFragment&quot; </span><span style="color:#a6e22e;">android:title</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;Logout&quot; </span><span style="color:#f8f8f2;">/&gt;
+<pre data-lang="xml" style="background-color:#272822;color:#f8f8f2;" class="language-xml "><code class="language-xml" data-lang="xml"><span>&lt;</span><span style="color:#f92672;">item </span><span style="color:#a6e22e;">android:id</span><span>=</span><span style="color:#e6db74;">&quot;@+id/loginFragment&quot; </span><span style="color:#a6e22e;">android:title</span><span>=</span><span style="color:#e6db74;">&quot;Logout&quot; </span><span>/&gt;
 </span></code></pre>
 <p>In our <em>navigation graph</em> file we defined the fragment with the same id <code>loginFragment</code>.</p>
-<pre style="background-color:#272822;">
-<code class="language-xml" data-lang="xml"><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">fragment </span><span style="color:#a6e22e;">android:id</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@+id/loginFragment&quot; </span><span style="color:#f8f8f2;">/&gt;
+<pre data-lang="xml" style="background-color:#272822;color:#f8f8f2;" class="language-xml "><code class="language-xml" data-lang="xml"><span>&lt;</span><span style="color:#f92672;">fragment </span><span style="color:#a6e22e;">android:id</span><span>=</span><span style="color:#e6db74;">&quot;@+id/loginFragment&quot; </span><span>/&gt;
 </span></code></pre>
 <p>At this point (Navigation UI component) it make sense also to mention the <strong>Drawer</strong> component. The navigation drawer shows the <em>navigation menu</em>. You can open it by selecting drawer icon or swipe from left edge.</p>
 <p><img src="../navigation-drawer.png" alt="" /></p>
 <h3 id="safe-args">Safe Args</h3>
 <p>When navigating you may also want to pass data between the screens. Safe Args plugin generate also classes which can be used for navigation. E.g. you have defined screens (fragments) and connect the screen with actions. To apply the direction you can use the generated class.</p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">data </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;data#payload&quot;
-</span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">action </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> Screen0FragmentDirections</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">actionScreen0FragmentToScreen1Fragment(</span><span style="color:#f92672;">data</span><span style="color:#f8f8f2;">)
-findNavController()</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">navigate(action)
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">val </span><span>data </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;data#payload&quot;
+</span><span style="color:#f92672;">val </span><span>action </span><span style="color:#f92672;">=</span><span> Screen0FragmentDirections</span><span style="color:#f92672;">.</span><span>actionScreen0FragmentToScreen1Fragment(</span><span style="color:#f92672;">data</span><span>)
+</span><span>findNavController()</span><span style="color:#f92672;">.</span><span>navigate(action)
 </span></code></pre>
 <p>To receive the data we use the arguments (variable) which is already given (generated) in our fragment.</p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">bundle </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> arguments
-bundle</span><span style="color:#f92672;">?.</span><span style="color:#f8f8f2;">let {
-    </span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">args </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> Screen1FragmentArgs</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">fromBundle(it)
-}
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">val </span><span>bundle </span><span style="color:#f92672;">=</span><span> arguments
+</span><span>bundle</span><span style="color:#f92672;">?.</span><span>let {
+</span><span>    </span><span style="color:#f92672;">val </span><span>args </span><span style="color:#f92672;">=</span><span> Screen1FragmentArgs</span><span style="color:#f92672;">.</span><span>fromBundle(it)
+</span><span>}
 </span></code></pre>
 <p>In the code example above we use the defined action to change the screens (from screen0 to screen1). We also pass data (type string). Now before you can use this piece of code you need some pre-steps. Let's have look to the navigation file where we defined an <code>action</code> and an <code>argument</code>.</p>
-<pre style="background-color:#272822;">
-<code class="language-xml" data-lang="xml"><span style="color:#75715e;">&lt;!-- FOR THE SAKE OF SIMPLITY BOILERPLATE CODE IS NOT GIVEN --&gt;
-</span><span style="color:#f8f8f2;">&lt;</span><span style="color:#f92672;">fragment</span><span style="color:#f8f8f2;">&gt;
-    &lt;</span><span style="color:#f92672;">action
-        </span><span style="color:#a6e22e;">android:id</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@+id/action_screen0Fragment_to_screen1Fragment&quot;
-        </span><span style="color:#a6e22e;">app:destination</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;@id/screen1Fragment&quot; </span><span style="color:#f8f8f2;">/&gt;
-&lt;/</span><span style="color:#f92672;">fragment</span><span style="color:#f8f8f2;">&gt;
-&lt;</span><span style="color:#f92672;">fragment</span><span style="color:#f8f8f2;">&gt;
-    &lt;</span><span style="color:#f92672;">argument
-        </span><span style="color:#a6e22e;">android:name</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;data&quot;
-        </span><span style="color:#a6e22e;">app:argType</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;string&quot;
-        </span><span style="color:#a6e22e;">android:defaultValue</span><span style="color:#f8f8f2;">=</span><span style="color:#e6db74;">&quot;default-data&quot; </span><span style="color:#f8f8f2;">/&gt;
-&lt;/</span><span style="color:#f92672;">fragment</span><span style="color:#f8f8f2;">&gt;
+<pre data-lang="xml" style="background-color:#272822;color:#f8f8f2;" class="language-xml "><code class="language-xml" data-lang="xml"><span style="color:#75715e;">&lt;!-- FOR THE SAKE OF SIMPLITY BOILERPLATE CODE IS NOT GIVEN --&gt;
+</span><span>&lt;</span><span style="color:#f92672;">fragment</span><span>&gt;
+</span><span>    &lt;</span><span style="color:#f92672;">action
+</span><span>        </span><span style="color:#a6e22e;">android:id</span><span>=</span><span style="color:#e6db74;">&quot;@+id/action_screen0Fragment_to_screen1Fragment&quot;
+</span><span>        </span><span style="color:#a6e22e;">app:destination</span><span>=</span><span style="color:#e6db74;">&quot;@id/screen1Fragment&quot; </span><span>/&gt;
+</span><span>&lt;/</span><span style="color:#f92672;">fragment</span><span>&gt;
+</span><span>&lt;</span><span style="color:#f92672;">fragment</span><span>&gt;
+</span><span>    &lt;</span><span style="color:#f92672;">argument
+</span><span>        </span><span style="color:#a6e22e;">android:name</span><span>=</span><span style="color:#e6db74;">&quot;data&quot;
+</span><span>        </span><span style="color:#a6e22e;">app:argType</span><span>=</span><span style="color:#e6db74;">&quot;string&quot;
+</span><span>        </span><span style="color:#a6e22e;">android:defaultValue</span><span>=</span><span style="color:#e6db74;">&quot;default-data&quot; </span><span>/&gt;
+</span><span>&lt;/</span><span style="color:#f92672;">fragment</span><span>&gt;
 </span></code></pre>
 <p>Safe args is optional so if you want to use it you also need to add the dependencies in your gradle file.</p>
-<pre style="background-color:#272822;">
-<code class="language-groovy" data-lang="groovy"><span style="color:#75715e;">// plugin apply in module gradle
-</span><span style="color:#f8f8f2;">id </span><span style="color:#e6db74;">&#39;androidx.navigation.safeargs.kotlin&#39;
-
+<pre data-lang="groovy" style="background-color:#272822;color:#f8f8f2;" class="language-groovy "><code class="language-groovy" data-lang="groovy"><span style="color:#75715e;">// plugin apply in module gradle
+</span><span>id </span><span style="color:#e6db74;">&#39;androidx.navigation.safeargs.kotlin&#39;
+</span><span>
 </span><span style="color:#75715e;">// dependency in top-level gradle file
-</span><span style="color:#f8f8f2;">classpath </span><span style="color:#e6db74;">&quot;androidx.navigation:navigation-safe-args-gradle-plugin:2.3.4&quot;
-</span></code></pre><h1 id="layout">Layout</h1>
+</span><span>classpath </span><span style="color:#e6db74;">&quot;androidx.navigation:navigation-safe-args-gradle-plugin:2.3.4&quot;
+</span></code></pre>
+<h1 id="layout">Layout</h1>
 <p>Layout's in Android are a huge topic. By time the available layout's evolved. You should basically know to use which layout when. </p>
 <ul>
 <li>Whats the difference <code>ConstraintLayout</code> to <code>CoordinatorLayout</code>. </li>

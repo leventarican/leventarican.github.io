@@ -1,26 +1,23 @@
 # personal page
 
-* created with zola (rust). similar to hugo (go).
+Created with zola (rust). Similar to hugo (go).
 
 ## Build and serve
-* build / create docs folder
-```
+
+```bash
+# start local serving
+./zola serve
+# server is available at http://127.0.0.1:1111
+
+# build / create docs folder
 ./zola build --output-dir docs
 ```
-* local serve
-```
-./zola serve
-```
 
-## Create project
-* create project or clone a theme 
-```
-./zola init zola-project
-git clone https://github.com/lopes/zola.386
-```
-* build from a template (in this case zola.386)
-```
-./zola --root zola.386 build --output-dir docs
+## Get zola
+Download zola from https://github.com/getzola/zola/releases (i.e. for Linux `*.tar.gz`). Extract with `tar xfv *.tar.gz`.
+
+```bash
+./zola
 ```
 
 ## Links

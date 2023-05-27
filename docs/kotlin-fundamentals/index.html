@@ -64,78 +64,74 @@
 <h1 id="enum">Enum</h1>
 <p>An Enumartion data type is in Kotlin a class. It defined by <code>enum class</code>. Similar to <code>sealed class</code>.</p>
 <p>Example: we define three constants. Whereas each constant is an object of the defined enum class.</p>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f92672;">enum class </span><span style="color:#f8f8f2;">Developer {
-    </span><span style="color:#ae81ff;">JUNIOR</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">SENIOR</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">EXPERT
-</span><span style="color:#f8f8f2;">}
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#f92672;">enum class </span><span>Developer {
+</span><span>    </span><span style="color:#ae81ff;">JUNIOR</span><span>, </span><span style="color:#ae81ff;">SENIOR</span><span>, </span><span style="color:#ae81ff;">EXPERT
+</span><span>}
 </span></code></pre>
 <p>Lets continue the example and give the option to assign an experience value. Each enum (e.g. <code>EXPERT</code>) is an instance of the defined enum class and initialized with the given <code>experience</code> value.</p>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f92672;">enum class </span><span style="color:#f8f8f2;">Developer(</span><span style="color:#f92672;">val </span><span style="font-style:italic;color:#fd971f;">experience</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">Int</span><span style="color:#f8f8f2;">) {
-    </span><span style="color:#ae81ff;">JUNIOR</span><span style="color:#f8f8f2;">(</span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">), </span><span style="color:#ae81ff;">SENIOR</span><span style="color:#f8f8f2;">(</span><span style="color:#ae81ff;">10</span><span style="color:#f8f8f2;">), </span><span style="color:#ae81ff;">EXPERT</span><span style="color:#f8f8f2;">(</span><span style="color:#ae81ff;">100</span><span style="color:#f8f8f2;">)
-}
-</span></code></pre><h1 id="sealed-class">Sealed class</h1>
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#f92672;">enum class </span><span>Developer(</span><span style="color:#f92672;">val </span><span style="font-style:italic;color:#fd971f;">experience</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">Int</span><span>) {
+</span><span>    </span><span style="color:#ae81ff;">JUNIOR</span><span>(</span><span style="color:#ae81ff;">1</span><span>), </span><span style="color:#ae81ff;">SENIOR</span><span>(</span><span style="color:#ae81ff;">10</span><span>), </span><span style="color:#ae81ff;">EXPERT</span><span>(</span><span style="color:#ae81ff;">100</span><span>)
+</span><span>}
+</span></code></pre>
+<h1 id="sealed-class">Sealed class</h1>
 <p>As the name <strong>sealed</strong> suggest a <code>sealed class</code> is restricted. Restricted means subclasses are only allowed at compile-time. A sealed class is also <strong>abstract</strong>. </p>
 <p>A Sealed class can more then an enum class.</p>
 <h1 id="by-lazy">by lazy</h1>
 <p><code>by lazy</code> follows the delegation pattern. In the following example a get operation will be delegated to the String and only computed on <em>first</em> access.</p>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">code</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">String </span><span style="color:#f92672;">by</span><span style="color:#f8f8f2;"> lazy {
-	</span><span style="color:#e6db74;">&quot;kotlin&quot;
-</span><span style="color:#f8f8f2;">}
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span>code</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">String </span><span style="color:#f92672;">by</span><span> lazy {
+</span><span>	</span><span style="color:#e6db74;">&quot;kotlin&quot;
+</span><span>}
 </span></code></pre>
 <p>When should we use <code>by lazy</code> property initialization?
 A good case is if you have a heavy class which initialization is time-consuming. Wouldn't is be better if we create it when it's needed? Another benefit is you will always use the same instance once an instance is created.</p>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f92672;">class </span><span style="color:#f8f8f2;">Developer {
-	</span><span style="color:#f92672;">private val </span><span style="color:#f8f8f2;">coffee</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> CoffeeGrinder </span><span style="color:#f92672;">by</span><span style="color:#f8f8f2;"> lazy {
-		CofeeGrinder()
-	}
-}
-</span></code></pre><h1 id="lateinit">lateinit</h1>
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#f92672;">class </span><span>Developer {
+</span><span>	</span><span style="color:#f92672;">private val </span><span>coffee</span><span style="color:#f92672;">:</span><span> CoffeeGrinder </span><span style="color:#f92672;">by</span><span> lazy {
+</span><span>		CofeeGrinder()
+</span><span>	}
+</span><span>}
+</span></code></pre>
+<h1 id="lateinit">lateinit</h1>
 <p>With <code>lateinit</code> you also achieve a later initialization like <code>by lazy</code>. In in this case you define where it's initialized. 
 <code>lateinit</code> is good if you want to prevent nullable variable.</p>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">data</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">String</span><span style="color:#f8f8f2;">? </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">null
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span>data</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">String</span><span>? </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">null
 </span></code></pre>
 <p>Better use <code>lateinit</code>.</p>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f8f8f2;">lateinit </span><span style="color:#f92672;">var </span><span style="color:#f8f8f2;">data</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">String 
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span>lateinit </span><span style="color:#f92672;">var </span><span>data</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">String 
 </span></code></pre>
 <blockquote>
 <p>If you have a nullable variable and want to ensure an alternative or default value you can use the <code>?:</code> aka Elvis operator.</p>
 </blockquote>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">process </span><span style="color:#f92672;">= data?.</span><span style="color:#f8f8f2;">payload </span><span style="color:#f92672;">?: </span><span style="color:#e6db74;">&quot;default-payload&quot; 
-</span></code></pre><h1 id="collections">Collections</h1>
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span>process </span><span style="color:#f92672;">= data?.</span><span>payload </span><span style="color:#f92672;">?: </span><span style="color:#e6db74;">&quot;default-payload&quot; 
+</span></code></pre>
+<h1 id="collections">Collections</h1>
 <h2 id="pair">Pair</h2>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f8f8f2;">println(</span><span style="color:#e6db74;">&quot;# collections: pair&quot;</span><span style="color:#f8f8f2;">)
-
-</span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">j </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> Pair(</span><span style="color:#e6db74;">&quot;java&quot;</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">11</span><span style="color:#f8f8f2;">)
-log(</span><span style="color:#e6db74;">&quot;first: </span><span style="font-style:italic;color:#fd971f;">${j.first}</span><span style="color:#e6db74;">; second: </span><span style="font-style:italic;color:#fd971f;">${j.second}</span><span style="color:#e6db74;">&quot;</span><span style="color:#f8f8f2;">)
-
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span>println(</span><span style="color:#e6db74;">&quot;# collections: pair&quot;</span><span>)
+</span><span>
+</span><span style="color:#f92672;">val </span><span>j </span><span style="color:#f92672;">=</span><span> Pair(</span><span style="color:#e6db74;">&quot;java&quot;</span><span>, </span><span style="color:#ae81ff;">11</span><span>)
+</span><span>log(</span><span style="color:#e6db74;">&quot;first: </span><span style="font-style:italic;color:#fd971f;">${j.first}</span><span style="color:#e6db74;">; second: </span><span style="font-style:italic;color:#fd971f;">${j.second}</span><span style="color:#e6db74;">&quot;</span><span>)
+</span><span>
 </span><span style="color:#75715e;">// with _syntactic sugar_
-</span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">k </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;kotlin&quot;</span><span style="color:#f8f8f2;"> to </span><span style="color:#ae81ff;">1.4
-</span><span style="color:#f8f8f2;">log(</span><span style="color:#e6db74;">&quot;first: </span><span style="font-style:italic;color:#fd971f;">${k.first}</span><span style="color:#e6db74;">; second: </span><span style="font-style:italic;color:#fd971f;">${k.second}</span><span style="color:#e6db74;">&quot;</span><span style="color:#f8f8f2;">)
-</span></code></pre><h2 id="triple">Triple</h2>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">green </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> Triple(</span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">255</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">)
-log(</span><span style="color:#e6db74;">&quot;rgb: </span><span style="font-style:italic;color:#fd971f;">${green.first}</span><span style="color:#e6db74;">, </span><span style="font-style:italic;color:#fd971f;">${green.second}</span><span style="color:#e6db74;">, </span><span style="font-style:italic;color:#fd971f;">${green.third}</span><span style="color:#e6db74;">&quot;</span><span style="color:#f8f8f2;">)
-</span></code></pre><h2 id="array">Array</h2>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">i </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> intArrayOf(</span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">10</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">200</span><span style="color:#f8f8f2;">)
-</span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">n </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> arrayOfNulls&lt;</span><span style="font-style:italic;color:#66d9ef;">Int</span><span style="color:#f8f8f2;">&gt;(</span><span style="color:#ae81ff;">3</span><span style="color:#f8f8f2;">)
-</span></code></pre><h2 id="list">List</h2>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">n </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> listOf(</span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">2</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">3</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">3</span><span style="color:#f8f8f2;">);
-</span></code></pre><h2 id="map">Map</h2>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">stack </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> mutableMapOf&lt;</span><span style="font-style:italic;color:#66d9ef;">Int</span><span style="color:#f8f8f2;">, </span><span style="font-style:italic;color:#66d9ef;">String</span><span style="color:#f8f8f2;">&gt;(</span><span style="color:#ae81ff;">10</span><span style="color:#f8f8f2;"> to </span><span style="color:#e6db74;">&quot;python&quot;</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">11</span><span style="color:#f8f8f2;"> to </span><span style="color:#e6db74;">&quot;rust&quot;</span><span style="color:#f8f8f2;">)
-</span></code></pre><h2 id="set">Set</h2>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">binary </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> setOf(</span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">)
-</span></code></pre><h1 id="links">Links</h1>
+</span><span style="color:#f92672;">val </span><span>k </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;kotlin&quot;</span><span> to </span><span style="color:#ae81ff;">1.4
+</span><span>log(</span><span style="color:#e6db74;">&quot;first: </span><span style="font-style:italic;color:#fd971f;">${k.first}</span><span style="color:#e6db74;">; second: </span><span style="font-style:italic;color:#fd971f;">${k.second}</span><span style="color:#e6db74;">&quot;</span><span>)
+</span></code></pre>
+<h2 id="triple">Triple</h2>
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span>green </span><span style="color:#f92672;">=</span><span> Triple(</span><span style="color:#ae81ff;">0</span><span>, </span><span style="color:#ae81ff;">255</span><span>, </span><span style="color:#ae81ff;">0</span><span>)
+</span><span>log(</span><span style="color:#e6db74;">&quot;rgb: </span><span style="font-style:italic;color:#fd971f;">${green.first}</span><span style="color:#e6db74;">, </span><span style="font-style:italic;color:#fd971f;">${green.second}</span><span style="color:#e6db74;">, </span><span style="font-style:italic;color:#fd971f;">${green.third}</span><span style="color:#e6db74;">&quot;</span><span>)
+</span></code></pre>
+<h2 id="array">Array</h2>
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span>i </span><span style="color:#f92672;">=</span><span> intArrayOf(</span><span style="color:#ae81ff;">0</span><span>, </span><span style="color:#ae81ff;">10</span><span>, </span><span style="color:#ae81ff;">200</span><span>)
+</span><span style="color:#f92672;">val </span><span>n </span><span style="color:#f92672;">=</span><span> arrayOfNulls&lt;</span><span style="font-style:italic;color:#66d9ef;">Int</span><span>&gt;(</span><span style="color:#ae81ff;">3</span><span>)
+</span></code></pre>
+<h2 id="list">List</h2>
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span>n </span><span style="color:#f92672;">=</span><span> listOf(</span><span style="color:#ae81ff;">0</span><span>, </span><span style="color:#ae81ff;">1</span><span>, </span><span style="color:#ae81ff;">2</span><span>, </span><span style="color:#ae81ff;">3</span><span>, </span><span style="color:#ae81ff;">3</span><span>);
+</span></code></pre>
+<h2 id="map">Map</h2>
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span>stack </span><span style="color:#f92672;">=</span><span> mutableMapOf&lt;</span><span style="font-style:italic;color:#66d9ef;">Int</span><span>, </span><span style="font-style:italic;color:#66d9ef;">String</span><span>&gt;(</span><span style="color:#ae81ff;">10</span><span> to </span><span style="color:#e6db74;">&quot;python&quot;</span><span>, </span><span style="color:#ae81ff;">11</span><span> to </span><span style="color:#e6db74;">&quot;rust&quot;</span><span>)
+</span></code></pre>
+<h2 id="set">Set</h2>
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span>binary </span><span style="color:#f92672;">=</span><span> setOf(</span><span style="color:#ae81ff;">0</span><span>, </span><span style="color:#ae81ff;">1</span><span>, </span><span style="color:#ae81ff;">1</span><span>, </span><span style="color:#ae81ff;">1</span><span>)
+</span></code></pre>
+<h1 id="links">Links</h1>
 <ul>
 <li>[0] https://kotlinlang.org/docs/sealed-classes.html</li>
 <li>[1] https://openjdk.java.net/jeps/359</li>

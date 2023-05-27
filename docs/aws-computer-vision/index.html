@@ -183,32 +183,30 @@
 <ol>
 <li>create virtual environment: only once</li>
 </ol>
-<pre style="background-color:#272822;">
-<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">python3</span><span style="font-style:italic;color:#fd971f;"> -m</span><span style="color:#f8f8f2;"> venv gluoncv
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>python3</span><span style="font-style:italic;color:#fd971f;"> -m</span><span> venv gluoncv
 </span></code></pre>
 <ol start="2">
 <li>activate virtual environment</li>
 </ol>
-<pre style="background-color:#272822;">
-<code class="language-bash" data-lang="bash"><span style="color:#66d9ef;">cd</span><span style="color:#f8f8f2;"> gluoncv
-</span><span style="color:#66d9ef;">source</span><span style="color:#f8f8f2;"> bin/activate
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#66d9ef;">cd</span><span> gluoncv
+</span><span style="color:#66d9ef;">source</span><span> bin/activate
 </span></code></pre>
 <ol start="3">
 <li>deactivate virtual environment</li>
 </ol>
-<pre style="background-color:#272822;">
-<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">deactivate
-</span></code></pre><h3 id="install-mxnet-and-gluoncv">Install MXNet and GluonCV</h3>
-<pre style="background-color:#272822;">
-<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">pip install mxnet
-pip install gluoncv
-
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>deactivate
+</span></code></pre>
+<h3 id="install-mxnet-and-gluoncv">Install MXNet and GluonCV</h3>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>pip install mxnet
+</span><span>pip install gluoncv
+</span><span>
 </span><span style="color:#75715e;"># for CPU optimized
-# pip install mxnet-mkl
-
-# for GPU optimized
-# pip install mxnet-cu101
-</span></code></pre><h3 id="image-classification-with-a-pre-trained-model">Image Classification with a pre-trained model</h3>
+</span><span style="color:#75715e;"># pip install mxnet-mkl
+</span><span>
+</span><span style="color:#75715e;"># for GPU optimized
+</span><span style="color:#75715e;"># pip install mxnet-cu101
+</span></code></pre>
+<h3 id="image-classification-with-a-pre-trained-model">Image Classification with a pre-trained model</h3>
 <ul>
 <li>objective is to classify the image from a list of predetermined classes</li>
 <li>when making a prediction the model will assign a probability to each of these classes</li>
@@ -240,9 +238,9 @@ pip install gluoncv
 <li>as already wrote, GluonCV implement these model based on the research paper. The GluonCV models are compared to other implementations optimized. The GluonCV version to ResNet-152 is called ResNet-152D.</li>
 </ul>
 <h4 id="code-examples">Code Examples</h4>
-<pre style="background-color:#272822;">
-<code><span style="color:#f8f8f2;">image-classification.py
-</span></code></pre><h3 id="object-detection-with-a-pre-trained-model">Object Detection with a pre-trained model</h3>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>image-classification.py
+</span></code></pre>
+<h3 id="object-detection-with-a-pre-trained-model">Object Detection with a pre-trained model</h3>
 <ul>
 <li>understand the content of an image</li>
 <li>ex. medical image analysis, self driving cars, ...</li>
@@ -284,9 +282,9 @@ pip install gluoncv
 </li>
 </ul>
 <h4 id="code-examples-1">Code Examples</h4>
-<pre style="background-color:#272822;">
-<code><span style="color:#f8f8f2;">object-detection.py
-</span></code></pre><h3 id="image-segmentation-with-a-pre-trained-model">Image Segmentation with a pre-trained model</h3>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>object-detection.py
+</span></code></pre>
+<h3 id="image-segmentation-with-a-pre-trained-model">Image Segmentation with a pre-trained model</h3>
 <ul>
 <li>see code documentation: <code>image-segmentation.py</code></li>
 </ul>
@@ -301,7 +299,7 @@ pip install gluoncv
 <li>its a general purpose network that makes no assumption about the input data</li>
 <li>the network begins from 0. it has no special information from the image and has to <em>re-learn</em> the relationship between  the pixels</li>
 </ul>
-<p><img src="./gluoncv/fully-connected-network.png" alt="source: aws training" /></p>
+<p><img src="https://leventarican.github.io/aws-computer-vision/./gluoncv/fully-connected-network.png" alt="source: aws training" /></p>
 <ul>
 <li>example of a fully connected network with 4 inputs with 3 fully connected layers</li>
 <li>the 4 inputs can correspond to 4 pixels (if we have a 2x2 image)</li>
@@ -361,7 +359,7 @@ pip install gluoncv
 <li>vectors and matrices of N-dimensions</li>
 <li>used in deep learning to represent input, output, ...</li>
 </ul>
-<p><img src="./gluoncv/ndarray.png" alt="source: aws training" /></p>
+<p><img src="https://leventarican.github.io/aws-computer-vision/./gluoncv/ndarray.png" alt="source: aws training" /></p>
 <h3 id="ndarray">NDArray</h3>
 <ul>
 <li>NDArray: MXNet's primary tool for storing and transforming numerical data</li>

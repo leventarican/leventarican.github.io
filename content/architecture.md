@@ -44,6 +44,10 @@ In ECS you have:
 
 To name some usage example. The game engine bevy uses the data-driven approach. Also Unity goes from OOP approach to ECS approach.
 
+### Elm Architechture
+* https://guide.elm-lang.org/architecture/
+* https://raphlinus.github.io/rust/gui/2022/05/07/ui-architecture.html
+
 ### Onion Architecture
 TODO
 

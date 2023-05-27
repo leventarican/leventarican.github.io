@@ -59,33 +59,33 @@
 <li>malloc() or calloc(), free()</li>
 <li>Memory Management</li>
 </ul>
-<pre style="background-color:#272822;">
-<code class="language-cpp" data-lang="cpp"><span style="color:#f92672;">#include </span><span style="color:#e6db74;">&lt;iostream&gt;
-
-</span><span style="color:#f92672;">using namespace</span><span style="color:#f8f8f2;"> std;
-
-</span><span style="font-style:italic;color:#66d9ef;">int </span><span style="color:#a6e22e;">main</span><span style="color:#f8f8f2;">() {
-    </span><span style="font-style:italic;color:#66d9ef;">float</span><span style="color:#f92672;">*</span><span style="color:#f8f8f2;"> p;
-    p </span><span style="color:#f92672;">= new </span><span style="font-style:italic;color:#66d9ef;">float</span><span style="color:#f8f8f2;">(</span><span style="color:#ae81ff;">3.14</span><span style="color:#f8f8f2;">);
-    cout </span><span style="color:#f92672;">&lt;&lt; </span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">new example: &quot; </span><span style="color:#f92672;">&lt;&lt; *</span><span style="color:#f8f8f2;">p;
-
-    </span><span style="font-style:italic;color:#66d9ef;">int</span><span style="color:#f8f8f2;"> size </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">8</span><span style="color:#f8f8f2;">;
-    </span><span style="font-style:italic;color:#66d9ef;">int</span><span style="color:#f92672;">*</span><span style="color:#f8f8f2;"> a </span><span style="color:#f92672;">= new </span><span style="font-style:italic;color:#66d9ef;">int</span><span style="color:#f8f8f2;">[size];
-    cout </span><span style="color:#f92672;">&lt;&lt; </span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">array: &quot; </span><span style="color:#f92672;">&lt;&lt; *</span><span style="color:#f8f8f2;">a;
-    </span><span style="color:#f92672;">*</span><span style="color:#f8f8f2;">a </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">100</span><span style="color:#f8f8f2;">;
-    </span><span style="color:#f92672;">*</span><span style="color:#f8f8f2;">a</span><span style="color:#f92672;">++</span><span style="color:#f8f8f2;">;
-    </span><span style="color:#f92672;">*</span><span style="color:#f8f8f2;">a </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">200</span><span style="color:#f8f8f2;">;
-    </span><span style="color:#f92672;">*</span><span style="color:#f8f8f2;">a</span><span style="color:#f92672;">--</span><span style="color:#f8f8f2;">;
-    cout </span><span style="color:#f92672;">&lt;&lt; </span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">array: &quot; </span><span style="color:#f92672;">&lt;&lt; *</span><span style="color:#f8f8f2;">a;
-    cout </span><span style="color:#f92672;">&lt;&lt; </span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">array: &quot; </span><span style="color:#f92672;">&lt;&lt;</span><span style="color:#f8f8f2;"> a[</span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">] </span><span style="color:#f92672;">&lt;&lt;</span><span style="color:#f8f8f2;"> endl;
-
-    </span><span style="color:#f92672;">delete []</span><span style="color:#f8f8f2;"> a;
-    cout </span><span style="color:#f92672;">&lt;&lt; </span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">processing finished: &quot; </span><span style="color:#f92672;">&lt;&lt;</span><span style="color:#f8f8f2;"> a[</span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">] </span><span style="color:#f92672;">&lt;&lt;</span><span style="color:#f8f8f2;"> endl;
-
-    cout </span><span style="color:#f92672;">&lt;&lt; </span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">processing finished: &quot; </span><span style="color:#f92672;">&lt;&lt;</span><span style="color:#f8f8f2;"> endl;
-    cout </span><span style="color:#f92672;">&lt;&lt; </span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">segmentation fault: &quot; </span><span style="color:#f92672;">&lt;&lt;</span><span style="color:#f8f8f2;"> a[</span><span style="color:#ae81ff;">100</span><span style="color:#f8f8f2;">] </span><span style="color:#f92672;">&lt;&lt;</span><span style="color:#f8f8f2;"> endl;
-}
+<pre data-lang="cpp" style="background-color:#272822;color:#f8f8f2;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#f92672;">#include </span><span style="color:#e6db74;">&lt;iostream&gt;
+</span><span>
+</span><span style="color:#f92672;">using namespace</span><span> std;
+</span><span>
+</span><span style="font-style:italic;color:#66d9ef;">int </span><span style="color:#a6e22e;">main</span><span>() {
+</span><span>    </span><span style="font-style:italic;color:#66d9ef;">float</span><span style="color:#f92672;">*</span><span> p;
+</span><span>    p </span><span style="color:#f92672;">= new </span><span style="font-style:italic;color:#66d9ef;">float</span><span>(</span><span style="color:#ae81ff;">3.14</span><span>);
+</span><span>    cout </span><span style="color:#f92672;">&lt;&lt; </span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">new example: &quot; </span><span style="color:#f92672;">&lt;&lt; *</span><span>p;
+</span><span>
+</span><span>    </span><span style="font-style:italic;color:#66d9ef;">int</span><span> size </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">8</span><span>;
+</span><span>    </span><span style="font-style:italic;color:#66d9ef;">int</span><span style="color:#f92672;">*</span><span> a </span><span style="color:#f92672;">= new </span><span style="font-style:italic;color:#66d9ef;">int</span><span>[size];
+</span><span>    cout </span><span style="color:#f92672;">&lt;&lt; </span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">array: &quot; </span><span style="color:#f92672;">&lt;&lt; *</span><span>a;
+</span><span>    </span><span style="color:#f92672;">*</span><span>a </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">100</span><span>;
+</span><span>    </span><span style="color:#f92672;">*</span><span>a</span><span style="color:#f92672;">++</span><span>;
+</span><span>    </span><span style="color:#f92672;">*</span><span>a </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">200</span><span>;
+</span><span>    </span><span style="color:#f92672;">*</span><span>a</span><span style="color:#f92672;">--</span><span>;
+</span><span>    cout </span><span style="color:#f92672;">&lt;&lt; </span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">array: &quot; </span><span style="color:#f92672;">&lt;&lt; *</span><span>a;
+</span><span>    cout </span><span style="color:#f92672;">&lt;&lt; </span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">array: &quot; </span><span style="color:#f92672;">&lt;&lt;</span><span> a[</span><span style="color:#ae81ff;">1</span><span>] </span><span style="color:#f92672;">&lt;&lt;</span><span> endl;
+</span><span>
+</span><span>    </span><span style="color:#f92672;">delete []</span><span> a;
+</span><span>    cout </span><span style="color:#f92672;">&lt;&lt; </span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">processing finished: &quot; </span><span style="color:#f92672;">&lt;&lt;</span><span> a[</span><span style="color:#ae81ff;">0</span><span>] </span><span style="color:#f92672;">&lt;&lt;</span><span> endl;
+</span><span>
+</span><span>    cout </span><span style="color:#f92672;">&lt;&lt; </span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">processing finished: &quot; </span><span style="color:#f92672;">&lt;&lt;</span><span> endl;
+</span><span>    cout </span><span style="color:#f92672;">&lt;&lt; </span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">segmentation fault: &quot; </span><span style="color:#f92672;">&lt;&lt;</span><span> a[</span><span style="color:#ae81ff;">100</span><span>] </span><span style="color:#f92672;">&lt;&lt;</span><span> endl;
+</span><span>}
 </span></code></pre>
+
 <footer>
 	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
 </footer>

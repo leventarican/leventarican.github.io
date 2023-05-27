@@ -61,13 +61,12 @@
 <p><em>cargo</em> is the build system and package manager. Dependencies will be automatically downloaded.</p>
 <p>A cargo project is defined by a <code>cargo.toml</code> file.</p>
 <p>The command for building a cargo project</p>
-<pre style="background-color:#272822;">
-<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">cargo build
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>cargo build
 </span></code></pre>
 <p>To run a cargo project</p>
-<pre style="background-color:#272822;">
-<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">cargo run
-</span></code></pre><h1 id="crates">Crates</h1>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>cargo run
+</span></code></pre>
+<h1 id="crates">Crates</h1>
 <p><em>crates</em> are <em>libraries</em></p>
 <h1 id="modules">Modules</h1>
 <p><em>modules</em> are used for code organizing</p>
@@ -83,17 +82,17 @@
 There is no class type in Rust. In Go language we also don't have class types.</p>
 <h1 id="method">Method</h1>
 <p>You defined a structure but also want to add methods. Then you can use the <code>impl</code> keyword.</p>
-<pre style="background-color:#272822;">
-<code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#66d9ef;">struct </span><span style="color:#f8f8f2;">Developer {
-    exp: </span><span style="font-style:italic;color:#66d9ef;">u8
-</span><span style="color:#f8f8f2;">}
-
-</span><span style="font-style:italic;color:#66d9ef;">impl </span><span style="color:#f8f8f2;">Developer {
-    </span><span style="font-style:italic;color:#66d9ef;">fn </span><span style="color:#a6e22e;">isExpert</span><span style="color:#f8f8f2;">(</span><span style="color:#f92672;">&amp;</span><span style="font-style:italic;color:#fd971f;">self</span><span style="color:#f8f8f2;">) -&gt; </span><span style="font-style:italic;color:#66d9ef;">bool </span><span style="color:#f8f8f2;">{
-        self.exp </span><span style="color:#f92672;">&gt; </span><span style="color:#ae81ff;">100
-    </span><span style="color:#f8f8f2;">}
-}
-</span></code></pre><h1 id="string">String</h1>
+<pre data-lang="rust" style="background-color:#272822;color:#f8f8f2;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#66d9ef;">struct </span><span>Developer {
+</span><span>    exp: </span><span style="font-style:italic;color:#66d9ef;">u8
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#66d9ef;">impl </span><span>Developer {
+</span><span>    </span><span style="font-style:italic;color:#66d9ef;">fn </span><span style="color:#a6e22e;">isExpert</span><span>(</span><span style="color:#f92672;">&amp;</span><span style="font-style:italic;color:#fd971f;">self</span><span>) -&gt; </span><span style="font-style:italic;color:#66d9ef;">bool </span><span>{
+</span><span>        self.exp </span><span style="color:#f92672;">&gt; </span><span style="color:#ae81ff;">100
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<h1 id="string">String</h1>
 <p>Text can stored in rust in two ways.</p>
 <p>The first way is to use the 'String' type. Which is a struct data type defined in rust std library: <code>Struct std::string::String</code>. The <code>String</code> is stored as a vector of bytes <code>Vec&lt;u8&gt;</code>.</p>
 <p>And there is also a second string data type: <code>&amp;str</code>.</p>
@@ -103,17 +102,16 @@ There is no class type in Rust. In Go language we also don't have class types.</
 <p>pointer size is usize (pointer size). <code>usize</code> is determined by the processor architecture. e.g. on <code>x86-64</code> the usize is <strong>64 bit</strong>.</p>
 </blockquote>
 <p>A quick refresher regarding <em>word</em>:</p>
-<pre style="background-color:#272822;">
-<code class="language-txt" data-lang="txt"><span style="color:#f8f8f2;">8 bit = 1 byte
-2 byte = 1 word
-1 dword (double word) = 2 word
-</span></code></pre><h1 id="streams">Streams</h1>
+<pre data-lang="txt" style="background-color:#272822;color:#f8f8f2;" class="language-txt "><code class="language-txt" data-lang="txt"><span>8 bit = 1 byte
+</span><span>2 byte = 1 word
+</span><span>1 dword (double word) = 2 word
+</span></code></pre>
+<h1 id="streams">Streams</h1>
 <p>Rust has in-build support for working with streaming or functional programming or collection tranformation operations.</p>
 <p>A basic example. We have a vector of numbers and want to display that data as a reversed string. First we need a iterator [<code>iter()</code>]. Afterwards we can begin our data transformation.</p>
-<pre style="background-color:#272822;">
-<code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#66d9ef;">let</span><span style="color:#f8f8f2;"> data </span><span style="color:#f92672;">= </span><span style="color:#f8f8f2;">vec![</span><span style="color:#ae81ff;">0</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">, </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">];
-</span><span style="font-style:italic;color:#66d9ef;">let</span><span style="color:#f8f8f2;"> s: </span><span style="font-style:italic;color:#66d9ef;">String </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> data.</span><span style="color:#66d9ef;">iter</span><span style="color:#f8f8f2;">().</span><span style="color:#66d9ef;">map</span><span style="color:#f8f8f2;">(|</span><span style="font-style:italic;color:#fd971f;">d</span><span style="color:#f8f8f2;">| d.</span><span style="color:#66d9ef;">to_string</span><span style="color:#f8f8f2;">()).</span><span style="color:#66d9ef;">rev</span><span style="color:#f8f8f2;">().</span><span style="color:#66d9ef;">collect</span><span style="color:#f8f8f2;">();
-
+<pre data-lang="rust" style="background-color:#272822;color:#f8f8f2;" class="language-rust "><code class="language-rust" data-lang="rust"><span style="font-style:italic;color:#66d9ef;">let</span><span> data </span><span style="color:#f92672;">= </span><span>vec![</span><span style="color:#ae81ff;">0</span><span>, </span><span style="color:#ae81ff;">1</span><span>, </span><span style="color:#ae81ff;">1</span><span>, </span><span style="color:#ae81ff;">1</span><span>];
+</span><span style="font-style:italic;color:#66d9ef;">let</span><span> s: </span><span style="font-style:italic;color:#66d9ef;">String </span><span style="color:#f92672;">=</span><span> data.</span><span style="color:#66d9ef;">iter</span><span>().</span><span style="color:#66d9ef;">map</span><span>(|</span><span style="font-style:italic;color:#fd971f;">d</span><span>| d.</span><span style="color:#66d9ef;">to_string</span><span>()).</span><span style="color:#66d9ef;">rev</span><span>().</span><span style="color:#66d9ef;">collect</span><span>();
+</span><span>
 </span><span style="color:#75715e;">// output: 1110
 </span></code></pre>
 <blockquote>

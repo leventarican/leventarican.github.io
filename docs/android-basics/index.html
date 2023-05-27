@@ -59,11 +59,10 @@
 <p>The very basic Android component is the <code>Activity</code>. An <code>Activity</code> is a window as you know it from the desktop world. Where the user can interact with the application.</p>
 <p>An <code>Activity</code> is mostly used as fullscreen window. You can use an <code>Activity</code> also as floating or embedded window.</p>
 <p>You place your UI with the method <code>setContentView(View)</code>. For example if you defined your UI in your layout file and you want to use it in your activity.</p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f8f8f2;">@Override
-</span><span style="color:#f92672;">public</span><span style="color:#f8f8f2;"> void onCreate(Bundle savedInstanceState) {
-	setContentView(R</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">layout</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">your_layout);
-}
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span>@Override
+</span><span style="color:#f92672;">public</span><span> void onCreate(Bundle savedInstanceState) {
+</span><span>	setContentView(R</span><span style="color:#f92672;">.</span><span>layout</span><span style="color:#f92672;">.</span><span>your_layout);
+</span><span>}
 </span></code></pre>
 <p>With <code>setContentView(View)</code> we are inflating the view to the activity. </p>
 <blockquote>
@@ -77,84 +76,79 @@ The layout xml is get parsed, then the view hierarchy is build, and finally adde
 <p>Since 2017 Android provide a second way for reacting to state changes the <strong>lifecycle library</strong>. It introduced the <code>Lifecycle</code>, <code>LifecycleOwner</code> (Activity, Fragment) and <code>LifecycleObserver</code> classes.</p>
 <p>So you may ask why was this library introduced? 
 A good example is the following case in the callback method. You forgot to stop the engine in the <code>onstop()</code> method.</p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">onStart</span><span style="color:#f8f8f2;">() {
-	engine</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">start()
-}
-</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">onStop</span><span style="color:#f8f8f2;">() {
-	</span><span style="color:#75715e;">// engine.stop()
-</span><span style="color:#f8f8f2;">}
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">onStart</span><span>() {
+</span><span>	engine</span><span style="color:#f92672;">.</span><span>start()
+</span><span>}
+</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">onStop</span><span>() {
+</span><span>	</span><span style="color:#75715e;">// engine.stop()
+</span><span>}
 </span></code></pre>
 <p>With the lifecycle library you have a way to move the logic to the <code>class Engine</code> itself. So on each respective event occurence (state change) the method's will be called.</p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">class </span><span style="color:#f8f8f2;">Engine(</span><span style="font-style:italic;color:#fd971f;">lifecycle</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> Lifecycle) </span><span style="color:#f92672;">: </span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">LifecycleObserver</span><span style="color:#f8f8f2;"> {
-	init {
-		lifecycle</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">addObserver(</span><span style="color:#ae81ff;">this</span><span style="color:#f8f8f2;">)
-	}
-	@OnLifecycleEvent(Lifecycle</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">Event</span><span style="color:#f92672;">.</span><span style="color:#ae81ff;">ON_START</span><span style="color:#f8f8f2;">)
-	</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">startEngine</span><span style="color:#f8f8f2;">() {</span><span style="color:#f92672;">...</span><span style="color:#f8f8f2;">}
-
-	@OnLifecycleEvent(Lifecycle</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">Event</span><span style="color:#f92672;">.</span><span style="color:#ae81ff;">ON_STOP</span><span style="color:#f8f8f2;">)
-	</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">stopEngine</span><span style="color:#f8f8f2;">() {</span><span style="color:#f92672;">...</span><span style="color:#f8f8f2;">}
-}
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">class </span><span>Engine(</span><span style="font-style:italic;color:#fd971f;">lifecycle</span><span style="color:#f92672;">:</span><span> Lifecycle) </span><span style="color:#f92672;">: </span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">LifecycleObserver</span><span> {
+</span><span>	init {
+</span><span>		lifecycle</span><span style="color:#f92672;">.</span><span>addObserver(</span><span style="color:#ae81ff;">this</span><span>)
+</span><span>	}
+</span><span>	@OnLifecycleEvent(Lifecycle</span><span style="color:#f92672;">.</span><span>Event</span><span style="color:#f92672;">.</span><span style="color:#ae81ff;">ON_START</span><span>)
+</span><span>	</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">startEngine</span><span>() {</span><span style="color:#f92672;">...</span><span>}
+</span><span>
+</span><span>	@OnLifecycleEvent(Lifecycle</span><span style="color:#f92672;">.</span><span>Event</span><span style="color:#f92672;">.</span><span style="color:#ae81ff;">ON_STOP</span><span>)
+</span><span>	</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">stopEngine</span><span>() {</span><span style="color:#f92672;">...</span><span>}
+</span><span>}
 </span></code></pre>
 <p>With the <em>introduced</em> <code>Lifecycle</code> class you can query the state</p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">class </span><span style="color:#f8f8f2;">MainActivity </span><span style="color:#f92672;">: </span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">AppCompatActivity</span><span style="color:#f8f8f2;">() {
-	</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">processData</span><span style="color:#f8f8f2;">() {
-		</span><span style="color:#f92672;">if</span><span style="color:#f8f8f2;"> (</span><span style="color:#ae81ff;">this</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">lifecycle</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">currentState</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">isAtLeast(Lifecycle</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">State</span><span style="color:#f92672;">.</span><span style="color:#ae81ff;">STARTED</span><span style="color:#f8f8f2;">)) {
-		}
-	}
-}
-</span></code></pre><h3 id="state">State</h3>
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">class </span><span>MainActivity </span><span style="color:#f92672;">: </span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">AppCompatActivity</span><span>() {
+</span><span>	</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">processData</span><span>() {
+</span><span>		</span><span style="color:#f92672;">if</span><span> (</span><span style="color:#ae81ff;">this</span><span style="color:#f92672;">.</span><span>lifecycle</span><span style="color:#f92672;">.</span><span>currentState</span><span style="color:#f92672;">.</span><span>isAtLeast(Lifecycle</span><span style="color:#f92672;">.</span><span>State</span><span style="color:#f92672;">.</span><span style="color:#ae81ff;">STARTED</span><span>)) {
+</span><span>		}
+</span><span>	}
+</span><span>}
+</span></code></pre>
+<h3 id="state">State</h3>
 <p>On some circumstates the system can destroy an activity instance. And the state of the application is may lost. For that cases you can save the instance state with <code>onSaveInstanceState()</code> and <code>Bundle</code>.</p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">override fun </span><span style="color:#a6e22e;">onSaveInstanceState</span><span style="color:#f8f8f2;">(</span><span style="font-style:italic;color:#fd971f;">outState</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> Bundle?) {
-	outState</span><span style="color:#f92672;">?.</span><span style="color:#f8f8f2;">run {
-		putInt(</span><span style="color:#ae81ff;">DATA</span><span style="color:#f8f8f2;">, currentData)
-	}
-
-	</span><span style="color:#ae81ff;">super</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">onSaveInstanceState(outState)
-}
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">override fun </span><span style="color:#a6e22e;">onSaveInstanceState</span><span>(</span><span style="font-style:italic;color:#fd971f;">outState</span><span style="color:#f92672;">:</span><span> Bundle?) {
+</span><span>	outState</span><span style="color:#f92672;">?.</span><span>run {
+</span><span>		putInt(</span><span style="color:#ae81ff;">DATA</span><span>, currentData)
+</span><span>	}
+</span><span>
+</span><span>	</span><span style="color:#ae81ff;">super</span><span style="color:#f92672;">.</span><span>onSaveInstanceState(outState)
+</span><span>}
 </span></code></pre>
 <p>To restore the activity UI state you can then use the saved instance state.</p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">override fun </span><span style="color:#a6e22e;">onCreate</span><span style="color:#f8f8f2;">(</span><span style="font-style:italic;color:#fd971f;">savedInstanceState</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> Bundle?) {
-	</span><span style="color:#ae81ff;">super</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">onCreate(savedInstanceState)onSaveInstanceState(outState)
-
-	</span><span style="color:#75715e;">// skip boilerplate code
-</span><span style="color:#f8f8f2;">	currentData </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> getInt(</span><span style="color:#ae81ff;">DATA</span><span style="color:#f8f8f2;">)
-}
-</span></code></pre><h2 id="view">View</h2>
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">override fun </span><span style="color:#a6e22e;">onCreate</span><span>(</span><span style="font-style:italic;color:#fd971f;">savedInstanceState</span><span style="color:#f92672;">:</span><span> Bundle?) {
+</span><span>	</span><span style="color:#ae81ff;">super</span><span style="color:#f92672;">.</span><span>onCreate(savedInstanceState)onSaveInstanceState(outState)
+</span><span>
+</span><span>	</span><span style="color:#75715e;">// skip boilerplate code
+</span><span>	currentData </span><span style="color:#f92672;">=</span><span> getInt(</span><span style="color:#ae81ff;">DATA</span><span>)
+</span><span>}
+</span></code></pre>
+<h2 id="view">View</h2>
 <p>A View is a atomic element (building block) in Android. A view can be a button, text, ... or a layout. There are many layout options in Android: Relative, Linear, Constraint, ...</p>
 <blockquote>
 <p>View is the base class for widgets, which are used to create interactive UI components (buttons, text fields, etc.)</p>
 </blockquote>
 <p>Now you read <strong>View, Widget, Layout</strong>. Let's see the class hierachy. You can see that View is in package <code>android.view</code> and a button in package <code>android.widget</code>.</p>
-<pre style="background-color:#272822;">
-<code><span style="color:#f8f8f2;">kotlin.Any
-	android.view.View
-		android.widget.TextView
-			android.widget.Button
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>kotlin.Any
+</span><span>	android.view.View
+</span><span>		android.widget.TextView
+</span><span>			android.widget.Button
 </span></code></pre>
 <p>Similarly for a layout. A <strong>ViewGroup</strong> is an invisible container that holds other Views or ViewGroups.</p>
-<pre style="background-color:#272822;">
-<code><span style="color:#f8f8f2;">kotlin.Any
-	android.view.View
-		android.view.ViewGroup
-			android.widget.LinearLayout
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>kotlin.Any
+</span><span>	android.view.View
+</span><span>		android.view.ViewGroup
+</span><span>			android.widget.LinearLayout
 </span></code></pre>
 <p>We can create view objects either by XML definition or programmatically.</p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f8f8f2;">@Override
-</span><span style="color:#f92672;">public</span><span style="color:#f8f8f2;"> void onCreate(Bundle savedInstanceState) {
-	</span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">b </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> Button()
-	</span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">t </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> TextView()
-	</span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">l </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> RelativeLayout()
-	l</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">add(b)
-	setContentView(l)
-}
-</span></code></pre><h2 id="layout">Layout</h2>
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span>@Override
+</span><span style="color:#f92672;">public</span><span> void onCreate(Bundle savedInstanceState) {
+</span><span>	</span><span style="color:#f92672;">val </span><span>b </span><span style="color:#f92672;">=</span><span> Button()
+</span><span>	</span><span style="color:#f92672;">val </span><span>t </span><span style="color:#f92672;">=</span><span> TextView()
+</span><span>	</span><span style="color:#f92672;">val </span><span>l </span><span style="color:#f92672;">=</span><span> RelativeLayout()
+</span><span>	l</span><span style="color:#f92672;">.</span><span>add(b)
+</span><span>	setContentView(l)
+</span><span>}
+</span></code></pre>
+<h2 id="layout">Layout</h2>
 <p>We know layout's from java swing, javafx, etc. It is the process of laying out the ui components. You may remember the layout managers from swing: <code>GridLayout</code>, <code>BorderLayout</code>, etc.</p>
 <p>In Android we have the option to define the layout in a layout .xml file as a resource. By handling the layout as a resource we separate it from code. So the maintenance of UI and application logic is more independent. </p>
 <h1 id="links">Links</h1>

@@ -63,17 +63,16 @@
 <p>When you create a new android project you get a default testing setup.
 If you look at your project you will see three so called <strong>source sets</strong>.
 <code>androidTest</code> and <code>test</code> contains your tests</p>
-<pre style="background-color:#272822;">
-<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">$ tree</span><span style="font-style:italic;color:#fd971f;"> -d -L</span><span style="color:#f8f8f2;"> 2 app/src/
-
-app/src/
-├── androidTest
-│   └── java
-├── main
-│   ├── java
-│   └── res
-└── test
-    └── java
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>$ tree</span><span style="font-style:italic;color:#fd971f;"> -d -L</span><span> 2 app/src/
+</span><span>
+</span><span>app/src/
+</span><span>├── androidTest
+</span><span>│   └── java
+</span><span>├── main
+</span><span>│   ├── java
+</span><span>│   └── res
+</span><span>└── test
+</span><span>    └── java
 </span></code></pre>
 <p>The default dependencies defined in gradle are <code>junit</code> and <code>espresso</code> library</p>
 <blockquote>
@@ -99,24 +98,23 @@ app/src/
 <li>Use good naming. Example: <code>subjectUnderTest_actionOrInput_resultState</code>.</li>
 <li>Structure your test code using Given / When / Then.</li>
 </ul>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f8f8f2;">@Test
-</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">getDeveloper_expert_returnsExpert</span><span style="color:#f8f8f2;">() {
-    </span><span style="color:#75715e;">// GIVEN
-    </span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">devs </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> listOf&lt;Developers&gt;(Developer(experience</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">10</span><span style="color:#f8f8f2;">), Developer(experience</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">15</span><span style="color:#f8f8f2;">), Developer(experience</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">30</span><span style="color:#f8f8f2;">))
-    </span><span style="color:#75715e;">// WHEN
-    </span><span style="color:#f92672;">val </span><span style="color:#f8f8f2;">result </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> getNumberOfSeniorDevelopers(devs)
-    </span><span style="color:#75715e;">// THEN
-</span><span style="color:#f8f8f2;">    assertEquals(</span><span style="color:#ae81ff;">3</span><span style="color:#f8f8f2;">, result)
-}
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span>@Test
+</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">getDeveloper_expert_returnsExpert</span><span>() {
+</span><span>    </span><span style="color:#75715e;">// GIVEN
+</span><span>    </span><span style="color:#f92672;">val </span><span>devs </span><span style="color:#f92672;">=</span><span> listOf&lt;Developers&gt;(Developer(experience</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">10</span><span>), Developer(experience</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">15</span><span>), Developer(experience</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">30</span><span>))
+</span><span>    </span><span style="color:#75715e;">// WHEN
+</span><span>    </span><span style="color:#f92672;">val </span><span>result </span><span style="color:#f92672;">=</span><span> getNumberOfSeniorDevelopers(devs)
+</span><span>    </span><span style="color:#75715e;">// THEN
+</span><span>    assertEquals(</span><span style="color:#ae81ff;">3</span><span>, result)
+</span><span>}
 </span></code></pre>
 <ul>
 <li>Use an assertion framework. For example hamcrest framework. For hamcrest you need to add the dependency in your build file. Example usage (differs from junit assertion)</li>
 </ul>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#75715e;">// `is` so called _matcher_
-</span><span style="color:#f8f8f2;">assertThat(result, </span><span style="color:#e6db74;">`is`</span><span style="color:#f8f8f2;">(</span><span style="color:#ae81ff;">3</span><span style="color:#f8f8f2;">))
-</span></code></pre><h1 id="test-scope-aka-testing-pyramid">Test scope aka. Testing Pyramid</h1>
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#75715e;">// `is` so called _matcher_
+</span><span>assertThat(result, </span><span style="color:#e6db74;">`is`</span><span>(</span><span style="color:#ae81ff;">3</span><span>))
+</span></code></pre>
+<h1 id="test-scope-aka-testing-pyramid">Test scope aka. Testing Pyramid</h1>
 <p>On automated testing generally three test scopes are used:</p>
 <ul>
 <li><strong>Unit</strong> tests: scope is class, function</li>
@@ -157,25 +155,23 @@ With a well defined (best practice) application architecture you can divide your
 </ul>
 </li>
 </ol>
-<pre style="background-color:#272822;">
-<code class="language-groovy" data-lang="groovy"><span style="color:#f8f8f2;">testImplementation </span><span style="color:#e6db74;">&quot;androidx.test:core-ktx:$androidXTestCoreVersion&quot;
-
-</span><span style="color:#f8f8f2;">testImplementation </span><span style="color:#e6db74;">&quot;org.robolectric:robolectric:$robolectricVersion&quot;
-
-</span><span style="color:#f8f8f2;">testImplementation </span><span style="color:#e6db74;">&quot;androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion&quot;
+<pre data-lang="groovy" style="background-color:#272822;color:#f8f8f2;" class="language-groovy "><code class="language-groovy" data-lang="groovy"><span>testImplementation </span><span style="color:#e6db74;">&quot;androidx.test:core-ktx:$androidXTestCoreVersion&quot;
+</span><span>
+</span><span>testImplementation </span><span style="color:#e6db74;">&quot;org.robolectric:robolectric:$robolectricVersion&quot;
+</span><span>
+</span><span>testImplementation </span><span style="color:#e6db74;">&quot;androidx.test.ext:junit-ktx:$androidXTestExtKotlinRunnerVersion&quot;
 </span></code></pre>
 <ol start="2">
 <li>Afterwards in your JUnit test class you also need to annotate you class.
 You can then use e.g. a <code>ViewModel</code> which expects an application context.</li>
 </ol>
-<pre style="background-color:#272822;">
-<code class="language-kt" data-lang="kt"><span style="color:#f8f8f2;">@RunWith(AndroidJUnit4</span><span style="color:#f92672;">::</span><span style="color:#f8f8f2;">class)
-</span><span style="color:#f92672;">class </span><span style="color:#f8f8f2;">DeveloperTest {
-    @Test
-    </span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">addNewDeveloper_setsNewDeveloperEvent</span><span style="color:#f8f8f2;"> {
-        </span><span style="color:#a6e22e;">val viewModel</span><span style="color:#f8f8f2;"> = </span><span style="color:#a6e22e;">DeveloperViewModel</span><span style="color:#f8f8f2;">(</span><span style="font-style:italic;color:#fd971f;">ApplicationProvider</span><span style="color:#f92672;">.</span><span style="font-style:italic;color:#fd971f;">getApplicationContext</span><span style="color:#f8f8f2;">())
-    }
-}
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span>@RunWith(AndroidJUnit4</span><span style="color:#f92672;">::</span><span>class)
+</span><span style="color:#f92672;">class </span><span>DeveloperTest {
+</span><span>    @Test
+</span><span>    </span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">addNewDeveloper_setsNewDeveloperEvent</span><span> {
+</span><span>        </span><span style="color:#a6e22e;">val viewModel</span><span> = </span><span style="color:#a6e22e;">DeveloperViewModel</span><span>(</span><span style="font-style:italic;color:#fd971f;">ApplicationProvider</span><span style="color:#f92672;">.</span><span style="font-style:italic;color:#fd971f;">getApplicationContext</span><span>())
+</span><span>    }
+</span><span>}
 </span></code></pre>
 <p>With AndroidX Test libraries we can reuse code in both environments (local and instrumented). To conclude AndroidX Test provides a unified API.</p>
 <p><img src="../androidX-test.png" alt="" /></p>

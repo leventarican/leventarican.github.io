@@ -73,71 +73,66 @@ An interface define how to interact with a database. In Room the interface is th
 <p>query: a request for data from a database (select) or a request to perform an action on the data (insert, delete)</p>
 </blockquote>
 <p>Now lets see annotation examples. Here we have a pure data class.</p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">data class </span><span style="color:#f8f8f2;">Developer(
-	</span><span style="color:#f92672;">var </span><span style="font-style:italic;color:#fd971f;">id</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">Long </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">0L</span><span style="color:#f8f8f2;">,
-	</span><span style="color:#f92672;">var </span><span style="font-style:italic;color:#fd971f;">exp</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">Int </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">10</span><span style="color:#f8f8f2;">,
-	</span><span style="color:#f92672;">var </span><span style="font-style:italic;color:#fd971f;">timestamp</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">Long </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> System</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">currentTimeMillis()
-	)
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">data class </span><span>Developer(
+</span><span>	</span><span style="color:#f92672;">var </span><span style="font-style:italic;color:#fd971f;">id</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">Long </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">0L</span><span>,
+</span><span>	</span><span style="color:#f92672;">var </span><span style="font-style:italic;color:#fd971f;">exp</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">Int </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">10</span><span>,
+</span><span>	</span><span style="color:#f92672;">var </span><span style="font-style:italic;color:#fd971f;">timestamp</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">Long </span><span style="color:#f92672;">=</span><span> System</span><span style="color:#f92672;">.</span><span>currentTimeMillis()
+</span><span>	)
 </span></code></pre>
 <p>In order to make it useable for Room we add annotations. We want a different table name and we want also that the system generate the id for us. </p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f8f8f2;">@Enitity(tableName </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;developer_table&quot;</span><span style="color:#f8f8f2;">)
-</span><span style="color:#f92672;">data class </span><span style="color:#f8f8f2;">Developer(
-	@</span><span style="font-style:italic;color:#fd971f;">PrimaryKey</span><span style="color:#f8f8f2;">(</span><span style="font-style:italic;color:#fd971f;">autoGenerate </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">true</span><span style="color:#f8f8f2;">)
-	</span><span style="color:#f92672;">var </span><span style="color:#f8f8f2;">id</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">Long </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">0L</span><span style="color:#f8f8f2;">,
-	@ColumnInfo(name </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;experience&quot;</span><span style="color:#f8f8f2;">)
-	</span><span style="color:#f92672;">var </span><span style="color:#f8f8f2;">exp</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">Int </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">10</span><span style="color:#f8f8f2;">,
-	</span><span style="color:#f92672;">var </span><span style="color:#f8f8f2;">timestamp</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> Ĺong </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> System</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">currentTimeMillis()
-	)
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span>@Enitity(tableName </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;developer_table&quot;</span><span>)
+</span><span style="color:#f92672;">data class </span><span>Developer(
+</span><span>	@</span><span style="font-style:italic;color:#fd971f;">PrimaryKey</span><span>(</span><span style="font-style:italic;color:#fd971f;">autoGenerate </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">true</span><span>)
+</span><span>	</span><span style="color:#f92672;">var </span><span>id</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">Long </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">0L</span><span>,
+</span><span>	@ColumnInfo(name </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;experience&quot;</span><span>)
+</span><span>	</span><span style="color:#f92672;">var </span><span>exp</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">Int </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">10</span><span>,
+</span><span>	</span><span style="color:#f92672;">var </span><span>timestamp</span><span style="color:#f92672;">:</span><span> Ĺong </span><span style="color:#f92672;">=</span><span> System</span><span style="color:#f92672;">.</span><span>currentTimeMillis()
+</span><span>	)
 </span></code></pre>
 <blockquote>
 <p>note that by default the class name is used as table name. same for variable names.</p>
 </blockquote>
 <p>Here is an example for an interface with Room. A DAO for interacting with the database.</p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f8f8f2;">@Dao
-</span><span style="color:#f92672;">interface </span><span style="color:#f8f8f2;">DeveloperDAO {
-    @Insert
-    </span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">insert</span><span style="color:#f8f8f2;">(</span><span style="color:#f92672;">data:</span><span style="color:#f8f8f2;"> Developer)
-}
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span>@Dao
+</span><span style="color:#f92672;">interface </span><span>DeveloperDAO {
+</span><span>    @Insert
+</span><span>    </span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">insert</span><span>(</span><span style="color:#f92672;">data:</span><span> Developer)
+</span><span>}
 </span></code></pre>
 <p>Ok now described our tables and our interaction. Finally we define a database <em>abstract</em> class which extends <code>RoomDatabase</code>. It's abstact because Room will do the implementation for us. </p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f8f8f2;">@Database(entities </span><span style="color:#f92672;">=</span><span style="color:#f8f8f2;"> arrayOf(Developer</span><span style="color:#f92672;">::</span><span style="color:#f8f8f2;">class), version </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">1</span><span style="color:#f8f8f2;">)
-</span><span style="color:#f92672;">abstract class </span><span style="color:#f8f8f2;">AppDatabase </span><span style="color:#f92672;">: </span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">RoomDatabase</span><span style="color:#f8f8f2;">() {
-    </span><span style="color:#f92672;">abstract fun </span><span style="color:#a6e22e;">developerDao</span><span style="color:#f8f8f2;">()</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> DeveloperDao
-}
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span>@Database(entities </span><span style="color:#f92672;">=</span><span> arrayOf(Developer</span><span style="color:#f92672;">::</span><span>class), version </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">1</span><span>)
+</span><span style="color:#f92672;">abstract class </span><span>AppDatabase </span><span style="color:#f92672;">: </span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">RoomDatabase</span><span>() {
+</span><span>    </span><span style="color:#f92672;">abstract fun </span><span style="color:#a6e22e;">developerDao</span><span>()</span><span style="color:#f92672;">:</span><span> DeveloperDao
+</span><span>}
 </span></code></pre>
 <p>A nice feature of Room is the support of <code>LiveData</code>. 
 Example when you define your DAO interface and you query data you can specify the result as <code>LiveData</code>. Which mean you call the function <strong>once</strong> and then can use the LiveData to <strong>observe</strong> from it.</p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f8f8f2;">@Dao
-</span><span style="color:#f92672;">interface </span><span style="color:#f8f8f2;">DeveloperDAO {
-    @Query
-    </span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">getAll</span><span style="color:#f8f8f2;">()</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> LiveData&lt;</span><span style="font-style:italic;color:#66d9ef;">List</span><span style="color:#f8f8f2;">&lt;Developer&gt;&gt;
-}
-</span></code></pre><h2 id="main-ui-thread">Main / UI Thread</h2>
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span>@Dao
+</span><span style="color:#f92672;">interface </span><span>DeveloperDAO {
+</span><span>    @Query
+</span><span>    </span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">getAll</span><span>()</span><span style="color:#f92672;">:</span><span> LiveData&lt;</span><span style="font-style:italic;color:#66d9ef;">List</span><span>&lt;Developer&gt;&gt;
+</span><span>}
+</span></code></pre>
+<h2 id="main-ui-thread">Main / UI Thread</h2>
 <p>Long running operation like database operations should run on a separate thread (<em>non-blocking</em>). That's why it is a good idea to run these operations with kotlin <strong>coroutines</strong>.</p>
 <blockquote>
 <p><strong>Recap</strong>: the main thread (also called UI thread) is a single thread that handles all updates on UI. The main thread has to update the screen every <em>16ms</em> or more or 60 fps to ensure everythings is smooth. Many tasks takes longer then 16ms such as fetch data from internet, reading a large file, database operations, etc.</p>
 </blockquote>
 <p>Whenever using coroutines with Room you need to ensure that functions in the call-hierarchy are marked with <code>suspend</code> otherwise Room won't recognize it and it will still try to run it on main thread. 
 You may then receive an error like this. Because Room will not allow access database without thread's by default.</p>
-<pre style="background-color:#272822;">
-<code><span style="color:#f8f8f2;">Cannot access database on the main thread since it may potentially lock the UI for a long period of time.
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>Cannot access database on the main thread since it may potentially lock the UI for a long period of time.
 </span></code></pre>
 <p>Example:</p>
-<pre style="background-color:#272822;">
-<code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">init</span><span style="color:#f8f8f2;">() {
-	scope</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">launch { </span><span style="color:#f92672;">data =</span><span style="color:#f8f8f2;"> database</span><span style="color:#f92672;">.</span><span style="color:#f8f8f2;">all() }
-}
-
-</span><span style="color:#f92672;">interface </span><span style="color:#f8f8f2;">AppDatabaseDao {
-	@Query(</span><span style="color:#e6db74;">&quot;select * from data_table order by dataId desc&quot;</span><span style="color:#f8f8f2;">)
-	</span><span style="color:#f92672;">suspend fun </span><span style="color:#a6e22e;">all</span><span style="color:#f8f8f2;">()</span><span style="color:#f92672;">:</span><span style="color:#f8f8f2;"> Data?
-}
-</span></code></pre><h1 id="links">Links</h1>
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">init</span><span>() {
+</span><span>	scope</span><span style="color:#f92672;">.</span><span>launch { </span><span style="color:#f92672;">data =</span><span> database</span><span style="color:#f92672;">.</span><span>all() }
+</span><span>}
+</span><span>
+</span><span style="color:#f92672;">interface </span><span>AppDatabaseDao {
+</span><span>	@Query(</span><span style="color:#e6db74;">&quot;select * from data_table order by dataId desc&quot;</span><span>)
+</span><span>	</span><span style="color:#f92672;">suspend fun </span><span style="color:#a6e22e;">all</span><span>()</span><span style="color:#f92672;">:</span><span> Data?
+</span><span>}
+</span></code></pre>
+<h1 id="links">Links</h1>
 <ul>
 <li>https://developer.android.com/training/data-storage/room</li>
 <li>https://developer.android.com/jetpack/androidx/releases/room</li>

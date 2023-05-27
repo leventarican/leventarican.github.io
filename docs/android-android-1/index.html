@@ -64,90 +64,85 @@ We want to keep it easy and clean we don't use any IDE.
 Everything is done with console tools.</p>
 <h1 id="setup-your-environment">Setup your environment</h1>
 <p>First of all we need to setup our environment. Instead of gradle the initial build mechanism for android was <code>ant</code>. For sure there was no Java 17 that's why we use Java 1.6 to be compatible. The most interesting part here is to get the android sdk 1.1 r1.</p>
-<pre style="background-color:#272822;">
-<code class="language-bash" data-lang="bash"><span style="color:#75715e;"># get java 1.6
-# ensure to set JAVA_HOME and PATH directing to java jdk 1.6 bin
-</span><span style="color:#f8f8f2;">curl https://cdn.azul.com/zulu/bin/zulu6.10.0.3-ca-jdk6.0.73-linux_x64.zip</span><span style="font-style:italic;color:#fd971f;"> --output</span><span style="color:#f8f8f2;"> jdk1.6.zip
-
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># get java 1.6
+</span><span style="color:#75715e;"># ensure to set JAVA_HOME and PATH directing to java jdk 1.6 bin
+</span><span>curl https://cdn.azul.com/zulu/bin/zulu6.10.0.3-ca-jdk6.0.73-linux_x64.zip</span><span style="font-style:italic;color:#fd971f;"> --output</span><span> jdk1.6.zip
+</span><span>
 </span><span style="color:#75715e;"># get apache ant (minimum Java 5 runtime)
-</span><span style="color:#f8f8f2;">curl https://dlcdn.apache.org//ant/binaries/apache-ant-1.9.16-bin.zip</span><span style="font-style:italic;color:#fd971f;"> --output</span><span style="color:#f8f8f2;"> apache-ant.zip
-
+</span><span>curl https://dlcdn.apache.org//ant/binaries/apache-ant-1.9.16-bin.zip</span><span style="font-style:italic;color:#fd971f;"> --output</span><span> apache-ant.zip
+</span><span>
 </span><span style="color:#75715e;"># get android sdk release 1.1 r1
-</span><span style="color:#f8f8f2;">curl https://dl.google.com/android/archives/android-sdk-linux_x86-1.1_r1.zip</span><span style="font-style:italic;color:#fd971f;"> -o</span><span style="color:#f8f8f2;"> android1.1.zip
-</span></code></pre><h2 id="setup-jdk">Setup JDK</h2>
+</span><span>curl https://dl.google.com/android/archives/android-sdk-linux_x86-1.1_r1.zip</span><span style="font-style:italic;color:#fd971f;"> -o</span><span> android1.1.zip
+</span></code></pre>
+<h2 id="setup-jdk">Setup JDK</h2>
 <p>You downloaded the jdk 1.6. Now the system should know it as the default java version.</p>
 <p>Create a bash script called <code>j6.sh</code>.</p>
-<pre style="background-color:#272822;">
-<code class="language-bash" data-lang="bash"><span style="color:#75715e;">#!/bin/bash
-
-</span><span style="color:#f92672;">export </span><span style="color:#f8f8f2;">JAVA_HOME</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">$HOME/development/zulu1.6.0_73-6.10.0.3-x86lx64
-</span><span style="color:#f8f8f2;">unlink $HOME/development/jdk
-ln</span><span style="font-style:italic;color:#fd971f;"> -s </span><span style="color:#f8f8f2;">$JAVA_HOME $HOME/development/jdk
-java</span><span style="font-style:italic;color:#fd971f;"> -version
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;">#!/bin/bash
+</span><span>
+</span><span style="color:#f92672;">export </span><span>JAVA_HOME</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">$HOME/development/zulu1.6.0_73-6.10.0.3-x86lx64
+</span><span>unlink $HOME/development/jdk
+</span><span>ln</span><span style="font-style:italic;color:#fd971f;"> -s </span><span>$JAVA_HOME $HOME/development/jdk
+</span><span>java</span><span style="font-style:italic;color:#fd971f;"> -version
 </span></code></pre>
 <p>Afterwards the script is referenced in alias. Aliases can be defined in <code>~/.bash_aliases</code>.</p>
-<pre style="background-color:#272822;">
-<code class="language-bash" data-lang="bash"><span style="color:#66d9ef;">alias </span><span style="color:#a6e22e;">j6</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;source $HOME/development/j6.sh&quot;
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#66d9ef;">alias </span><span style="color:#a6e22e;">j6</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;source $HOME/development/j6.sh&quot;
 </span><span style="color:#66d9ef;">alias </span><span style="color:#a6e22e;">j8</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;source $HOME/development/j8.sh&quot;
 </span><span style="color:#66d9ef;">alias </span><span style="color:#a6e22e;">j11</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;source $HOME/development/j11.sh&quot;
 </span></code></pre>
 <p>Finally add the jdk path to your environment PATH variable. I use the <code>~/.profile</code> for that purpose.</p>
-<pre style="background-color:#272822;">
-<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">PATH</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;$HOME/development/jdk/bin:$PATH&quot;
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>PATH</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;$HOME/development/jdk/bin:$PATH&quot;
 </span></code></pre>
 <p>If you did that for other Java version, then you can switch between the available java version in a comfortable way.</p>
 <h1 id="hello-world">Hello World</h1>
 <p>You should now prepared to create an android application, build it, start the emulator, install the apk to the emulator.</p>
 <p>Full list of commands using <code>activitycreator</code>, <code>emulator</code> and <code>adb</code>.</p>
-<pre style="background-color:#272822;">
-<code class="language-bash" data-lang="bash"><span style="color:#75715e;"># create an application
-</span><span style="color:#f8f8f2;">./android-sdk-linux_x86-1.1_r1/tools/activitycreator</span><span style="font-style:italic;color:#fd971f;"> --out</span><span style="color:#f8f8f2;"> HelloAndroid com.android.hello.HelloAndroid
-
-HelloAndroid$ tree
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># create an application
+</span><span>./android-sdk-linux_x86-1.1_r1/tools/activitycreator</span><span style="font-style:italic;color:#fd971f;"> --out</span><span> HelloAndroid com.android.hello.HelloAndroid
+</span><span>
+</span><span>HelloAndroid$ tree
 </span><span style="color:#66d9ef;">.
-</span><span style="color:#f8f8f2;">├── AndroidManifest.xml
-├── bin
-├── build.xml
-├── default.properties
-├── libs
-├── res
-│   ├── layout
-│   │   └── main.xml
-│   └── values
-│       └── strings.xml
-└── src
-    └── com
-        └── android
-            └── hello
-                ├── HelloAndroid.java
-                └── R.java
-
-9 directories, 7 files
-
+</span><span>├── AndroidManifest.xml
+</span><span>├── bin
+</span><span>├── build.xml
+</span><span>├── default.properties
+</span><span>├── libs
+</span><span>├── res
+</span><span>│   ├── layout
+</span><span>│   │   └── main.xml
+</span><span>│   └── values
+</span><span>│       └── strings.xml
+</span><span>└── src
+</span><span>    └── com
+</span><span>        └── android
+</span><span>            └── hello
+</span><span>                ├── HelloAndroid.java
+</span><span>                └── R.java
+</span><span>
+</span><span>9 directories, 7 files
+</span><span>
 </span><span style="color:#75715e;"># start emulator
-</span><span style="color:#f8f8f2;">./android-sdk-linux_x86-1.1_r1/tools/emulator
-
+</span><span>./android-sdk-linux_x86-1.1_r1/tools/emulator
+</span><span>
 </span><span style="color:#75715e;"># build (this creates the apk)
-</span><span style="color:#f8f8f2;">ant debug
-
-Buildfile: HelloAndroid/build.xml
-...
-
+</span><span>ant debug
+</span><span>
+</span><span>Buildfile: HelloAndroid/build.xml
+</span><span>...
+</span><span>
 </span><span style="color:#75715e;"># install apk
-</span><span style="color:#f8f8f2;">android-sdk-linux_x86-1.1_r1/tools$ adb install HelloAndroid-debug.apk
-
-Performing Push Install
-HelloAndroid/bin/...ebug.apk: 1 file pushed, 0 skipped. 23.7 MB/s (4784 bytes in 0.000s)
-	pkg: /data/local/tmp/HelloAndroid-debug.apk
-Success
-
+</span><span>android-sdk-linux_x86-1.1_r1/tools$ adb install HelloAndroid-debug.apk
+</span><span>
+</span><span>Performing Push Install
+</span><span>HelloAndroid/bin/...ebug.apk: 1 file pushed, 0 skipped. 23.7 MB/s (4784 bytes in 0.000s)
+</span><span>	pkg: /data/local/tmp/HelloAndroid-debug.apk
+</span><span>Success
+</span><span>
 </span><span style="color:#75715e;"># uninstall apk (with package name)
-</span><span style="color:#f8f8f2;">android-sdk-linux_x86-1.1_r1/tools$ adb uninstall com.android.hello
-Success
+</span><span>android-sdk-linux_x86-1.1_r1/tools$ adb uninstall com.android.hello
+</span><span>Success
 </span></code></pre>
 <p>Create an app with <code>android</code> command line tool (available in Android 1.5).</p>
-<pre style="background-color:#272822;">
-<code class="language-bash" data-lang="bash"><span style="color:#f8f8f2;">android-sdk-linux_x86-1.5_r3/tools/android update project</span><span style="font-style:italic;color:#fd971f;"> --path</span><span style="color:#f8f8f2;"> HelloActivity/</span><span style="font-style:italic;color:#fd971f;"> --target</span><span style="color:#f8f8f2;"> 1
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>android-sdk-linux_x86-1.5_r3/tools/android update project</span><span style="font-style:italic;color:#fd971f;"> --path</span><span> HelloActivity/</span><span style="font-style:italic;color:#fd971f;"> --target</span><span> 1
 </span></code></pre>
 <p><img src="../android1-emulator.png" alt="" /></p>
 <h1 id="links">Links</h1>

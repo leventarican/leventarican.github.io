@@ -3,6 +3,8 @@ title = "Linux"
 date = 2021-03-18
 +++
 
+
+
 # Curl
 ```bash
 sudo curl -L https://down.load/file -o here
@@ -83,6 +85,14 @@ sudo lshw -C memory
        physical id: 1
        slot: System board or motherboard
        size: 16GiB
+```
+
+List systen information: machine, cpu, battery, ...
+```bash
+inxi
+inxi -Fxz
+
+# Battery:   ID-1: BAT0 charge: 42.4 Wh condition: 53.3/57.0 Wh (93%) status: Not charging
 ```
 
 List all with format html.

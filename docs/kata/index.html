@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:800px; margin:16px auto;">
+            
+<h1 class="title">
+    Kata
+</h1>
+<p class="subtitle"><strong>2023-05-27</strong></p>
+<p><em>Kata in programming is a term derived from the martial arts and it denotes a form of practice designed for consistent improvement.</em></p>
+<ol>
+<li><strong>Reinforce</strong>: In the context of programming, a kata is a technique that reinforces concepts and skills. By working on the same problem repeatedly, you strengthen your understanding of the particular coding technique, data structure, or algorithm involved.</li>
+<li><strong>Sharpen</strong>: A kata serves to sharpen your coding skills. Similar to how a martial artist refines their moves through repetition, a developer sharpens their coding techniques by repeatedly solving the same or similar problems.</li>
+<li><strong>Exercise</strong>: A kata is an exercise that works your 'coding muscles'. The more you engage in it, the better your proficiency in a particular area of programming.</li>
+<li><strong>Repeating</strong>: In a kata, the repetition of problem-solving is essential. It's not about solving new problems every time but perfecting your approach to a specific problem by repeatedly working on it.</li>
+<li><strong>Practice</strong>: Kata is all about practice. It's the belief that consistent, deliberate, and focused practice of programming concepts can lead to mastery.</li>
+</ol>
+<h1 id="tool">Tool</h1>
+<p>In functional programming language like Kotlin you have ready-to-use functions for applying on coding problems.</p>
+<p>A list of some useful functions.</p>
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span>forEachIndexed()
+</span><span>split()
+</span><span>drop()
+</span><span>first()
+</span><span>toUpperCase()
+</span><span>toLowerCase()
+</span><span>joinToString()
+</span><span>reversed()
+</span><span>filter()
+</span><span>count()
+</span><span>plus()
+</span><span>map()
+</span><span>mapIndexed()
+</span></code></pre>
+<p>Here an example how the function can be applied to solve a problem.</p>
+<pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">main</span><span>() {
+</span><span>    generateSequence(</span><span style="color:#ae81ff;">0</span><span>) { it </span><span style="color:#f92672;">+ </span><span style="color:#ae81ff;">1</span><span> }</span><span style="color:#f92672;">.</span><span>windowed(size</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">3</span><span>, step</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">10</span><span>)
+</span><span>    </span><span style="color:#f92672;">.</span><span>take(</span><span style="color:#ae81ff;">3</span><span>)</span><span style="color:#f92672;">.</span><span>toList()
+</span><span>    </span><span style="color:#f92672;">.</span><span>apply(</span><span style="color:#f92672;">::</span><span>println)
+</span><span>    </span><span style="color:#75715e;">// [[0, 1, 2], [10, 11, 12], [20, 21, 22]]
+</span><span>}
+</span></code></pre>
+<p>The Java way.</p>
+<pre data-lang="java" style="background-color:#272822;color:#f8f8f2;" class="language-java "><code class="language-java" data-lang="java"><span style="color:#f92672;">import </span><span style="font-style:italic;color:#66d9ef;">java</span><span>.</span><span style="font-style:italic;color:#66d9ef;">util</span><span>.</span><span style="color:#f92672;">*</span><span>;
+</span><span style="color:#f92672;">import </span><span style="font-style:italic;color:#66d9ef;">java</span><span>.</span><span style="font-style:italic;color:#66d9ef;">util</span><span>.</span><span style="font-style:italic;color:#66d9ef;">stream</span><span>.</span><span style="color:#f92672;">*</span><span>;
+</span><span>
+</span><span style="color:#f92672;">public </span><span style="font-style:italic;color:#66d9ef;">class </span><span style="text-decoration:underline;color:#a6e22e;">Kata </span><span>{
+</span><span>    </span><span style="color:#f92672;">private static </span><span style="font-style:italic;color:#66d9ef;">List</span><span>&lt;</span><span style="font-style:italic;color:#66d9ef;">Integer</span><span>&gt; </span><span style="color:#a6e22e;">windowed</span><span>(</span><span style="font-style:italic;color:#66d9ef;">int </span><span style="font-style:italic;color:#fd971f;">start</span><span>) {
+</span><span>        </span><span style="color:#f92672;">return </span><span style="font-style:italic;color:#66d9ef;">IntStream</span><span>.range(start, start </span><span style="color:#f92672;">+ </span><span style="color:#ae81ff;">3</span><span>).boxed().collect(</span><span style="font-style:italic;color:#66d9ef;">Collectors</span><span>.toList());
+</span><span>    }
+</span><span>    </span><span style="color:#f92672;">public static </span><span style="font-style:italic;color:#66d9ef;">void </span><span style="color:#a6e22e;">main</span><span>(</span><span style="font-style:italic;color:#66d9ef;">String</span><span style="color:#f92672;">[] </span><span style="font-style:italic;color:#fd971f;">args</span><span>) {
+</span><span>        </span><span style="font-style:italic;color:#66d9ef;">List</span><span>&lt;</span><span style="font-style:italic;color:#66d9ef;">List</span><span>&lt;</span><span style="font-style:italic;color:#66d9ef;">Integer</span><span>&gt;&gt; sequences </span><span style="color:#f92672;">= </span><span style="font-style:italic;color:#66d9ef;">IntStream</span><span>.range(</span><span style="color:#ae81ff;">0</span><span>, </span><span style="color:#ae81ff;">3</span><span>)
+</span><span>                .map(</span><span style="font-style:italic;color:#fd971f;">i </span><span style="font-style:italic;color:#66d9ef;">-&gt;</span><span> i </span><span style="color:#f92672;">* </span><span style="color:#ae81ff;">10</span><span>)
+</span><span>                .mapToObj(</span><span style="font-style:italic;color:#66d9ef;">Kata</span><span>::windowed)
+</span><span>                .collect(</span><span style="font-style:italic;color:#66d9ef;">Collectors</span><span>.toList());
+</span><span>        </span><span style="font-style:italic;color:#66d9ef;">System</span><span>.out.println(sequences);  
+</span><span>        </span><span style="color:#75715e;">// [[0, 1, 2], [10, 11, 12], [20, 21, 22]]
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>The imperative way.</p>
+<pre data-lang="java" style="background-color:#272822;color:#f8f8f2;" class="language-java "><code class="language-java" data-lang="java"><span style="color:#f92672;">private static</span><span> void imperative() {
+</span><span>    </span><span style="font-style:italic;color:#66d9ef;">List</span><span>&lt;</span><span style="font-style:italic;color:#66d9ef;">List</span><span>&lt;</span><span style="font-style:italic;color:#66d9ef;">Integer</span><span>&gt;&gt; sequences </span><span style="color:#f92672;">= new </span><span style="font-style:italic;color:#66d9ef;">ArrayList</span><span>&lt;&gt;();
+</span><span>    </span><span style="color:#f92672;">for </span><span>(</span><span style="font-style:italic;color:#66d9ef;">int</span><span> i </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">0</span><span>; i </span><span style="color:#f92672;">&lt; </span><span style="color:#ae81ff;">3</span><span>; i</span><span style="color:#f92672;">++</span><span>) {
+</span><span>        </span><span style="font-style:italic;color:#66d9ef;">int</span><span> start </span><span style="color:#f92672;">=</span><span> i </span><span style="color:#f92672;">* </span><span style="color:#ae81ff;">10</span><span>;
+</span><span>        </span><span style="font-style:italic;color:#66d9ef;">List</span><span>&lt;</span><span style="font-style:italic;color:#66d9ef;">Integer</span><span>&gt; windowedSequence </span><span style="color:#f92672;">= new </span><span style="font-style:italic;color:#66d9ef;">ArrayList</span><span>&lt;&gt;();
+</span><span>        </span><span style="color:#f92672;">for </span><span>(</span><span style="font-style:italic;color:#66d9ef;">int</span><span> j </span><span style="color:#f92672;">=</span><span> start; j </span><span style="color:#f92672;">&lt;</span><span> start </span><span style="color:#f92672;">+ </span><span style="color:#ae81ff;">3</span><span>; j</span><span style="color:#f92672;">++</span><span>) {
+</span><span>            windowedSequence.add(j);
+</span><span>        }
+</span><span>        sequences.add(windowedSequence);
+</span><span>    }
+</span><span>    </span><span style="font-style:italic;color:#66d9ef;">System</span><span>.out.println(sequences);
+</span><span>    </span><span style="color:#75715e;">// [[0, 1, 2], [10, 11, 12], [20, 21, 22]]
+</span><span>}
+</span></code></pre>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

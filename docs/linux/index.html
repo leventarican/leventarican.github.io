@@ -110,6 +110,12 @@ With <code>lshw</code> you can list cpu, memory or all system information in con
 </span><span>       slot: System board or motherboard
 </span><span>       size: 16GiB
 </span></code></pre>
+<p>List systen information: machine, cpu, battery, ...</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>inxi
+</span><span>inxi</span><span style="font-style:italic;color:#fd971f;"> -Fxz
+</span><span>
+</span><span style="color:#75715e;"># Battery:   ID-1: BAT0 charge: 42.4 Wh condition: 53.3/57.0 Wh (93%) status: Not charging
+</span></code></pre>
 <p>List all with format html.</p>
 <pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>sudo lshw</span><span style="font-style:italic;color:#fd971f;"> -html </span><span style="color:#f92672;">&gt;</span><span> specs.html
 </span></code></pre>

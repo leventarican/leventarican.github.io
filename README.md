@@ -19,6 +19,3 @@ Download zola from https://github.com/getzola/zola/releases (i.e. for Linux `*.t
 ```bash
 ./zola
 ```
-
-## Links
-* https://github.com/getzola/zola

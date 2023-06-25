@@ -3,8 +3,6 @@ title = "Linux"
 date = 2021-03-18
 +++
 
-
-
 # Curl
 ```bash
 sudo curl -L https://down.load/file -o here

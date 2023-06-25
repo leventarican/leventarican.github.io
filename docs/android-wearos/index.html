@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:800px; margin:16px auto;">
+            
+<h1 class="title">
+    Android: Wear OS
+</h1>
+<p class="subtitle"><strong>2023-06-25</strong></p>
+<p>If you have a Samsung Watch 4 you are forced to use a Android smartphone together. There is even no option to add contact on watch without phone neither add a google account on watch.</p>
+<p>Now what if you have a cellular (LTE) watch 4 and you want to use the watch independently / <strong>standalone</strong> ?</p>
+<h1 id="the-reset">The Reset</h1>
+<p>Note, that you might for the <em>esim</em> initially setup the watch with a smartphone. </p>
+<p>Afterwards you can do a reset of the watch: <code>settings &gt; general &gt; reset</code>, uncheck the esim delete option. So your esim is still linked with watch but everything else is reseted.</p>
+<p>Now you are ready to start <strong>hidden</strong> configuration by tapping <code>3x</code> on the blue icon, followed by <code>1 long tab</code>.</p>
+<p>The watch will start without smartphone.</p>
+<p>In this state you can dial calls. And also the health features should work. But google playstore etc. won't work as you can't add account without smartphone.</p>
+<h1 id="the-developer">The Developer</h1>
+<p>As the features are restricted in this standalone state luckily there is a way for developers.</p>
+<p>In watch 4 you can activate the <strong>hidden</strong> developer mode: <code>settings &gt; info ... &gt; softwareinfo</code>. Now tab <code>7x</code> on <code>softwareversion</code> and a message will appear that dev mod is on. Go back in menu and the dev mode item should visible.</p>
+<p>As the dev mode is on you can install <code>apk</code>'s. As the watch 4 has no USB port we will connect via wifi. After that, we are ready to develop apps with Android Studio. The steps:</p>
+<ul>
+<li>connect to WLAN on watch 4</li>
+<li>on android studio open <code>device manager</code> &gt; select tab <code>physical</code> &gt; then <code>pair using wifi</code> &gt; then tab <code>pair using pair code</code></li>
+<li>on watch 4: <code>dev mode</code> &gt; <code>wireless debugging</code> &gt; <code>pair new devices</code> &gt; use the <code>pin</code> to pair watch 4 with android studio</li>
+</ul>
+<p>The app development in android studio is from now on quit straight forward. Just create a new project for wear ideally an empty compose activity. The select your device and run.</p>
+<p>Here is a code snippet for start dialer intent.</p>
+<pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span>@Composable
+</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">Greeting</span><span>(</span><span style="font-style:italic;color:#fd971f;">greetingName</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">String</span><span>, </span><span style="font-style:italic;color:#fd971f;">activity</span><span style="color:#f92672;">:</span><span> ComponentActivity) {
+</span><span>    Text(
+</span><span>        modifier </span><span style="color:#f92672;">=</span><span> Modifier</span><span style="color:#f92672;">.</span><span>fillMaxWidth(),
+</span><span>        textAlign </span><span style="color:#f92672;">=</span><span> TextAlign</span><span style="color:#f92672;">.</span><span>Center,
+</span><span>        color </span><span style="color:#f92672;">=</span><span> MaterialTheme</span><span style="color:#f92672;">.</span><span>colors</span><span style="color:#f92672;">.</span><span>primary,
+</span><span>        text </span><span style="color:#f92672;">=</span><span> stringResource(R</span><span style="color:#f92672;">.</span><span>string</span><span style="color:#f92672;">.</span><span>hello_world, greetingName)
+</span><span>    )
+</span><span>    Row(
+</span><span>        modifier </span><span style="color:#f92672;">=</span><span> Modifier</span><span style="color:#f92672;">.</span><span>fillMaxWidth(),
+</span><span>        horizontalArrangement </span><span style="color:#f92672;">=</span><span> Arrangement</span><span style="color:#f92672;">.</span><span>Center
+</span><span>    ) {
+</span><span>        Button(onClick </span><span style="color:#f92672;">=</span><span> { dialPhoneNumber(</span><span style="color:#e6db74;">&quot;00001111&quot;</span><span>, activity) }) {
+</span><span>            Text(text </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;android&quot;</span><span>)
+</span><span>        }
+</span><span>    }
+</span><span>}
+</span><span>
+</span><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">dialPhoneNumber</span><span>(</span><span style="font-style:italic;color:#fd971f;">phoneNumber</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">String</span><span>, </span><span style="font-style:italic;color:#fd971f;">activity</span><span style="color:#f92672;">:</span><span> ComponentActivity) {
+</span><span>    </span><span style="color:#f92672;">val </span><span>intent </span><span style="color:#f92672;">=</span><span> Intent(Intent</span><span style="color:#f92672;">.</span><span style="color:#ae81ff;">ACTION_DIAL</span><span>)</span><span style="color:#f92672;">.</span><span>apply {
+</span><span>        </span><span style="color:#f92672;">data =</span><span> Uri</span><span style="color:#f92672;">.</span><span>parse(</span><span style="color:#e6db74;">&quot;tel:</span><span style="font-style:italic;color:#fd971f;">$phoneNumber</span><span style="color:#e6db74;">&quot;</span><span>)
+</span><span>    }
+</span><span>    </span><span style="color:#f92672;">if</span><span> (intent</span><span style="color:#f92672;">.</span><span>resolveActivity(activity</span><span style="color:#f92672;">.</span><span>packageManager) </span><span style="color:#f92672;">!= </span><span style="color:#ae81ff;">null</span><span>) {
+</span><span>        activity</span><span style="color:#f92672;">.</span><span>startActivity(intent)
+</span><span>    }
+</span><span>}
+</span></code></pre>
+<p>For sure you also need the respective permission in your android manifest.</p>
+<pre data-lang="xml" style="background-color:#272822;color:#f8f8f2;" class="language-xml "><code class="language-xml" data-lang="xml"><span>&lt;</span><span style="color:#f92672;">uses-permission </span><span style="color:#a6e22e;">android:name</span><span>=</span><span style="color:#e6db74;">&quot;android.permission.CALL_PHONE&quot;</span><span>/&gt;
+</span></code></pre>
+<h1 id="system-environment">System environment</h1>
+<ul>
+<li>Android studio Dolphin 2021.3.1 Patch 1</li>
+<li>Samsung SM-R865F, API Level 30, Android 11</li>
+</ul>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

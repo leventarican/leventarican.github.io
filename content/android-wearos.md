@@ -71,3 +71,32 @@ For sure you also need the respective permission in your android manifest.
 # System environment
 * Android studio Dolphin 2021.3.1 Patch 1
 * Samsung SM-R865F, API Level 30, Android 11
+
+# adb commands
+
+```bash
+# after adb push you may need to change the rights
+./adb shell
+freshus:/ $ chmod 777 /sdcard/Music/audio.mp3  
+
+# Change DPI
+wm density xxx
+
+# Display Current DPI
+wm density
+
+# Reset DPI
+wm density reset
+
+# Install App
+-e install <filename.apk>
+
+# Uninstall App
+pm uninstall -k --user 0 <package_name>
+
+# Reinstall Debloated System Apps
+pm install-existing <package_name>
+
+# Customize Font Size
+settings put system font_scale x.xx
+```

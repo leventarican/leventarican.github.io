@@ -106,6 +106,32 @@
 <li>Android studio Dolphin 2021.3.1 Patch 1</li>
 <li>Samsung SM-R865F, API Level 30, Android 11</li>
 </ul>
+<h1 id="adb-commands">adb commands</h1>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># after adb push you may need to change the rights
+</span><span>./adb shell
+</span><span>freshus:/ $ chmod 777 /sdcard/Music/audio.mp3  
+</span><span>
+</span><span style="color:#75715e;"># Change DPI
+</span><span>wm density xxx
+</span><span>
+</span><span style="color:#75715e;"># Display Current DPI
+</span><span>wm density
+</span><span>
+</span><span style="color:#75715e;"># Reset DPI
+</span><span>wm density reset
+</span><span>
+</span><span style="color:#75715e;"># Install App
+</span><span>-e install </span><span style="color:#f92672;">&lt;</span><span>filename.apk</span><span style="color:#f92672;">&gt;
+</span><span>
+</span><span style="color:#75715e;"># Uninstall App
+</span><span>pm uninstall</span><span style="font-style:italic;color:#fd971f;"> -k --user</span><span> 0 </span><span style="color:#f92672;">&lt;</span><span>package_name</span><span style="color:#f92672;">&gt;
+</span><span>
+</span><span style="color:#75715e;"># Reinstall Debloated System Apps
+</span><span>pm install-existing </span><span style="color:#f92672;">&lt;</span><span>package_name</span><span style="color:#f92672;">&gt;
+</span><span>
+</span><span style="color:#75715e;"># Customize Font Size
+</span><span>settings put system font_scale x.xx
+</span></code></pre>
 
 <footer>
 	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>

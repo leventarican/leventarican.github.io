@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:800px; margin:16px auto;">
+            
+<h1 class="title">
+    ChatGPT API pricing calculation
+</h1>
+<p class="subtitle"><strong>2023-09-14</strong></p>
+<h1 id="about">About</h1>
+<p>This document gives an explanation of how the token price is calculated.</p>
+<blockquote>
+<p>Counting tokens for chat completions API call.</p>
+</blockquote>
+<p>We take as an example the language model <em>GPT-3.5 Turbo</em>.</p>
+<table><thead><tr><th>Model</th><th>Input</th><th>Output</th></tr></thead><tbody>
+<tr><td>4K context</td><td>$0.0015 / 1K tokens</td><td>$0.002 / 1K tokens</td></tr>
+<tr><td>16K context</td><td>$0.003 / 1K tokens</td><td>$0.004 / 1K tokens</td></tr>
+</tbody></table>
+<h1 id="calculation">Calculation</h1>
+<p>When using the ChatGPT API, the cost is determined by two main factors: the number of tokens in the input and the number of tokens in the output. Each token has a specific price based on the model you're using.</p>
+<h2 id="example-request">Example Request</h2>
+<p>Here's the Python request we made to the ChatGPT API:</p>
+<pre data-lang="python" style="background-color:#272822;color:#f8f8f2;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#f92672;">import </span><span>openai
+</span><span>
+</span><span>completion </span><span style="color:#f92672;">= </span><span>openai.ChatCompletion.create(
+</span><span>  </span><span style="font-style:italic;color:#fd971f;">model</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;gpt-3.5-turbo&quot;</span><span>,
+</span><span>  </span><span style="font-style:italic;color:#fd971f;">messages</span><span style="color:#f92672;">=</span><span>[
+</span><span>    {</span><span style="color:#e6db74;">&quot;role&quot;</span><span>: </span><span style="color:#e6db74;">&quot;system&quot;</span><span>, </span><span style="color:#e6db74;">&quot;content&quot;</span><span>: </span><span style="color:#e6db74;">&quot;You are a helpful assistant.&quot;</span><span>},
+</span><span>  ]
+</span><span>)
+</span></code></pre>
+<h2 id="example-response">Example Response</h2>
+<pre data-lang="json" style="background-color:#272822;color:#f8f8f2;" class="language-json "><code class="language-json" data-lang="json"><span>{
+</span><span>  </span><span style="color:#e6db74;">&quot;id&quot;</span><span>: </span><span style="color:#e6db74;">&quot;...&quot;</span><span>,
+</span><span>  </span><span style="color:#e6db74;">&quot;object&quot;</span><span>: </span><span style="color:#e6db74;">&quot;chat.completion&quot;</span><span>,
+</span><span>  </span><span style="color:#e6db74;">&quot;created&quot;</span><span>: </span><span style="color:#ae81ff;">1694725384</span><span>,
+</span><span>  </span><span style="color:#e6db74;">&quot;model&quot;</span><span>: </span><span style="color:#e6db74;">&quot;gpt-3.5-turbo-0613&quot;</span><span>,
+</span><span>  </span><span style="color:#e6db74;">&quot;choices&quot;</span><span>: [
+</span><span>    {
+</span><span>      </span><span style="color:#e6db74;">&quot;index&quot;</span><span>: </span><span style="color:#ae81ff;">0</span><span>,
+</span><span>      </span><span style="color:#e6db74;">&quot;message&quot;</span><span>: {
+</span><span>        </span><span style="color:#e6db74;">&quot;role&quot;</span><span>: </span><span style="color:#e6db74;">&quot;assistant&quot;</span><span>,
+</span><span>        </span><span style="color:#e6db74;">&quot;content&quot;</span><span>: </span><span style="color:#e6db74;">&quot;How can I assist you today?&quot;
+</span><span>      },
+</span><span>      </span><span style="color:#e6db74;">&quot;finish_reason&quot;</span><span>: </span><span style="color:#e6db74;">&quot;stop&quot;
+</span><span>    }
+</span><span>  ],
+</span><span>  </span><span style="color:#e6db74;">&quot;usage&quot;</span><span>: {
+</span><span>    </span><span style="color:#e6db74;">&quot;prompt_tokens&quot;</span><span>: </span><span style="color:#ae81ff;">13</span><span>,
+</span><span>    </span><span style="color:#e6db74;">&quot;completion_tokens&quot;</span><span>: </span><span style="color:#ae81ff;">7</span><span>,
+</span><span>    </span><span style="color:#e6db74;">&quot;total_tokens&quot;</span><span>: </span><span style="color:#ae81ff;">20
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>From the response, we can see that:</p>
+<p>Input tokens used: 13
+Output tokens generated: 7
+Total tokens: 20
+Breaking down the cost:</p>
+<ol>
+<li>Input Tokens:
+<ul>
+<li>Cost for our input: (13 tokens / 1000) * $0.0015 = $0.0000195</li>
+</ul>
+</li>
+<li>Output Tokens:
+<ul>
+<li>Cost for our output: (7 tokens / 1000) * $0.002 = $0.000014</li>
+</ul>
+</li>
+<li>Total Cost:
+<ul>
+<li>Total cost: $0.0000195 (input) + $0.000014 (output) = $0.0000335</li>
+</ul>
+</li>
+</ol>
+<p>So, for our example call with a total of 20 tokens, the cost would be $0.0000335.</p>
+<h2 id="example-code">Example code</h2>
+<blockquote>
+<p>Models don't see text like you and I, instead they see a sequence of numbers (known as tokens).</p>
+</blockquote>
+<blockquote>
+<p>ChatGPT models like gpt-3.5-turbo and gpt-4 use tokens in the same way as older completions models, but because of their message-based formatting, it's more difficult to count how many tokens will be used by a conversation.</p>
+</blockquote>
+<pre data-lang="python" style="background-color:#272822;color:#f8f8f2;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#75715e;"># tiktoken is a fast BPE tokeniser for use with OpenAI&#39;s models.
+</span><span style="color:#f92672;">import </span><span>tiktoken
+</span><span>
+</span><span style="color:#75715e;"># load correct encoding: &lt;Encoding &#39;cl100k_base&#39;&gt;
+</span><span>encoding </span><span style="color:#f92672;">= </span><span>tiktoken.encoding_for_model(</span><span style="color:#e6db74;">&quot;gpt-3.5-turbo-0613&quot;</span><span>)
+</span><span style="color:#66d9ef;">print</span><span>(encoding)
+</span><span style="color:#75715e;"># output: &lt;Encoding &#39;cl100k_base&#39;&gt;
+</span><span>
+</span><span>messages </span><span style="color:#f92672;">= </span><span>[
+</span><span>    {</span><span style="color:#e6db74;">&quot;role&quot;</span><span>: </span><span style="color:#e6db74;">&quot;system&quot;</span><span>, </span><span style="color:#e6db74;">&quot;content&quot;</span><span>: </span><span style="color:#e6db74;">&quot;You are a helpful assistant.&quot;</span><span>}
+</span><span>]
+</span><span>
+</span><span>encoded </span><span style="color:#f92672;">= </span><span>encoding.encode(messages[</span><span style="color:#ae81ff;">0</span><span>][</span><span style="color:#e6db74;">&#39;content&#39;</span><span>])
+</span><span style="color:#66d9ef;">print</span><span>(encoded)
+</span><span style="color:#75715e;"># output: [2675, 527, 264, 11190, 18328, 13]
+</span><span style="color:#75715e;"># result is 6 tokens
+</span><span>
+</span><span style="font-style:italic;color:#f92672;">def </span><span style="color:#a6e22e;">num_tokens_from_messages</span><span>(</span><span style="font-style:italic;color:#fd971f;">messages</span><span>, </span><span style="font-style:italic;color:#fd971f;">model</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;gpt-3.5-turbo-0613&quot;</span><span>):
+</span><span>    </span><span style="color:#75715e;">&quot;&quot;&quot;Return the number of tokens used by a list of messages.&quot;&quot;&quot;
+</span><span>    </span><span style="color:#f92672;">try</span><span>:
+</span><span>        encoding </span><span style="color:#f92672;">= </span><span>tiktoken.encoding_for_model(model)
+</span><span>    </span><span style="color:#f92672;">except </span><span style="font-style:italic;color:#66d9ef;">KeyError</span><span>:
+</span><span>        </span><span style="color:#66d9ef;">print</span><span>(</span><span style="color:#e6db74;">&quot;Warning: model not found. Using cl100k_base encoding.&quot;</span><span>)
+</span><span>        encoding </span><span style="color:#f92672;">= </span><span>tiktoken.get_encoding(</span><span style="color:#e6db74;">&quot;cl100k_base&quot;</span><span>)
+</span><span>    </span><span style="color:#f92672;">if </span><span>model </span><span style="color:#f92672;">in </span><span>{
+</span><span>        </span><span style="color:#e6db74;">&quot;gpt-3.5-turbo-0613&quot;</span><span>,
+</span><span>        </span><span style="color:#e6db74;">&quot;gpt-3.5-turbo-16k-0613&quot;</span><span>,
+</span><span>        </span><span style="color:#e6db74;">&quot;gpt-4-0314&quot;</span><span>,
+</span><span>        </span><span style="color:#e6db74;">&quot;gpt-4-32k-0314&quot;</span><span>,
+</span><span>        </span><span style="color:#e6db74;">&quot;gpt-4-0613&quot;</span><span>,
+</span><span>        </span><span style="color:#e6db74;">&quot;gpt-4-32k-0613&quot;</span><span>,
+</span><span>        }:
+</span><span>        tokens_per_message </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">3
+</span><span>        tokens_per_name </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">1
+</span><span>    </span><span style="color:#f92672;">elif </span><span>model </span><span style="color:#f92672;">== </span><span style="color:#e6db74;">&quot;gpt-3.5-turbo-0301&quot;</span><span>:
+</span><span>        tokens_per_message </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">4  </span><span style="color:#75715e;"># every message follows &lt;|start|&gt;{role/name}\n{content}&lt;|end|&gt;\n
+</span><span>        tokens_per_name </span><span style="color:#f92672;">= -</span><span style="color:#ae81ff;">1  </span><span style="color:#75715e;"># if there&#39;s a name, the role is omitted
+</span><span>    </span><span style="color:#f92672;">elif </span><span style="color:#e6db74;">&quot;gpt-3.5-turbo&quot; </span><span style="color:#f92672;">in </span><span>model:
+</span><span>        </span><span style="color:#66d9ef;">print</span><span>(</span><span style="color:#e6db74;">&quot;Warning: gpt-3.5-turbo may update over time. Returning num tokens assuming gpt-3.5-turbo-0613.&quot;</span><span>)
+</span><span>        </span><span style="color:#f92672;">return </span><span>num_tokens_from_messages(messages, </span><span style="font-style:italic;color:#fd971f;">model</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;gpt-3.5-turbo-0613&quot;</span><span>)
+</span><span>    </span><span style="color:#f92672;">elif </span><span style="color:#e6db74;">&quot;gpt-4&quot; </span><span style="color:#f92672;">in </span><span>model:
+</span><span>        </span><span style="color:#66d9ef;">print</span><span>(</span><span style="color:#e6db74;">&quot;Warning: gpt-4 may update over time. Returning num tokens assuming gpt-4-0613.&quot;</span><span>)
+</span><span>        </span><span style="color:#f92672;">return </span><span>num_tokens_from_messages(messages, </span><span style="font-style:italic;color:#fd971f;">model</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;gpt-4-0613&quot;</span><span>)
+</span><span>    </span><span style="color:#f92672;">else</span><span>:
+</span><span>        </span><span style="color:#f92672;">raise </span><span style="font-style:italic;color:#66d9ef;">NotImplementedError</span><span>(
+</span><span>            </span><span style="font-style:italic;color:#66d9ef;">f</span><span style="color:#e6db74;">&quot;&quot;&quot;num_tokens_from_messages() is not implemented for model </span><span>{model}</span><span style="color:#e6db74;">. See https://github.com/openai/openai-python/blob/main/chatml.md for information on how messages are converted to tokens.&quot;&quot;&quot;
+</span><span>        )
+</span><span>    num_tokens </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">0
+</span><span>    </span><span style="color:#f92672;">for </span><span>message </span><span style="color:#f92672;">in </span><span>messages:
+</span><span>        num_tokens </span><span style="color:#f92672;">+= </span><span>tokens_per_message
+</span><span>        </span><span style="color:#f92672;">for </span><span>key, value </span><span style="color:#f92672;">in </span><span>message.items():
+</span><span>            num_tokens </span><span style="color:#f92672;">+= </span><span style="color:#66d9ef;">len</span><span>(encoding.encode(value))
+</span><span>            </span><span style="color:#f92672;">if </span><span>key </span><span style="color:#f92672;">== </span><span style="color:#e6db74;">&quot;name&quot;</span><span>:
+</span><span>                num_tokens </span><span style="color:#f92672;">+= </span><span>tokens_per_name
+</span><span>    num_tokens </span><span style="color:#f92672;">+= </span><span style="color:#ae81ff;">3  </span><span style="color:#75715e;"># every reply is primed with &lt;|start|&gt;assistant&lt;|message|&gt;
+</span><span>    </span><span style="color:#f92672;">return </span><span>num_tokens
+</span><span>
+</span><span>num_tokens </span><span style="color:#f92672;">= </span><span>num_tokens_from_messages(messages, </span><span style="font-style:italic;color:#fd971f;">model</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;gpt-3.5-turbo-0613&quot;</span><span>)
+</span><span style="color:#66d9ef;">print</span><span>(num_tokens)
+</span><span style="color:#75715e;"># output: 13
+</span></code></pre>
+<h1 id="sources">Sources</h1>
+<ul>
+<li>https://openai.com/pricing</li>
+<li>https://github.com/openai/tiktoken</li>
+<li>https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb</li>
+</ul>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

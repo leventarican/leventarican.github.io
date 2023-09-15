@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:800px; margin:16px auto;">
+            
+<h1 class="title">
+    ESP32
+</h1>
+<p class="subtitle"><strong>2023-09-15</strong></p>
+<h1 id="esp32">ESP32</h1>
+<h1 id="about">About</h1>
+<p>Programming with ESP32: The ESP32 is a microcontroller widely used in embedded systems and IoT (Internet of Things) applications. This guide provides an introduction to programming with the ESP32, allowing you to harness its capabilities for various projects and IoT innovations.</p>
+<h1 id="system">System</h1>
+<ul>
+<li>Espressif ESP-32 / ESP-WROOM-32 Chipset, NodeMCU Development Board </li>
+<li>usb-b to usb-a cable</li>
+<li>computer with linux</li>
+</ul>
+<h1 id="check">Check</h1>
+<p>Connect SoC (ESP32) with usb cable to computer. Do a check if ESP32 is visible.</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>ls</span><span style="font-style:italic;color:#fd971f;"> -l</span><span> /dev/ttyUSB</span><span style="color:#f92672;">*
+</span><span>crw-rw----+ 1 root dialout 188, 0 Sep 15 21:29 /dev/ttyUSB0
+</span></code></pre>
+<p>You may also need to your user to group <code>dialout</code> in order to accesible by arduino.</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>sudo usermod</span><span style="font-style:italic;color:#fd971f;"> -a -G</span><span> dialout </span><span style="color:#f92672;">&lt;</span><span>user</span><span style="color:#f92672;">&gt;
+</span></code></pre>
+<h1 id="arduino">Arduino</h1>
+<ul>
+<li>Download Arduino IDE 2.2.1 from Arduino Software.</li>
+<li>Select <code>ESP32 Dev Module</code> from the &quot;Boards&quot; menu. This will install the <code>Platform esp32:esp32@2.0.11.</code></li>
+<li>Ensure the Python pyserial module is installed for serial communication. Make sure you install it for the correct Python version, especially if your Arduino IDE uses a different version of Python than your system:</li>
+</ul>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>python3.11</span><span style="font-style:italic;color:#fd971f;"> -m</span><span> pip install pyserial
+</span></code></pre>
+<h1 id="about-the-hardware">About the hardware</h1>
+<p>UART, which stands for Universal Asynchronous Receiver-Transmitter, is used for serial communication.</p>
+<h2 id="baud">Baud</h2>
+<p>Baud Rate: The baud rate represents the number of <strong>signal units per second</strong> that are transmitted over a communication channel. </p>
+<p>9600 Baud: This means the signal can change state 9,600 times per second. In the context of UART, it typically means you can transmit 9,600 <strong>bits per second</strong>.</p>
+<h2 id="data-frame">Data frame</h2>
+<p>In UART, data is packaged in 8-bit frames, which include a start bit, data bits, an optional parity bit, and stop bit(s).</p>
+<h2 id="system-diagram">System diagram</h2>
+<ul>
+<li>TX: Transmit</li>
+<li>RX: Receive</li>
+</ul>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span> ESP32-WROOM                                                                             Computer           
+</span><span> +-----------------------------------------------------------------------+               +------------+     
+</span><span> |                                                                       |               |            |     
+</span><span> |  +------------+                      +-------------+                  |   USB cable   |            |     
+</span><span> |  |            |  TX             RX   |             |        USB Port  | &lt;-----------&gt; |  USB Port  |     
+</span><span> |  |            |  ------------------&gt; |             |                  |    data +     |            |     
+</span><span> |  |            |                      |             |                  |    power      |            |     
+</span><span> |  | ESP32 Chip |                      | CP210x Chip |                  |               |            |     
+</span><span> |  |            |                      | USB-to-UART |                  |               |            |     
+</span><span> |  |            |  &lt;------------------ |             |                  |               |            |     
+</span><span> |  |            |  RX             TX   |             |                  |               |            |     
+</span><span> |  |            |                      |             |                  |               |            |     
+</span><span> |  +------------+                      +-------------+                  |               |            |     
+</span><span> |                                                                       |               |            |     
+</span><span> +-----------------------------------------------------------------------+               +------------+     
+</span></code></pre>
+<h1 id="code">Code</h1>
+<p>Now here we have a code example that you can deploy this code to your ESP32 to scan for nearby WiFi networks endlessly. The results are sent over serial communication, and you can read them in the Arduino IDE's Serial Monitor. Plus, with each scan, the built-in LED on the ESP32 lights up.</p>
+<pre data-lang="cpp" style="background-color:#272822;color:#f8f8f2;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#f92672;">#include </span><span style="color:#e6db74;">&lt;WiFi.h&gt;
+</span><span>
+</span><span style="color:#75715e;">// Define the GPIO pin for the built-in LED
+</span><span style="color:#f92672;">#define </span><span>LED_PIN </span><span style="color:#ae81ff;">2
+</span><span>
+</span><span style="font-style:italic;color:#66d9ef;">void </span><span style="color:#a6e22e;">setup</span><span>() {
+</span><span>  </span><span style="color:#75715e;">// Initialize Serial communication
+</span><span>  Serial.begin(</span><span style="color:#ae81ff;">115200</span><span>);
+</span><span>  delay(</span><span style="color:#ae81ff;">1000</span><span>); </span><span style="color:#75715e;">// Give some time for Serial to initialize
+</span><span>
+</span><span>  </span><span style="color:#75715e;">// Print a welcome message
+</span><span>  Serial.println(</span><span style="color:#e6db74;">&quot;ESP32 Demonstration Program&quot;</span><span>);
+</span><span>
+</span><span>  </span><span style="color:#75715e;">// Initialize the built-in LED as an output
+</span><span>  pinMode(LED_PIN, OUTPUT);
+</span><span>}
+</span><span>
+</span><span style="font-style:italic;color:#66d9ef;">void </span><span style="color:#a6e22e;">loop</span><span>() {
+</span><span>  </span><span style="color:#75715e;">// Blink the built-in LED
+</span><span>  digitalWrite(LED_PIN, HIGH);
+</span><span>  delay(</span><span style="color:#ae81ff;">1000</span><span>);
+</span><span>  digitalWrite(LED_PIN, LOW);
+</span><span>  delay(</span><span style="color:#ae81ff;">1000</span><span>);
+</span><span>
+</span><span>  </span><span style="color:#75715e;">// Scan for nearby WiFi networks
+</span><span>  Serial.println(</span><span style="color:#e6db74;">&quot;Scanning for WiFi networks...&quot;</span><span>);
+</span><span>  </span><span style="font-style:italic;color:#66d9ef;">int</span><span> n </span><span style="color:#f92672;">=</span><span> WiFi.scanNetworks();
+</span><span>  </span><span style="color:#f92672;">if </span><span>(n </span><span style="color:#f92672;">== </span><span style="color:#ae81ff;">0</span><span>) {
+</span><span>    Serial.println(</span><span style="color:#e6db74;">&quot;No networks found&quot;</span><span>);
+</span><span>  } </span><span style="color:#f92672;">else </span><span>{
+</span><span>    Serial.print(n);
+</span><span>    Serial.println(</span><span style="color:#e6db74;">&quot; networks found&quot;</span><span>);
+</span><span>    </span><span style="color:#f92672;">for </span><span>(</span><span style="font-style:italic;color:#66d9ef;">int</span><span> i </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">0</span><span>; i </span><span style="color:#f92672;">&lt;</span><span> n; </span><span style="color:#f92672;">++</span><span>i) {
+</span><span>      </span><span style="color:#75715e;">// Print SSID and signal strength for each network
+</span><span>      Serial.print(i </span><span style="color:#f92672;">+ </span><span style="color:#ae81ff;">1</span><span>);
+</span><span>      Serial.print(</span><span style="color:#e6db74;">&quot;: &quot;</span><span>);
+</span><span>      Serial.print(WiFi.SSID(i));
+</span><span>      Serial.print(</span><span style="color:#e6db74;">&quot; (&quot;</span><span>);
+</span><span>      Serial.print(WiFi.RSSI(i));
+</span><span>      Serial.println(</span><span style="color:#e6db74;">&quot; dBm)&quot;</span><span>);
+</span><span>      delay(</span><span style="color:#ae81ff;">10</span><span>);
+</span><span>    }
+</span><span>  }
+</span><span>  delay(</span><span style="color:#ae81ff;">5000</span><span>); </span><span style="color:#75715e;">// Wait for 5 seconds before scanning again
+</span><span>}
+</span></code></pre>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

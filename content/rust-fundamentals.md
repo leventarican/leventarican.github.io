@@ -26,6 +26,10 @@ cargo run
 # Crates
 _crates_ are _libraries_
 
+# Memory Management
+Rust manages memory with __ownership__ system. While some languages clean up unused memory automatically (__gargabe collector__) or require programmers (__allocate__ and __free__) to do it.
+Each value has an owner and you can borrow it.
+
 # Modules
 _modules_ are used for code organizing
 
@@ -89,10 +93,7 @@ let s: String = data.iter().map(|d| d.to_string()).rev().collect();
 
 > You may ask what is `vec!`. It's a macro, an alias to create new `Vec` and initialize with values.
 
-# Links
-* https://doc.rust-lang.org/rust-by-example/trait.html
-* https://doc.rust-lang.org/rust-by-example/custom_types/structs.html
-* https://doc.rust-lang.org/rust-by-example/fn/methods.html
-* https://doc.rust-lang.org/rust-by-example/std/str.html
+# Sources
+* https://doc.rust-lang.org/rust-by-example/
 * https://mkaz.blog/working-with-rust/
 * Android and Rust AOSP: https://source.android.com/setup/build/rust/building-rust-modules/overview

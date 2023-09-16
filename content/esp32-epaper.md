@@ -1,5 +1,5 @@
 +++
-title = "ESP32"
+title = "ESP32 - e-Paper / E-Ink"
 date = 2023-09-16
 +++
 
@@ -14,6 +14,9 @@ This document gives an overview how to developer esp32 with a connected epaper (
     * 200x200, 1.54inch E-Ink display module, three-color
 * usb-b to usb-a cable
 * computer with linux
+* programming of esp32 with arduino or compareable
+    
+> arduino also provides the option to install libraries: open menu > Manage Libraries ... > install `EPD`, `GxEPD`, `GxEPD2` on demand. These libs provides also code example that you can access with menu > File > Example > `Examples from Custom Libraries`.
 
 # Interface
 

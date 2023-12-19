@@ -1,5 +1,5 @@
 +++
-title = "ChatGPT API pricing calculation"
+title = "OpenAI: ChatGPT API pricing calculation"
 date = 2023-09-14
 +++
 
@@ -14,6 +14,9 @@ We take as an example the language model _GPT-3.5 Turbo_.
 |-------------|----------------------|----------------------|
 | 4K context  | $0.0015 / 1K tokens  | $0.002 / 1K tokens   |
 | 16K context | $0.003 / 1K tokens   | $0.004 / 1K tokens   |
+
+> To see how many tokens are in a text string without making an API call, you can use OpenAI’s tiktoken Python library.
+Source: https://help.openai.com/en/articles/7232945-how-can-i-use-the-chatgpt-api
 
 # Calculation
 

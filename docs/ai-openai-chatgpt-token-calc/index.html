@@ -49,7 +49,7 @@
         <div class="container" style="width:800px; margin:16px auto;">
             
 <h1 class="title">
-    ChatGPT API pricing calculation
+    OpenAI: ChatGPT API pricing calculation
 </h1>
 <p class="subtitle"><strong>2023-09-14</strong></p>
 <h1 id="about">About</h1>
@@ -62,6 +62,10 @@
 <tr><td>4K context</td><td>$0.0015 / 1K tokens</td><td>$0.002 / 1K tokens</td></tr>
 <tr><td>16K context</td><td>$0.003 / 1K tokens</td><td>$0.004 / 1K tokens</td></tr>
 </tbody></table>
+<blockquote>
+<p>To see how many tokens are in a text string without making an API call, you can use OpenAI’s tiktoken Python library.
+Source: https://help.openai.com/en/articles/7232945-how-can-i-use-the-chatgpt-api</p>
+</blockquote>
 <h1 id="calculation">Calculation</h1>
 <p>When using the ChatGPT API, the cost is determined by two main factors: the number of tokens in the input and the number of tokens in the output. Each token has a specific price based on the model you're using.</p>
 <h2 id="example-request">Example Request</h2>

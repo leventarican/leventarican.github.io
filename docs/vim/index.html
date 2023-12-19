@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:800px; margin:16px auto;">
+            
+<h1 class="title">
+    nvim and nvim
+</h1>
+<p class="subtitle"><strong>2023-12-19</strong></p>
+<h1 id="about">About</h1>
+<p>This document gives an overview about nvim. 
+The concepts here are also applicable for vim and partially for vi.
+But I will mostly focus on nvim. But to keep it short and generall i will use vim. </p>
+<p>Originally there was <code>vi</code>, then <code>vim</code> came and finally neovim aka. <code>nvim</code> arrivied.</p>
+<h1 id="motivation">Motivation</h1>
+<p>Why am I using in some cases vim?</p>
+<p>Basically vim is installed by default on linux and mac - it's <strong>everywhere</strong>. So whenever we login to a machine we can start wird text editing.
+My other main reason is that in vim I am more <strong>focused</strong>. Especially that I not need a mouse and completely navigate via keyboard. This is the so called vim motion.
+And it's <strong>fast</strong>.</p>
+<p>For me an alternative editor to vim (but with UI) are:</p>
+<ul>
+<li>scite (scintilla)</li>
+<li>vscode</li>
+<li>geany (based on scintilla)</li>
+<li>sublime</li>
+</ul>
+<p>I used that editor's in the past to edit files from various formats. But none of them are fast as vim.</p>
+<h1 id="introduction">Introduction</h1>
+<p>Now as mentioned vim is by default installed on your machine or server.
+By hitting <code>vim</code> in console you are ready to code. </p>
+<p>Vim has by default vim has a file explorer <code>netrw</code>. </p>
+<p>When enriching with plugins it can even more.</p>
+<p>You can even attach a language server (protocoll) so that code completion is possible. But in such cases i use IDE's like <code>intellij</code> or <code>eclipse</code>.</p>
+<p>To keep the dependency less I used minimum plugins. The plugins should work for both <code>vim</code> and <code>nvim</code>.</p>
+<h1 id="configuration">Configuration</h1>
+<p>The default vim is enough for editing text but with few plugins and colorscheme vim is more enriched.</p>
+<p>Here I give the main plugins I use:</p>
+<ul>
+<li><code>telescope</code>   - with this plugin you can filter files in your current working directy. So we can navigate fast in our current working directory.</li>
+<li><code>lualine</code>     - give you a good overview in status line. Like which vim mode or git branch</li>
+<li><code>nvim-treesitter</code> - parses your text as tree and gives you syntax highlighting.</li>
+</ul>
+<p>To install the plugins I use nvim <code>packer</code>.</p>
+<p>A short note here. <code>vim</code> works with <code>.vim</code> files <code>nvim</code> can also understand <code>.lua</code> files.
+So when configuring <code>nvim</code> i prefer <code>.lua</code>.</p>
+<p>Git repository: https://github.com/leventarican/nvim-config</p>
+<h1 id="cheatsheet">Cheatsheet</h1>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>i           insert mode
+</span><span>ESC         normal mode
+</span><span>v           visual mode: mark
+</span><span>
+</span><span>hjkl        left,down,up,right - for arrow keys you can remap in .vimrc
+</span><span>
+</span><span>w           next word (or SHIFT+arrow-right)
+</span><span>b           back next word (or SHIFT+arrow-left)
+</span><span>0           jump to begin of line
+</span><span>CTRL+$      jump to end of line
+</span><span>
+</span><span>gg          jump to top file
+</span><span>SHIFT+gg    jump bottom file
+</span><span>
+</span><span>CTRL+ww     change windows: tab, split, etc.
+</span><span>
+</span><span># in visual mode
+</span><span>SHIFT+v     mark lines
+</span><span>STRG+v      mark vertikal
+</span><span>
+</span><span># in normal mode
+</span><span>cc          copy line
+</span><span>p           pase line
+</span><span>dd          delete/cut line
+</span><span>y           copy
+</span><span>yy          copy line
+</span><span>
+</span><span># clipboard: extern clipboard support can be an issue.
+</span><span>SHIFT+CTRL+v    paste; works on some terminals
+</span><span>
+</span><span>:tabnew     create new tab
+</span><span>:tabclose   close current tab
+</span><span>gt          navigate between tabs
+</span><span>
+</span><span># telescope (plugin)
+</span><span>CTRL+f      open file finder. Shortcut is manually remapped
+</span><span>CTRL+v      open file in vertical split
+</span><span>CTRL+t      open file in tab
+</span><span>
+</span><span># file explorer buildin: netrw
+</span><span>t           open file in tab window
+</span><span>:E          close window or manually remap to CTRL+e
+</span><span>%           create new file
+</span><span>d           create new directory
+</span><span>D           delete file
+</span><span>u           directory up
+</span></code></pre>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:800px; margin:16px auto;">
+            
+<h1 class="title">
+    AI model&#x27;s overview
+</h1>
+<p class="subtitle"><strong>2023-12-16</strong></p>
+<p>In 2023 a lot happend in AI. Here I list the most for me interesting AI models, systems, etc.</p>
+<p>NOTE: This page is dynamic.</p>
+<p>Table of contents:</p>
+<ul>
+<li><a href="https://leventarican.github.io/ai-model-overview/#xai">xAI</a></li>
+<li><a href="https://leventarican.github.io/ai-model-overview/#pi">pi</a></li>
+<li><a href="https://leventarican.github.io/ai-model-overview/#claude">claude</a></li>
+<li><a href="https://leventarican.github.io/ai-model-overview/#poe">poe</a></li>
+<li><a href="https://leventarican.github.io/ai-model-overview/#openai">openai</a></li>
+<li><a href="https://leventarican.github.io/ai-model-overview/#llamafile">llamafile</a> </li>
+<li><a href="https://leventarican.github.io/ai-model-overview/#uncategorized">uncategorized</a></li>
+<li></li>
+</ul>
+<h1 id="xai">xAi</h1>
+<p>AI from x.com aka. grok.</p>
+<ul>
+<li>https://x.ai/ide/docs</li>
+</ul>
+<h1 id="claude">claude</h1>
+<p>Anthropic's model. Currently not available european countries.
+Anthropic’s Claude models can also used with Amazon Bedrock API.</p>
+<ul>
+<li>https://claude.ai </li>
+<li>https://docs.anthropic.com/claude/reference/claude-on-amazon-bedrock</li>
+</ul>
+<h1 id="poe">poe</h1>
+<p>Poe is a neutral platform. You can access different providers (OpenAI, Anthropic, Google, and open source models like Llama 2 or SDXL).</p>
+<ul>
+<li>https://developer.poe.com</li>
+</ul>
+<h1 id="pi">pi</h1>
+<p>Currently no developer API.</p>
+<ul>
+<li>https://pi.ai</li>
+<li>https://inflection.ai/</li>
+</ul>
+<h1 id="google">google</h1>
+<p>Aside the known google bard. Google provides gemini (ultra, pro and nano). Nano is dedicated for mobile systems.
+Pro is already available.</p>
+<ul>
+<li>https://ai.google.dev/</li>
+<li>https://idx.dev/</li>
+</ul>
+<h1 id="openai">openai</h1>
+<p>OpenAI API provides various models for app integration.</p>
+<table><thead><tr><th><strong>Category</strong></th><th><strong>Model Type</strong></th><th><strong>Models</strong></th></tr></thead><tbody>
+<tr><td>Language Models</td><td>GPT-4 Turbo</td><td>gpt-4-1106-preview</td></tr>
+<tr><td></td><td></td><td>gpt-4-1106-vision-preview</td></tr>
+<tr><td></td><td>GPT-4</td><td>gpt-4</td></tr>
+<tr><td></td><td></td><td>gpt-4-32k</td></tr>
+<tr><td></td><td>GPT-3.5 Turbo</td><td>gpt-3.5-turbo-1106</td></tr>
+<tr><td></td><td></td><td>gpt-3.5-turbo-instruct</td></tr>
+<tr><td>Assistants API (Tools)</td><td></td><td>Retrieval</td></tr>
+<tr><td></td><td></td><td>Code interpreter</td></tr>
+<tr><td>Fine-tuning Models</td><td></td><td>gpt-3.5-turbo</td></tr>
+<tr><td></td><td></td><td>davinci-002</td></tr>
+<tr><td></td><td></td><td>babbage-002</td></tr>
+<tr><td>Embedding Models</td><td></td><td>ada v2</td></tr>
+<tr><td>Base Models</td><td></td><td>davinci-002</td></tr>
+<tr><td></td><td></td><td>babbage-002</td></tr>
+<tr><td>Other Models</td><td>Image Models</td><td>DALL·E 3</td></tr>
+<tr><td></td><td>Audio Models</td><td>Whisper (speech-to-text)</td></tr>
+<tr><td></td><td></td><td>TTS (text-to-speech)</td></tr>
+<tr><td></td><td></td><td>TTS HD</td></tr>
+</tbody></table>
+<p>Sidenote regarding <strong>ada v2</strong> and embeddings: Posted by @karpathy on X.</p>
+<blockquote>
+<p>LLM OS. Bear with me I'm still cooking.
+Specs:</p>
+<ul>
+<li>LLM: OpenAI GPT-4 Turbo 256 core (batch size) processor @ 20Hz (tok/s)</li>
+<li>RAM: 128Ktok</li>
+<li>Filesystem: Ada002</li>
+</ul>
+</blockquote>
+<h2 id="assistants-api">Assistants API</h2>
+<p>The Assistant's API allows you to create agent-based applications using our text generation models.</p>
+<p>The assistans api consists of tools: </p>
+<ul>
+<li>code interpreter: AI can run and write code i.e. when you provide.</li>
+<li>retrieval: use your internal knowledge base.</li>
+<li>functions calling: describe custom functions of app as well as external APIs.</li>
+</ul>
+<p><strong>Function calling</strong> allows developers to more reliably get structured data back from the model. </p>
+<blockquote>
+<p>Source: https://openai.com/blog/function-calling-and-other-api-updates</p>
+</blockquote>
+<p>Learn how to connect large language models to external tools.</p>
+<blockquote>
+<p>https://platform.openai.com/docs/guides/function-calling</p>
+</blockquote>
+<h2 id="custom-gpts">Custom GPTs</h2>
+<p>From November 2023, OpenAI's ChatGPT introduces the ability to create bespoke GPT models. Anticipated shortly is the launch of a specialized store for these models.</p>
+<p>Currently ChatGPT offers a way to create a GPT</p>
+<blockquote>
+<p>Customize a version of ChatGPT for specific purpose.</p>
+</blockquote>
+<p>Enhancing Security in Custom GPT Model Creation</p>
+<p>When creating custom GPT models, it's crucial to safeguard against prompt injections that could reveal sensitive instructions. To enhance security, employ mechanisms like 'rules' or a 'seed hash'. During the creation process, you can generate a unique seed hash. This seed hash acts as a key; only those who possess it can access or view the specific instructions of the model.</p>
+<p>This approach ensures that your custom GPT model remains secure and its usage is controlled, thereby maintaining the integrity and confidentiality of your application.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li>https://platform.openai.com/docs/assistants</li>
+<li>Assistants API tools: https://platform.openai.com/docs/assistants/tools</li>
+<li>https://platform.openai.com/playground &gt; Assistants</li>
+<li>GPT-4V(ision) system card: https://openai.com/research/gpt-4v-system-card</li>
+<li>OpenAI DevDay, Opening Keynote: https://www.youtube.com/watch?v=U9mJuUkhUzk</li>
+<li>https://openai.com/blog/introducing-gpts</li>
+</ul>
+<h1 id="llamafile">llamafile</h1>
+<p>Powered by mozilla. It combines <code>llama.cpp</code> with <code>cosmopolitan</code> to make a single file executable. Either in console or browser.</p>
+<ul>
+<li>https://hacks.mozilla.org/2023/11/introducing-llamafile/</li>
+<li>https://github.com/Mozilla-Ocho/llamafile</li>
+</ul>
+<h1 id="uncategorized">uncategorized</h1>
+<ul>
+<li>Amber model and CrystalCoder model (completely open source ?) - https://www.llm360.ai/</li>
+<li>JetBrains AI - https://www.jetbrains.com/de-de/ai/</li>
+<li>nanoGPT - https://github.com/karpathy/nanoGPT, https://lambdalabs.com/ </li>
+<li>the github for ML models - https://huggingface.co</li>
+<li>https://stability.ai/</li>
+<li>https://brev.dev/</li>
+<li>run AI models - https://modal.com/docs/examples/doc_ocr_jobs</li>
+<li>deploy apps and nextJS - https://vercel.com</li>
+<li>generate user interface with AI, by vercel - https://v0.dev/faq</li>
+<li>https://supabase.com</li>
+</ul>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

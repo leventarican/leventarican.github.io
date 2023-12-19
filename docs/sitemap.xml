@@ -4,6 +4,14 @@
         <loc>https://leventarican.github.io/</loc>
     </url>
     <url>
+        <loc>https://leventarican.github.io/ai-model-overview/</loc>
+        <lastmod>2023-12-16</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/ai-openai-chatgpt-token-calc/</loc>
+        <lastmod>2023-09-14</lastmod>
+    </url>
+    <url>
         <loc>https://leventarican.github.io/algorithms/</loc>
         <lastmod>2021-03-07</lastmod>
     </url>
@@ -46,10 +54,6 @@
     <url>
         <loc>https://leventarican.github.io/aws-computer-vision/</loc>
         <lastmod>2020-05-13</lastmod>
-    </url>
-    <url>
-        <loc>https://leventarican.github.io/chatgpt-token-calc/</loc>
-        <lastmod>2023-09-14</lastmod>
     </url>
     <url>
         <loc>https://leventarican.github.io/cpp-dynamic-memory/</loc>
@@ -98,5 +102,9 @@
     <url>
         <loc>https://leventarican.github.io/sse/</loc>
         <lastmod>2021-03-02</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/vim/</loc>
+        <lastmod>2023-12-19</lastmod>
     </url>
 </urlset>

@@ -49,7 +49,7 @@
         <div class="container" style="width:800px; margin:16px auto;">
             
 <h1 class="title">
-    nvim and nvim
+    vim and nvim
 </h1>
 <p class="subtitle"><strong>2023-12-19</strong></p>
 <h1 id="about">About</h1>
@@ -70,6 +70,14 @@ And it's <strong>fast</strong>.</p>
 <li>sublime</li>
 </ul>
 <p>I used that editor's in the past to edit files from various formats. But none of them are fast as vim.</p>
+<p>Another thing is that i usually done a lot of things in <code>console</code>. The reason for that are various. </p>
+<ul>
+<li>The console is deterministic. </li>
+<li>Text is universal. </li>
+<li>Easy to automate.</li>
+</ul>
+<p>One more thing is when editing text in any kind of program we navigate using usually with arrow keys. Pressing it several times.
+Instead of hitting arrow keys several times we can invest time in vim shortcut's like <code>dw</code> - delete word right from cursor.</p>
 <h1 id="introduction">Introduction</h1>
 <p>Now as mentioned vim is by default installed on your machine or server.
 By hitting <code>vim</code> in console you are ready to code. </p>
@@ -100,6 +108,9 @@ So when configuring <code>nvim</code> i prefer <code>.lua</code>.</p>
 </span><span>b           back next word (or SHIFT+arrow-left)
 </span><span>0           jump to begin of line
 </span><span>CTRL+$      jump to end of line
+</span><span>u           undo change
+</span><span>dw          delete word right
+</span><span>db          delete word left
 </span><span>
 </span><span>gg          jump to top file
 </span><span>SHIFT+gg    jump bottom file
@@ -117,7 +128,16 @@ So when configuring <code>nvim</code> i prefer <code>.lua</code>.</p>
 </span><span>y           copy
 </span><span>yy          copy line
 </span><span>
+</span><span># command mode with &lt;:&gt;
+</span><span>tab         completion menu :+tab (iterate pressing tab)
+</span><span>
 </span><span># clipboard: extern clipboard support can be an issue.
+</span><span>
+</span><span># in case not working install xclib on linux
+</span><span># sudo apt-get install xclip
+</span><span>
+</span><span># and set clipboard settings in your vim lua script
+</span><span># vim.opt.clipboard:append(&quot;unnamedplus&quot;)
 </span><span>SHIFT+CTRL+v    paste; works on some terminals
 </span><span>
 </span><span>:tabnew     create new tab

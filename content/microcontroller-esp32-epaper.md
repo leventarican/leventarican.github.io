@@ -1,5 +1,5 @@
 +++
-title = "ESP32 - e-Paper / E-Ink"
+title = "Microcontroller: ESP32 - e-Paper / E-Ink"
 date = 2023-09-16
 +++
 

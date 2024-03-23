@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:800px; margin:16px auto;">
+            
+<h1 class="title">
+    Microcontroller: ESP8266 MicroPython
+</h1>
+<p class="subtitle"><strong>2024-03-23</strong></p>
+<h1 id="esp8266-micropython">ESP8266 MicroPython</h1>
+<h1 id="about">About</h1>
+<p>Programm the ESP8266 using MicroPython. Using MicroPython you are able to run code directly on target machine without compile and upload.</p>
+<h1 id="system">System</h1>
+<ul>
+<li>Espressif ESP-8266 </li>
+<li>usb-b to usb-a cable</li>
+<li>computer with linux</li>
+</ul>
+<h1 id="install">Install</h1>
+<p>Before install ensure that you have <code>esptool.py</code>.</p>
+<p>The easiest way to get it is to install app <code>thonny</code>. You can install it with: <code>snap install thonny</code> on ubuntu. thonny is an python IDE ideal for MicroPython.</p>
+<p>Get MicroPython firmware: https://micropython.org/download/ESP8266_GENERIC/</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span style="color:#75715e;"># /snap/thonny/214/bin/python3.10 distribution incl. esptool.py
+</span><span style="color:#75715e;"># erase flash
+</span><span>python3.10</span><span style="font-style:italic;color:#fd971f;"> -u -m</span><span> esptool</span><span style="font-style:italic;color:#fd971f;"> --port</span><span> /dev/ttyUSB0 erase_flash
+</span><span style="color:#75715e;"># install micropython
+</span><span>python3.10</span><span style="font-style:italic;color:#fd971f;"> -u -m</span><span> esptool</span><span style="font-style:italic;color:#fd971f;"> --port</span><span> /dev/ttyUSB0</span><span style="font-style:italic;color:#fd971f;"> --baud</span><span> 460800 write_flash</span><span style="font-style:italic;color:#fd971f;"> --flash_size</span><span style="color:#f92672;">=</span><span>detect 0 ESP8266_GENERIC-20240105-v1.22.1.bin
+</span></code></pre>
+<h1 id="code">Code</h1>
+<p>Here is an example code snippet to give a preview of MicroPython features.</p>
+<pre data-lang="python" style="background-color:#272822;color:#f8f8f2;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#75715e;"># put this in boot.py to automatically connect to your WiFi network
+</span><span style="font-style:italic;color:#f92672;">def </span><span style="color:#a6e22e;">do_connect</span><span>():
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(</span><span style="color:#e6db74;">&#39;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">connecting to network (WIFI / WLAN) ...&#39;</span><span>)
+</span><span>    </span><span style="color:#f92672;">import </span><span>network
+</span><span>    sta_if </span><span style="color:#f92672;">= </span><span>network.WLAN(network.STA_IF)
+</span><span>    </span><span style="color:#f92672;">if not </span><span>sta_if.isconnected():
+</span><span>        sta_if.active(</span><span style="color:#ae81ff;">True</span><span>)
+</span><span>        SSID </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;&lt;ssid&gt;&quot;
+</span><span>        key </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;&lt;pass&gt;&quot;
+</span><span>        sta_if.connect(SSID, key)
+</span><span>        </span><span style="color:#f92672;">while not </span><span>sta_if.isconnected():
+</span><span>            </span><span style="color:#f92672;">pass
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(</span><span style="font-style:italic;color:#66d9ef;">f</span><span style="color:#e6db74;">&quot;IP address, netmask, gateway, DNS: </span><span>{sta_if.ifconfig()}</span><span style="color:#e6db74;">&quot;</span><span>)
+</span><span>
+</span><span style="color:#75715e;"># disable or enable access point
+</span><span style="font-style:italic;color:#f92672;">def </span><span style="color:#a6e22e;">access_point_enable</span><span>(</span><span style="font-style:italic;color:#fd971f;">active</span><span>):
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(</span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">access point enable: </span><span style="color:#ae81ff;">{active}</span><span style="color:#e6db74;">&quot;</span><span>)
+</span><span>    </span><span style="color:#f92672;">import </span><span>network
+</span><span>    ap_if </span><span style="color:#f92672;">= </span><span>network.WLAN(network.AP_IF)
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(</span><span style="color:#e6db74;">&quot;ap_if.active(): {ap_if.active()}&quot;</span><span>)
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(</span><span style="font-style:italic;color:#66d9ef;">f</span><span style="color:#e6db74;">&quot;IP address, netmask, gateway, DNS: </span><span>{ap_if.ifconfig()}</span><span style="color:#e6db74;">&quot;</span><span>)
+</span><span>    ap_if.active(active)
+</span><span>
+</span><span style="color:#75715e;"># make http request
+</span><span style="font-style:italic;color:#f92672;">def </span><span style="color:#a6e22e;">http_get</span><span>(</span><span style="font-style:italic;color:#fd971f;">url</span><span>):
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(</span><span style="font-style:italic;color:#66d9ef;">f</span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">make http request: </span><span>{url}</span><span style="color:#e6db74;">&quot;</span><span>)
+</span><span>    </span><span style="color:#f92672;">import </span><span>socket
+</span><span>    _, _, host, path </span><span style="color:#f92672;">= </span><span>url.split(</span><span style="color:#e6db74;">&#39;/&#39;</span><span>, </span><span style="color:#ae81ff;">3</span><span>)
+</span><span>    addr </span><span style="color:#f92672;">= </span><span>socket.getaddrinfo(host, </span><span style="color:#ae81ff;">80</span><span>)[</span><span style="color:#ae81ff;">0</span><span>][</span><span style="color:#f92672;">-</span><span style="color:#ae81ff;">1</span><span>]
+</span><span>    s </span><span style="color:#f92672;">= </span><span>socket.socket()
+</span><span>    s.connect(addr)
+</span><span>    s.send(</span><span style="font-style:italic;color:#66d9ef;">bytes</span><span>(</span><span style="color:#e6db74;">&#39;GET /</span><span style="color:#ae81ff;">%s</span><span style="color:#e6db74;"> HTTP/1.0</span><span style="color:#ae81ff;">\r\n</span><span style="color:#e6db74;">Host: </span><span style="color:#ae81ff;">%s\r\n\r\n</span><span style="color:#e6db74;">&#39; </span><span style="color:#f92672;">% </span><span>(path, host), </span><span style="color:#e6db74;">&#39;utf8&#39;</span><span>))
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(</span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">RESPONSE</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">&quot;</span><span>)
+</span><span>    </span><span style="color:#f92672;">while </span><span style="color:#ae81ff;">True</span><span>:
+</span><span>        data </span><span style="color:#f92672;">= </span><span>s.recv(</span><span style="color:#ae81ff;">100</span><span>)
+</span><span>        </span><span style="color:#f92672;">if </span><span>data:
+</span><span>            </span><span style="color:#66d9ef;">print</span><span>(</span><span style="font-style:italic;color:#66d9ef;">str</span><span>(data, </span><span style="color:#e6db74;">&#39;utf8&#39;</span><span>), </span><span style="font-style:italic;color:#fd971f;">end</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&#39;&#39;</span><span>)
+</span><span>        </span><span style="color:#f92672;">else</span><span>:
+</span><span>            </span><span style="color:#f92672;">break
+</span><span>    s.close()
+</span><span>    
+</span><span style="font-style:italic;color:#f92672;">def </span><span style="color:#a6e22e;">free_space</span><span>():
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(</span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">show free space&quot;</span><span>)
+</span><span>    </span><span style="color:#f92672;">import </span><span>uos
+</span><span>    </span><span style="color:#f92672;">try</span><span>:
+</span><span>        </span><span style="color:#75715e;"># Attempt to use the statvfs function to get file system status.
+</span><span>        </span><span style="color:#75715e;"># Note: This function might not be available on all devices.
+</span><span>        fs_stat </span><span style="color:#f92672;">= </span><span>uos.statvfs(</span><span style="color:#e6db74;">&#39;/&#39;</span><span>)
+</span><span>        </span><span style="color:#75715e;"># Calculate the block size and the number of free blocks.
+</span><span>        f_bsize </span><span style="color:#f92672;">= </span><span>fs_stat[</span><span style="color:#ae81ff;">0</span><span>]
+</span><span>        f_bfree </span><span style="color:#f92672;">= </span><span>fs_stat[</span><span style="color:#ae81ff;">3</span><span>]
+</span><span>        </span><span style="color:#75715e;"># Calculate free space in bytes.
+</span><span>        free_space_bytes </span><span style="color:#f92672;">= </span><span>f_bsize </span><span style="color:#f92672;">* </span><span>f_bfree
+</span><span>        </span><span style="color:#66d9ef;">print</span><span>(</span><span style="color:#e6db74;">&quot;Free space:&quot;</span><span>, free_space_bytes, </span><span style="color:#e6db74;">&quot;bytes&quot;</span><span>)
+</span><span>        </span><span style="color:#66d9ef;">print</span><span>(</span><span style="color:#e6db74;">&quot;Free space:&quot;</span><span>, free_space_bytes</span><span style="color:#f92672;">/</span><span style="color:#ae81ff;">1024</span><span style="color:#f92672;">/</span><span style="color:#ae81ff;">1024</span><span>, </span><span style="color:#e6db74;">&quot;MB&quot;</span><span>)
+</span><span>    </span><span style="color:#f92672;">except </span><span style="font-style:italic;color:#66d9ef;">AttributeError</span><span>:
+</span><span>        </span><span style="color:#66d9ef;">print</span><span>(</span><span style="color:#e6db74;">&quot;Function not supported on this device.&quot;</span><span>)
+</span><span>
+</span><span style="color:#75715e;"># Define the size of the file to be 512KB
+</span><span style="color:#75715e;"># example size = 512 * 1024  # 512KB
+</span><span style="font-style:italic;color:#f92672;">def </span><span style="color:#a6e22e;">create_file</span><span>(</span><span style="font-style:italic;color:#fd971f;">size</span><span>):
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(</span><span style="font-style:italic;color:#66d9ef;">f</span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">create random data random_data.bin with size: </span><span>{size}</span><span style="color:#e6db74;">&quot;</span><span>)
+</span><span>    </span><span style="color:#f92672;">import </span><span>os
+</span><span>    </span><span style="color:#75715e;"># Open a new file in write-binary (&#39;wb&#39;) mode
+</span><span>    </span><span style="color:#f92672;">with </span><span style="color:#66d9ef;">open</span><span>(</span><span style="color:#e6db74;">&#39;random_data.bin&#39;</span><span>, </span><span style="color:#e6db74;">&#39;wb&#39;</span><span>) </span><span style="color:#f92672;">as </span><span>file:
+</span><span>        </span><span style="color:#75715e;"># Since generating and writing 512KB of data at once might be too much for some devices,
+</span><span>        </span><span style="color:#75715e;"># we&#39;ll do it in smaller chunks. Here, we use 1024 bytes (1KB) chunks.
+</span><span>        chunk_size </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">1024
+</span><span>        </span><span style="color:#f92672;">for </span><span>_ </span><span style="color:#f92672;">in </span><span style="color:#66d9ef;">range</span><span>(size </span><span style="color:#f92672;">// </span><span>chunk_size):
+</span><span>            </span><span style="color:#75715e;"># Generate a chunk of random bytes
+</span><span>            chunk </span><span style="color:#f92672;">= </span><span>os.urandom(chunk_size)
+</span><span>            </span><span style="color:#75715e;"># Write the chunk to the file
+</span><span>            file.write(chunk)
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(</span><span style="color:#e6db74;">&#39;File with 512KB of random data created.&#39;</span><span>)
+</span><span>    
+</span><span style="font-style:italic;color:#f92672;">def </span><span style="color:#a6e22e;">delete_file</span><span>(</span><span style="font-style:italic;color:#fd971f;">name</span><span>):
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(</span><span style="font-style:italic;color:#66d9ef;">f</span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">delete file (folder) name: </span><span>{name}</span><span style="color:#e6db74;">&quot;</span><span>)
+</span><span>    </span><span style="color:#f92672;">import </span><span>os
+</span><span>    </span><span style="color:#f92672;">try</span><span>:
+</span><span>        os.remove(name)
+</span><span>        </span><span style="color:#66d9ef;">print</span><span>(</span><span style="font-style:italic;color:#66d9ef;">f</span><span style="color:#e6db74;">&#39;File </span><span>{name}</span><span style="color:#e6db74;"> deleted successfully.&#39;</span><span>)
+</span><span>    </span><span style="color:#f92672;">except </span><span style="font-style:italic;color:#66d9ef;">OSError</span><span>:
+</span><span>        </span><span style="color:#66d9ef;">print</span><span>(</span><span style="font-style:italic;color:#66d9ef;">f</span><span style="color:#e6db74;">&#39;Error: File </span><span>{name}</span><span style="color:#e6db74;"> not found or could not be deleted.&#39;</span><span>)
+</span><span>
+</span><span style="font-style:italic;color:#f92672;">def </span><span style="color:#a6e22e;">list_root_directory</span><span>():
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(</span><span style="font-style:italic;color:#66d9ef;">f</span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">list root directory&quot;</span><span>)
+</span><span>    </span><span style="color:#f92672;">import </span><span>os
+</span><span>    dirs </span><span style="color:#f92672;">= </span><span>os.listdir(</span><span style="color:#e6db74;">&quot;.&quot;</span><span>)
+</span><span>    </span><span style="color:#f92672;">for </span><span>file </span><span style="color:#f92672;">in </span><span>dirs:
+</span><span>       </span><span style="color:#66d9ef;">print</span><span>(file)
+</span><span>       
+</span><span style="font-style:italic;color:#f92672;">def </span><span style="color:#a6e22e;">system_info</span><span>():
+</span><span>    </span><span style="color:#f92672;">import </span><span>machine
+</span><span>    freq </span><span style="color:#f92672;">= </span><span>machine.freq()          </span><span style="color:#75715e;"># get the current frequency of the CPU
+</span><span>    </span><span style="color:#75715e;">#machine.freq(160000000) # set the CPU frequency to 160 MHz
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(</span><span style="font-style:italic;color:#66d9ef;">f</span><span style="color:#e6db74;">&quot;</span><span style="color:#ae81ff;">\n</span><span style="color:#e6db74;">CPU frequency: </span><span>{freq</span><span style="color:#f92672;">/</span><span style="color:#ae81ff;">1000000</span><span>}</span><span style="color:#e6db74;"> Mhz&quot;</span><span>)
+</span><span>    </span><span style="color:#f92672;">import </span><span>os
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(os.uname())
+</span><span>    </span><span style="color:#f92672;">import </span><span>sys
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(sys.modules.keys())
+</span><span>    </span><span style="color:#f92672;">import </span><span>gc
+</span><span>    </span><span style="color:#66d9ef;">print</span><span>(</span><span style="font-style:italic;color:#66d9ef;">f</span><span style="color:#e6db74;">&quot;free memory: </span><span>{gc.mem_free()}</span><span style="color:#e6db74;"> bytes&quot;</span><span>)
+</span><span>
+</span><span style="color:#66d9ef;">print</span><span>(</span><span style="color:#e6db74;">&quot;# START PROGRAM&quot;</span><span>)
+</span><span>
+</span><span style="color:#75715e;"># OS
+</span><span style="color:#75715e;">#delete_file(&quot;foo&quot;)
+</span><span style="color:#75715e;">#delete_file(&quot;random_data.bin&quot;)
+</span><span style="color:#75715e;">#create_file(512*2*1024)
+</span><span>free_space()
+</span><span>list_root_directory()
+</span><span>
+</span><span style="color:#75715e;"># NETWORK
+</span><span style="color:#75715e;">#do_connect()
+</span><span style="color:#75715e;">#access_point_enable(True)
+</span><span>url </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;http://checkip.amazonaws.com/&quot;
+</span><span>http_get(url)
+</span><span>
+</span><span style="color:#75715e;"># machine
+</span><span>system_info()
+</span><span>
+</span><span style="color:#66d9ef;">print</span><span>(</span><span style="color:#e6db74;">&quot;# END PROGRAM&quot;</span><span>)
+</span></code></pre>
+<h1 id="links">Links</h1>
+<ul>
+<li>MicroPython firmware: https://micropython.org/download/ESP8266_GENERIC/</li>
+</ul>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

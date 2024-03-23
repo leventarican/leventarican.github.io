@@ -49,7 +49,7 @@
         <div class="container" style="width:800px; margin:16px auto;">
             
 <h1 class="title">
-    ESP32
+    Microcontroller: ESP32
 </h1>
 <p class="subtitle"><strong>2023-09-15</strong></p>
 <h1 id="esp32">ESP32</h1>
@@ -67,7 +67,7 @@
 </span><span>crw-rw----+ 1 root dialout 188, 0 Sep 15 21:29 /dev/ttyUSB0
 </span></code></pre>
 <p>You may also need to your user to group <code>dialout</code> in order to accesible by arduino.</p>
-<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>sudo usermod</span><span style="font-style:italic;color:#fd971f;"> -a -G</span><span> dialout </span><span style="color:#f92672;">&lt;</span><span>user</span><span style="color:#f92672;">&gt;
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>sudo usermod</span><span style="font-style:italic;color:#fd971f;"> -a -G</span><span> dialout $USER
 </span></code></pre>
 <h1 id="arduino">Arduino</h1>
 <ul>

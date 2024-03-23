@@ -127,4 +127,4 @@ Powered by mozilla. It combines `llama.cpp` with `cosmopolitan` to make a single
 * deploy apps and nextJS - https://vercel.com
 * generate user interface with AI, by vercel - https://v0.dev/faq
 * https://supabase.com
-
+* whisper.cpp and llama.cpp where created from this tensor lib - https://ggml.ai/

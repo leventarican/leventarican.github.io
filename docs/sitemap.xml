@@ -64,14 +64,6 @@
         <lastmod>2021-03-02</lastmod>
     </url>
     <url>
-        <loc>https://leventarican.github.io/esp32-epaper/</loc>
-        <lastmod>2023-09-16</lastmod>
-    </url>
-    <url>
-        <loc>https://leventarican.github.io/esp32/</loc>
-        <lastmod>2023-09-15</lastmod>
-    </url>
-    <url>
         <loc>https://leventarican.github.io/go-fundamentals/</loc>
         <lastmod>2021-03-07</lastmod>
     </url>
@@ -86,6 +78,18 @@
     <url>
         <loc>https://leventarican.github.io/linux/</loc>
         <lastmod>2021-03-18</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/microcontroller-esp32-epaper/</loc>
+        <lastmod>2023-09-16</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/microcontroller-esp32/</loc>
+        <lastmod>2023-09-15</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/microcontroller-esp8266-micropython/</loc>
+        <lastmod>2024-03-23</lastmod>
     </url>
     <url>
         <loc>https://leventarican.github.io/microcontroller-from-scratch/</loc>

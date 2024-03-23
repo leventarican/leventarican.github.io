@@ -1,5 +1,5 @@
 +++
-title = "nvim and nvim"
+title = "vim and nvim"
 date = 2023-12-19
 +++
 
@@ -24,6 +24,14 @@ For me an alternative editor to vim (but with UI) are:
 * sublime
 
 I used that editor's in the past to edit files from various formats. But none of them are fast as vim.
+
+Another thing is that i usually done a lot of things in `console`. The reason for that are various. 
+* The console is deterministic. 
+* Text is universal. 
+* Easy to automate.
+
+One more thing is when editing text in any kind of program we navigate using usually with arrow keys. Pressing it several times.
+Instead of hitting arrow keys several times we can invest time in vim shortcut's like `dw` - delete word right from cursor.
 
 # Introduction
 Now as mentioned vim is by default installed on your machine or server.
@@ -65,6 +73,9 @@ w           next word (or SHIFT+arrow-right)
 b           back next word (or SHIFT+arrow-left)
 0           jump to begin of line
 CTRL+$      jump to end of line
+u           undo change
+dw          delete word right
+db          delete word left
 
 gg          jump to top file
 SHIFT+gg    jump bottom file
@@ -82,7 +93,16 @@ dd          delete/cut line
 y           copy
 yy          copy line
 
+# command mode with <:>
+tab         completion menu :+tab (iterate pressing tab)
+
 # clipboard: extern clipboard support can be an issue.
+
+# in case not working install xclib on linux
+# sudo apt-get install xclip
+
+# and set clipboard settings in your vim lua script
+# vim.opt.clipboard:append("unnamedplus")
 SHIFT+CTRL+v    paste; works on some terminals
 
 :tabnew     create new tab

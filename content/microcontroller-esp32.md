@@ -1,5 +1,5 @@
 +++
-title = "ESP32"
+title = "Microcontroller: ESP32"
 date = 2023-09-15
 +++
 
@@ -22,7 +22,7 @@ crw-rw----+ 1 root dialout 188, 0 Sep 15 21:29 /dev/ttyUSB0
 
 You may also need to your user to group `dialout` in order to accesible by arduino.
 ```bash
-sudo usermod -a -G dialout <user>
+sudo usermod -a -G dialout $USER
 ```
 
 # Arduino

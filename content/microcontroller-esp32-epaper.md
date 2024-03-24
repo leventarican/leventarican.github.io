@@ -6,15 +6,15 @@ date = 2023-09-16
 # About
 This document gives an overview how to developer esp32 with a connected epaper (E-Ink).
 
-# Hardware
+# Requirements
 * Espressif ESP-32 / ESP-WROOM-32 Chipset, NodeMCU Development Board 
-* waveshare epaper
-    * SKU: 13338 
-    * 1.54inch e-Paper Module (B) 
-    * 200x200, 1.54inch E-Ink display module, three-color
 * usb-b to usb-a cable
 * computer with linux
-* programming of esp32 with arduino or compareable
+* epaper: waveshare
+    * 200x200, 1.54inch E-Ink display module, three-color, SPI interface | `WFT0000CZ04` 
+    * SKU: 13338 
+    * 1.54inch e-Paper Module (B) 
+* ide: arduino ide
     
 > arduino also provides the option to install libraries: open menu > Manage Libraries ... > install `EPD`, `GxEPD`, `GxEPD2` on demand. These libs provides also code example that you can access with menu > File > Example > `Examples from Custom Libraries`.
 
@@ -23,62 +23,49 @@ This document gives an overview how to developer esp32 with a connected epaper (
 Here is a reference of the pins.
 
 ```
-| SYMBOL | DESCRIPTION                                        |
-| ------ | -------------------------------------------------- |
-| VCC    | 3.3V/5V                                            |
-| GND    | Ground                                             |
-| DIN    | SPI MOSI pin                                       |
-| CLK    | SPI SCK pin                                        |
-| CS     | SPI chip selection, low active                     |
-| DC     | Data/Command selection (high for data, low for command) |
-| RST    | External reset, low active                         |
-| BUSY   | Busy status output, low active                     |
+| SYMBOL | DESCRIPTION                                                  |
+| ------ | ------------------------------------------------------------ |
+| VCC    | 3.3V/5V                                                      |
+| GND    | Ground                                                       |
+| DIN    | SPI MOSI pin                                                 |
+| CLK    | SPI SCK pin, SCL                                             |
+| CS     | SPI chip selection, low active, chip enable, SS slave select |
+| DC     | Data/Command selection (high for data, low for command)      |
+| RST    | External reset, low active                                   |
+| BUSY   | Busy status output, low active                               |
+
+Serial Data (SDA) and Serial Clock (SCL)
 ```
+
 Source: https://www.waveshare.com/1.54inch-e-paper-module-b.htm
 
-# Example
-Waveshare provides a wifi demo ~> `Loader_esp32wf` that you can use to get started:
-* https://www.waveshare.com/wiki/E-Paper_ESP32_Driver_Board#Download_Demo
-* https://files.waveshare.com/upload/5/50/E-Paper_ESP32_Driver_Board_Code.7z
+# Example: GxEPD2
 
-In this demo, a server is loaded onto the ESP32, allowing you to drag and drop an image in 200x200 size and upload it to the e-paper display.
+Library `GxEPD2` provides an example: `GxEPD2_WS_ESP32_Driver.ino`.
+In Ardiuno you can install it as library.
 
-To setup the demo, load the example in arduino IDE > Open ... > `Loader_esp32wf.ino`. Then edit wifi configuration in `srvr.h`:
+In code set following values to apply for waveshare 1.54inch e-Paper Module (B) 
 ```cpp
-/* SSID and password of your WiFi net ----------------------------------------*/
-const char *ssid = ""; //"your ssid";
-const char *password = "";   //"your password";
-
-/* Static IP address Settings ------------------------------------------------*/
-IPAddress staticIP(192, 168, 178, 111);
-IPAddress gateway(192, 168, 178, 1);
-IPAddress subnet(255, 255, 255, 0);
-IPAddress dns(192, 168, 178, 1);
+DISPLAY_CLASS = GxEPD2_3C
+DRIVER_CLASS = GxEPD2_154_Z90c
 ```
 
-Ensure that your wiring aligns with the definitions in `epd.h`:
-```cpp
-#define PIN_SPI_SCK  13
-#define PIN_SPI_DIN  14
-#define PIN_SPI_CS   15
-#define PIN_SPI_BUSY 25//19
-#define PIN_SPI_RST  26//21
-#define PIN_SPI_DC   27//22
-```
+# Example: waveshare
+Waveshare also provides an example `epd1in54b_V2-demo.ino`.
 
 # Wiring
-Here's how you should connect the components:
+
+Wiring example from: https://www.waveshare.com/wiki/E-Paper_ESP32_Driver_Board
 ```
-| Component | ESP32 Pin |
-| --------- | --------- |
-| BUSY      | G25       |
-| RST       | G26       |
-| DC        | G27       |
-| CS        | G15       |
-| CLK       | G13       |
-| DIN       | G14       |
-| GND       | GND       |
-| VCC       | 3V3       |
+Pin 	ESP32 	Description
+VCC 	3V3 	Power input (3.3V)                              gray
+GND 	GND 	Ground                                          brown
+DIN 	P14 	SPI MOSI pin, data input                        blue
+SCLK 	P13 	SPI CLK pin, clock signal input                 yellow
+CS 	    P15 	Chip selection, low active                      orange
+DC 	    P27 	Data/command, low for commands, high for data   green
+RST 	P26 	Reset, low active                               white
+BUSY 	P25 	Busy status output pin (means busy)             violet
 ```
 
 # Sources

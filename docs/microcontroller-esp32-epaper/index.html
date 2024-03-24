@@ -54,75 +54,59 @@
 <p class="subtitle"><strong>2023-09-16</strong></p>
 <h1 id="about">About</h1>
 <p>This document gives an overview how to developer esp32 with a connected epaper (E-Ink).</p>
-<h1 id="hardware">Hardware</h1>
+<h1 id="requirements">Requirements</h1>
 <ul>
 <li>Espressif ESP-32 / ESP-WROOM-32 Chipset, NodeMCU Development Board </li>
-<li>waveshare epaper
-<ul>
-<li>SKU: 13338 </li>
-<li>1.54inch e-Paper Module (B) </li>
-<li>200x200, 1.54inch E-Ink display module, three-color</li>
-</ul>
-</li>
 <li>usb-b to usb-a cable</li>
 <li>computer with linux</li>
-<li>programming of esp32 with arduino or compareable</li>
+<li>epaper: waveshare
+<ul>
+<li>200x200, 1.54inch E-Ink display module, three-color, SPI interface | <code>WFT0000CZ04</code> </li>
+<li>SKU: 13338 </li>
+<li>1.54inch e-Paper Module (B) </li>
+</ul>
+</li>
+<li>ide: arduino ide</li>
 </ul>
 <blockquote>
 <p>arduino also provides the option to install libraries: open menu &gt; Manage Libraries ... &gt; install <code>EPD</code>, <code>GxEPD</code>, <code>GxEPD2</code> on demand. These libs provides also code example that you can access with menu &gt; File &gt; Example &gt; <code>Examples from Custom Libraries</code>.</p>
 </blockquote>
 <h1 id="interface">Interface</h1>
 <p>Here is a reference of the pins.</p>
-<pre style="background-color:#272822;color:#f8f8f2;"><code><span>| SYMBOL | DESCRIPTION                                        |
-</span><span>| ------ | -------------------------------------------------- |
-</span><span>| VCC    | 3.3V/5V                                            |
-</span><span>| GND    | Ground                                             |
-</span><span>| DIN    | SPI MOSI pin                                       |
-</span><span>| CLK    | SPI SCK pin                                        |
-</span><span>| CS     | SPI chip selection, low active                     |
-</span><span>| DC     | Data/Command selection (high for data, low for command) |
-</span><span>| RST    | External reset, low active                         |
-</span><span>| BUSY   | Busy status output, low active                     |
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>| SYMBOL | DESCRIPTION                                                  |
+</span><span>| ------ | ------------------------------------------------------------ |
+</span><span>| VCC    | 3.3V/5V                                                      |
+</span><span>| GND    | Ground                                                       |
+</span><span>| DIN    | SPI MOSI pin                                                 |
+</span><span>| CLK    | SPI SCK pin, SCL                                             |
+</span><span>| CS     | SPI chip selection, low active, chip enable, SS slave select |
+</span><span>| DC     | Data/Command selection (high for data, low for command)      |
+</span><span>| RST    | External reset, low active                                   |
+</span><span>| BUSY   | Busy status output, low active                               |
+</span><span>
+</span><span>Serial Data (SDA) and Serial Clock (SCL)
 </span></code></pre>
 <p>Source: https://www.waveshare.com/1.54inch-e-paper-module-b.htm</p>
-<h1 id="example">Example</h1>
-<p>Waveshare provides a wifi demo ~&gt; <code>Loader_esp32wf</code> that you can use to get started:</p>
-<ul>
-<li>https://www.waveshare.com/wiki/E-Paper_ESP32_Driver_Board#Download_Demo</li>
-<li>https://files.waveshare.com/upload/5/50/E-Paper_ESP32_Driver_Board_Code.7z</li>
-</ul>
-<p>In this demo, a server is loaded onto the ESP32, allowing you to drag and drop an image in 200x200 size and upload it to the e-paper display.</p>
-<p>To setup the demo, load the example in arduino IDE &gt; Open ... &gt; <code>Loader_esp32wf.ino</code>. Then edit wifi configuration in <code>srvr.h</code>:</p>
-<pre data-lang="cpp" style="background-color:#272822;color:#f8f8f2;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#75715e;">/* SSID and password of your WiFi net ----------------------------------------*/
-</span><span style="color:#f92672;">const </span><span style="font-style:italic;color:#66d9ef;">char </span><span style="color:#f92672;">*</span><span>ssid </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;&quot;</span><span>; </span><span style="color:#75715e;">//&quot;your ssid&quot;;
-</span><span style="color:#f92672;">const </span><span style="font-style:italic;color:#66d9ef;">char </span><span style="color:#f92672;">*</span><span>password </span><span style="color:#f92672;">= </span><span style="color:#e6db74;">&quot;&quot;</span><span>;   </span><span style="color:#75715e;">//&quot;your password&quot;;
-</span><span>
-</span><span style="color:#75715e;">/* Static IP address Settings ------------------------------------------------*/
-</span><span>IPAddress </span><span style="color:#a6e22e;">staticIP</span><span>(</span><span style="color:#ae81ff;">192</span><span>, </span><span style="color:#ae81ff;">168</span><span>, </span><span style="color:#ae81ff;">178</span><span>, </span><span style="color:#ae81ff;">111</span><span>);
-</span><span>IPAddress </span><span style="color:#a6e22e;">gateway</span><span>(</span><span style="color:#ae81ff;">192</span><span>, </span><span style="color:#ae81ff;">168</span><span>, </span><span style="color:#ae81ff;">178</span><span>, </span><span style="color:#ae81ff;">1</span><span>);
-</span><span>IPAddress </span><span style="color:#a6e22e;">subnet</span><span>(</span><span style="color:#ae81ff;">255</span><span>, </span><span style="color:#ae81ff;">255</span><span>, </span><span style="color:#ae81ff;">255</span><span>, </span><span style="color:#ae81ff;">0</span><span>);
-</span><span>IPAddress </span><span style="color:#a6e22e;">dns</span><span>(</span><span style="color:#ae81ff;">192</span><span>, </span><span style="color:#ae81ff;">168</span><span>, </span><span style="color:#ae81ff;">178</span><span>, </span><span style="color:#ae81ff;">1</span><span>);
+<h1 id="example-gxepd2">Example: GxEPD2</h1>
+<p>Library <code>GxEPD2</code> provides an example: <code>GxEPD2_WS_ESP32_Driver.ino</code>.
+In Ardiuno you can install it as library.</p>
+<p>In code set following values to apply for waveshare 1.54inch e-Paper Module (B) </p>
+<pre data-lang="cpp" style="background-color:#272822;color:#f8f8f2;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span>DISPLAY_CLASS </span><span style="color:#f92672;">=</span><span> GxEPD2_3C
+</span><span>DRIVER_CLASS </span><span style="color:#f92672;">=</span><span> GxEPD2_154_Z90c
 </span></code></pre>
-<p>Ensure that your wiring aligns with the definitions in <code>epd.h</code>:</p>
-<pre data-lang="cpp" style="background-color:#272822;color:#f8f8f2;" class="language-cpp "><code class="language-cpp" data-lang="cpp"><span style="color:#f92672;">#define </span><span>PIN_SPI_SCK  </span><span style="color:#ae81ff;">13
-</span><span style="color:#f92672;">#define </span><span>PIN_SPI_DIN  </span><span style="color:#ae81ff;">14
-</span><span style="color:#f92672;">#define </span><span>PIN_SPI_CS   </span><span style="color:#ae81ff;">15
-</span><span style="color:#f92672;">#define </span><span>PIN_SPI_BUSY </span><span style="color:#ae81ff;">25</span><span style="color:#75715e;">//19
-</span><span style="color:#f92672;">#define </span><span>PIN_SPI_RST  </span><span style="color:#ae81ff;">26</span><span style="color:#75715e;">//21
-</span><span style="color:#f92672;">#define </span><span>PIN_SPI_DC   </span><span style="color:#ae81ff;">27</span><span style="color:#75715e;">//22
-</span></code></pre>
+<h1 id="example-waveshare">Example: waveshare</h1>
+<p>Waveshare also provides an example <code>epd1in54b_V2-demo.ino</code>.</p>
 <h1 id="wiring">Wiring</h1>
-<p>Here's how you should connect the components:</p>
-<pre style="background-color:#272822;color:#f8f8f2;"><code><span>| Component | ESP32 Pin |
-</span><span>| --------- | --------- |
-</span><span>| BUSY      | G25       |
-</span><span>| RST       | G26       |
-</span><span>| DC        | G27       |
-</span><span>| CS        | G15       |
-</span><span>| CLK       | G13       |
-</span><span>| DIN       | G14       |
-</span><span>| GND       | GND       |
-</span><span>| VCC       | 3V3       |
+<p>Wiring example from: https://www.waveshare.com/wiki/E-Paper_ESP32_Driver_Board</p>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>Pin 	ESP32 	Description
+</span><span>VCC 	3V3 	Power input (3.3V)                              gray
+</span><span>GND 	GND 	Ground                                          brown
+</span><span>DIN 	P14 	SPI MOSI pin, data input                        blue
+</span><span>SCLK 	P13 	SPI CLK pin, clock signal input                 yellow
+</span><span>CS 	    P15 	Chip selection, low active                      orange
+</span><span>DC 	    P27 	Data/command, low for commands, high for data   green
+</span><span>RST 	P26 	Reset, low active                               white
+</span><span>BUSY 	P25 	Busy status output pin (means busy)             violet
 </span></code></pre>
 <h1 id="sources">Sources</h1>
 <ul>

@@ -1,5 +1,5 @@
 +++
-title = "OpenAI: ChatGPT API pricing calculation"
+title = "AI: - OpenAI ChatGPT API pricing calculation"
 date = 2023-09-14
 +++
 

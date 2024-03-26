@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Flutter, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:800px; margin:16px auto;">
+            
+<h1 class="title">
+    AI: - AI integration with LangChain.js
+</h1>
+<p class="subtitle"><strong>2024-03-26</strong></p>
+<h1 id="about">About</h1>
+<p>In the world of programming, integrating artificial intelligence (AI) into your projects can seem daunting. However, with the right tools and a bit of guidance, it can be a straightforward and rewarding process. In this article, we'll explore how to use Langchain with OpenAI to add AI capabilities to your applications.</p>
+<p>NOTE that instead of openai other LLM's can be used.</p>
+<ul>
+<li>Groq</li>
+<li>Ollama (local)</li>
+</ul>
+<h1 id="what-is-langchain">What is Langchain</h1>
+<p>Langchain is a library that simplifies the process of integrating AI models, like those provided by OpenAI, into your applications. It provides a set of tools that make it easier to send messages to AI models and interpret their responses.</p>
+<h1 id="getting-started">Getting started</h1>
+<p>To begin, you'll need to set up your development environment. This involves installing necessary packages and setting up environment variables. We'll be using Deno, a modern runtime for JavaScript and TypeScript, to run our example</p>
+<h1 id="step-1-install-deno">Step 1: install deno</h1>
+<p>Deno is a secure runtime for JavaScript and TypeScript that is built on V8, the same engine that powers Google Chrome.</p>
+<blockquote>
+<p>Since version 1.28, Deno has native support for importing npm packages. This is done by importing using npm: specifiers.</p>
+</blockquote>
+<ul>
+<li>source: https://docs.deno.com/runtime/manual/node/npm_specifiers</li>
+</ul>
+<p>Example <code>packages.json</code>. We use here ES module instead of javascript module.</p>
+<pre data-lang="json" style="background-color:#272822;color:#f8f8f2;" class="language-json "><code class="language-json" data-lang="json"><span>{
+</span><span>  </span><span style="color:#e6db74;">&quot;type&quot;</span><span>: </span><span style="color:#e6db74;">&quot;module&quot;</span><span>,
+</span><span>  </span><span style="color:#e6db74;">&quot;dependencies&quot;</span><span>: {
+</span><span>    </span><span style="color:#e6db74;">&quot;chalk&quot;</span><span>: </span><span style="color:#e6db74;">&quot;^5.3.0&quot;</span><span>,
+</span><span>    </span><span style="color:#e6db74;">&quot;dotenv&quot;</span><span>: </span><span style="color:#e6db74;">&quot;^16.4.5&quot;</span><span>,
+</span><span>    </span><span style="color:#e6db74;">&quot;langchain&quot;</span><span>: </span><span style="color:#e6db74;">&quot;^0.1.30&quot;
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<h1 id="step-2-install-packages">Step 2: install packages</h1>
+<p>Once Deno is installed, you'll need to install a few npm packages:</p>
+<ul>
+<li>dotenv: To manage environment variables.</li>
+<li>langchain: The main library we'll be using to interact with OpenAI.</li>
+<li>chalk: A library for adding color to console output.</li>
+</ul>
+<p>Install these packages:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>npm i dotenv
+</span><span>npm i langchain
+</span><span>npm i chalk
+</span></code></pre>
+<h1 id="step-3-set-up-env-file">Step 3: set up <code>.env</code> file</h1>
+<p>Create a .env file in your project directory and add your OpenAI API key:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>OPENAI_API_KEY</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">your_openai_api_key_here
+</span></code></pre>
+<p>Make sure to replace your_openai_api_key_here with your actual API key from OpenAI.</p>
+<h1 id="step-4-write-code">Step 4: write code</h1>
+<p>Now, let's write some TypeScript code to use Langchain with OpenAI. Save the following code as langchain-openai.ts:</p>
+<pre data-lang="js" style="background-color:#272822;color:#f8f8f2;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#f92672;">import </span><span>chalk </span><span style="color:#f92672;">from </span><span style="color:#e6db74;">&quot;chalk&quot;</span><span>;
+</span><span style="color:#f92672;">import </span><span style="color:#e6db74;">&quot;dotenv/config&quot;</span><span>;
+</span><span style="color:#f92672;">import </span><span>{ ChatOpenAI } </span><span style="color:#f92672;">from </span><span style="color:#e6db74;">&quot;npm:@langchain/openai&quot;</span><span>;
+</span><span style="color:#f92672;">import </span><span>{ HumanMessage } </span><span style="color:#f92672;">from </span><span style="color:#e6db74;">&quot;npm:@langchain/core/messages&quot;</span><span>;
+</span><span>
+</span><span style="font-style:italic;color:#66d9ef;">console</span><span>.</span><span style="color:#66d9ef;">log</span><span>(</span><span style="color:#e6db74;">&quot;# START    &quot;</span><span>);
+</span><span>
+</span><span style="color:#75715e;">// will use default env name OPENAI_API_KEY which is defined in .env
+</span><span style="font-style:italic;color:#66d9ef;">const </span><span>model </span><span style="color:#f92672;">= new </span><span>ChatOpenAI({
+</span><span>    modelName: </span><span style="color:#e6db74;">&quot;gpt-3.5-turbo-1106&quot;</span><span>,
+</span><span>    temperature: </span><span style="color:#ae81ff;">0.9</span><span>,
+</span><span>});
+</span><span>
+</span><span style="font-style:italic;color:#66d9ef;">const </span><span>response </span><span style="color:#f92672;">= await </span><span>model.</span><span style="color:#a6e22e;">invoke</span><span>([
+</span><span>    </span><span style="color:#f92672;">new </span><span>HumanMessage(</span><span style="color:#e6db74;">&quot;write kotlin hello world.&quot;</span><span>)
+</span><span>]);
+</span><span>
+</span><span style="font-style:italic;color:#66d9ef;">console</span><span>.</span><span style="color:#66d9ef;">log</span><span>(chalk.</span><span style="color:#a6e22e;">bgGreenBright</span><span>(response.content));
+</span><span>
+</span><span style="font-style:italic;color:#66d9ef;">console</span><span>.</span><span style="color:#66d9ef;">log</span><span>(</span><span style="color:#e6db74;">&quot;# END&quot;</span><span>);
+</span></code></pre>
+<p>This script initializes the Langchain model, sends a message to the AI asking it to write a &quot;Hello, World!&quot; program in Kotlin, and then prints the AI's response with a green background.</p>
+<h1 id="step-5-run-code">Step 5: run code</h1>
+<p>To run your script, use the following command:</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>deno run</span><span style="font-style:italic;color:#fd971f;"> --allow-env --allow-sys --allow-read --allow-net</span><span> langchain-openai.ts
+</span><span>
+</span><span style="color:#75715e;"># START
+</span><span>fun main() {
+</span><span>    println(</span><span style="color:#e6db74;">&quot;Hello, World!&quot;</span><span>)
+</span><span>}
+</span><span style="color:#75715e;"># END
+</span></code></pre>
+<h1 id="links">Links</h1>
+<ul>
+<li>https://api.js.langchain.com/classes/langchain_openai.ChatOpenAI.html</li>
+</ul>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

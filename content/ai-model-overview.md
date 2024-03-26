@@ -1,5 +1,5 @@
 +++
-title = "AI model's overview"
+title = "AI: model overview"
 date = 2023-12-16
 +++
 
@@ -22,7 +22,7 @@ AI from x.com aka. grok.
 * https://x.ai/ide/docs
 
 # claude
-Anthropic's model. Currently not available european countries.
+Anthropic's model. Currently __not available__ european countries.
 Anthropic’s Claude models can also used with Amazon Bedrock API.
 
 * https://claude.ai 
@@ -44,7 +44,21 @@ Aside the known google bard. Google provides gemini (ultra, pro and nano). Nano 
 Pro is already available.
 
 * https://ai.google.dev/
-* https://idx.dev/
+* https://idx.dev/ ~> like `replit.com` it seems to use `nix` as backend OS.
+
+---
+
+Example use case: pair programming with LLM.
+
+You need a `API key`. PaLM API (legacy) or Gemini API. Note, that Gemini API is __not available__ in some countries: https://ai.google.dev/available_regions#available_regions
+
+Why use LLM during programming?
+* it can speed up development process
+* support in error handlin
+* help in performance improvment
+* refactor code
+* write test cases
+* work with existing code base which is technical dead
 
 # openai
 OpenAI API provides various models for app integration.

@@ -1,5 +1,5 @@
 +++
-title = "AWS: Computer Vision"
+title = "AI: AWS Computer Vision"
 date = 2020-05-13
 +++
 

@@ -1,5 +1,5 @@
 +++
-title = "AI: - AI integration with LangChain.js"
+title = "AI: Integration with LangChain.js"
 date = 2024-03-26
 +++
 

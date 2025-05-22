@@ -46,15 +46,88 @@
 
 <body>
     <section class="section">
-        <div class="container" style="width:800px; margin:16px auto;">
+        <div class="container" style="width:1200px; margin:16px auto;">
             
 <h1 class="title">
-    Claude Code
+    AI: Claude Code
 </h1>
 <p class="subtitle"><strong>2025-05-22</strong></p>
 <h1 id="about">About</h1>
+<p>On May 22, Anthropic announced Claude 4. Alongside this, they also released a CLI tool called Claude Code. As I prefer interacting with computers via the terminal (shoutout to Ghostty), I was eager to try it out. For interacting with Claude models, I use the API. This document will record my impressions and experiences. Let's see how far I can go with just $5.</p>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>
+</span><span> ██████╗██╗      █████╗ ██╗   ██╗██████╗ ███████╗
+</span><span>██╔════╝██║     ██╔══██╗██║   ██║██╔══██╗██╔════╝
+</span><span>██║     ██║     ███████║██║   ██║██║  ██║█████╗  
+</span><span>██║     ██║     ██╔══██║██║   ██║██║  ██║██╔══╝  
+</span><span>╚██████╗███████╗██║  ██║╚██████╔╝██████╔╝███████╗
+</span><span> ╚═════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝
+</span><span> 
+</span><span> ██████╗ ██████╗ ██████╗ ███████╗                
+</span><span>██╔════╝██╔═══██╗██╔══██╗██╔════╝                
+</span><span>██║     ██║   ██║██║  ██║█████╗                  
+</span><span>██║     ██║   ██║██║  ██║██╔══╝                  
+</span><span>╚██████╗╚██████╔╝██████╔╝███████╗
+</span><span> ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝
+</span><span>
+</span></code></pre>
+<h1 id="usage">Usage</h1>
 <pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>claude</span><span style="font-style:italic;color:#fd971f;"> --version
 </span><span>1.0.0 (Claude Code)
+</span></code></pre>
+<p>OK we are now ready to interact so let's start. Create a new empty folder change to it and ...</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>claude
+</span><span>✻ Welcome to Claude Code!
+</span></code></pre>
+<p>My first prompt was to create a Tetris game using pure JavaScript in a single HTML file. This way, we can simply open the file and start playing. In less than a minute, Tetris was created and playable. ✔</p>
+<h1 id="the-example">The Example</h1>
+<p>Now let's give another try and create an console app in pure js which get's a file and count the rows.</p>
+<p>Input</p>
+<blockquote>
+<p>Create a single-file JavaScript console app that counts and prints the number of rows in a given text using an emoji and the row count.</p>
+</blockquote>
+<p>Output</p>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>● Created row-counter.js - a console app that counts text rows and displays them with 📊 emoji. Usage: node row-counter.js &lt;filename&gt; or pipe text to it.
+</span><span>
+</span><span>&gt; /cost
+</span><span>  ⎿  Total cost:            $0.0298
+</span><span>     Total duration (API):  31.7s
+</span><span>     Total duration (wall): 1m 10.3s
+</span><span>     Total code changes:    44 lines added, 0 lines removed
+</span><span>     Token usage by model:
+</span><span>         claude-3-5-haiku:  2.1k input, 150 output, 0 cache read, 0 cache write
+</span><span>            claude-sonnet:  19 input, 590 output, 41.9k cache read, 1.6k cache write
+</span></code></pre>
+<p>Test</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>node row-counter.js row-counter.js
+</span><span>📊 44 rows
+</span></code></pre>
+<p>Conclusion</p>
+<p>As you see the model create a file with 44 lines <code>44 lines added</code>. It cost ~ $0.02. Then we used the app to validate and we et here the same result <code>44 rows</code>. So we checked if app is running and if lines matches.</p>
+<h1 id="the-cost">The Cost</h1>
+<p>Every step you do interacts with the model. This good thing is. It seems that claude code decide which model is used. So for basic stuff <code>claude-3-5-haiku</code> is used. Which is cheaper compared to more advanced models.</p>
+<p>You can check the cost for a session with a command. But even the cost command itself costs!</p>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>&gt; /cost
+</span><span>  ⎿  Total cost:            $0.1198
+</span><span>     Total duration (API):  42s
+</span><span>     Total duration (wall): 17m 34.8s
+</span><span>     Total code changes:    33 lines added, 0 lines removed
+</span><span>     Token usage by model:
+</span><span>         claude-3-5-haiku:  1.8k input, 145 output, 0 cache read, 0 cache write
+</span><span>            claude-sonnet:  40 input, 823 output, 118.9k cache read, 18.6k cache write
+</span></code></pre>
+<h1 id="mtok">Mtok</h1>
+<p>We saw previously that every interaction with the model costs. So it makes sense in near future we will think more in <strong>Mtok</strong>.
+Instead horse power <em>HS</em> or computing power <em>Hertz</em> we calculate using unity <em>Mtok</em>.</p>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>&gt; /model 
+</span><span>
+</span><span>Switch between Claude models. Applies to this session and future Claude Code sessions. For custom model names, specify with --model.
+</span><span>1. Default (recommended)  Use the default model (currently Claude Sonnet 4) · $3/$15 per Mtok
+</span><span>2. Opus                   Claude Opus 4 for complex tasks · $15/$75 per Mtok
+</span></code></pre>
+<h1 id="the-end">The End</h1>
+<p>So my hole experience (incl. Tetris game creation, create CLAUDE.md, run commands) cost ~ 0.25$.
+Now let's exit Claude Code with</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>:q
 </span></code></pre>
 
 <footer>

@@ -4,8 +4,16 @@
         <loc>https://leventarican.github.io/</loc>
     </url>
     <url>
+        <loc>https://leventarican.github.io/ai-an-introduction/</loc>
+        <lastmod>2025-05-11</lastmod>
+    </url>
+    <url>
         <loc>https://leventarican.github.io/ai-aws-computer-vision/</loc>
         <lastmod>2020-05-13</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/ai-claude-code/</loc>
+        <lastmod>2025-05-22</lastmod>
     </url>
     <url>
         <loc>https://leventarican.github.io/ai-integration-with-langchain/</loc>

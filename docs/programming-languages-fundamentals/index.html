@@ -175,7 +175,7 @@ There is no class type in Rust. In Go language we also don't have class types.</
 </span><span>}
 </span></code></pre>
 <h2 id="sealed-class">Sealed class</h2>
-<p>As the name <strong>sealed</strong> suggest a <code>sealed class</code> is restricted. Restricted means subclasses are only allowed at compile-time. A sealed class is also <strong>abstract</strong>. </p>
+<p>As the name <strong>sealed</strong> suggest a <code>sealed class</code> is restricted. Restricted means subclasses are only allowed at compile-time. A sealed class is also <strong>abstract</strong>.</p>
 <p>A Sealed class can more then an enum class.</p>
 <h2 id="by-lazy">by lazy</h2>
 <p><code>by lazy</code> follows the delegation pattern. In the following example a get operation will be delegated to the String and only computed on <em>first</em> access.</p>
@@ -192,7 +192,7 @@ A good case is if you have a heavy class which initialization is time-consuming.
 </span><span>}
 </span></code></pre>
 <h2 id="lateinit">lateinit</h2>
-<p>With <code>lateinit</code> you also achieve a later initialization like <code>by lazy</code>. In in this case you define where it's initialized. 
+<p>With <code>lateinit</code> you also achieve a later initialization like <code>by lazy</code>. In in this case you define where it's initialized.
 <code>lateinit</code> is good if you want to prevent nullable variable.</p>
 <pre data-lang="kt" style="background-color:#272822;color:#f8f8f2;" class="language-kt "><code class="language-kt" data-lang="kt"><span style="color:#f92672;">val </span><span>data</span><span style="color:#f92672;">: </span><span style="font-style:italic;color:#66d9ef;">String</span><span>? </span><span style="color:#f92672;">= </span><span style="color:#ae81ff;">null
 </span></code></pre>

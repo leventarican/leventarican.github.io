@@ -93,7 +93,7 @@
 <h1 id="menu">Menu</h1>
 <p>There are different menu types: options menu (aka. <em>overflow</em> menu), contextual menu and popup menu.</p>
 <h1 id="navigation">Navigation</h1>
-<p>With navigation the movement (back and forth) from screen to screen is meant. 
+<p>With navigation the movement (back and forth) from screen to screen is meant.
 You can navigate between different Activies and between Fragments in an Activity.</p>
 <p>Historically (or with basic Android building blocks) you implement navigate between the screens with intents and fragment transactions.</p>
 <p>Whenever you navigate to a screen the previous screen is arranges in a stack which is called the <strong>back stack</strong>. It follows the stack principle <em>LIFO (last in, first out)</em>. You can go back but not forth when you hit the back button.
@@ -102,7 +102,7 @@ You can navigate between different Activies and between Fragments in an Activity
 <h2 id="navigation-component">Navigation Component</h2>
 <p><strong>Navigation Component</strong> is another way to navigate between the screens.
 The Navigation component is a collection of libraries, plug-in and tooling.
-It handles the back stack, fragment transactions, argument passing (safe args), deep linking, navigation-based animations. </p>
+It handles the back stack, fragment transactions, argument passing (safe args), deep linking, navigation-based animations.</p>
 <p>All the navigation information is centralized and visualised in the <strong>Navigation graph</strong>. Aside nav graph you should understand the role of <strong>NavHost</strong> and <strong>NavController</strong>. The host component acts as the name suggests as a host of the current (destination screen). The controller component on the other side <em>orchestrates</em> the swapping of the screen within the host component (NavHost).</p>
 <p>To be more concrete. An activity has the ability to display. Thas why it's obvious to define a <em>NavHost</em> in an activity.</p>
 <p><img src="../nav-component.png" alt="" /></p>
@@ -152,10 +152,10 @@ It handles the back stack, fragment transactions, argument passing (safe args), 
 </span><span>classpath </span><span style="color:#e6db74;">&quot;androidx.navigation:navigation-safe-args-gradle-plugin:2.3.4&quot;
 </span></code></pre>
 <h1 id="layout">Layout</h1>
-<p>Layout's in Android are a huge topic. By time the available layout's evolved. You should basically know to use which layout when. </p>
+<p>Layout's in Android are a huge topic. By time the available layout's evolved. You should basically know to use which layout when.</p>
 <ul>
-<li>Whats the difference <code>ConstraintLayout</code> to <code>CoordinatorLayout</code>. </li>
-<li><code>RecyclerView</code> is a good choice for large list items. </li>
+<li>Whats the difference <code>ConstraintLayout</code> to <code>CoordinatorLayout</code>.</li>
+<li><code>RecyclerView</code> is a good choice for large list items.</li>
 <li>You should also heard about <code>&lt;include&gt;</code> and <code>&lt;merge&gt;</code> layout tags for performance improving and <strong>reusing</strong> of layouts.</li>
 <li>Or if you want to use a navigation drawer in your app you can use the predefined <code>DrawerLayout</code>.</li>
 </ul>

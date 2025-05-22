@@ -55,10 +55,10 @@
 <h1 id="about">About</h1>
 <p>This documentation gives a kind of microcontroller programming from scratch.
 I used the ATtiny85 for this example. IMHO its simplest, smallest, ... and a good starting point.
-The aim was: </p>
+The aim was:</p>
 <ul>
-<li>Code a programm (preferable in C) and run it on the uC. </li>
-<li>The wiring, powering, is all done manually. </li>
+<li>Code a programm (preferable in C) and run it on the uC.</li>
+<li>The wiring, powering, is all done manually.</li>
 <li>No ready-to-use embedded single boards, or other comfortable chips, sticks.</li>
 </ul>
 <h1 id="tools">Tools</h1>
@@ -72,7 +72,7 @@ The aim was: </p>
 <li><em>optional tools</em>
 <ul>
 <li>binutils-avr: tools like assembler, linker</li>
-<li>gdb-avr: debugger for </li>
+<li>gdb-avr: debugger for</li>
 </ul>
 </li>
 </ul>
@@ -103,7 +103,7 @@ The aim was: </p>
 <li>Step 2: run the uC</li>
 </ul>
 <p><strong>Step 1: compile, build and flash</strong></p>
-<p>In order to bring our program to the uC we need a elf format. To be short. These are the steps for it: </p>
+<p>In order to bring our program to the uC we need a elf format. To be short. These are the steps for it:</p>
 <pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>avr-gcc</span><span style="font-style:italic;color:#fd971f;"> -mmcu</span><span style="color:#f92672;">=</span><span>attiny85</span><span style="font-style:italic;color:#fd971f;"> -Os -c</span><span> main.c</span><span style="font-style:italic;color:#fd971f;">  -o</span><span> main.o
 </span><span>avr-gcc main.o</span><span style="font-style:italic;color:#fd971f;"> -o</span><span> main.elf
 </span><span>avr-objcopy</span><span style="font-style:italic;color:#fd971f;"> -O</span><span> ihex</span><span style="font-style:italic;color:#fd971f;"> -j</span><span> .text</span><span style="font-style:italic;color:#fd971f;"> -j</span><span> .data main.elf main.hex
@@ -123,11 +123,11 @@ The aim was: </p>
 <p><strong>cheatsheet</strong></p>
 <ul>
 <li>list supported uController: <code>avrdude -p?</code></li>
-<li>check connection between programmer (e.g. USBasp, AVRISP, ...): </li>
+<li>check connection between programmer (e.g. USBasp, AVRISP, ...):</li>
 </ul>
 <pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>avrdude</span><span style="font-style:italic;color:#fd971f;"> -p</span><span> attiny85</span><span style="font-style:italic;color:#fd971f;"> -c</span><span> usbasp
 </span></code></pre>
-<p>or </p>
+<p>or</p>
 <pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>avrdude</span><span style="font-style:italic;color:#fd971f;"> -p</span><span> t85</span><span style="font-style:italic;color:#fd971f;"> -c</span><span> usbasp
 </span></code></pre>
 <p><strong>electricity</strong></p>

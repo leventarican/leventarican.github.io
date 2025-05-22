@@ -64,7 +64,7 @@
 </span><span>	setContentView(R</span><span style="color:#f92672;">.</span><span>layout</span><span style="color:#f92672;">.</span><span>your_layout);
 </span><span>}
 </span></code></pre>
-<p>With <code>setContentView(View)</code> we are inflating the view to the activity. </p>
+<p>With <code>setContentView(View)</code> we are inflating the view to the activity.</p>
 <blockquote>
 <p>The process of connecting a Layout and Activity is called <strong>inflation</strong>.</p>
 </blockquote>
@@ -74,7 +74,7 @@ The layout xml is get parsed, then the view hierarchy is build, and finally adde
 <h3 id="lifecycle">Lifecycle</h3>
 <p>An activity has a <strong>lifecycle</strong> where it has different <strong>stages</strong>. These stages are covered through six callbacks: <code>onCreate(), onStart()</code> etc. The android system invokes the <strong>callbacks</strong> as an activity enters a new <strong>state</strong>. With these callback methods you can react to each stage <strong>event</strong>.</p>
 <p>Since 2017 Android provide a second way for reacting to state changes the <strong>lifecycle library</strong>. It introduced the <code>Lifecycle</code>, <code>LifecycleOwner</code> (Activity, Fragment) and <code>LifecycleObserver</code> classes.</p>
-<p>So you may ask why was this library introduced? 
+<p>So you may ask why was this library introduced?
 A good example is the following case in the callback method. You forgot to stop the engine in the <code>onstop()</code> method.</p>
 <pre data-lang="kotlin" style="background-color:#272822;color:#f8f8f2;" class="language-kotlin "><code class="language-kotlin" data-lang="kotlin"><span style="color:#f92672;">fun </span><span style="color:#a6e22e;">onStart</span><span>() {
 </span><span>	engine</span><span style="color:#f92672;">.</span><span>start()
@@ -150,7 +150,7 @@ A good example is the following case in the callback method. You forgot to stop 
 </span></code></pre>
 <h2 id="layout">Layout</h2>
 <p>We know layout's from java swing, javafx, etc. It is the process of laying out the ui components. You may remember the layout managers from swing: <code>GridLayout</code>, <code>BorderLayout</code>, etc.</p>
-<p>In Android we have the option to define the layout in a layout .xml file as a resource. By handling the layout as a resource we separate it from code. So the maintenance of UI and application logic is more independent. </p>
+<p>In Android we have the option to define the layout in a layout .xml file as a resource. By handling the layout as a resource we separate it from code. So the maintenance of UI and application logic is more independent.</p>
 <h1 id="links">Links</h1>
 <ul>
 <li>https://developer.android.com/reference/android/app/Activity</li>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, AI Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:800px; margin:16px auto;">
+            
+<h1 class="title">
+    AI: An Introduction
+</h1>
+<p class="subtitle"><strong>2025-05-11</strong></p>
+<h1 id="about">About</h1>
+<p>This page is an attempt to provide an overview of the highly dynamic world of AI.</p>
+<p>Beyond today’s popular foundation models, it’s fascinating to see how AI evolves over time.</p>
+<p>Soon, instead of building models from scratch, we might rely more on pre-trained systems. The bigger question will be: How do we integrate AI into traditional software? Standards like MCP - Model Context Protocol or A2A (Agent2Agent protocol)  could play a key role here.</p>
+<p>As always the case when program a computer we should ask us: <strong>which problem I want to solve</strong>?</p>
+<h1 id="definitions">Definitions</h1>
+<ul>
+<li>Architecture: The blueprint of the neural network (e.g., CNN, Transformer).</li>
+<li>Model: A trained instance of an architecture (e.g., "ResNet-50" is a CNN model).</li>
+<li>Frameworks: Scikit-learn (classic ML), Tensorflow/PyTorch (Deep Learning)</li>
+<li>Basic ML workflow</li>
+</ul>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>ingest data → feature engineering → train model → predict
+</span></code></pre>
+<h1 id="architecture">Architecture</h1>
+<p>Network architectures are like <em>design pattern</em> in software development.</p>
+<ul>
+<li>Images (e.g., classification, object detection)
+<ul>
+<li>Architecture: CNN (Convolutional Neural Network)</li>
+<li>Examples: ResNet, EfficientNet, VGG.</li>
+</ul>
+</li>
+<li>Text/Language (e.g., translation, sentiment analysis)
+<ul>
+<li>Architecture: Transformer</li>
+<li>Examples: BERT (understanding), GPT (generation).</li>
+<li>https://daleonai.com/transformers-explained</li>
+</ul>
+</li>
+<li>Time Series (e.g., forecasting, sensor data)
+<ul>
+<li>Architecture: LSTM or Transformer</li>
+</ul>
+</li>
+<li>Generative Tasks (e.g., image/text creation)
+<ul>
+<li>GAN (Generative Adversarial Network)
+<ul>
+<li>Examples: StyleGAN (images), Deepfake videos.</li>
+</ul>
+</li>
+<li>Diffusion Models
+<ul>
+<li>Examples: Stable Diffusion (images), DALL-E.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="problem-framing">Problem Framing</h1>
+<p>How to determine if machine learning (ML) is a good approach for a problem.</p>
+<ul>
+<li>https://developers.google.com/machine-learning/problem-framing</li>
+</ul>
+<h1 id="heuristic">heuristic</h1>
+<p>A simple and quickly implemented solution to a problem. For example, "With a heuristic, we achieved 86% accuracy. When we switched to a deep neural network, accuracy went up to 98%."</p>
+<ul>
+<li>https://developers.google.com/machine-learning/glossary#heuristic</li>
+</ul>
+<h1 id="todo">TODO</h1>
+<blockquote>
+<p>Machine learning workflows are often composed of different parts. A typical pipeline consists of a pre-processing step that transforms or imputes the data, and a final predictor that predicts target values.</p>
+</blockquote>
+<ul>
+<li>https://scikit-learn.org/stable/getting_started.html#transformers-and-pre-processors</li>
+</ul>
+<h1 id="llm-as-a-judge">LLM-as-a-Judge</h1>
+<p>LLM-as-a-Judge is the process of using LLMs to evaluate model outputs.</p>
+<h1 id="invariance-testing">invariance testing</h1>
+<h1 id="holdout">holdout</h1>
+<h1 id="hyperparameter-tuning">Hyperparameter tuning</h1>
+<p>Hyperparameters, such as learning rate, batch size, and epochs, are external configurations that influence the training process of a machine learning model.</p>
+<h1 id="backtesting">backtesting</h1>
+<h1 id="5-fold-cross-validation">5-fold cross-validation</h1>
+<p>In short: validate your model.</p>
+<p>5-fold CV is the gold standard for model evaluation when you want balance between reliability and computational cost.</p>
+<p>A robust evaluation technique in machine learning where the dataset is split into 5 equal parts (folds). The model is trained on 4 folds and validated on the remaining 1 fold, repeating this process 5 times (each fold serves as the validation set once).</p>
+<p>Why use it?</p>
+<ul>
+<li>Reduces overfitting – Tests model performance across different data subsets.</li>
+<li>Maximizes data usage – Every data point is used for both training and validation.</li>
+</ul>
+<pre data-lang="python" style="background-color:#272822;color:#f8f8f2;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#f92672;">from </span><span>sklearn.model_selection </span><span style="color:#f92672;">import </span><span>cross_val_score
+</span><span style="color:#f92672;">from </span><span>sklearn.ensemble </span><span style="color:#f92672;">import </span><span>RandomForestClassifier
+</span><span>
+</span><span>model </span><span style="color:#f92672;">= </span><span>RandomForestClassifier()
+</span><span>scores </span><span style="color:#f92672;">= </span><span>cross_val_score(model, X, y, </span><span style="font-style:italic;color:#fd971f;">cv</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">5</span><span>)  </span><span style="color:#75715e;"># 5-fold CV
+</span><span style="color:#66d9ef;">print</span><span>(</span><span style="font-style:italic;color:#66d9ef;">f</span><span style="color:#e6db74;">&quot;Mean Accuracy: </span><span>{scores.mean()</span><span style="color:#ae81ff;">:.2f</span><span>}</span><span style="color:#e6db74;"> (±</span><span>{scores.std()</span><span style="color:#ae81ff;">:.2f</span><span>}</span><span style="color:#e6db74;">)&quot;</span><span>)
+</span></code></pre>
+<ul>
+<li>https://scikit-learn.org/stable/getting_started.html#model-evaluation</li>
+</ul>
+<h1 id="binning">Binning</h1>
+<p>Binning (also called bucketing) is a feature engineering technique.</p>
+<ul>
+<li>https://developers.google.com/machine-learning/crash-course/numerical-data/binning</li>
+</ul>
+<h1 id="simpson-s-paradox">Simpson's paradox</h1>
+<h1 id="baseline">Baseline</h1>
+<p>A simple reference model to compare against more complex solutions.
+In short; check if your model is better then a trivial approaches.</p>
+<h2 id="random-baseline">Random Baseline</h2>
+<p>A type of baseline that makes random predictions within the possible output range.</p>
+<h2 id="zero-baseline-zero-rule">zero-baseline (zero-rule)</h2>
+<p>The simplest possible baseline that always predicts the most common class or average value.</p>
+<h1 id="feature-engineering">Feature Engineering</h1>
+<p>Is the task to bring the <em>raw data</em> into numerical data format as input for the model. Usually you read that a data analyst (previously data scientist) does this task.</p>
+<p>It's not a role, it's a task. I would also say that prompt engineering is <em>only</em> a task.</p>
+<p>A role is more ML engineering or AI engineering.</p>
+<h1 id="supervised-unsupervised-learning">supervised/unsupervised Learning</h1>
+<ul>
+<li>static data</li>
+</ul>
+<h2 id="supervised-learning">supervised learning</h2>
+<ul>
+<li>use-case: labeled data available (input → output pairs).</li>
+</ul>
+<h2 id="unsupervised-learning">unsupervised learning</h2>
+<ul>
+<li>use-case: no labels, find hidden patterns.</li>
+</ul>
+<h1 id="reinforcement-learning">Reinforcement Learning</h1>
+<ul>
+<li>interactive environments</li>
+<li>use-case: sequential decision-making (actions → rewards).</li>
+</ul>
+<h1 id="deep-learning">Deep Learning</h1>
+<ul>
+<li>scalable for high-dimensional data</li>
+<li>use-case: complex data (images, text, time series).</li>
+</ul>
+<h1 id="random-forest">Random Forest</h1>
+<p>Random Forest is a classical (non-deep) machine learning algorithm.
+It’s an ensemble method (combines multiple decision trees) for supervised learning.</p>
+<pre data-lang="python" style="background-color:#272822;color:#f8f8f2;" class="language-python "><code class="language-python" data-lang="python"><span style="color:#f92672;">from </span><span>sklearn.ensemble </span><span style="color:#f92672;">import </span><span>RandomForestClassifier
+</span><span>model </span><span style="color:#f92672;">= </span><span>RandomForestClassifier()
+</span><span>model.fit(X_train, y_train)  </span><span style="color:#75715e;"># Works on tabular data!
+</span></code></pre>
+<h1 id="decision-trees">Decision Trees</h1>
+<p>Decision Trees are simple, interpretable models for classification/regression that split data hierarchically (like a flowchart). Random Forest improves them by combining many trees (ensemble) to reduce overfitting and boost accuracy.</p>
+<h1 id="neural-network">Neural Network</h1>
+<p>There are supervised learning neural network models and unsupervised learning neural network models.</p>
+<h1 id="gan-generative-adversarial-network">GAN - Generative Adversarial Network</h1>
+<ul>
+<li>use-case: image generation</li>
+</ul>
+<h1 id="cnn-convolutional-neural-network">CNN - Convolutional Neural Network</h1>
+<ul>
+<li>use-case: object-detection</li>
+<li>typical CNN flow</li>
+</ul>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>Input → [Conv → ReLU → Pooling] × N → FC → Output
+</span></code></pre>
+<h1 id="rnn-recurrent-neural-networks">RNN - Recurrent Neural Networks</h1>
+<p>RNNs (Recurrent Neural Networks) are used for sequential data (like text, time series, or speech) where order matters. They process inputs step-by-step while maintaining a "memory" of previous steps.</p>
+<p>Largely replaced by Transformers for most tasks today, but still relevant for simple sequences or low-resource settings.</p>
+<h1 id="stable-diffusion">Stable Diffusion</h1>
+<p>Stable Diffusion is a deep learning, text-to-image model based on diffusion techniques.
+A method that combines:</p>
+<ul>
+<li>U-Net (CNN architecture for image generation).
+<ul>
+<li>A convolutional neural network (CNN) used for iterative image denoising.</li>
+</ul>
+</li>
+<li>Text-encoder (Transformer-based architecture for text understanding).
+<ul>
+<li>Converts text into numerical tokens → mapped to embedding vectors.</li>
+</ul>
+</li>
+<li>https://mccormickml.com/2022/12/21/how-stable-diffusion-works/</li>
+</ul>
+<h2 id="simplified-flow">Simplified Flow</h2>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>Text Prompt → Text-Encoder (Transformer) → Diffusion Process (U-Net) → Generated Image
+</span></code></pre>
+<h1 id="sources">Sources</h1>
+<ul>
+<li>Me (&amp; books)</li>
+<li>Wikipedia</li>
+<li>https://developers.google.com/machine-learning/glossary/fundamentals</li>
+<li>https://a16z.com/ai-canon/</li>
+<li><em>INFO: some text is AI generated</em></li>
+</ul>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

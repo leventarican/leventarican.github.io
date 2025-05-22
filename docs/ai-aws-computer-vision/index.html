@@ -61,7 +61,7 @@
 <li>GluonCV: a deep learning toolkit for computer vision</li>
 <li>runs on Apache MXNet engine</li>
 <li>created and maintained by AWS</li>
-<li>Java, Maven, Linux, CPU: 
+<li>Java, Maven, Linux, CPU:
 <ul>
 <li>https://mxnet.apache.org/get_started/java_setup.html</li>
 <li>https://gluon-cv.mxnet.io/install.html</li>
@@ -71,7 +71,7 @@
 <li>GluonCV <em>implements</em> models for image classifications, ...</li>
 <li>these models are accessible in <strong>model zoo</strong>.</li>
 <li>these models are pre-trained on public available dataset with millions of images.</li>
-<li>what is a model? 
+<li>what is a model?
 <ul>
 <li>simply defined: a function with an input and an output</li>
 <li>in CV a model takes an image as input and generate a prediction as output</li>
@@ -91,7 +91,7 @@
 <h2 id="apache-mxnet">Apache MXNet</h2>
 <ul>
 <li>Apache MXNet: is a deep learning framework</li>
-<li>with MXNet you can build and train neuronal network models </li>
+<li>with MXNet you can build and train neuronal network models</li>
 <li>it support different languages: Java, Python, R, C++, ...</li>
 <li>MXNet has a lot of pre-trained models in model-zoo</li>
 <li>MXNet supports ONNX: https://onnx.ai/supported-tools.html</li>
@@ -108,7 +108,7 @@
 <li><em>Amazon SageMaker</em></li>
 </ul>
 </li>
-<li>ML Frameworks &amp; Infrastructure: 
+<li>ML Frameworks &amp; Infrastructure:
 <ul>
 <li>DL Frameworks TensorFlow, MXNet, Pytorch, ...</li>
 <li>Infrastructure: EC2, Deep Learning Containers, IoT Greengrass
@@ -127,7 +127,7 @@
 <h3 id="amazon-sagemaker">Amazon SageMaker</h3>
 <ul>
 <li>SageMaker service is compososed of many services: label, build &amp; train, tune, compile, deploy</li>
-<li>amazon sagemaker has a service for labeling for supervised learning. ex. when classification a dog image. on train a human has to label it: 
+<li>amazon sagemaker has a service for labeling for supervised learning. ex. when classification a dog image. on train a human has to label it:
 <ul>
 <li>a flag: yes it is a dog</li>
 <li>pixel coordinates of the dog in the image</li>
@@ -146,7 +146,7 @@
 <li><strong>AWS IoT Greengrass</strong>: for deployment on edge devices; see also Amazon SageMaker Neo</li>
 </ul>
 </li>
-<li>the workflow is controlable by AWS CLI </li>
+<li>the workflow is controlable by AWS CLI</li>
 <li>or SDK's in python <code>import sagemaker</code></li>
 </ul>
 <h3 id="aws-deep-learning-ami">AWS Deep Learning AMI</h3>
@@ -156,14 +156,14 @@
 <li>an AMI includes the OS and any additional software / dependency</li>
 <li>its like purchasing an computer. it has an OS and additional programs</li>
 <li>the DLAMI provides different OS (Ubuntu, Amazon Linux, Windows), preinstalled DL frameworks (mxnet, tensorflow, ...) and Nvidia CUDA drivers</li>
-<li>if you create an DLAMI instance with EC2 then you can access it with SSH (private/public key). you access the instance with the public DNS: <code>ssh -i &quot;private-key.pem&quot; ubuntu@ec2-...-compute-amazonaws.com</code>. do not forget to shutdown the instance (for cost reasons). and also delete the instance because you'll get charged for the storage.</li>
+<li>if you create an DLAMI instance with EC2 then you can access it with SSH (private/public key). you access the instance with the public DNS: <code>ssh -i "private-key.pem" ubuntu@ec2-...-compute-amazonaws.com</code>. do not forget to shutdown the instance (for cost reasons). and also delete the instance because you'll get charged for the storage.</li>
 </ul>
 <h3 id="aws-deep-learning-containers">AWS Deep Learning Containers</h3>
 <ul>
 <li>these containers provide just another way to set up a <em>deep learning environment</em> on AWS with optimized, prepackaged, container images</li>
 <li>amazon provides a docker container repository: Amazon Elastic Container Registry (ECR)</li>
 <li>Amazon Elastic Container Service: Amazon ECS. ECS do the container orchestration.</li>
-<li>So what are Deep Learning Containers? <em>These are Docker container images pre-installed with deep learning frameworks</em> </li>
+<li>So what are Deep Learning Containers? <em>These are Docker container images pre-installed with deep learning frameworks</em></li>
 <li>you can deploy container on:
 <ul>
 <li>ECS</li>
@@ -244,7 +244,7 @@
 <ul>
 <li>understand the content of an image</li>
 <li>ex. medical image analysis, self driving cars, ...</li>
-<li>locate object in an image with a box (called bounding box) </li>
+<li>locate object in an image with a box (called bounding box)</li>
 <li>additionally the located object is classified from a list of predetermined classes</li>
 <li>the model will also give a probability for each class</li>
 </ul>
@@ -267,7 +267,7 @@
 </ul>
 <h4 id="models-1">Models</h4>
 <ul>
-<li>Object detection model architectures: 
+<li>Object detection model architectures:
 <ul>
 <li><strong>Faster-RNN</strong>: with ResNet
 <ul>
@@ -335,7 +335,7 @@
 <li><em>Convolutional neural networks learn local patterns from small neighborhoods of pixels, unlike fully connected networks that learned patterns across all pixels of the image.</em></li>
 <li>two most important operations: the convolution operation and the max-pooling operation</li>
 <li>a component of the convolution operation is the <strong>kernel or filter</strong></li>
-<li>the input goes through this kernel and generate an output to learn pattern or extract features </li>
+<li>the input goes through this kernel and generate an output to learn pattern or extract features</li>
 <li>you can achive by this operation: edge feature extraction, or blur image, sharpen</li>
 <li>with deep learning we learn the parameter for the best suited kernel values</li>
 <li>max pooling reduces the dimension by getting the max value of a defined kernel ex. 2x2 (4 input values) the output will be 1 value</li>
@@ -351,7 +351,7 @@
 <li>Understand the mathematics behind NDArray</li>
 <li>Understand when to use different Gluon blocks including convolution, dense layers, and pooling</li>
 <li>Compose Gluon blocks into complete models</li>
-<li>Understand the difference between metrics and loss </li>
+<li>Understand the difference between metrics and loss</li>
 </ul>
 <h3 id="n-dimensional-arrays">N-dimensional arrays</h3>
 <ul>

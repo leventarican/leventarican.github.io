@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, AI Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+    <!-- Analytics 
+    analytics.google.com 
+    curl -L -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ..." -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/leventarican/leventarican.github.io/traffic/views
+    -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X86T9RBJ92');Add commentMore actions
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:1200px; margin:16px auto;">
+            
+<h1 class="title">
+    AI: sdk
+</h1>
+<p class="subtitle"><strong>2025-06-07</strong></p>
+<h1 id="about">about</h1>
+<p>In this article, I want to give a brief and easy overview of how to use Vercel's AI SDK for building AI-powered applications.</p>
+<p>In this example, I'll use Anthropic, but it should also work without an API key. So, with a gateway, you can communicate and use different LLM providers in a provider-agnostic way.</p>
+<pre data-lang="bash" style="background-color:#272822;color:#f8f8f2;" class="language-bash "><code class="language-bash" data-lang="bash"><span>npm install ai
+</span><span>npm install @ai-sdk/anthropic
+</span><span>npm install dotenv
+</span><span>
+</span><span style="color:#75715e;"># create .env variable for environment variable
+</span><span style="color:#75715e;"># ANTHROPIC_API_KEY=...
+</span></code></pre>
+<h1 id="the-app">the-app</h1>
+<pre data-lang="js" style="background-color:#272822;color:#f8f8f2;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#f92672;">import </span><span style="color:#e6db74;">&#39;dotenv/config&#39;</span><span>;
+</span><span style="color:#f92672;">import </span><span>{ anthropic } </span><span style="color:#f92672;">from </span><span style="color:#e6db74;">&#39;@ai-sdk/anthropic&#39;</span><span>;
+</span><span style="color:#f92672;">import </span><span>{ generateText } </span><span style="color:#f92672;">from </span><span style="color:#e6db74;">&#39;ai&#39;</span><span>;
+</span><span>
+</span><span style="color:#f92672;">async </span><span style="font-style:italic;color:#66d9ef;">function </span><span style="color:#a6e22e;">main</span><span>() {
+</span><span>  </span><span style="font-style:italic;color:#66d9ef;">const </span><span>{ text } </span><span style="color:#f92672;">= await </span><span style="color:#a6e22e;">generateText</span><span>({
+</span><span>    model: </span><span style="color:#a6e22e;">anthropic</span><span>(</span><span style="color:#e6db74;">&#39;claude-3-haiku-20240307&#39;</span><span>),
+</span><span>    prompt: </span><span style="color:#e6db74;">&#39;Write a short poem about coding&#39;</span><span>,
+</span><span>  });
+</span><span>
+</span><span>  </span><span style="font-style:italic;color:#66d9ef;">console</span><span>.</span><span style="color:#66d9ef;">log</span><span>(text);
+</span><span>}
+</span><span>
+</span><span style="color:#a6e22e;">main</span><span>().</span><span style="color:#66d9ef;">catch</span><span>(</span><span style="font-style:italic;color:#66d9ef;">console</span><span>.</span><span style="color:#66d9ef;">error</span><span>);
+</span></code></pre>
+<p>Output</p>
+<pre style="background-color:#272822;color:#f8f8f2;"><code><span>Here is a short poem about coding:
+</span><span>
+</span><span>Coding, a dance of logic and grace,
+</span><span>Weaving lines of code, a digital lace.
+</span><span>Algorithms and syntax, a symphony to behold,
+</span><span>Transforming ideas into stories untold.
+</span><span>
+</span><span>Pixels and bytes, the canvas of our time,
+</span><span>Crafting solutions, a masterpiece sublime.
+</span><span>From the depths of the screen, a world takes shape,
+</span><span>Coding, the language that helps us escape.
+</span><span>
+</span><span>Endless possibilities, a universe to explore,
+</span><span>With each line of code, we unlock so much more.
+</span><span>Coding, the art of creating, the power to inspire,
+</span><span>A journey of discovery, a never-ending desire.
+</span></code></pre>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

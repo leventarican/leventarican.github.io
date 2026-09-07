@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, AI Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        table, th, td {
+            border: solid 1px;
+        }
+        footer {
+            color: #c0c0c0
+        }
+    </style>
+    <!-- Analytics 
+    analytics.google.com 
+    curl -L -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ..." -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/leventarican/leventarican.github.io/traffic/views
+    -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X86T9RBJ92');Add commentMore actions
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container" style="width:1200px; margin:16px auto;">
+            
+<h1 class="title">
+    AI: Agentic Coding
+</h1>
+<p class="subtitle"><strong>2026-08-02</strong></p>
+<h1 id="about">About</h1>
+<p>Two small experiments, same underlying questions, two different languages. One is a JavaScript "ad copy writer" built with LangChain/LangGraph/LangSmith, the other a Python "support email classifier" built with Pydantic/PydanticAI. Neither does anything useful on its own — they exist to isolate two ideas that keep coming up once you write actual code around an LLM instead of just chatting with one.</p>
+<h1 id="the-two-questions-that-matter">The two questions that matter</h1>
+<p>Once an LLM call is wired into a program instead of a chat window, two questions turn out to matter more than which framework logo is on the box: who decides what happens next, and can you trust the shape of what comes back? The first is the difference between a <strong>workflow</strong> and an <strong>agent</strong>. The second is what "structured output" is actually for. Both experiments below are really just these two questions, poked at from two languages.</p>
+<h1 id="workflow-vs-agent-same-task-twice">Workflow vs. agent, same task twice</h1>
+<p>The JS project writes an advertising blurb for a product, checks it against a word limit and a list of banned words, and revises it until it passes — twice, with the exact same tools, once as a workflow and once as an agent.</p>
+<p>As a <strong>workflow</strong> (<code>main.js</code>), the control flow is a plain function:</p>
+<pre data-lang="js" style="background-color:#272822;color:#f8f8f2;" class="language-js "><code class="language-js" data-lang="js"><span style="color:#f92672;">if </span><span>(woerter </span><span style="color:#f92672;">&gt; </span><span>MAX_WOERTER) {
+</span><span>  </span><span style="color:#75715e;">// zurück zum Writer, mit der Fehlermeldung als Anweisung
+</span><span>}
+</span></code></pre>
+<p><em>You</em> wrote that <code>if</code>. The LLM only ever fills in text; every decision about what happens next lives in your code.</p>
+<p>As an <strong>agent</strong> (<code>agent.js</code>), the same task is handed to the model together with three tools — <code>zaehle_woerter</code> (count words), <code>pruefe_richtlinien</code> (check banned words), <code>speichere_werbetext</code> (save the result) — and a system prompt describing the procedure. The routing function looks almost the same as the workflow's <code>if</code>, except it's now reading a decision instead of making one:</p>
+<pre data-lang="js" style="background-color:#272822;color:#f8f8f2;" class="language-js "><code class="language-js" data-lang="js"><span style="font-style:italic;color:#66d9ef;">function </span><span style="color:#a6e22e;">routeAgent</span><span>(</span><span style="font-style:italic;color:#fd971f;">state</span><span>) {
+</span><span>  </span><span style="font-style:italic;color:#66d9ef;">const </span><span>letzte </span><span style="color:#f92672;">= </span><span>state.messages.</span><span style="color:#a6e22e;">at</span><span>(</span><span style="color:#f92672;">-</span><span style="color:#ae81ff;">1</span><span>);
+</span><span>  </span><span style="color:#f92672;">if </span><span>(letzte.tool_calls?.length) </span><span style="color:#f92672;">return </span><span style="color:#e6db74;">&quot;werkzeuge&quot;</span><span>; </span><span style="color:#75715e;">// model asked for a tool
+</span><span>  </span><span style="color:#f92672;">return </span><span>END;                                        </span><span style="color:#75715e;">// model is done
+</span><span>}
+</span></code></pre>
+<p>That's the entire difference between the two files: in the workflow, the condition inspects data your code computed. In the agent, the condition inspects what the <em>model</em> decided to do next. Both are built on the same LangGraph mechanism underneath — a state, nodes, a conditional edge, and a cycle back from the tool node to the model node so it can see the tool result and decide again. A <code>recursionLimit</code> acts as a safety net against a model that never stops asking for tools.</p>
+<p>One thing that surprised me: a graph earns its keep even without multiple agents. <code>main.js</code> has zero agents and still needs a cycle — LangChain alone (no graph) can't express "go back and try again" — so the useful distinction isn't "how many agents" but "is the flow cyclic, and who's steering it."</p>
+<h1 id="forcing-the-model-to-answer-in-a-shape-you-can-use">Forcing the model to answer in a shape you can use</h1>
+<p>The Python project answers a different half of the same problem: getting the model to return something your code can rely on without hand-parsing text. A classic <code>pydantic.BaseModel</code> first validates the raw input (does <code>sender</code> look like an email address, is <code>subject</code> non-empty) — plain data validation, no AI involved yet:</p>
+<pre data-lang="python" style="background-color:#272822;color:#f8f8f2;" class="language-python "><code class="language-python" data-lang="python"><span style="font-style:italic;color:#f92672;">class </span><span style="text-decoration:underline;color:#a6e22e;">IncomingEmail</span><span>(</span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">BaseModel</span><span>):
+</span><span>    sender: </span><span style="font-style:italic;color:#66d9ef;">str
+</span><span>    subject: </span><span style="font-style:italic;color:#66d9ef;">str </span><span style="color:#f92672;">= </span><span>Field(</span><span style="color:#ae81ff;">...</span><span>, </span><span style="font-style:italic;color:#fd971f;">min_length</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">1</span><span>)
+</span><span>    body: </span><span style="font-style:italic;color:#66d9ef;">str </span><span style="color:#f92672;">= </span><span>Field(</span><span style="color:#ae81ff;">...</span><span>, </span><span style="font-style:italic;color:#fd971f;">min_length</span><span style="color:#f92672;">=</span><span style="color:#ae81ff;">1</span><span>)
+</span></code></pre>
+<p>Then a <code>pydantic_ai.Agent</code> is given that same kind of model as its <code>output_type</code>:</p>
+<pre data-lang="python" style="background-color:#272822;color:#f8f8f2;" class="language-python "><code class="language-python" data-lang="python"><span style="font-style:italic;color:#f92672;">class </span><span style="text-decoration:underline;color:#a6e22e;">SupportAnalysis</span><span>(</span><span style="text-decoration:underline;font-style:italic;color:#a6e22e;">BaseModel</span><span>):
+</span><span>    category: Literal[</span><span style="color:#e6db74;">&quot;Technical&quot;</span><span>, </span><span style="color:#e6db74;">&quot;Billing&quot;</span><span>, </span><span style="color:#e6db74;">&quot;General&quot;</span><span>, </span><span style="color:#e6db74;">&quot;Complaint&quot;</span><span>]
+</span><span>    urgency: Literal[</span><span style="color:#e6db74;">&quot;low&quot;</span><span>, </span><span style="color:#e6db74;">&quot;medium&quot;</span><span>, </span><span style="color:#e6db74;">&quot;high&quot;</span><span>]
+</span><span>    sentiment: Literal[</span><span style="color:#e6db74;">&quot;positive&quot;</span><span>, </span><span style="color:#e6db74;">&quot;neutral&quot;</span><span>, </span><span style="color:#e6db74;">&quot;negative&quot;</span><span>, </span><span style="color:#e6db74;">&quot;frustrated&quot;</span><span>]
+</span><span>    draft_reply: </span><span style="font-style:italic;color:#66d9ef;">str
+</span><span>
+</span><span>agent </span><span style="color:#f92672;">= </span><span>Agent(model, </span><span style="font-style:italic;color:#fd971f;">output_type</span><span style="color:#f92672;">=</span><span>SupportAnalysis, </span><span style="font-style:italic;color:#fd971f;">system_prompt</span><span style="color:#f92672;">=</span><span style="color:#e6db74;">&quot;...&quot;</span><span>)
+</span><span>result </span><span style="color:#f92672;">= </span><span>agent.run_sync(prompt)
+</span></code></pre>
+<p>PydanticAI turns that model into the schema the LLM is constrained to answer in, checks the response against it, and — if the model drifts — pushes back for a correction. The code on the other side never sees free-form text to parse; it gets a <code>SupportAnalysis</code> object or an error.</p>
+<p>PydanticAI itself is Python-only, though — it doesn't exist in JavaScript. The equivalent idea shows up in the JS project's tool definitions instead, via <code>zod</code>:</p>
+<pre data-lang="js" style="background-color:#272822;color:#f8f8f2;" class="language-js "><code class="language-js" data-lang="js"><span>schema: z.</span><span style="color:#a6e22e;">object</span><span>({ text: z.</span><span style="color:#a6e22e;">string</span><span>().</span><span style="color:#a6e22e;">describe</span><span>(</span><span style="color:#e6db74;">&quot;Der zu prüfende Werbetext&quot;</span><span>) }),
+</span></code></pre>
+<p>Same underlying need — force the model's output into something type-checked instead of a string you <code>JSON.parse</code> and hope — just solved per-tool with <code>zod</code> rather than for a whole agent's final answer with a Pydantic model.</p>
+<h1 id="a-few-things-that-only-show-up-once-you-actually-run-it">A few things that only show up once you actually run it</h1>
+<ul>
+<li><strong>Small local models can't call tools.</strong> <code>agent.js</code> checks this before starting: <code>gemma2:2b</code> runs fine for the plain workflow, but the agent variant needs tool-calling support, so a small model just fails deep inside the run with a raw 400 error unless you check first and tell the user to pull a bigger model.</li>
+<li><strong>You don't always need a dedicated integration package.</strong> OpenRouter has no <code>@langchain/openrouter</code> package — it doesn't need one, since it speaks the same protocol as OpenAI. Pointing the regular <code>ChatOpenAI</code> adapter's <code>baseURL</code> at OpenRouter is enough, and the same trick works for any OpenAI-compatible endpoint (Groq, Together, a local vLLM server).</li>
+<li><strong>Tracing doesn't care where the model runs.</strong> LangSmith traces local Ollama runs exactly like it traces Claude or OpenRouter calls — it's just three environment variables, no code change, and switching it off again is just not setting them.</li>
+<li><strong>Model names go stale fast.</strong> The Python script originally asked for <code>claude-3-5-sonnet-latest</code>; by the time it ran, that alias had already been retired in favor of a newer model. Worth pinning a model version somewhere you'll actually notice when it needs updating.</li>
+</ul>
+<h1 id="what-s-next">What's next</h1>
+<p>Both projects stayed intentionally small — one file each, no framework left unexplained. The natural next step for the workflow/agent side is a task where the workflow version genuinely can't keep up (more than one plausible next step, not just "too long/not too long"), and for the structured-output side, an agent whose tools themselves return typed data instead of just strings, so the whole chain from input to output stays type-checked, not just the ends.</p>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

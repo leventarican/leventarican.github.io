@@ -2,3 +2,6 @@ zola*
 themes/*
 
 ignore*
+
+.claude/
+CLAUDE.md

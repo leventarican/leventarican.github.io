@@ -4,6 +4,10 @@
         <loc>https://leventarican.github.io/</loc>
     </url>
     <url>
+        <loc>https://leventarican.github.io/ai-agentic-coding/</loc>
+        <lastmod>2026-08-02</lastmod>
+    </url>
+    <url>
         <loc>https://leventarican.github.io/ai-an-introduction/</loc>
         <lastmod>2025-05-11</lastmod>
     </url>
@@ -13,6 +17,14 @@
     </url>
     <url>
         <loc>https://leventarican.github.io/ai-claude-code/</loc>
+        <lastmod>2025-05-22</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/ai-gauntlet-loop/</loc>
+        <lastmod>2026-07-20</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/ai-gemini-cli/</loc>
         <lastmod>2025-05-22</lastmod>
     </url>
     <url>
@@ -82,6 +94,10 @@
     <url>
         <loc>https://leventarican.github.io/linux/</loc>
         <lastmod>2021-03-18</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/microcontroller-ecu-can/</loc>
+        <lastmod>2026-09-04</lastmod>
     </url>
     <url>
         <loc>https://leventarican.github.io/microcontroller-esp32-epaper/</loc>

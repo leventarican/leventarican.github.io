@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Levent Arican</title>
     
     <meta name="author" content="Levent Arican">
@@ -10,6 +11,38 @@
     <meta http-equiv="cache-control" content="no-cache"/>
 
     <style>
+        :root {
+            color-scheme: light dark;
+            --bg: #ffffff;
+            --fg: #1a1a1a;
+            --link: #0645ad;
+            --link-visited: #5a3696;
+            --muted: #c0c0c0;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1b1b1d;
+                --fg: #e2e2e2;
+                --link: #8ab4f8;
+                --link-visited: #c58af9;
+                --muted: #6b6b6b;
+            }
+            img {
+                /* diagrams/screenshots are often transparent with dark lines */
+                background: #ffffff;
+            }
+        }
+        body {
+            line-height: 1.6;
+            background: var(--bg);
+            color: var(--fg);
+        }
+        a {
+            color: var(--link);
+        }
+        a:visited {
+            color: var(--link-visited);
+        }
         h1 {
             font-size: 1.6em;
         }
@@ -29,7 +62,34 @@
             border: solid 1px;
         }
         footer {
-            color: #c0c0c0
+            color: var(--muted)
+        }
+        .container {
+            max-width: 760px;
+            margin: 16px auto;
+            padding: 0 16px;
+            overflow-wrap: break-word;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        pre {
+            overflow-x: auto;
+            padding: 12px 16px;
+            border-radius: 6px;
+            line-height: 1.4;
+        }
+        table {
+            display: block;
+            max-width: 100%;
+            overflow-x: auto;
+            border-collapse: collapse;
+        }
+        @media (max-width: 600px) {
+            code {
+                font-size: medium;
+            }
         }
     </style>
     <!-- Analytics 
@@ -41,13 +101,13 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-X86T9RBJ92');Add commentMore actions
+    gtag('config', 'G-X86T9RBJ92');
     </script>
 </head>
 
 <body>
     <section class="section">
-        <div class="container" style="width:1200px; margin:16px auto;">
+        <div class="container">
             
 <h1 class="title">
     Kata

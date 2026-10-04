@@ -1,5 +1,5 @@
 +++
-title = "AI: Claude Code"
+title = "AI: Gemini CLI"
 date = 2025-05-22
 +++
 

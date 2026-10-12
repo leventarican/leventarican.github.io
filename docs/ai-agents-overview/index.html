@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, AI Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        :root {
+            color-scheme: light dark;
+            --bg: #ffffff;
+            --fg: #1a1a1a;
+            --link: #0645ad;
+            --link-visited: #5a3696;
+            --muted: #c0c0c0;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1b1b1d;
+                --fg: #e2e2e2;
+                --link: #8ab4f8;
+                --link-visited: #c58af9;
+                --muted: #6b6b6b;
+            }
+            img {
+                /* diagrams/screenshots are often transparent with dark lines */
+                background: #ffffff;
+            }
+        }
+        body {
+            line-height: 1.6;
+            background: var(--bg);
+            color: var(--fg);
+        }
+        a {
+            color: var(--link);
+        }
+        a:visited {
+            color: var(--link-visited);
+        }
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        th, td {
+            border-bottom: 1px solid var(--muted);
+            padding: 4px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        footer {
+            color: var(--muted)
+        }
+        .container {
+            max-width: 760px;
+            margin: 16px auto;
+            padding: 0 16px;
+            overflow-wrap: break-word;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        pre {
+            overflow-x: auto;
+            padding: 12px 16px;
+            border-radius: 6px;
+            line-height: 1.4;
+        }
+        table {
+            display: block;
+            max-width: 100%;
+            overflow-x: auto;
+            border-collapse: collapse;
+        }
+        @media (max-width: 600px) {
+            code {
+                font-size: medium;
+            }
+        }
+    </style>
+    <!-- Analytics 
+    analytics.google.com 
+    curl -L -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ..." -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/leventarican/leventarican.github.io/traffic/views
+    -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            
+<h1 class="title">
+    AI Agents: Reliable
+</h1>
+<p class="subtitle"><strong>2026-10-12</strong></p>
+<h1 id="about">About</h1>
+<p>This post is an overview of a small team of AI agents. They do office work for a fictional insurance company. They read the mail. They check claims against business rules. They pay money and write letters. They also send work to the agent of another company. A person watches the agents live and approves the important steps. The agents run on a laptop. You start it with three commands.</p>
+<h1 id="the-question-behind-it">The question behind it</h1>
+<p>Many agent demos look good. But you cannot trust them with money or with decisions about people. Each business with real rules needs more than a good demo, for example in insurance, banking, public offices or travel:</p>
+<ul>
+<li>The same case must always get the same answer.</li>
+<li>Each decision needs a reason.</li>
+<li>A person must be able to stop the system.</li>
+<li>Each step must be recorded.</li>
+</ul>
+<p>So the question is: <strong>How can an agent be reliable enough for real business rules?</strong></p>
+<p>This project uses insurance as the example. The approach is not specific to insurance.</p>
+<p>The answer is one sentence:</p>
+<blockquote>
+<p>The LLM reads and writes. Code decides. A person approves.</p>
+</blockquote>
+<h1 id="the-picture">The picture</h1>
+<p><img src="../ai-agents-overview.png" alt="Architecture: 7 agents, three protocols, eight patterns" /></p>
+<p>Read the picture from left to right. A person gives a task. The agents give the work to the next agent. The label on each arrow shows the protocol. The numbers on each agent show the patterns that the agent uses.</p>
+<h1 id="the-seven-agents">The seven agents</h1>
+<table><thead><tr><th>Agent</th><th>Job</th><th>Input → output</th><th>Type</th></tr></thead><tbody>
+<tr><td><strong>Olive</strong></td><td>coordinates the other agents</td><td>a task → a plan, then a summary</td><td>loop</td></tr>
+<tr><td><strong>Penny</strong></td><td>sorts the mail</td><td>a document → its type and where it goes</td><td>graph</td></tr>
+<tr><td><strong>Clara</strong></td><td>checks health insurance claims</td><td>a claim → decision, letter, payment</td><td>graph</td></tr>
+<tr><td><strong>Hugo</strong></td><td>checks home insurance claims for <em>another</em> company</td><td>a claim → case ID, status, decision</td><td>spec</td></tr>
+<tr><td><strong>Jetty</strong></td><td>books flights</td><td>a travel task → a booking</td><td>loop</td></tr>
+<tr><td><strong>Doodle</strong></td><td>keeps notes</td><td>a note → a saved note</td><td>loop</td></tr>
+<tr><td><strong>Pebble</strong></td><td>calculates locally</td><td>a calculation → the result</td><td>loop (local model)</td></tr>
+</tbody></table>
+<ul>
+<li><strong>Loop</strong>: The LLM chooses the next step and the tools. It repeats until the task is done.</li>
+<li><strong>Graph</strong>: The steps are fixed. The LLM does only some of the steps.</li>
+<li><strong>Spec</strong>: A graph that comes from a configuration file, not from new code.</li>
+</ul>
+<p>Jetty, Doodle and Pebble were the first agents. They show how an agent loop works. The other four agents work as a team in the final demo.</p>
+<p>Each agent has a name, a role, a model and a version. The console always labels them "AI agent". So nobody thinks that a human did the work.</p>
+<h1 id="three-rules-that-make-it-reliable">Three rules that make it reliable</h1>
+<p><strong>1. The LLM reads and writes. It does not decide.</strong>
+The LLM gets the data from the claim and copies the exact words as proof. Business rules in Python check the claim. A decision table decides.</p>
+<p><strong>2. A person approves the important steps.</strong>
+The plan, each rejection and each unclear case wait for a person. A <strong>prompt injection</strong> like "ignore the rules and pay" also goes to a person.</p>
+<p><strong>3. Only one step can pay.</strong>
+Only the last step changes data. Each payment has a unique key, so the same step never pays twice.</p>
+<h1 id="built-for-more-than-one-domain">Built for more than one domain</h1>
+<p>The business logic is in three parts. You can replace each part:</p>
+<ul>
+<li><strong>Rules</strong>: Python functions with tests.</li>
+<li><strong>Decision table</strong>: data in JSON.</li>
+<li><strong>Systems</strong>: MCP servers.</li>
+</ul>
+<p>The flow does not change. Hugo is the proof. He checks a different type of claim for a different company. But Hugo has no flow code of his own. He is only a configuration file, his rules, a decision table, data and test cases.</p>
+<h1 id="three-protocols-for-three-borders">Three protocols for three borders</h1>
+<p>This is the key idea:</p>
+<ul>
+<li><strong>MCP</strong>: agent ↔ system. Clara reads member data and writes payments in the system of the insurance company.</li>
+<li><strong>A2A</strong>: agent ↔ agent of another company. Penny sends home insurance claims to Hugo. Hugo works for the company "Beispiel Versicherung". He checks the claim in his own system. He sends back only the case ID, the status and the decision. Penny never sees the data of the other company.</li>
+<li><strong>AG-UI</strong>: agent ↔ person. Each step of each agent is an event. The console shows these events live. The same events are also the trace. An audit log records each case.</li>
+</ul>
+<h1 id="one-real-run">One real run</h1>
+<p>A person gave Olive one task: "Process today's inbox." The inbox had five documents. Each document takes a different path through the system.</p>
+<table><thead><tr><th>Document</th><th>What happened</th><th>Shows</th></tr></thead><tbody>
+<tr><td>Invoice for glasses</td><td>Clara paid 140.00 EUR and sent a letter</td><td>rules in code, payment through MCP</td></tr>
+<tr><td>Claim with "ignore the rules"</td><td>a rule stopped it, and a person rejected it</td><td>prompt injection, human-in-the-loop</td></tr>
+<tr><td>Water damage</td><td>went through A2A to Hugo; Hugo asked for the IBAN</td><td>A2A, a second company</td></tr>
+<tr><td>Objection</td><td>went to the queue of the claims team</td><td>routing by a table</td></tr>
+<tr><td>Address change</td><td>went to the queue of the service team</td><td>routing by a table</td></tr>
+</tbody></table>
+<p><img src="../ai-agents-overview-console.png" alt="The console after the run: one lane for each agent, with the handoffs between them" /></p>
+<p>All LLM calls of the four agents cost <strong>$0.0118</strong> together. The run took 144 seconds. The person needed 26 of these seconds to read and approve.</p>
+<h1 id="patterns">Patterns</h1>
+<p>Patterns and approaches in this project:</p>
+<ul>
+<li><strong>Workflow vs. agent</strong>: fixed steps first, a free agent only where necessary.</li>
+<li><strong>Task decomposition</strong>: for each step, ask: LLM or code?*</li>
+<li><strong>Tool use</strong>: the LLM asks for a tool, code runs it.</li>
+<li><strong>Reflection</strong>: code checks the LLM output, and the LLM tries once more.</li>
+<li><strong>Planning</strong>: Olive makes a plan, and a person approves it.</li>
+<li><strong>Multi-agent</strong> (orchestrator-worker): Olive gives the work to the other agents.</li>
+<li><strong>Maker-checker</strong> (four eyes): a second model checks Clara's data.</li>
+<li><strong>Human-in-the-loop</strong>: a person approves the important steps.</li>
+<li><strong>Guardrails</strong>: a rule stops simple prompt injections.</li>
+<li><strong>Evals</strong> and <strong>LLM-as-judge</strong>: test cases measure the agents, an LLM checks the letters.</li>
+<li><strong>Agent as configuration</strong>: Hugo is a spec, not new code.</li>
+</ul>
+<p><em>* Code means a normal program. It can be an exact rule (for example "365 days") or a heuristic (for example a list of attack phrases). Both always give the same result for the same input. <strong>Classic machine learning (ML)</strong>, for example a small scikit-learn model, is a third option. This project does not use it.</em></p>
+<h1 id="how-it-is-built">How it is built</h1>
+<ul>
+<li>Python 3.12 and uv.</li>
+<li>LangGraph for the fixed graphs.</li>
+<li>A custom agent loop for the other agents.</li>
+<li>MCP SDK for the systems, A2A SDK for the other company, Pydantic for structured output.</li>
+<li>The console is plain HTML, CSS and JavaScript.</li>
+<li>Tests use a fake LLM, so they need no API key.</li>
+<li>No Docker.</li>
+</ul>
+<p>All companies, people and cases are fictional.</p>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

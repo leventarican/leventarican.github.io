@@ -41,6 +41,8 @@ So "memory" means: put the right text into the context at the right time.
 
 All three are plain Markdown on disk. You can read, edit and commit them.
 
+Skills can hold more than facts. They can also hold a way of working. For example, [agent-skills](https://github.com/addyosmani/agent-skills) gives a coding agent workflows for spec, plan, test, review and ship.
+
 Inside one long session the context also fills up. Agents then replace old turns with a summary (compaction), or move verbose tool output to disk and keep only a short reference.
 
 # Memory layers

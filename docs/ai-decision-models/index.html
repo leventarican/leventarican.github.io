@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, AI Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        :root {
+            color-scheme: light dark;
+            --bg: #ffffff;
+            --fg: #1a1a1a;
+            --link: #0645ad;
+            --link-visited: #5a3696;
+            --muted: #c0c0c0;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1b1b1d;
+                --fg: #e2e2e2;
+                --link: #8ab4f8;
+                --link-visited: #c58af9;
+                --muted: #6b6b6b;
+            }
+            img {
+                /* diagrams/screenshots are often transparent with dark lines */
+                background: #ffffff;
+            }
+        }
+        body {
+            line-height: 1.6;
+            background: var(--bg);
+            color: var(--fg);
+        }
+        a {
+            color: var(--link);
+        }
+        a:visited {
+            color: var(--link-visited);
+        }
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        th, td {
+            border-bottom: 1px solid var(--muted);
+            padding: 4px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        footer {
+            color: var(--muted)
+        }
+        .container {
+            max-width: 760px;
+            margin: 16px auto;
+            padding: 0 16px;
+            overflow-wrap: break-word;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        pre {
+            overflow-x: auto;
+            padding: 12px 16px;
+            border-radius: 6px;
+            line-height: 1.4;
+        }
+        table {
+            display: block;
+            max-width: 100%;
+            overflow-x: auto;
+            border-collapse: collapse;
+        }
+        @media (max-width: 600px) {
+            code {
+                font-size: medium;
+            }
+        }
+    </style>
+    <!-- Analytics 
+    analytics.google.com 
+    curl -L -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ..." -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/leventarican/leventarican.github.io/traffic/views
+    -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            
+<h1 class="title">
+    AI: Decision Models
+</h1>
+<p class="subtitle"><strong>2026-10-12</strong></p>
+<h1 id="the-question">The question</h1>
+<p>A lot of LLM calls in my code are not really "chat". They are small decisions: which branch, which category, is this urgent, yes or no.
+For that I usually ask a big model to answer in JSON and then hope the JSON is valid.
+So the question is simple: <strong>is a model that only makes typed decisions a better tool for these small steps than a general LLM?</strong></p>
+<h1 id="chat-api-vs-decision-api">Chat API vs. Decision API</h1>
+<p>A decision model does not write free text. You give it a state and some typed questions. It returns typed answers with probabilities.</p>
+<table><thead><tr><th></th><th>Chat API</th><th>Decision API</th></tr></thead><tbody>
+<tr><td>Input</td><td>messages</td><td><code>state</code> + named <code>questions</code></td></tr>
+<tr><td>Output</td><td>text (maybe JSON, if the model behaves)</td><td>one of the predefined values + probabilities</td></tr>
+<tr><td>Use in code</td><td>parse, validate, retry</td><td><code>if answer.choice == "shipping": ...</code></td></tr>
+</tbody></table>
+<p>The idea comes from Daniel Kahneman: System 1 is fast and intuitive thinking, System 2 is slow and deliberate.
+A decision model is the System 1 part: fast, cheap, no reasoning text.</p>
+<h1 id="what-is-different">What is different</h1>
+<ul>
+<li><strong>Input</strong> is structured program state, not a conversation.</li>
+<li><strong>All answers come in one pass</strong>, not token by token.</li>
+<li><strong>Output</strong> is always one of the predefined values. There is no invalid JSON and no made-up option.</li>
+<li><strong>Probabilities are calibrated</strong>: the model is trained so that 0.8 means "right in about 80% of cases".</li>
+</ul>
+<h1 id="question-types">Question types</h1>
+<p>There are three types. One request can mix them, and each question is answered against the same state.</p>
+<table><thead><tr><th>Type</th><th>Asks</th><th>Returns</th></tr></thead><tbody>
+<tr><td>choice</td><td>pick one option</td><td>option + probability per option</td></tr>
+<tr><td>score</td><td>rate on an ordered scale</td><td>level + probability per level</td></tr>
+<tr><td>yes/no</td><td>is this statement true?</td><td>value between 0 and 1</td></tr>
+</tbody></table>
+<p>A support ticket as example. The request (shortened):</p>
+<pre data-lang="json" style="background-color:#272822;color:#f8f8f2;" class="language-json "><code class="language-json" data-lang="json"><span>{
+</span><span>  </span><span style="color:#e6db74;">&quot;state&quot;</span><span>: </span><span style="color:#e6db74;">&quot;My order arrived damaged and nobody replied for a week.&quot;</span><span>,
+</span><span>  </span><span style="color:#e6db74;">&quot;questions&quot;</span><span>: {
+</span><span>    </span><span style="color:#e6db74;">&quot;department&quot;</span><span>: {
+</span><span>      </span><span style="color:#e6db74;">&quot;type&quot;</span><span>: </span><span style="color:#e6db74;">&quot;choice&quot;</span><span>,
+</span><span>      </span><span style="color:#e6db74;">&quot;criteria&quot;</span><span>: {
+</span><span>        </span><span style="color:#e6db74;">&quot;billing&quot;</span><span>: </span><span style="color:#e6db74;">&quot;Payment or subscription issues&quot;</span><span>,
+</span><span>        </span><span style="color:#e6db74;">&quot;shipping&quot;</span><span>: </span><span style="color:#e6db74;">&quot;Delivery or product condition problems&quot;</span><span>,
+</span><span>        </span><span style="color:#e6db74;">&quot;sales&quot;</span><span>: </span><span style="color:#e6db74;">&quot;Pricing or account questions&quot;
+</span><span>      }
+</span><span>    },
+</span><span>    </span><span style="color:#e6db74;">&quot;is_urgent&quot;</span><span>: {
+</span><span>      </span><span style="color:#e6db74;">&quot;type&quot;</span><span>: </span><span style="color:#e6db74;">&quot;yes/no&quot;</span><span>,
+</span><span>      </span><span style="color:#e6db74;">&quot;instructions&quot;</span><span>: </span><span style="color:#e6db74;">&quot;The message conveys urgency&quot;
+</span><span>    }
+</span><span>  }
+</span><span>}
+</span></code></pre>
+<p>The answer:</p>
+<pre data-lang="json" style="background-color:#272822;color:#f8f8f2;" class="language-json "><code class="language-json" data-lang="json"><span>{
+</span><span>  </span><span style="color:#e6db74;">&quot;department&quot;</span><span>: {
+</span><span>    </span><span style="color:#e6db74;">&quot;choice&quot;</span><span>: </span><span style="color:#e6db74;">&quot;shipping&quot;</span><span>,
+</span><span>    </span><span style="color:#e6db74;">&quot;probabilities&quot;</span><span>: { </span><span style="color:#e6db74;">&quot;billing&quot;</span><span>: </span><span style="color:#ae81ff;">0.05</span><span>, </span><span style="color:#e6db74;">&quot;shipping&quot;</span><span>: </span><span style="color:#ae81ff;">0.82</span><span>, </span><span style="color:#e6db74;">&quot;sales&quot;</span><span>: </span><span style="color:#ae81ff;">0.13 </span><span>}
+</span><span>  },
+</span><span>  </span><span style="color:#e6db74;">&quot;is_urgent&quot;</span><span>: </span><span style="color:#ae81ff;">0.95
+</span><span>}
+</span></code></pre>
+<p>The exact field names differ from provider to provider. The shape is the same.</p>
+<h1 id="confidence-decides-the-next-step">Confidence decides the next step</h1>
+<p>The calibrated probability is the interesting part. The code can decide by itself when the small model is good enough.</p>
+<pre data-lang="text" style="background-color:#272822;color:#f8f8f2;" class="language-text "><code class="language-text" data-lang="text"><span>+-----------+  state + questions  +----------------+
+</span><span>| your code | ------------------&gt; | decision model |
+</span><span>+-----------+                     +----------------+
+</span><span>                                          |
+</span><span>                                          v
+</span><span>                                  +----------------+
+</span><span>                                  |  confidence    |
+</span><span>                                  |  high enough?  |
+</span><span>                                  +----------------+
+</span><span>                                     |          |
+</span><span>                                 yes |          | no
+</span><span>                                     v          v
+</span><span>                          +------------+  +-----------------+
+</span><span>                          | use the    |  | ask a large LLM |
+</span><span>                          | answer     |  | or a human      |
+</span><span>                          +------------+  +-----------------+
+</span><span>
+</span><span>        Figure 1: Escalation by confidence
+</span></code></pre>
+<p>Most cases stay fast and cheap. Only the unclear ones go to the slow, expensive path.</p>
+<p>Good fit: routing, classification, scoring, yes/no checks. Not a fit: anything that needs generated text or code.</p>
+<h1 id="without-a-decision-api">Without a decision API</h1>
+<p>A general LLM can do part of this today:</p>
+<ul>
+<li><strong>Structured output</strong> with an <code>enum</code> in the JSON schema forces one of the allowed values.</li>
+<li><strong>Token logprobs</strong>, where the API returns them, give a rough probability per option.</li>
+</ul>
+<p>But these probabilities are not trained to be calibrated. And the model still generates text, so it is slower.</p>
+<h1 id="examples-october-2026">Examples (October 2026)</h1>
+<ul>
+<li><strong>Jev</strong> from TypeSafe AI: the first "System One Model", September 2026. https://typesafe.ai/blog/introducing-system-one-models-and-jev</li>
+<li><strong>OpenAI Decisions API</strong> (<code>/v1/decisions</code>): followed a few weeks later, same three question types.</li>
+<li><strong>Laya</strong>: open source decision model (Apache 2.0) that you can self-host.</li>
+</ul>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

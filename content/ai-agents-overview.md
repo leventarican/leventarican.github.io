@@ -1,5 +1,5 @@
 +++
-title = "AI Agents: Reliable"
+title = "AI: Agents Reliable"
 date = 2026-10-12
 +++
 

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Levent Arican</title>
+    
+    <meta name="author" content="Levent Arican">
+    <meta name="description" content="Software Craftsman, Software Engineering, Computer Vision, Data Engineering, AI Engineering, Computer Science, Machine Learning, Deep Learning, Android Development, Kotlin, Java, Rust, Python">
+    <meta http-equiv="cache-control" content="no-cache"/>
+
+    <style>
+        :root {
+            color-scheme: light dark;
+            --bg: #ffffff;
+            --fg: #1a1a1a;
+            --link: #0645ad;
+            --link-visited: #5a3696;
+            --muted: #c0c0c0;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #1b1b1d;
+                --fg: #e2e2e2;
+                --link: #8ab4f8;
+                --link-visited: #c58af9;
+                --muted: #6b6b6b;
+            }
+            img {
+                /* diagrams/screenshots are often transparent with dark lines */
+                background: #ffffff;
+            }
+        }
+        body {
+            line-height: 1.6;
+            background: var(--bg);
+            color: var(--fg);
+        }
+        a {
+            color: var(--link);
+        }
+        a:visited {
+            color: var(--link-visited);
+        }
+        h1 {
+            font-size: 1.6em;
+        }
+        h2 {
+            font-size: 1.4em;
+        }
+        h3 {
+            font-size: 1.2em;
+        }
+        code {
+            font-size: large;
+        }
+        blockquote {
+            font-style: italic;
+        }
+        th, td {
+            border-bottom: 1px solid var(--muted);
+            padding: 4px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        footer {
+            color: var(--muted)
+        }
+        .container {
+            max-width: 760px;
+            margin: 16px auto;
+            padding: 0 16px;
+            overflow-wrap: break-word;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        pre {
+            overflow-x: auto;
+            padding: 12px 16px;
+            border-radius: 6px;
+            line-height: 1.4;
+        }
+        table {
+            display: block;
+            max-width: 100%;
+            overflow-x: auto;
+            border-collapse: collapse;
+        }
+        @media (max-width: 600px) {
+            code {
+                font-size: medium;
+            }
+        }
+    </style>
+    <!-- Analytics 
+    analytics.google.com 
+    curl -L -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ..." -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/repos/leventarican/leventarican.github.io/traffic/views
+    -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X86T9RBJ92"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X86T9RBJ92');
+    </script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            
+<h1 class="title">
+    AI: Agents Runtime
+</h1>
+<p class="subtitle"><strong>2026-10-17</strong></p>
+<h1 id="about">About</h1>
+<p>Claude Code runs on a laptop. It runs commands and writes files on that laptop. So how does an agent run on a server, for many users, in a safe place? This post follows that question from one layer to the next. At the end, it shows a test of one of these layers on a laptop.</p>
+<p>The terms come from <a href="../ai-agents-terms/">AI: Agents Terms</a>.</p>
+<h1 id="the-question-behind-it">The question behind it</h1>
+<p>An AI agent is a program in which the LLM chooses the next step and uses tools, in a loop. The dangerous part is the tools. A command like <code>rm -rf</code> changes the machine where the tool runs. So the real question is: <strong>Where do the tools run, and who controls them?</strong></p>
+<h1 id="three-parts-two-places">Three parts, two places</h1>
+<p>A coding agent like Claude Code has three parts:</p>
+<pre data-lang="text" style="background-color:#272822;color:#f8f8f2;" class="language-text "><code class="language-text" data-lang="text"><span>  laptop                                    provider (cloud)
+</span><span> +-------------------------------+         +-----------------+
+</span><span> | harness (loop)                | &lt;-----&gt; |       LLM       |
+</span><span> |   |                           |  HTTPS  +-----------------+
+</span><span> |   v                           |
+</span><span> | tools: shell, files, git      |
+</span><span> |   -&gt; run on the laptop        |
+</span><span> +-------------------------------+
+</span><span>
+</span><span>        Figure 1: A coding agent on a laptop
+</span></code></pre>
+<ul>
+<li>The <strong>LLM</strong> does not run on the laptop. It only suggests a step, for example "run <code>npm test</code>".</li>
+<li>The <strong>harness</strong> runs on the laptop. It sends text to the LLM and back.</li>
+<li>The <strong>tools</strong> run on the laptop. They change files and run commands.</li>
+</ul>
+<p>A sandbox isolates the tools. There are two ways:</p>
+<ol>
+<li>Put the full harness in a container. The agent sees only the container.</li>
+<li>Keep the harness outside. Send each tool call to a remote sandbox.</li>
+</ol>
+<h1 id="how-a-remote-agent-gets-a-task">How a remote agent gets a task</h1>
+<p>A harness can run without a chat window. Claude Code has a headless mode (<code>claude -p</code>). It writes each step as one JSON line. A small server around this process does the rest:</p>
+<ol>
+<li>The server receives a task over HTTP.</li>
+<li>The server starts the harness in a sandbox.</li>
+<li>The server streams each step to the client, for example with Server-Sent Events (SSE).</li>
+<li>The client shows the steps and asks a person for approvals.</li>
+</ol>
+<p>A person does not log in to the sandbox. A person uses a web page, or a system like CI gives the task.</p>
+<h1 id="the-layers">The layers</h1>
+<p>For many agents, the work splits into layers. None of the layers is an agent:</p>
+<pre data-lang="text" style="background-color:#272822;color:#f8f8f2;" class="language-text "><code class="language-text" data-lang="text"><span>            person / client
+</span><span>                  |
+</span><span>   +--------------v---------------+
+</span><span>   | ingress gateway              |  auth, policy, input filter
+</span><span>   +--------------+---------------+
+</span><span>                  |
+</span><span>   +--------------v---------------+
+</span><span>   | harness                      |  loop, context, planning,
+</span><span>   | (Claude Code, ADK, ...)      |  guardrails
+</span><span>   +--------------+---------------+
+</span><span>                  |
+</span><span>   +--------------v---------------+
+</span><span>   | egress gateway               |  allowed models and tools,
+</span><span>   |                              |  credentials, destinations
+</span><span>   +--------------+---------------+
+</span><span>                  |
+</span><span>           LLM API, MCP servers
+</span><span>
+</span><span>   below: agent orchestrator (for example AX)
+</span><span>          sandbox runtime (for example Agent Substrate)
+</span><span>          Kubernetes
+</span><span>
+</span><span>        Figure 2: Layers around an agent
+</span></code></pre>
+<ul>
+<li><strong>Kubernetes</strong> puts containers on machines.</li>
+<li><strong>Agent Substrate</strong> (open source, started by Google) runs many agent sandboxes on Kubernetes. The project says: it freezes a waiting agent as a snapshot of memory and files, and it continues the agent in less than one second.</li>
+<li><strong>AX</strong> (Agent Executor, experimental) sits on top of Substrate. It describes agent tasks as Kubernetes-style resources: <code>Task</code>, <code>Workspace</code>, <code>Gateway</code>, <code>Model</code>.</li>
+<li><strong>Gateways</strong> control the traffic. The ingress gateway removes secrets from the input. The egress gateway adds the credentials to each call. So the harness never sees a secret.</li>
+</ul>
+<p>Gateways for LLM and MCP traffic already exist, for example LiteLLM Proxy, Envoy AI Gateway and agentgateway.</p>
+<p>A gateway does not replace business checks. The agent still needs its own rules and approvals.</p>
+<h1 id="one-project-on-the-map">One project on the map</h1>
+<p>The project from <a href="../ai-agents-overview/">AI: Agents Reliable</a> runs on one laptop. This is how its parts fit the map:</p>
+<table><thead><tr><th>Layer</th><th>In the project</th><th>Not there</th></tr></thead><tbody>
+<tr><td>Ingress</td><td>console: tasks and approvals; input checks; a rule against prompt injection</td><td>authentication</td></tr>
+<tr><td>Harness</td><td>own agent loop, LangGraph graphs</td><td>–</td></tr>
+<tr><td>Egress</td><td>MCP to the systems; write tools need an approval; idempotency keys</td><td>API keys stay in the agent process</td></tr>
+<tr><td>Infrastructure</td><td>one local process; LangGraph checkpointer in memory</td><td>sandbox, durable state</td></tr>
+</tbody></table>
+<p>The gaps are clear: authentication at the ingress, and secrets outside the agent.</p>
+<h1 id="a-test-on-a-laptop">A test on a laptop</h1>
+<p>The test tried to run Agent Substrate on a laptop with kind (Kubernetes in Docker).</p>
+<table><thead><tr><th>Part</th><th>Version</th></tr></thead><tbody>
+<tr><td>Host</td><td>Debian 12, Linux 6.1</td></tr>
+<tr><td>kind</td><td>v0.33.0, Kubernetes v1.37.0</td></tr>
+<tr><td>Agent Substrate</td><td><code>main</code> at <code>05cb6f24</code> (2026-10-16)</td></tr>
+</tbody></table>
+<p>The result:</p>
+<ul>
+<li>The cluster started. All Substrate pods were <code>Running</code>.</li>
+<li>The demo agent did not start. Its status was <code>GoldenActorCrashed</code>.</li>
+<li>The cause is in the Substrate code. It mounts overlay file systems with the option <code>lowerdir+</code>. This option needs Linux 6.5 or newer. The code says so in a comment.</li>
+<li>kind does not help here. A kind node is a container, and a container uses the kernel of the host.</li>
+</ul>
+<p>The lesson: <strong>a container is not a virtual machine.</strong> A sandbox runtime can need a newer kernel than the host has. To continue the test, use a virtual machine with a newer kernel, or a managed cluster.</p>
+<p>Not tested: freeze and continue, AX, the gateways.</p>
+
+<footer>
+	<code>levent arican # <a href="https://leventarican.github.io/">https://leventarican.github.io/</a></code>
+</footer>
+
+        </div>
+    </section>
+</body>
+
+</html>

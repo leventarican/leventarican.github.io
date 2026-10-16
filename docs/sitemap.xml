@@ -4,12 +4,24 @@
         <loc>https://leventarican.github.io/</loc>
     </url>
     <url>
+        <loc>https://leventarican.github.io/ai-agent-memory/</loc>
+        <lastmod>2026-10-12</lastmod>
+    </url>
+    <url>
         <loc>https://leventarican.github.io/ai-agentic-coding/</loc>
         <lastmod>2026-08-02</lastmod>
     </url>
     <url>
         <loc>https://leventarican.github.io/ai-agents-overview/</loc>
         <lastmod>2026-10-12</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/ai-agents-runtime/</loc>
+        <lastmod>2026-10-17</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/ai-agents-terms/</loc>
+        <lastmod>2026-10-16</lastmod>
     </url>
     <url>
         <loc>https://leventarican.github.io/ai-an-introduction/</loc>
@@ -22,6 +34,10 @@
     <url>
         <loc>https://leventarican.github.io/ai-claude-code/</loc>
         <lastmod>2025-05-22</lastmod>
+    </url>
+    <url>
+        <loc>https://leventarican.github.io/ai-decision-models/</loc>
+        <lastmod>2026-10-12</lastmod>
     </url>
     <url>
         <loc>https://leventarican.github.io/ai-gauntlet-loop/</loc>

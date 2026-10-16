@@ -27,7 +27,7 @@ A decision model is the System 1 part: fast, cheap, no reasoning text.
 * **Input** is structured program state, not a conversation.
 * **All answers come in one pass**, not token by token.
 * **Output** is always one of the predefined values. There is no invalid JSON and no made-up option.
-* **Probabilities are calibrated**: the model is trained so that 0.8 means "right in about 80% of cases".
+* **Probabilities are calibrated**: the model is trained so that 0.8 means "right in about 80% of cases". This holds only within the given options.
 
 # Question types
 
@@ -36,7 +36,7 @@ There are three types. One request can mix them, and each question is answered a
 | Type | Asks | Returns |
 |---|---|---|
 | choice | pick one option | option + probability per option |
-| score | rate on an ordered scale | level + probability per level |
+| score | rate on an ordered scale | value on the scale (also between levels) + probability per level |
 | yes/no | is this statement true? | value between 0 and 1 |
 
 A support ticket as example. The request (shortened):
@@ -112,6 +112,21 @@ A general LLM can do part of this today:
 * **Token logprobs**, where the API returns them, give a rough probability per option.
 
 But these probabilities are not trained to be calibrated. And the model still generates text, so it is slower.
+
+# A test
+
+I sent 12 support tickets to Jev via OpenRouter, each with four questions: team, urgency, is it a bug, churn risk.
+Thresholds in my own code decide the queue. All 12 took 600 ms in parallel and cost $0.0003 in total.
+
+![Ticket T08: team confidence 0.39 is below 0.60, so the code sends it to the review queue](../ai-decision-models-test.png)
+
+Ticket T08 threatens to switch to a competitor and complains about a slow dashboard. Jev is unsure about the team (0.39), so my code sends it to a human. This is Figure 1 with real data.
+
+What I learned:
+
+* **Add an "other" option.** "Thanks, everything works now!" went to `technical` with 0.95. Without a fitting option, the model is sure about a wrong answer.
+* **One choice is one answer.** A ticket with a bug and a billing problem lost the billing part. Use one yes/no question per team for this.
+* **The model answers, the code decides.** Tickets, questions and thresholds are three separate files. Only the thresholds change the route.
 
 # Examples (October 2026)
 

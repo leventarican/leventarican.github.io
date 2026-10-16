@@ -134,13 +134,13 @@ A decision model is the System 1 part: fast, cheap, no reasoning text.</p>
 <li><strong>Input</strong> is structured program state, not a conversation.</li>
 <li><strong>All answers come in one pass</strong>, not token by token.</li>
 <li><strong>Output</strong> is always one of the predefined values. There is no invalid JSON and no made-up option.</li>
-<li><strong>Probabilities are calibrated</strong>: the model is trained so that 0.8 means "right in about 80% of cases".</li>
+<li><strong>Probabilities are calibrated</strong>: the model is trained so that 0.8 means "right in about 80% of cases". This holds only within the given options.</li>
 </ul>
 <h1 id="question-types">Question types</h1>
 <p>There are three types. One request can mix them, and each question is answered against the same state.</p>
 <table><thead><tr><th>Type</th><th>Asks</th><th>Returns</th></tr></thead><tbody>
 <tr><td>choice</td><td>pick one option</td><td>option + probability per option</td></tr>
-<tr><td>score</td><td>rate on an ordered scale</td><td>level + probability per level</td></tr>
+<tr><td>score</td><td>rate on an ordered scale</td><td>value on the scale (also between levels) + probability per level</td></tr>
 <tr><td>yes/no</td><td>is this statement true?</td><td>value between 0 and 1</td></tr>
 </tbody></table>
 <p>A support ticket as example. The request (shortened):</p>
@@ -202,6 +202,17 @@ A decision model is the System 1 part: fast, cheap, no reasoning text.</p>
 <li><strong>Token logprobs</strong>, where the API returns them, give a rough probability per option.</li>
 </ul>
 <p>But these probabilities are not trained to be calibrated. And the model still generates text, so it is slower.</p>
+<h1 id="a-test">A test</h1>
+<p>I sent 12 support tickets to Jev via OpenRouter, each with four questions: team, urgency, is it a bug, churn risk.
+Thresholds in my own code decide the queue. All 12 took 600 ms in parallel and cost $0.0003 in total.</p>
+<p><img src="../ai-decision-models-test.png" alt="Ticket T08: team confidence 0.39 is below 0.60, so the code sends it to the review queue" /></p>
+<p>Ticket T08 threatens to switch to a competitor and complains about a slow dashboard. Jev is unsure about the team (0.39), so my code sends it to a human. This is Figure 1 with real data.</p>
+<p>What I learned:</p>
+<ul>
+<li><strong>Add an "other" option.</strong> "Thanks, everything works now!" went to <code>technical</code> with 0.95. Without a fitting option, the model is sure about a wrong answer.</li>
+<li><strong>One choice is one answer.</strong> A ticket with a bug and a billing problem lost the billing part. Use one yes/no question per team for this.</li>
+<li><strong>The model answers, the code decides.</strong> Tickets, questions and thresholds are three separate files. Only the thresholds change the route.</li>
+</ul>
 <h1 id="examples-october-2026">Examples (October 2026)</h1>
 <ul>
 <li><strong>Jev</strong> from TypeSafe AI: the first "System One Model", September 2026. https://typesafe.ai/blog/introducing-system-one-models-and-jev</li>
